@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: eeaa39149fb73164b9112765eb134e8c
-timeCreated: 1471998920
+timeCreated: 1474038495
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - ToneMapMaterial: {fileID: 2100000, guid: 7774e00c6d8bbe8419e7d3e2d2525107, type: 2}
+  - HorizontalBlurMaterial: {fileID: 2100000, guid: a368f81308dc15740aeb772029df1157,
+      type: 2}
+  - VerticalBlurMaterial: {fileID: 2100000, guid: fbbdc59c251389c4b886aee8b5bf993f,
+      type: 2}
+  - CompositeMaterial: {fileID: 2100000, guid: b7c47a484fccdce4ca09eb21fa8025c8, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

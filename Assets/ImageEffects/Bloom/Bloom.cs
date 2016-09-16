@@ -22,9 +22,9 @@ public class Bloom : MonoBehaviour
     private RenderTexture blurTextureY4;
 
     [Range(0.1f, 5.0f)]
-    public float HorizontalStretch;
+    public float HorizontalStretch = 1.0f;
     [Range(0.1f, 5.0f)]
-    public float VerticalStretch;
+    public float VerticalStretch = 1.0f;
 
     // Use this for initialization
     void Start()
@@ -51,9 +51,9 @@ public class Bloom : MonoBehaviour
 
         Graphics.Blit(blurTextureX2, blurTextureY2, VerticalBlurMaterial);
 
-        Graphics.Blit(blurTextureY2, blurTextureX4, HorizontalBlurMaterial);
+        Graphics.Blit(blurTextureY2, blurTextureX4, VerticalBlurMaterial);
 
-        Graphics.Blit(blurTextureX4, blurTextureY4, VerticalBlurMaterial);
+        Graphics.Blit(blurTextureX4, blurTextureY4, HorizontalBlurMaterial);
 
         Graphics.Blit(blurTextureY4, blurTextureX2, HorizontalBlurMaterial);
 
