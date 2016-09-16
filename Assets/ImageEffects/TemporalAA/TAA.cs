@@ -5,6 +5,8 @@
 
 using UnityEngine;
 
+//[ImageEffectAllowedInSceneView]
+//[ExecuteInEditMode]
 [RequireComponent(typeof(Camera))]
 public class TAA : MonoBehaviour
 {

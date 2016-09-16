@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[ImageEffectAllowedInSceneView]
+[ExecuteInEditMode]
 public class Bloom : MonoBehaviour
 {
 
@@ -60,6 +62,6 @@ public class Bloom : MonoBehaviour
         Graphics.Blit(blurTextureX2, blurTextureY2, VerticalBlurMaterial);
 
         //CompositeMaterial.SetTexture("Blur4Tex", blurTextureY2);
-        Graphics.Blit(source, null, CompositeMaterial);
+        Graphics.Blit(source, destination, CompositeMaterial);
     }
 }

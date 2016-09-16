@@ -64,7 +64,7 @@ public class GenericGun : MonoBehaviour
             if (Physics.Raycast(playerTransform.position + playerTransform.rotation * barrelOffset, playerTransform.forward, out raycastResult))
             {
                 //Add in some tag related collision stuff here.
-                DestroyObject(gameObject);
+               
             }
         }
     }

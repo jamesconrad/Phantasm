@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[ImageEffectAllowedInSceneView]
+[ExecuteInEditMode]
 public class FXAAScript : MonoBehaviour
 {
     public Material effectMaterial;
