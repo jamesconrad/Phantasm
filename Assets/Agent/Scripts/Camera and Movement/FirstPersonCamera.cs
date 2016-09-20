@@ -4,7 +4,7 @@ using System.Collections;
 public class FirstPersonCamera : MonoBehaviour {
 
     private Camera playerCamera;
-    private Transform playerCameraTransform;
+    private Transform playerTransform;
 
     private Vector2 MouseMovement;
     public float MaxCameraY;
@@ -18,8 +18,8 @@ public class FirstPersonCamera : MonoBehaviour {
         MouseMovement = new Vector2(0.0f, 0.0f);
 
         playerCamera = Camera.main;
-        playerCameraTransform = playerCamera.transform;
-
+        playerTransform = GetComponent<Transform>();
+        playerCamera.transform.position = GetComponent<Transform>().position;// + new Vector3(0.0f, 0.5f, 0.0f);
     }
 
     // Update is called once per frame
@@ -28,13 +28,13 @@ public class FirstPersonCamera : MonoBehaviour {
         //Fetch mouse movement
         MouseMovement.x += Input.GetAxis("Mouse X");
         MouseMovement.y += Input.GetAxis("Mouse Y");
-
+        
         //Clamp pitch angle
         MouseMovement.y = Mathf.Clamp(MouseMovement.y, MinCameraY, MaxCameraY);
 
         //Generate rotation quaternion
         rot = Quaternion.Euler(-MouseMovement.y, MouseMovement.x, 0.0f);
-
-        playerCameraTransform.rotation = rot;
+        playerCamera.transform.position = GetComponent<Transform>().position;
+        playerTransform.rotation = playerCamera.transform.rotation = rot;
     }
 }

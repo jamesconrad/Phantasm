@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FirstPersonMovement : MonoBehaviour {
+public class FirstPersonMovement : MonoBehaviour
+{
 
     private Transform playerTransform;
+
     private Rigidbody playerRigidBody;
     private Vector3 movementDirection;
 
@@ -13,7 +15,7 @@ public class FirstPersonMovement : MonoBehaviour {
     {
         movementDirection = new Vector3(0.0f, 0.0f, 0.0f);
 
-        playerTransform = Camera.main.transform;
+        playerTransform = GetComponent<Transform>();
         playerRigidBody = GetComponent<Rigidbody>();
     }
 
@@ -21,12 +23,8 @@ public class FirstPersonMovement : MonoBehaviour {
     void Update()
     {
         movementDirection = (playerTransform.forward * Input.GetAxis("Vertical") + playerTransform.right * Input.GetAxis("Horizontal"));
+       // movementDirection *= Mathf.Abs(Input.GetAxis("Vertical")) > Mathf.Abs(Input.GetAxis("Horizontal")) ? Input.GetAxis("Vertical") : Input.GetAxis("Horizontal");
 
-        //playerTransform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
-        playerRigidBody.AddForce(movementDirection * movementSpeed * Time.deltaTime, ForceMode.VelocityChange);
-        if (playerRigidBody.velocity.magnitude > movementSpeed)
-        {
-            playerRigidBody.velocity = playerRigidBody.velocity.normalized * movementSpeed;
-        }
+        playerTransform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
     }
 }

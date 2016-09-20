@@ -3,8 +3,8 @@ using System.Collections;
 
 public class GenericBullet : MonoBehaviour
 {
-    public float maxLife = 50.0f;
-    private float currentLife;
+    public float maxLife = 5.0f;
+    public float currentLife;
 
     public float damage;
     public float speed;
