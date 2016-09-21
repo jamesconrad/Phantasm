@@ -43,13 +43,13 @@ public class GenericGun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && bulletPrefab != null && currentNumberOfRounds > 0)
+		if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && bulletPrefab != null && currentNumberOfRounds > 0)
         {
             Instantiate(bulletPrefab, playerTransform.position + playerTransform.rotation * barrelOffset, playerTransform.rotation);
             currentNumberOfRounds--;
         }
 
-        if (Input.GetButtonDown("Reload"))
+		if (Input.GetButtonDown("Reload") || Input.GetButtonDown("GamePad Reload"))
         {
             if (currentNumberOfClips > 0)
             {
