@@ -28,6 +28,9 @@ public class FirstPersonCamera : MonoBehaviour {
         //Fetch mouse movement
         MouseMovement.x += Input.GetAxis("Mouse X");
         MouseMovement.y += Input.GetAxis("Mouse Y");
+
+		MouseMovement.x += Input.GetAxis("GamePad X");
+		MouseMovement.y += Input.GetAxis("GamePad Y");
         
         //Clamp pitch angle
         MouseMovement.y = Mathf.Clamp(MouseMovement.y, MinCameraY, MaxCameraY);

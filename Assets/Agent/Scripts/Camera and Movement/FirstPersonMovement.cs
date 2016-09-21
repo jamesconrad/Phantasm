@@ -23,8 +23,7 @@ public class FirstPersonMovement : MonoBehaviour
     void Update()
     {
         movementDirection = (playerTransform.forward * Input.GetAxis("Vertical") + playerTransform.right * Input.GetAxis("Horizontal"));
-       // movementDirection *= Mathf.Abs(Input.GetAxis("Vertical")) > Mathf.Abs(Input.GetAxis("Horizontal")) ? Input.GetAxis("Vertical") : Input.GetAxis("Horizontal");
-
+       
         playerTransform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
     }
 }
