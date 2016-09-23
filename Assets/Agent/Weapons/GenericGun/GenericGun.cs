@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class GenericGun : MonoBehaviour
+public class GenericGun : NetworkBehaviour
 {
 
 
@@ -34,22 +35,58 @@ public class GenericGun : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
+    }
+
+    // Called on clients for player objects for the local client (only)
+    public override void OnStartLocalPlayer()
+    {
         playerTransform = GetComponent<Transform>();
 
         currentNumberOfClips = ammoSettings.startingNumberOfClips;
         currentNumberOfRounds = ammoSettings.startingNumberOfRounds;
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
-		if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && bulletPrefab != null && currentNumberOfRounds > 0)
+        if (!isLocalPlayer)
         {
-            Instantiate(bulletPrefab, playerTransform.position + playerTransform.rotation * barrelOffset, playerTransform.rotation);
-            currentNumberOfRounds--;
+            return;
         }
 
-		if (Input.GetButtonDown("Reload") || Input.GetButtonDown("GamePad Reload"))
+
+        Physics.Raycast(playerTransform.position + playerTransform.rotation * barrelOffset, playerTransform.forward, out raycastResult);
+
+        if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && bulletPrefab != null && currentNumberOfRounds > 0)
+        {
+            Quaternion tempQuat = Quaternion.identity;
+            if (raycastResult.collider)
+            {
+                GetComponentInChildren<Transform>().rotation = Quaternion.LookRotation(raycastResult.point - transform.position);
+                tempQuat = Quaternion.LookRotation((raycastResult.point - (transform.position + transform.rotation * barrelOffset)).normalized);
+                CmdFireWeapon(transform.position + transform.rotation * barrelOffset, tempQuat);
+            }
+            else
+            {
+                GetComponentInChildren<Transform>().rotation = Quaternion.LookRotation(transform.forward);
+                tempQuat = Quaternion.LookRotation(transform.forward);
+                CmdFireWeapon(transform.position + transform.rotation * barrelOffset, tempQuat);
+            }
+            currentNumberOfRounds--;
+
+            if (Hitscan)
+            {
+
+                {
+                    //Add in some tag related collision stuff here.
+
+                }
+            }
+        }
+        if (Input.GetButtonDown("Reload") || Input.GetButtonDown("GamePad Reload"))
         {
             if (currentNumberOfClips > 0)
             {
@@ -57,16 +94,14 @@ public class GenericGun : MonoBehaviour
                 currentNumberOfRounds = ammoSettings.maxClipSize;
             }
         }
-
-        if (Hitscan)
-        {
-            if (Physics.Raycast(playerTransform.position + playerTransform.rotation * barrelOffset, playerTransform.forward, out raycastResult))
-            {
-                //Add in some tag related collision stuff here.
-               
-            }
-        }
     }
 
+    [Command]
+    public void CmdFireWeapon(Vector3 spawnPosition, Quaternion spawnRotation)
+    {
+        GameObject tempBullet = (GameObject)Instantiate(bulletPrefab, spawnPosition, spawnRotation);
+        NetworkServer.Spawn(tempBullet);
+        
+    }
 
 }
