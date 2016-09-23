@@ -20,9 +20,13 @@ public class BehaviourTree : MonoBehaviour {
         //state C is charging, the ai is aware of players current location
         //state W is walking, the ai knows where the player was last and is checking at that location
         //state I is idle, the ai has no information at all
-        GameObject playerGO = GameObject.Find("Player");
+        if (!GameObject.FindGameObjectWithTag("Player"))
+        {
+            return 'I';
+        }
+        GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        Vector3 player = playerGO.transform.position;
+        Vector3 player = playerGO.GetComponent<Transform>().position;
         Vector3 me = transform.position;
 
         Vector3 dir = player - me;
@@ -59,9 +63,13 @@ public class BehaviourTree : MonoBehaviour {
 	void Update () {
         //BehavTree
         //Search/Attack
-        GameObject playerGO = GameObject.Find("Player");
+        if (!GameObject.FindGameObjectWithTag("Player"))
+        {
+            return;
+        }
+        GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        Vector3 player = playerGO.transform.position;
+        Vector3 player = playerGO.GetComponent<Transform>().position;
         Vector3 me = transform.position;
 
         Vector3 dir = player - me;

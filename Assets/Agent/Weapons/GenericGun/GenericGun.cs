@@ -45,6 +45,8 @@ public class GenericGun : NetworkBehaviour
 
         currentNumberOfClips = ammoSettings.startingNumberOfClips;
         currentNumberOfRounds = ammoSettings.startingNumberOfRounds;
+
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
@@ -93,6 +95,11 @@ public class GenericGun : NetworkBehaviour
                 currentNumberOfClips--;
                 currentNumberOfRounds = ammoSettings.maxClipSize;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 

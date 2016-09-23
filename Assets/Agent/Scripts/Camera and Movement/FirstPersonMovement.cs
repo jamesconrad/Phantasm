@@ -16,7 +16,9 @@ public class FirstPersonMovement : MonoBehaviour
         movementDirection = new Vector3(0.0f, 0.0f, 0.0f);
 
         playerTransform = GetComponent<Transform>();
-        playerRigidBody = GetComponent<Rigidbody>();
+        playerTransform.position = FindObjectOfType<PlayerStartLocation>().transform.position;
+        playerTransform.rotation = FindObjectOfType<PlayerStartLocation>().transform.rotation;
+        playerRigidBody = GetComponent<Rigidbody>();        
     }
 
     // Update is called once per frame

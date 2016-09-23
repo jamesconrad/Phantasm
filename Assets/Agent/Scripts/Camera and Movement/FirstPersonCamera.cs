@@ -28,6 +28,7 @@ public class FirstPersonCamera : NetworkBehaviour
         playerCamera = Camera.main;
         playerTransform = GetComponent<Transform>();
         playerCamera.transform.position = GetComponent<Transform>().position;// + new Vector3(0.0f, 0.5f, 0.0f);
+        playerCamera.transform.rotation = GetComponent<Transform>().rotation;
     }
 
 
