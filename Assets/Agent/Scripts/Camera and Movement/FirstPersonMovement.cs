@@ -35,6 +35,7 @@ public class FirstPersonMovement : MonoBehaviour
         //    movementDirection *= Input.GetAxis("Horizontal");
         //}
         movementDirection.y = 0.0f;//* Input.GetAxis("Horizontal")
-        playerTransform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
+        //playerTransform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
+        playerRigidBody.velocity = movementDirection * movementSpeed * Time.deltaTime;
     }
 }

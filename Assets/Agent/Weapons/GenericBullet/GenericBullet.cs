@@ -2,8 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class GenericBullet : NetworkBehaviour
-{
+public class GenericBullet : NetworkBehaviour {
     public float maxLife = 5.0f;
     public float currentLife;
 
