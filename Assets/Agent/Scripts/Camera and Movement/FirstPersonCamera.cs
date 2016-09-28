@@ -20,18 +20,16 @@ public class FirstPersonCamera : NetworkBehaviour
         
     }
 
-    // Called on clients for player objects for the local client (only)
-    public override void OnStartLocalPlayer()
-    {
-        MouseMovement = new Vector2(0.0f, 0.0f);
+	// Called on clients for player objects for the local client (only)
+	public override void OnStartLocalPlayer()
+	{
+		MouseMovement = new Vector2(0.0f, 0.0f);
 
-        playerCamera = Camera.main;
-        playerTransform = GetComponent<Transform>();
-        playerCamera.transform.position = GetComponent<Transform>().position;// + new Vector3(0.0f, 0.5f, 0.0f);
-        playerCamera.transform.rotation = GetComponent<Transform>().rotation;
-    }
-
-
+		playerCamera = Camera.main;
+		playerTransform = GetComponent<Transform>();
+		playerCamera.transform.position = GetComponent<Transform>().position;
+		playerCamera.transform.rotation = GetComponent<Transform>().rotation;
+	}
 
     // Update is called once per frame
     void Update()
@@ -48,7 +46,7 @@ public class FirstPersonCamera : NetworkBehaviour
 
         //Generate rotation quaternion
         rot = Quaternion.Euler(-MouseMovement.y, MouseMovement.x, 0.0f);
-        playerCamera.transform.position = GetComponent<Transform>().position;
+        playerCamera.transform.position = GetComponent<Transform>().position + Vector3.up;
         playerTransform.rotation = playerCamera.transform.rotation = rot;
     }
 }

@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using UnityEngine.Networking.Match;
 
 public class GunHandle : NetworkBehaviour
 {
     public GunSettings weaponSettings;
+
+	private GameObject gunReference;
      
     private RaycastHit raycastResult;
 
     private Transform playerTransform;
-    
+
+	private Quaternion ninty;
     // Use this for initialization
     void Start()
     {
@@ -21,6 +25,8 @@ public class GunHandle : NetworkBehaviour
     {
         playerTransform = GetComponent<Transform>();
 
+		ninty = Quaternion.AngleAxis(90.0f, Vector3.up);
+
         weaponSettings.currentNumberOfClips = weaponSettings.ammoSettings.startingNumberOfClips;
         weaponSettings.currentNumberOfRounds = weaponSettings.ammoSettings.startingNumberOfRounds;
 
@@ -28,11 +34,15 @@ public class GunHandle : NetworkBehaviour
 
         if (GetComponentInChildren<Gun>())
         {
+			gunReference = GetComponentInChildren<Gun>().gameObject;
+
             weaponSettings = GetComponentInChildren<Gun>().weaponSettings;
 
             //temp solution. I'd like to get this automated.
             weaponSettings.currentNumberOfClips = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfClips;
             weaponSettings.currentNumberOfRounds = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfRounds;
+
+			gunReference.transform.parent = Camera.main.transform;
         }
     }
 
@@ -46,23 +56,36 @@ public class GunHandle : NetworkBehaviour
             return;
         }
 
+		#if UNITY_EDITOR
+		if(!weaponSettings.Equals(gunReference.GetComponent<Gun>().weaponSettings))
+		{
+			weaponSettings = gunReference.GetComponent<Gun>().weaponSettings;
+		}
+		#endif
 
         Physics.Raycast(playerTransform.position + playerTransform.rotation * weaponSettings.barrelOffset, playerTransform.forward, out raycastResult);
+
+		//if (raycastResult.collider)
+		//{
+		//	gunReference.transform.rotation = Quaternion.LookRotation(raycastResult.point - Camera.main.transform.position) * ninty;
+		//}
+		//else
+		//{
+		//	gunReference.transform.rotation = Quaternion.LookRotation(transform.forward) * ninty;
+		//}
 
         if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && weaponSettings.bulletPrefab != null && weaponSettings.currentNumberOfRounds > 0)
         {
             Quaternion tempQuat = Quaternion.identity;
             if (raycastResult.collider)
             {
-                GetComponentInChildren<Transform>().rotation = Quaternion.LookRotation(raycastResult.point - transform.position);
-                tempQuat = Quaternion.LookRotation((raycastResult.point - (transform.position + transform.rotation * weaponSettings.barrelOffset)).normalized);
-                CmdFireWeapon(transform.position + transform.rotation * weaponSettings.barrelOffset, tempQuat);
+                tempQuat = Quaternion.LookRotation((raycastResult.point - (transform.position + Camera.main.transform.rotation * weaponSettings.barrelOffset)).normalized);
+                CmdFireWeapon(Camera.main.transform.position + Camera.main.transform.rotation * weaponSettings.barrelOffset, tempQuat);
             }
             else
-            {
-                GetComponentInChildren<Transform>().rotation = Quaternion.LookRotation(transform.forward);
-                tempQuat = Quaternion.LookRotation(transform.forward);
-                CmdFireWeapon(transform.position + transform.rotation * weaponSettings.barrelOffset, tempQuat);
+            {                
+				tempQuat = Quaternion.LookRotation(Camera.main.transform.forward);
+				CmdFireWeapon(Camera.main.transform.position + Camera.main.transform.rotation * weaponSettings.barrelOffset, tempQuat);
             }
             weaponSettings.currentNumberOfRounds--;
 
@@ -84,7 +107,7 @@ public class GunHandle : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetMouseButtonDown(1))
         {
             Cursor.lockState = CursorLockMode.None;
         }
