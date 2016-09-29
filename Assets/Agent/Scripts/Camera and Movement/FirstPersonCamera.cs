@@ -34,6 +34,10 @@ public class FirstPersonCamera : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (!isLocalPlayer)
+		{
+			return;
+		}
         //Fetch mouse movement
         MouseMovement.x += Input.GetAxis("Mouse X");
         MouseMovement.y += Input.GetAxis("Mouse Y");
@@ -47,6 +51,7 @@ public class FirstPersonCamera : NetworkBehaviour
         //Generate rotation quaternion
         rot = Quaternion.Euler(-MouseMovement.y, MouseMovement.x, 0.0f);
         playerCamera.transform.position = GetComponent<Transform>().position + Vector3.up;
-        playerTransform.rotation = playerCamera.transform.rotation = rot;
+        playerCamera.transform.rotation = rot;
+		playerTransform.rotation = Quaternion.Euler(0.0f, MouseMovement.x, 0.0f);
     }
 }

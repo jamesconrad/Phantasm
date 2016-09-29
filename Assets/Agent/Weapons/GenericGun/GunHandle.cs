@@ -63,35 +63,24 @@ public class GunHandle : NetworkBehaviour
 		}
 		#endif
 
-        Physics.Raycast(playerTransform.position + playerTransform.rotation * weaponSettings.barrelOffset, playerTransform.forward, out raycastResult);
+		Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, Camera.main.transform.forward, out raycastResult);
 
-		//if (raycastResult.collider)
-		//{
-		//	gunReference.transform.rotation = Quaternion.LookRotation(raycastResult.point - Camera.main.transform.position) * ninty;
-		//}
-		//else
-		//{
-		//	gunReference.transform.rotation = Quaternion.LookRotation(transform.forward) * ninty;
-		//}
+		if (raycastResult.collider)
+		{
+			gunReference.transform.rotation = Quaternion.Slerp(gunReference.transform.rotation, Quaternion.LookRotation((raycastResult.point - (gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset)).normalized), Time.deltaTime * 8.0f);
+		}
+		else
+		{
+			gunReference.transform.rotation = Quaternion.Slerp(gunReference.transform.rotation, Quaternion.LookRotation(gunReference.transform.forward), Time.deltaTime * 8.0f);
+		}
 
         if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && weaponSettings.bulletPrefab != null && weaponSettings.currentNumberOfRounds > 0)
         {
-            Quaternion tempQuat = Quaternion.identity;
-            if (raycastResult.collider)
-            {
-                tempQuat = Quaternion.LookRotation((raycastResult.point - (transform.position + Camera.main.transform.rotation * weaponSettings.barrelOffset)).normalized);
-                CmdFireWeapon(Camera.main.transform.position + Camera.main.transform.rotation * weaponSettings.barrelOffset, tempQuat);
-            }
-            else
-            {                
-				tempQuat = Quaternion.LookRotation(Camera.main.transform.forward);
-				CmdFireWeapon(Camera.main.transform.position + Camera.main.transform.rotation * weaponSettings.barrelOffset, tempQuat);
-            }
+            CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
             weaponSettings.currentNumberOfRounds--;
 
             if (weaponSettings.Hitscan)
             {
-
                 {
                     //Add in some tag related collision stuff here.
 
@@ -107,6 +96,10 @@ public class GunHandle : NetworkBehaviour
             }
         }
 
+		if (Input.GetMouseButtonDown(0))
+		{
+			Cursor.lockState = CursorLockMode.Locked;
+		}
         if (Input.GetMouseButtonDown(1))
         {
             Cursor.lockState = CursorLockMode.None;
