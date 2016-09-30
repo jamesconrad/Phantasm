@@ -30,6 +30,10 @@ public class GenericBullet : MonoBehaviour {
     // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
     public void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<Health>().takeDamage(damage);
+        }
 		if (collision.gameObject.CompareTag("Player") != true)
 		{
 			Destroy(gameObject);

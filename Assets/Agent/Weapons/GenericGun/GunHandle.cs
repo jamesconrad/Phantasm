@@ -64,11 +64,11 @@ public class GunHandle : NetworkBehaviour
 
 		if (raycastResult.collider)
 		{
-			gunReference.transform.rotation = Quaternion.Slerp(gunReference.transform.rotation, Quaternion.LookRotation((raycastResult.point - (gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset)).normalized), Time.deltaTime * 8.0f);
+            gunReference.transform.rotation = Quaternion.LookRotation((raycastResult.point - (gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset)).normalized);// Quaternion.Slerp(gunReference.transform.rotation, Quaternion.LookRotation((raycastResult.point - (gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset)).normalized), 1.0f);
 		}
 		else
 		{
-			gunReference.transform.rotation = Quaternion.Slerp(gunReference.transform.rotation, Quaternion.LookRotation(gunReference.transform.forward), Time.deltaTime * 8.0f);
+            gunReference.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);// Quaternion.Slerp(gunReference.transform.rotation, Quaternion.LookRotation(Camera.main.transform.forward), 1.0f);
 		}
 
         if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && weaponSettings.bulletPrefab != null && weaponSettings.currentNumberOfRounds > 0)
