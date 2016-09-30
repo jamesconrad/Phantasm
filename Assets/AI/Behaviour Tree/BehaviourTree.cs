@@ -106,13 +106,6 @@ public class BehaviourTree : NetworkBehaviour {
             state = State();// remove for perma charge
         }
 
-        if(Physics.Raycast(transform.position + new Vector3(0.0f, GetComponent<CapsuleCollider>().height, 0.0f), Vector3.down, 0.1f))
-        {
-            GetComponent<Rigidbody>().useGravity = false;
-        }
-        else
-        {
-            GetComponent<Rigidbody>().useGravity = true;
-        }
+        
 	}
 }
