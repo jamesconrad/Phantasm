@@ -14,14 +14,26 @@ Platform assembly: C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Da
 Loading C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.052 seconds
+- Completed reload, in  0.057 seconds
 Platform assembly: C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.862419 ms
+UnloadTime: 0.857679 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: adc -> priority: 1 
-  Thread -> id: fb8 -> priority: 1 
+  Thread -> id: b1c -> priority: 1 
+  Thread -> id: 31f0 -> priority: 1 
+MatchMakingClient ListMatches :https://mm.unet.unity3d.com/json/reply/ListMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+MatchMakingClient Join :https://mm.unet.unity3d.com/json/reply/JoinMatchRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+MatchMakingClient DropConnection :https://mm.unet.unity3d.com/json/reply/DropConnectionRequest
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+

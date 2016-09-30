@@ -41,39 +41,21 @@ public class NetworkedMovement : NetworkBehaviour
     void Update()
     {
         simulatedPosition = syncedPosition + syncedVelocity * (float)(Network.time - sendTime2);
-
-        if (objectIsClient)
+        
+        if (!isLocalPlayer)
         {
-            if (!isLocalPlayer)
+            transform.position = Vector3.Lerp(transform.position, simulatedPosition, 0.25f);
+            transform.rotation = syncedRotation;
+        }
+        else if (isLocalPlayer)
+        {
+            CmdSyncRotation(transform.rotation);
+            if ((simulatedPosition - transform.position).magnitude >= maxDistance)
             {
-                transform.position = Vector3.Lerp(transform.position, simulatedPosition, 0.25f);
-                transform.rotation = syncedRotation;
-            }
-            else if (isLocalPlayer)
-            {
-                CmdSyncRotation(transform.rotation);
-                if ((simulatedPosition - transform.position).magnitude >= maxDistance)
-                {
-                    CmdSyncMovement(transform.position, GetComponentInParent<Rigidbody>().velocity, transform.rotation, Network.time);
-                }
+                CmdSyncMovement(transform.position, GetComponentInParent<Rigidbody>().velocity, transform.rotation, Network.time);
             }
         }
-        else
-        {
-             if (!isServer)
-            {
-                transform.position = Vector3.Lerp(transform.position, simulatedPosition, 0.25f);
-                transform.rotation = syncedRotation;
-            }
-            else if (isServer)
-            {
-                ServerSyncRotation(transform.rotation);
-                if ((simulatedPosition - transform.position).magnitude >= maxDistance)
-                {
-                    ServerSyncMovement(transform.position, GetComponentInParent<Rigidbody>().velocity, transform.rotation, Network.time);
-                }
-            }
-        }
+        
     }
 
     [Command]
@@ -84,21 +66,6 @@ public class NetworkedMovement : NetworkBehaviour
 
     [Command]
     private void CmdSyncMovement(Vector3 _position, Vector3 _velocity, Quaternion _rotation, double _time)
-    {
-        syncedPosition = _position;
-        syncedVelocity = _velocity;
-        //syncedRotation = _rotation;
-        sendTime2 = _time;
-    }
-
-    [Server]
-    private void ServerSyncRotation(Quaternion _rotation)
-    {
-        syncedRotation = _rotation;
-    }
-
-    [ServerCallback]
-    private void ServerSyncMovement(Vector3 _position, Vector3 _velocity, Quaternion _rotation, double _time)
     {
         syncedPosition = _position;
         syncedVelocity = _velocity;
