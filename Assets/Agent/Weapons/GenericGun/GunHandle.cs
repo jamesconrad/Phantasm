@@ -13,7 +13,6 @@ public class GunHandle : NetworkBehaviour
 
     private Transform playerTransform;
 
-	private Quaternion ninty;
     // Use this for initialization
     void Start()
     {
@@ -24,8 +23,6 @@ public class GunHandle : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         playerTransform = GetComponent<Transform>();
-
-		ninty = Quaternion.AngleAxis(90.0f, Vector3.up);
 
         weaponSettings.currentNumberOfClips = weaponSettings.ammoSettings.startingNumberOfClips;
         weaponSettings.currentNumberOfRounds = weaponSettings.ammoSettings.startingNumberOfRounds;

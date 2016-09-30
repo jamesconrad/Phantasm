@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class BehaviourTree : MonoBehaviour {
+public class BehaviourTree : NetworkBehaviour {
 
     public float aggroRadius = 5;
     public float sightRange = 10;
@@ -63,6 +64,11 @@ public class BehaviourTree : MonoBehaviour {
 	void Update () {
         //BehavTree
         //Search/Attack
+        if (!isServer)
+        {
+            return;
+        }
+
         if (!GameObject.FindGameObjectWithTag("Player"))
         {
             return;

@@ -1,0 +1,193 @@
+fileFormatVersion: 2
+guid: cb2dafdd69ae0e446b9807abbdb09ed6
+timeCreated: 1475160214
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: fmFiveSeven_TEX:_UNKNOWN_REF_NODE_fosterParent1
+    100004: fmFiveSeven_TEX:barrelBack
+    100006: fmFiveSeven_TEX:barrelBack 1
+    100008: fmFiveSeven_TEX:barrelBottom
+    100010: fmFiveSeven_TEX:barrelFront
+    100012: fmFiveSeven_TEX:barrelInside
+    100014: fmFiveSeven_TEX:barrelMiddle
+    100016: fmFiveSeven_TEX:boltThing1
+    100018: fmFiveSeven_TEX:boltThing2
+    100020: fmFiveSeven_TEX:gunBottom
+    100022: fmFiveSeven_TEX:gunTop
+    100024: fmFiveSeven_TEX:handleMain
+    100026: fmFiveSeven_TEX:lockOnBack
+    100028: fmFiveSeven_TEX:lockOnFront
+    100030: fmFiveSeven_TEX:ref_angle
+    100032: fmFiveSeven_TEX:ref_Back
+    100034: fmFiveSeven_TEX:ref_Side
+    100036: fmFiveSeven_TEX:reference
+    100038: fmFiveSeven_TEX:safetySwitch
+    100040: fmFiveSeven_TEX:transform1
+    100042: fmFiveSeven_TEX:transform10
+    100044: fmFiveSeven_TEX:transform11
+    100046: fmFiveSeven_TEX:transform12
+    100048: fmFiveSeven_TEX:transform2
+    100050: fmFiveSeven_TEX:transform3
+    100052: fmFiveSeven_TEX:transform4
+    100054: fmFiveSeven_TEX:transform5
+    100056: fmFiveSeven_TEX:transform6
+    100058: fmFiveSeven_TEX:transform7
+    100060: fmFiveSeven_TEX:transform8
+    100062: fmFiveSeven_TEX:transform9
+    100064: fmFiveSeven_TEX:Trigger
+    100066: polySurface1
+    100068: polySurface1 1
+    100070: polySurface10
+    100072: polySurface11
+    100074: polySurface12
+    100076: polySurface2
+    100078: polySurface3
+    100080: polySurface4
+    100082: polySurface5
+    100084: polySurface6
+    100086: polySurface7
+    100088: polySurface8
+    100090: polySurface9
+    100092: transform1
+    100094: transform10
+    100096: transform11
+    100098: transform12
+    100100: transform13
+    100102: transform2
+    100104: transform3
+    100106: transform4
+    100108: transform5
+    100110: transform6
+    100112: transform7
+    100114: transform8
+    100116: transform9
+    400000: //RootNode
+    400002: fmFiveSeven_TEX:_UNKNOWN_REF_NODE_fosterParent1
+    400004: fmFiveSeven_TEX:barrelBack
+    400006: fmFiveSeven_TEX:barrelBack 1
+    400008: fmFiveSeven_TEX:barrelBottom
+    400010: fmFiveSeven_TEX:barrelFront
+    400012: fmFiveSeven_TEX:barrelInside
+    400014: fmFiveSeven_TEX:barrelMiddle
+    400016: fmFiveSeven_TEX:boltThing1
+    400018: fmFiveSeven_TEX:boltThing2
+    400020: fmFiveSeven_TEX:gunBottom
+    400022: fmFiveSeven_TEX:gunTop
+    400024: fmFiveSeven_TEX:handleMain
+    400026: fmFiveSeven_TEX:lockOnBack
+    400028: fmFiveSeven_TEX:lockOnFront
+    400030: fmFiveSeven_TEX:ref_angle
+    400032: fmFiveSeven_TEX:ref_Back
+    400034: fmFiveSeven_TEX:ref_Side
+    400036: fmFiveSeven_TEX:reference
+    400038: fmFiveSeven_TEX:safetySwitch
+    400040: fmFiveSeven_TEX:transform1
+    400042: fmFiveSeven_TEX:transform10
+    400044: fmFiveSeven_TEX:transform11
+    400046: fmFiveSeven_TEX:transform12
+    400048: fmFiveSeven_TEX:transform2
+    400050: fmFiveSeven_TEX:transform3
+    400052: fmFiveSeven_TEX:transform4
+    400054: fmFiveSeven_TEX:transform5
+    400056: fmFiveSeven_TEX:transform6
+    400058: fmFiveSeven_TEX:transform7
+    400060: fmFiveSeven_TEX:transform8
+    400062: fmFiveSeven_TEX:transform9
+    400064: fmFiveSeven_TEX:Trigger
+    400066: polySurface1
+    400068: polySurface1 1
+    400070: polySurface10
+    400072: polySurface11
+    400074: polySurface12
+    400076: polySurface2
+    400078: polySurface3
+    400080: polySurface4
+    400082: polySurface5
+    400084: polySurface6
+    400086: polySurface7
+    400088: polySurface8
+    400090: polySurface9
+    400092: transform1
+    400094: transform10
+    400096: transform11
+    400098: transform12
+    400100: transform13
+    400102: transform2
+    400104: transform3
+    400106: transform4
+    400108: transform5
+    400110: transform6
+    400112: transform7
+    400114: transform8
+    400116: transform9
+    2300000: polySurface1
+    3300000: polySurface1
+    4300000: polySurface1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

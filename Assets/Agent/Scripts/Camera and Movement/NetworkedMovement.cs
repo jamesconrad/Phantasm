@@ -20,6 +20,8 @@ public class NetworkedMovement : NetworkBehaviour
     [SyncVar]
     private Vector3 syncedVelocity;
 
+    public bool objectIsClient = true;
+
     //private Rigidbody playerRigidBody;
 
 
@@ -40,23 +42,36 @@ public class NetworkedMovement : NetworkBehaviour
     {
         simulatedPosition = syncedPosition + syncedVelocity * (float)(Network.time - sendTime2);
 
-        if (isClient && !isLocalPlayer)
+        if (objectIsClient)
         {
-            //Debug.Log((float)(Network.time - sendTime2));
-        }
-
-        if (!isLocalPlayer)
-        {
-            transform.position = Vector3.Lerp(transform.position, simulatedPosition, 0.25f);
-            transform.rotation = syncedRotation;
-        }
-
-        if (isLocalPlayer)
-        {
-            CmdSyncRotation(transform.rotation);
-            if ((simulatedPosition - transform.position).magnitude >= maxDistance)
+            if (!isLocalPlayer)
             {
-                CmdSyncMovement(transform.position, GetComponentInParent<Rigidbody>().velocity, transform.rotation, Network.time);
+                transform.position = Vector3.Lerp(transform.position, simulatedPosition, 0.25f);
+                transform.rotation = syncedRotation;
+            }
+            else if (isLocalPlayer)
+            {
+                CmdSyncRotation(transform.rotation);
+                if ((simulatedPosition - transform.position).magnitude >= maxDistance)
+                {
+                    CmdSyncMovement(transform.position, GetComponentInParent<Rigidbody>().velocity, transform.rotation, Network.time);
+                }
+            }
+        }
+        else
+        {
+             if (!isServer)
+            {
+                transform.position = Vector3.Lerp(transform.position, simulatedPosition, 0.25f);
+                transform.rotation = syncedRotation;
+            }
+            else if (isServer)
+            {
+                ServerSyncRotation(transform.rotation);
+                if ((simulatedPosition - transform.position).magnitude >= maxDistance)
+                {
+                    ServerSyncMovement(transform.position, GetComponentInParent<Rigidbody>().velocity, transform.rotation, Network.time);
+                }
             }
         }
     }
@@ -69,6 +84,21 @@ public class NetworkedMovement : NetworkBehaviour
 
     [Command]
     private void CmdSyncMovement(Vector3 _position, Vector3 _velocity, Quaternion _rotation, double _time)
+    {
+        syncedPosition = _position;
+        syncedVelocity = _velocity;
+        //syncedRotation = _rotation;
+        sendTime2 = _time;
+    }
+
+    [Server]
+    private void ServerSyncRotation(Quaternion _rotation)
+    {
+        syncedRotation = _rotation;
+    }
+
+    [ServerCallback]
+    private void ServerSyncMovement(Vector3 _position, Vector3 _velocity, Quaternion _rotation, double _time)
     {
         syncedPosition = _position;
         syncedVelocity = _velocity;
