@@ -7,7 +7,7 @@ public class GunHandle : NetworkBehaviour
 {
     public GunSettings weaponSettings;
 
-	private GameObject gunReference;
+	public GameObject gunReference;
      
     private RaycastHit raycastResult;
 
@@ -16,7 +16,16 @@ public class GunHandle : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        
+        if (GetComponentInChildren<Gun>())
+        {
+            gunReference = GetComponentInChildren<Gun>().gameObject;
+            weaponSettings = GetComponentInChildren<Gun>().weaponSettings;
+
+            //temp solution. I'd like to get this automated.
+            weaponSettings.currentNumberOfClips = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfClips;
+            weaponSettings.currentNumberOfRounds = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfRounds;
+            
+        }
     }
 
     // Called on clients for player objects for the local client (only)
@@ -29,17 +38,17 @@ public class GunHandle : NetworkBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
 
+        //This needs to be seperated into it's own function call so that new weapons can be picked up automatically, in case we choose to have multiple weapons.
         if (GetComponentInChildren<Gun>())
         {
-			gunReference = GetComponentInChildren<Gun>().gameObject;
-
+            gunReference = GetComponentInChildren<Gun>().gameObject;
             weaponSettings = GetComponentInChildren<Gun>().weaponSettings;
 
             //temp solution. I'd like to get this automated.
             weaponSettings.currentNumberOfClips = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfClips;
             weaponSettings.currentNumberOfRounds = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfRounds;
 
-			gunReference.transform.parent = Camera.main.transform;
+            gunReference.transform.parent = Camera.main.transform;
         }
     }
 
