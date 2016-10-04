@@ -6,23 +6,18 @@ public class NetworkedMovement : NetworkBehaviour
 {
     public float maxDistance;
 
-    [SyncVar]
-    private double sendTime;
-
-    private double startTime = 0.0;
-
-    [SyncVar]
-    private Vector3 syncedPosition;
-
     private Vector3 simulatedPosition;
 
-    [SyncVar]
-    private Quaternion syncedRotation;
 
-    [SyncVar]
+    private double sendTime;
+    private double startTime = 0.0;
+    private Vector3 syncedPosition;
+    private Quaternion syncedRotation;
     private Vector3 syncedVelocity;
 
     public bool objectIsClient = true;
+
+    double timeDifference;
 
 
 
@@ -41,21 +36,10 @@ public class NetworkedMovement : NetworkBehaviour
         sendTime = Network.time;
     }
 
-    public void OnConnectedToServer()
-    {
-    }
-
-
-
-    // Called on clients for player objects for the local client (only)
-    public override void OnStartLocalPlayer()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
-        simulatedPosition = syncedPosition + syncedVelocity * (float)(Network.time - sendTime);
+        simulatedPosition = syncedPosition + syncedVelocity * (float)((Network.time - timeDifference) - sendTime);
 
         if (objectIsClient)
         {
@@ -91,22 +75,44 @@ public class NetworkedMovement : NetworkBehaviour
         }
     }
 
+
+    public override bool OnSerialize(NetworkWriter writer, bool initialState)
+    {
+        writer.Write(syncedPosition);
+        writer.Write(syncedVelocity);
+        writer.Write(syncedRotation);
+        writer.Write(Network.time);
+        writer.Write(startTime);
+        return true;
+    }
+
+    // Called to apply state to objects on clients
+    public override void OnDeserialize(NetworkReader reader, bool initialState)
+    {
+        syncedPosition = reader.ReadVector3();
+        syncedVelocity = reader.ReadVector3();
+        syncedRotation = reader.ReadQuaternion();
+        sendTime = reader.ReadDouble();
+        startTime = reader.ReadDouble();
+        
+        if (initialState)
+        {
+            timeDifference = sendTime - Network.time;
+        }
+    }
+
+
     [Command]
     private void CmdSyncRotation(Quaternion _rotation)
     {
         syncedRotation = _rotation;
     }
 
-    // Called to gather state to send from the server to clients
-    public override bool OnSerialize(NetworkWriter writer, bool initialState)
-    {
-        return true;
-    }
-
     [Command]
     private void CmdSyncMovement(Vector3 _position, Vector3 _velocity, Quaternion _rotation, double _time)
     {
         syncedPosition = _position;
+        SetDirtyBit(1);
         syncedVelocity = _velocity;
         //syncedRotation = _rotation;
         sendTime = _time;
