@@ -39,7 +39,7 @@ public class NetworkedMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        simulatedPosition = syncedPosition + syncedVelocity * (float)((Network.time - timeDifference) - sendTime);
+        simulatedPosition = syncedPosition;// + syncedVelocity * (float)((Network.time - timeDifference) - sendTime);
 
         if (objectIsClient)
         {
