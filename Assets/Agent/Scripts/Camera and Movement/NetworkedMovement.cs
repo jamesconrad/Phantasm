@@ -44,14 +44,7 @@ public class NetworkedMovement : NetworkBehaviour
     void Update()
     {
         float deltaTime = 0.0f;
-        if (connectionToServer != null)
-        {
-            deltaTime = connectionToServer.lastMessageTime;
-        }
-        else if (connectionToClient != null)
-        {
-            deltaTime = connectionToClient.lastMessageTime;
-        }
+        //TODO: find out some way to set delta time correctly. THere seems to be several ways in the deprecated networking, but like, none in the new one.
         simulatedPosition = syncedPosition + syncedVelocity * deltaTime;// (float)((Network.time) - startTime);
         if (objectIsClient)
         {
@@ -62,7 +55,7 @@ public class NetworkedMovement : NetworkBehaviour
             }
             else if (isLocalPlayer)
             {
-                
+
                 //SetDirtyBit(netId.Value);
                 CmdSyncRotation(transform.rotation);
                 if ((simulatedPosition - transform.position).magnitude >= maxDistance)
