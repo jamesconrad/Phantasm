@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.Networking.NetworkSystem;
 using System.Collections;
 
 public class SpawnHacker : MonoBehaviour {
 
     public GameObject hacker;
+
     // OnMouseUpAsButton is only called when the mouse is released over the same GUIElement or Collider as it was pressed
     public void CreateObjectAndDisableMenu()
     {
-        Instantiate(hacker, new Vector3(0.0f, 0.5f, -22.0f), Quaternion.identity);
-
+        IntegerMessage msg = new IntegerMessage(1);
+        ClientScene.AddPlayer(NetworkManager.singleton.client.connection, 0, msg);
         GetComponentInParent<Canvas>().gameObject.SetActive(false);
     }
 

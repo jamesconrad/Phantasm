@@ -24,7 +24,6 @@ public class NetworkedMovement : NetworkBehaviour
     double timeDifference;
 
 
-
     public class TransformMessage : MessageBase
     {
         public double sendTimeFromClient;
@@ -37,7 +36,7 @@ public class NetworkedMovement : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        sendTime = Network.time;
+
     }
 
     // Update is called once per frame
@@ -45,7 +44,7 @@ public class NetworkedMovement : NetworkBehaviour
     {
         float deltaTime = 0.0f;
         //TODO: find out some way to set delta time correctly. THere seems to be several ways in the deprecated networking, but like, none in the new one.
-        simulatedPosition = syncedPosition + syncedVelocity * deltaTime;// (float)((Network.time) - startTime);
+        simulatedPosition = syncedPosition + syncedVelocity * deltaTime;;
         if (objectIsClient)
         {
             if (!isLocalPlayer)

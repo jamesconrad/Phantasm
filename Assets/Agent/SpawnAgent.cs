@@ -11,9 +11,10 @@ public class SpawnAgent : MonoBehaviour
     // OnMouseUpAsButton is only called when the mouse is released over the same GUIElement or Collider as it was pressed
     public void CreateObjectAndDisableMenu()
     {
-        ClientScene.AddPlayer(NetworkManager.singleton.client.connection, 0);
+        IntegerMessage msg = new IntegerMessage(0);
+        ClientScene.AddPlayer(NetworkManager.singleton.client.connection, 0, msg);
 
-        GetComponentInParent<Canvas>().gameObject.SetActive(false);
+        GetComponentInParent<Canvas>().enabled = false;
     }
 }
     

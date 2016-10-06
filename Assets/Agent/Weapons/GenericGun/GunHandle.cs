@@ -7,8 +7,8 @@ public class GunHandle : NetworkBehaviour
 {
     public GunSettings weaponSettings;
 
-	public GameObject gunReference;
-     
+    public GameObject gunReference;
+
     private RaycastHit raycastResult;
 
     private Transform playerTransform;
@@ -24,7 +24,7 @@ public class GunHandle : NetworkBehaviour
             //temp solution. I'd like to get this automated.
             weaponSettings.currentNumberOfClips = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfClips;
             weaponSettings.currentNumberOfRounds = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfRounds;
-            
+
         }
     }
 
@@ -62,23 +62,23 @@ public class GunHandle : NetworkBehaviour
             return;
         }
 
-		#if UNITY_EDITOR
-		if(!weaponSettings.Equals(gunReference.GetComponent<Gun>().weaponSettings))
-		{
-			weaponSettings = gunReference.GetComponent<Gun>().weaponSettings;
-		}
-		#endif
+#if UNITY_EDITOR
+        if (!weaponSettings.Equals(gunReference.GetComponent<Gun>().weaponSettings))
+        {
+            weaponSettings = gunReference.GetComponent<Gun>().weaponSettings;
+        }
+#endif
 
-		Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, Camera.main.transform.forward, out raycastResult);
+        Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, Camera.main.transform.forward, out raycastResult);
 
-		if (raycastResult.collider)
-		{
+        if (raycastResult.collider)
+        {
             gunReference.transform.rotation = Quaternion.LookRotation((raycastResult.point - (gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset)).normalized);// Quaternion.Slerp(gunReference.transform.rotation, Quaternion.LookRotation((raycastResult.point - (gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset)).normalized), 1.0f);
-		}
-		else
-		{
+        }
+        else
+        {
             gunReference.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);// Quaternion.Slerp(gunReference.transform.rotation, Quaternion.LookRotation(Camera.main.transform.forward), 1.0f);
-		}
+        }
 
         if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && weaponSettings.bulletPrefab != null && weaponSettings.currentNumberOfRounds > 0)
         {
@@ -102,10 +102,10 @@ public class GunHandle : NetworkBehaviour
             }
         }
 
-		if (Input.GetMouseButtonDown(0))
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-		}
+        if (Input.GetMouseButtonDown(2))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
         if (Input.GetMouseButtonDown(1))
         {
             Cursor.lockState = CursorLockMode.None;
@@ -117,7 +117,19 @@ public class GunHandle : NetworkBehaviour
     {
         GameObject tempBullet = (GameObject)Instantiate(weaponSettings.bulletPrefab, spawnPosition, spawnRotation);
         NetworkServer.Spawn(tempBullet);
-        
+
     }
 
+    // This function is called when the MonoBehaviour will be destroyed
+    public void OnDestroy()
+    {
+        if (FindObjectOfType<MainMenu>())
+        {
+            FindObjectOfType<MainMenu>().GetComponent<Canvas>().enabled = true;
+        }
+        if (gunReference)
+        {
+            Destroy(gunReference.gameObject);
+        }
+    }
 }
