@@ -14,14 +14,14 @@ Platform assembly: C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Da
 Loading C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
 Loading C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.044 seconds
+- Completed reload, in  0.052 seconds
 Platform assembly: C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\100559819\Documents\Phantasm\Bin\TestBuild-Jordan_Data\Managed\System.dll (this message is harmless)
 desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 0.785778 ms
+UnloadTime: 0.776690 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2ae8 -> priority: 1 
-  Thread -> id: 1fdc -> priority: 1 
+  Thread -> id: 1dc -> priority: 1 
+  Thread -> id: 2648 -> priority: 1 

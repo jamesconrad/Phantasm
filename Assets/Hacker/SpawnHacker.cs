@@ -12,7 +12,7 @@ public class SpawnHacker : MonoBehaviour {
     {
         IntegerMessage msg = new IntegerMessage(1);
         ClientScene.AddPlayer(NetworkManager.singleton.client.connection, 0, msg);
-        GetComponentInParent<Canvas>().gameObject.SetActive(false);
+        MainMenu.DeactivateMainMenu();
     }
 
     // OnMouseDown is called when the user has pressed the mouse button while over the GUIElement or Collider

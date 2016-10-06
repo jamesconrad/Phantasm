@@ -123,10 +123,6 @@ public class GunHandle : NetworkBehaviour
     // This function is called when the MonoBehaviour will be destroyed
     public void OnDestroy()
     {
-        if (FindObjectOfType<MainMenu>())
-        {
-            FindObjectOfType<MainMenu>().GetComponent<Canvas>().enabled = true;
-        }
         if (gunReference)
         {
             Destroy(gunReference.gameObject);

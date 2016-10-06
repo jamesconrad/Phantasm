@@ -14,7 +14,7 @@ public class SpawnAgent : MonoBehaviour
         IntegerMessage msg = new IntegerMessage(0);
         ClientScene.AddPlayer(NetworkManager.singleton.client.connection, 0, msg);
 
-        GetComponentInParent<Canvas>().enabled = false;
+        MainMenu.DeactivateMainMenu();
     }
 }
     
