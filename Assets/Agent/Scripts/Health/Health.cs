@@ -5,7 +5,7 @@ public class Health : MonoBehaviour {
 
     [Tooltip("Amount of health for the object")]
     public float health;
-    private float currentHealth;
+    public float currentHealth;
 
     public float deathDelay;
 

@@ -22,22 +22,45 @@ public class CustomNetworkManager : NetworkManager
 
     }
 
+    public override void OnStartClient(NetworkClient client)
+    {
+        //MainMenu.ActivateMainMenu();
+        base.OnStartClient(client);
+    }
+
     public override void OnClientConnect(NetworkConnection conn)
     {
         MainMenu.ActivateMainMenu();
         base.OnClientConnect(conn);
     }
 
-    // Called on the client when the connection was lost or you disconnected from the server
-    public void OnDisconnectedFromServer(NetworkDisconnection info)
+    public override void OnStopClient()
     {
         MainMenu.DeactivateMainMenu();
+        base.OnStopClient();
+    }
+
+    public override void OnStartServer()
+    {
+        MainMenu.ActivateMainMenu();
+        base.OnStartServer();
     }
 
     public override void OnStopServer()
     {
         MainMenu.DeactivateMainMenu();
         base.OnStopServer();
+    }
+
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        client.Shutdown();
+        base.OnClientDisconnect(conn);
+    }
+
+    public override void OnServerDisconnect(NetworkConnection conn)
+    { 
+        base.OnServerDisconnect(conn);
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
@@ -47,7 +70,7 @@ public class CustomNetworkManager : NetworkManager
             playerPrefab = spawnPrefabs[extraMessageReader.ReadMessage<IntegerMessage>().value];
             if (playerPrefab == spawnPrefabs[1])
             {
-                
+
             }
         }
         base.OnServerAddPlayer(conn, playerControllerId, extraMessageReader);

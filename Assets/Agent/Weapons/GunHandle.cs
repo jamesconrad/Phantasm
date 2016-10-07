@@ -127,5 +127,6 @@ public class GunHandle : NetworkBehaviour
         {
             Destroy(gunReference.gameObject);
         }
+        GameState.StaticEndGame();
     }
 }
