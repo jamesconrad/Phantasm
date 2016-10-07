@@ -25,11 +25,17 @@ public class MainMenu : MonoBehaviour
 
     public static void ActivateMainMenu()
     {
-        MenuCanvas.enabled = true;
+		if (MenuCanvas) 
+		{
+			MenuCanvas.enabled = true;
+		}
     }
 
     public static void DeactivateMainMenu()
     {
-        MenuCanvas.enabled = false;
+		if (MenuCanvas) 
+		{
+			MenuCanvas.enabled = false;
+		}
     }
 }

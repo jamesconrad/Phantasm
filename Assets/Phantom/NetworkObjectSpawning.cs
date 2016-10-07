@@ -23,7 +23,7 @@ public class NetworkObjectSpawning : NetworkBehaviour
             return;
         }
         spawnLocations = FindObjectsOfType<PhantomSpawnLocation>();
-        if (spawnLocations == null)
+        if (spawnLocations.Length == 0)
         {
             Debug.Log("There are no spawn locations for the phantom.");
             NetworkServer.Spawn((GameObject)Instantiate(phantomGameObject, Vector3.up * 2 /*spawnLocations[Random.Range(0, spawnLocations.Length-1)].transform.position*/, Quaternion.identity));

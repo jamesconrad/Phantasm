@@ -6,6 +6,10 @@ public class Phantom : NetworkBehaviour
 {
     public float attackDamage;
 
+    public GameObject vanishParticleEffect;
+
+    private PhantomSpawnLocation[] respawnPoints;
+
     // Start is called just before any of the Update methods is called the first time
     public void Start()
     {
@@ -13,6 +17,8 @@ public class Phantom : NetworkBehaviour
         {
             GetComponent<Collider>().enabled = false;
         }
+
+        respawnPoints = FindObjectsOfType<PhantomSpawnLocation>();
     }
 
 
@@ -24,5 +30,14 @@ public class Phantom : NetworkBehaviour
         {
             collision.gameObject.GetComponent<Health>().takeDamage(attackDamage);
         }
+    }
+
+    public void Respawn()
+    {
+        Instantiate(vanishParticleEffect, transform.position, Quaternion.identity);
+
+        transform.position = respawnPoints[Random.Range(0, respawnPoints.Length - 1)].transform.position;
+
+        GetComponent<Health>().currentHealth = GetComponent<Health>().health;
     }
 }
