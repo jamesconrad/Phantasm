@@ -62,13 +62,6 @@ public class GunHandle : NetworkBehaviour
             return;
         }
 
-#if UNITY_EDITOR
-        if (!weaponSettings.Equals(gunReference.GetComponent<Gun>().weaponSettings))
-        {
-            weaponSettings = gunReference.GetComponent<Gun>().weaponSettings;
-        }
-#endif
-
         Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, Camera.main.transform.forward, out raycastResult);
 
         if (raycastResult.collider)
@@ -83,7 +76,7 @@ public class GunHandle : NetworkBehaviour
         if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && weaponSettings.bulletPrefab != null && weaponSettings.currentNumberOfRounds > 0)
         {
             CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
-            weaponSettings.currentNumberOfRounds--;
+            
 
             if (weaponSettings.Hitscan)
             {
@@ -116,6 +109,7 @@ public class GunHandle : NetworkBehaviour
     public void CmdFireWeapon(Vector3 spawnPosition, Quaternion spawnRotation)
     {
         GameObject tempBullet = (GameObject)Instantiate(weaponSettings.bulletPrefab, spawnPosition, spawnRotation);
+        weaponSettings.currentNumberOfRounds--;
         NetworkServer.Spawn(tempBullet);
 
     }

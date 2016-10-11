@@ -9,6 +9,7 @@ public class Phantom : NetworkBehaviour
     public GameObject vanishParticleEffect;
 
     private PhantomSpawnLocation[] respawnPoints;
+    public PhantomSpawnLocation previousSpawnLocation = null;
 
     // Start is called just before any of the Update methods is called the first time
     public void Start()
@@ -29,15 +30,32 @@ public class Phantom : NetworkBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Health>().takeDamage(attackDamage);
+            collision.rigidbody.AddForce((collision.transform.position - transform.position).normalized * 50.0f, ForceMode.Impulse);
+            Respawn();
         }
     }
 
     public void Respawn()
     {
-        Instantiate(vanishParticleEffect, transform.position, Quaternion.identity);
-
-        transform.position = respawnPoints[Random.Range(0, respawnPoints.Length - 1)].transform.position;
+        Destroy(Instantiate(vanishParticleEffect, transform.position, vanishParticleEffect.transform.rotation), vanishParticleEffect.GetComponent<ParticleSystem>().duration);
+        PhantomSpawnLocation spawnLoc = previousSpawnLocation;
+        do
+        {
+            spawnLoc = respawnPoints[Random.Range(0, respawnPoints.Length)];
+            transform.position = spawnLoc.transform.position;
+            if (respawnPoints.Length == 1)
+            {
+                break;
+            }
+        } while (spawnLoc == previousSpawnLocation);
+        previousSpawnLocation = spawnLoc;
 
         GetComponent<Health>().currentHealth = GetComponent<Health>().health;
+    }
+
+    // This function is called when the MonoBehaviour will be destroyed
+    public void OnDestroy()
+    {
+        GameState.StaticEndGame();
     }
 }
