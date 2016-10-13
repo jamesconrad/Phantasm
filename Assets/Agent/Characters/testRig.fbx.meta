@@ -1,0 +1,424 @@
+fileFormatVersion: 2
+guid: 6c3b5619f3358d044a9dd0410258e599
+timeCreated: 1476376561
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: arm_l
+    100002: arm_r
+    100004: cst_Hip
+    100006: cst_Hip3
+    100008: cst_Hip4
+    100010: cst_lElbow
+    100012: cst_lElbow 1
+    100014: cst_lElbow 2
+    100016: cst_lElow
+    100018: cst_lFootBack
+    100020: cst_lFootFront
+    100022: cst_lKnee
+    100024: cst_lShoulder
+    100026: cst_lShoulder2
+    100028: cst_lShoulder3
+    100030: cst_lShoulder4
+    100032: cst_lWrist
+    100034: cst_lWrist2
+    100036: cst_lWrist3
+    100038: cst_lWrist4
+    100040: cst_rElbow
+    100042: cst_rElbow 1
+    100044: cst_rElbow 2
+    100046: cst_rElbow 3
+    100048: cst_rFootBack
+    100050: cst_rFootFront
+    100052: cst_rKnee
+    100054: cst_rShoulder
+    100056: cst_rShoulder2
+    100058: cst_rShoulder3
+    100060: cst_rShoulder4
+    100062: cst_rWrist
+    100064: cst_rWrist 1
+    100066: cst_rWrist2
+    100068: cst_rWrist3
+    100070: cst_Spine1
+    100072: cst_Spine2
+    100074: cst_Spine3
+    100076: cst_Spine4
+    100078: cst_Spine5
+    100080: cst_Spine6
+    100082: elbow_l
+    100084: elbow_r
+    100086: head
+    100088: headBack
+    100090: headFront
+    100092: heel_l
+    100094: heel_r
+    100096: ik_lAnkle
+    100098: ik_lArm
+    100100: ik_lFoot
+    100102: ik_lLeg
+    100104: ik_rAnkle
+    100106: ik_rArm
+    100108: ik_rFoot
+    100110: ik_rLeg
+    100112: knee_l
+    100114: knee_r
+    100116: lAnkle
+    100118: lClavicale
+    100120: left
+    100122: leg_l
+    100124: leg_r
+    100126: lElbow
+    100128: lFootBack
+    100130: lFootFront
+    100132: lFootMid
+    100134: lIndex1
+    100136: lIndex2
+    100138: lIndex3
+    100140: lIndex4
+    100142: lLegBottom
+    100144: lLegTop
+    100146: lMid1
+    100148: lMid2
+    100150: lMid3
+    100152: lMid4
+    100154: lPink1
+    100156: lPink2
+    100158: lPink3
+    100160: lPink4
+    100162: lRing1
+    100164: lRing2
+    100166: lRing3
+    100168: lRing4
+    100170: lShoulder
+    100172: lThumb1
+    100174: lThumb2
+    100176: lThumb3
+    100178: lThumb4
+    100180: lWrist
+    100182: mesh
+    100184: pelvis
+    100186: pelvis1
+    100188: rAnkle
+    100190: rClavicale
+    100192: rElbow
+    100194: rFootBack
+    100196: rFootFront
+    100198: rFootMid
+    100200: rIndex1
+    100202: rIndex2
+    100204: rIndex3
+    100206: rIndex4
+    100208: rLegBottom
+    100210: rLegTop
+    100212: rMid1
+    100214: rMid2
+    100216: rMid3
+    100218: rMid4
+    100220: rPink1
+    100222: rPink2
+    100224: rPink3
+    100226: rPink4
+    100228: rRing1
+    100230: rRing2
+    100232: rRing3
+    100234: rRing4
+    100236: rShoulder
+    100238: rThumb1
+    100240: rThumb2
+    100242: rThumb3
+    100244: rThumb4
+    100246: rWrist
+    100248: shoulder_l
+    100250: shoulder_r
+    100252: spine1
+    100254: spine1 1
+    100256: spine1Front
+    100258: spine2
+    100260: spine2 1
+    100262: spine2Front
+    100264: spine3
+    100266: spine3 1
+    100268: spine3Front
+    100270: spine4
+    100272: spine4 1
+    100274: spine4Front
+    100276: spine5_arms
+    100278: spine5_arms 1
+    100280: spine5_arms_Front
+    100282: spine5_collar_Front
+    100284: spine6_clav
+    100286: spine6_collar
+    100288: spine7_headbase
+    100290: spine7_neck
+    100292: //RootNode
+    100294: toe_l
+    100296: toe_r
+    100298: wrist_l
+    100300: wrist_r
+    400000: arm_l
+    400002: arm_r
+    400004: cst_Hip
+    400006: cst_Hip3
+    400008: cst_Hip4
+    400010: cst_lElbow
+    400012: cst_lElbow 1
+    400014: cst_lElbow 2
+    400016: cst_lElow
+    400018: cst_lFootBack
+    400020: cst_lFootFront
+    400022: cst_lKnee
+    400024: cst_lShoulder
+    400026: cst_lShoulder2
+    400028: cst_lShoulder3
+    400030: cst_lShoulder4
+    400032: cst_lWrist
+    400034: cst_lWrist2
+    400036: cst_lWrist3
+    400038: cst_lWrist4
+    400040: cst_rElbow
+    400042: cst_rElbow 1
+    400044: cst_rElbow 2
+    400046: cst_rElbow 3
+    400048: cst_rFootBack
+    400050: cst_rFootFront
+    400052: cst_rKnee
+    400054: cst_rShoulder
+    400056: cst_rShoulder2
+    400058: cst_rShoulder3
+    400060: cst_rShoulder4
+    400062: cst_rWrist
+    400064: cst_rWrist 1
+    400066: cst_rWrist2
+    400068: cst_rWrist3
+    400070: cst_Spine1
+    400072: cst_Spine2
+    400074: cst_Spine3
+    400076: cst_Spine4
+    400078: cst_Spine5
+    400080: cst_Spine6
+    400082: elbow_l
+    400084: elbow_r
+    400086: head
+    400088: headBack
+    400090: headFront
+    400092: heel_l
+    400094: heel_r
+    400096: ik_lAnkle
+    400098: ik_lArm
+    400100: ik_lFoot
+    400102: ik_lLeg
+    400104: ik_rAnkle
+    400106: ik_rArm
+    400108: ik_rFoot
+    400110: ik_rLeg
+    400112: knee_l
+    400114: knee_r
+    400116: lAnkle
+    400118: lClavicale
+    400120: left
+    400122: leg_l
+    400124: leg_r
+    400126: lElbow
+    400128: lFootBack
+    400130: lFootFront
+    400132: lFootMid
+    400134: lIndex1
+    400136: lIndex2
+    400138: lIndex3
+    400140: lIndex4
+    400142: lLegBottom
+    400144: lLegTop
+    400146: lMid1
+    400148: lMid2
+    400150: lMid3
+    400152: lMid4
+    400154: lPink1
+    400156: lPink2
+    400158: lPink3
+    400160: lPink4
+    400162: lRing1
+    400164: lRing2
+    400166: lRing3
+    400168: lRing4
+    400170: lShoulder
+    400172: lThumb1
+    400174: lThumb2
+    400176: lThumb3
+    400178: lThumb4
+    400180: lWrist
+    400182: mesh
+    400184: pelvis
+    400186: pelvis1
+    400188: rAnkle
+    400190: rClavicale
+    400192: rElbow
+    400194: rFootBack
+    400196: rFootFront
+    400198: rFootMid
+    400200: rIndex1
+    400202: rIndex2
+    400204: rIndex3
+    400206: rIndex4
+    400208: rLegBottom
+    400210: rLegTop
+    400212: rMid1
+    400214: rMid2
+    400216: rMid3
+    400218: rMid4
+    400220: rPink1
+    400222: rPink2
+    400224: rPink3
+    400226: rPink4
+    400228: rRing1
+    400230: rRing2
+    400232: rRing3
+    400234: rRing4
+    400236: rShoulder
+    400238: rThumb1
+    400240: rThumb2
+    400242: rThumb3
+    400244: rThumb4
+    400246: rWrist
+    400248: shoulder_l
+    400250: shoulder_r
+    400252: spine1
+    400254: spine1 1
+    400256: spine1Front
+    400258: spine2
+    400260: spine2 1
+    400262: spine2Front
+    400264: spine3
+    400266: spine3 1
+    400268: spine3Front
+    400270: spine4
+    400272: spine4 1
+    400274: spine4Front
+    400276: spine5_arms
+    400278: spine5_arms 1
+    400280: spine5_arms_Front
+    400282: spine5_collar_Front
+    400284: spine6_clav
+    400286: spine6_collar
+    400288: spine7_headbase
+    400290: spine7_neck
+    400292: //RootNode
+    400294: toe_l
+    400296: toe_r
+    400298: wrist_l
+    400300: wrist_r
+    4300000: wrist_l
+    4300002: elbow_l
+    4300004: arm_l
+    4300006: wrist_r
+    4300008: elbow_r
+    4300010: arm_r
+    4300012: shoulder_l
+    4300014: shoulder_r
+    4300016: head
+    4300018: spine7_neck
+    4300020: spine6_clav
+    4300022: spine5_arms
+    4300024: spine4
+    4300026: spine3
+    4300028: spine2
+    4300030: spine1
+    4300032: pelvis1
+    4300034: leg_l
+    4300036: leg_r
+    4300038: knee_l
+    4300040: knee_r
+    4300042: heel_l
+    4300044: toe_l
+    4300046: toe_r
+    4300048: heel_r
+    9500000: //RootNode
+    13700000: arm_l
+    13700002: arm_r
+    13700004: elbow_l
+    13700006: elbow_r
+    13700008: head
+    13700010: heel_l
+    13700012: heel_r
+    13700014: knee_l
+    13700016: knee_r
+    13700018: leg_l
+    13700020: leg_r
+    13700022: pelvis1
+    13700024: shoulder_l
+    13700026: shoulder_r
+    13700028: spine1
+    13700030: spine2
+    13700032: spine3
+    13700034: spine4
+    13700036: spine5_arms
+    13700038: spine6_clav
+    13700040: spine7_neck
+    13700042: toe_l
+    13700044: toe_r
+    13700046: wrist_l
+    13700048: wrist_r
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
