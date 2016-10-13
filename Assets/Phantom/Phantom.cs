@@ -14,6 +14,12 @@ public class Phantom : NetworkBehaviour
     // Start is called just before any of the Update methods is called the first time
     public void Start()
     {
+        if (!isLocalPlayer)
+        {
+            //Change to apply the correct shaders when Stephen gets them done.
+            GetComponent<MeshRenderer>().enabled = false;
+        }
+
         if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])
         {
             GetComponent<Collider>().enabled = false;
@@ -30,7 +36,7 @@ public class Phantom : NetworkBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<Health>().takeDamage(attackDamage);
-            collision.rigidbody.AddForce((collision.transform.position - transform.position).normalized * 50.0f, ForceMode.Impulse);
+            collision.rigidbody.AddForce((collision.transform.position - transform.position).normalized * 25.0f, ForceMode.Impulse);
             Respawn();
         }
     }

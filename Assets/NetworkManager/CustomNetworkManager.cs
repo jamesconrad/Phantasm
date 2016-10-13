@@ -68,7 +68,7 @@ public class CustomNetworkManager : NetworkManager
         if (extraMessageReader != null)
         {
             playerPrefab = spawnPrefabs[extraMessageReader.ReadMessage<IntegerMessage>().value];
-            if (playerPrefab == spawnPrefabs[1])
+            if (playerPrefab == spawnPrefabs[0])
             {
 
             }
