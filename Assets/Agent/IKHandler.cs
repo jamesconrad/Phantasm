@@ -28,9 +28,9 @@ public class IKHandler : MonoBehaviour {
 
     void OnAnimatorIK()
     {
-        lIKTar.position = gun.position;
-        rIKTar.position = gun.position;
-
+        lIKTar = gun;
+        rIKTar = gun;
+        
         me.eulerAngles = new Vector3(me.eulerAngles.x, me.eulerAngles.y, gun.eulerAngles.z);
 
         anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
@@ -41,7 +41,7 @@ public class IKHandler : MonoBehaviour {
 
         anim.SetIKPosition(AvatarIKGoal.LeftHand, lIKTar.position);
         anim.SetIKPosition(AvatarIKGoal.RightHand, rIKTar.position);
-
+        
         //anim.SetIKHintPosition(AvatarIKHint.LeftElbow, lHint.position);
         //anim.SetIKHintPosition(AvatarIKHint.RightElbow, rHint.position);
     }
