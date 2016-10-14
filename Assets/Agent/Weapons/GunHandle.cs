@@ -76,7 +76,7 @@ public class GunHandle : NetworkBehaviour
         if ((Input.GetButtonDown("GamePad Fire") || Input.GetButtonDown("Fire1")) && weaponSettings.bulletPrefab != null && weaponSettings.currentNumberOfRounds > 0)
         {
             CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
-            
+            GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds);
 
             if (weaponSettings.Hitscan)
             {
@@ -92,6 +92,7 @@ public class GunHandle : NetworkBehaviour
             {
                 weaponSettings.currentNumberOfClips--;
                 weaponSettings.currentNumberOfRounds = weaponSettings.ammoSettings.maxClipSize;
+                GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds);
             }
         }
 

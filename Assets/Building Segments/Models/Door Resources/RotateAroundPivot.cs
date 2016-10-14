@@ -16,7 +16,7 @@ public class RotateAroundPivot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-       pivotPoint = transform.forward + transform.position;
+       pivotPoint = transform.forward * 1.3f + transform.position;
 	}
 	
 	// Update is called once per frame
