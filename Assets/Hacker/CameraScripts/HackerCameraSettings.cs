@@ -44,6 +44,4 @@ public class HackerCameraSettings : MonoBehaviour
 
         return enabled;
     }
-
-
 }

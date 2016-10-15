@@ -2,8 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class GenericBullet : NetworkBehaviour
-{
+public class GenericBullet : MonoBehaviour {
     public float maxLife = 5.0f;
     public float currentLife;
 
@@ -16,13 +15,6 @@ public class GenericBullet : NetworkBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Impulse);
         currentLife = maxLife;
     }
-
-    // Called on clients for player objects for the local client (only)
-    public override void OnStartLocalPlayer()
-    {
-    }
-
-
 
     // Update is called once per frame
     void Update()
@@ -38,6 +30,13 @@ public class GenericBullet : NetworkBehaviour
     // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
     public void OnCollisionEnter(Collision collision)
     {
-        Destroy(gameObject, 0.0066f);
-    }
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            collision.gameObject.GetComponent<Health>().takeDamage(damage);
+        }
+		if (collision.gameObject.CompareTag("Player") != true)
+		{
+			Destroy(gameObject);
+		}
+	}
 }

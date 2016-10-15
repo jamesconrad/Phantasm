@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿
 
 public class NeuralLayer
 {
@@ -14,8 +14,16 @@ public class NeuralLayer
             layer[i] = new NeuralNode(numInputs);
     }
 
-    public void CalculateLayer()
+    public float[] CalculateLayer(float[] inputs)
     {
+        float[] outputs = new float[neurons];
 
+        for (int i = 0; i < neurons; i++)
+        {
+            layer[i].ApplyInput(inputs);
+            outputs[i] = layer[i].CalculateOutput();
+        }
+
+        return outputs;
     }
 }
