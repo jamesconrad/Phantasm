@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d3a7f311684a1a64995a91c4a0dd7e82
+timeCreated: 1476474781
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - effectMaterial: {fileID: 2100000, guid: 74347cd67be138f4d84a50394250491f, type: 2}
+  - thermalRamp: {fileID: 2800000, guid: 023dabe62eee5aa4cbcf94a3d1ac85b0, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
