@@ -3,10 +3,8 @@
 	Properties
 	{
 		_MainTex("Texture", 2D) = "white" {}
-		_ThermalRamp("Thermal (RGB)", 2D) = "grey" {}
-		_Temperature("Temperature", Range(0,1)) = 1.0
 	}
-	SubShader
+		SubShader
 	{
 		Tags { "RenderType" = "Opaque" }
 		LOD 100
@@ -32,26 +30,19 @@
 				o.pos = UnityObjectToClipPos(vertex);
 				// UnityCG.cginc file contains function to transform
 				// normal from object to world space, use that
-				//o.worldNormal = UnityObjectToWorldDir(normal);
 				float3 viewN = normalize(mul(UNITY_MATRIX_IT_MV, normal.xyzz).xyz);
+				o.worldNormal = UnityObjectToWorldDir(normal);
 				o.worldNormal = viewN;
 				return o;
-			}		
-
-			sampler2D _ThermalRamp;
-			half _Temperature;
-
+			}
+		
 			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed4 c = 0;
-				float dotProduct = (dot(float3(0.0f, 0.0f, 1.0f), i.worldNormal) * _Temperature);
-				float4 thermalRamp = tex2D(_ThermalRamp, float2(max(dotProduct, 0.05f) * 0.925f, 0.0f));
-
-				//c.rgb = i.worldNormal*0.5 + 0.5;
-				c = thermalRamp;
-				//c.r = dotProduct;
-				//c.g = dotProduct;
-				//c.b = dotProduct;
+				// normal is a 3D vector with xyz components; in -1..1
+				// range. To display it as color, bring the range into 0..1
+				// and put into red, green, blue components
+				c.rgb = i.worldNormal*0.5 + 0.5;
 				//c.rgb = viewN * 0.5 + 0.5;
 				return c;
 			}

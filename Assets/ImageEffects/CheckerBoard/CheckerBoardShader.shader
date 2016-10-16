@@ -4,6 +4,9 @@
 	{
 		_MainTex("Texture", 2D) = "white" {}
 		_ScanlineAmount("Scanline Amount", Range(0,1)) = 0.5
+		_CheckerAmount("Thickness Amount", Range(0,1)) = 0.25
+		_ScanlineXAmount("ScanlineX Amount", Range(0,2)) = 0.0
+		_ScanlineYAmount("ScanlineY Amount", Range(0,2)) = 0.0
 	}
 		SubShader
 		{
@@ -34,6 +37,9 @@
 		
 			sampler2D _MainTex;
 			float _ScanlineAmount;
+			float _ScanlineXAmount;
+			float _ScanlineYAmount;
+			float _CheckerAmount;
 		
 			fixed4 frag(v2f i, UNITY_VPOS_TYPE screenPos : VPOS) : SV_Target
 			{
@@ -43,8 +49,8 @@
 		
 				// checker value will be negative for 4x4 blocks of pixels
 				// in a checkerboard pattern
-				screenPos.xy = floor(screenPos.xy) * _ScanlineAmount;
-				float checker = -frac(screenPos.g);// + screenPos.g);
+				screenPos.xy = floor(screenPos.xy * _CheckerAmount) * _ScanlineAmount;
+				float checker = -frac(screenPos.r * _ScanlineXAmount + screenPos.g * _ScanlineYAmount);// + screenPos.g);
 		
 				// clip HLSL instruction stops rendering a pixel if value is negative
 				clip(checker);
