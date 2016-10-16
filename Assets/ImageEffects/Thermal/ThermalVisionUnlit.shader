@@ -44,7 +44,8 @@
 			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed4 c = 0;
-				float dotProduct = (dot(float3(0.0f, 0.0f, 1.0f), i.worldNormal) * _Temperature);
+				//UNITY_MATRIX_IT_MV[2].xyz
+				float dotProduct = (dot(float3(0.0f, 0.0f, 1.0f), i.worldNormal) * _Temperature); //
 				float4 thermalRamp = tex2D(_ThermalRamp, float2(max(dotProduct, 0.05f) * 0.925f, 0.0f));
 
 				//c.rgb = i.worldNormal*0.5 + 0.5;
