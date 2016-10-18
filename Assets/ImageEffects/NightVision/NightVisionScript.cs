@@ -32,7 +32,7 @@ public class NightVisionScript : MonoBehaviour
         RenderSettings.ambientLight = ambientLightTemp;
 
         float RandomNum = Random.Range(0.0f, 1.0f);
-        effectMaterial.SetFloat("RandomNumber", RandomNum);
+        effectMaterial.SetFloat("uRandom", RandomNum);
         effectMaterial.SetFloat("uAmount", filmGrainAmount);
 
         Graphics.Blit(source, destination, effectMaterial);

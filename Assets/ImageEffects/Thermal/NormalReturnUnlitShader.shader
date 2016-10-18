@@ -31,7 +31,7 @@
 				// UnityCG.cginc file contains function to transform
 				// normal from object to world space, use that
 				float3 viewN = normalize(mul(UNITY_MATRIX_IT_MV, normal.xyzz).xyz);
-				o.worldNormal = UnityObjectToWorldDir(normal);
+				//o.worldNormal = UnityObjectToWorldDir(normal);
 				o.worldNormal = viewN;
 				return o;
 			}
