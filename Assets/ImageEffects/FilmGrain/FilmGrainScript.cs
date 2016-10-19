@@ -6,11 +6,8 @@ using System.Collections;
 public class FilmGrainScript : MonoBehaviour
 {
     public Material effectMaterial;
-
-    //private Color ambientSkyColorTemp;
-    //private float ambientIntensityTemp;
-    private Color ambientLightTemp;
-
+    
+    [Range(0.0f, 1.0f)]
     public float filmGrainAmount = 0.3f;
     
     // OnRenderImage is called after all rendering is complete to render image

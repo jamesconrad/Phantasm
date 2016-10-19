@@ -1,11 +1,11 @@
 fileFormatVersion: 2
 guid: d5ea4790c967c8e49a98321b77f461c0
-timeCreated: 1476809567
+timeCreated: 1476838546
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - effectMaterial: {fileID: 2100000, guid: 4dde0efccd0588d4e8a2f6fe46a8fd1d, type: 2}
+  - effectMaterial: {fileID: 2100000, guid: f92baa2e387385044ad2b674670453af, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
