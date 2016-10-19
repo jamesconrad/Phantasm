@@ -15,7 +15,8 @@ public class BehaviourTree : NetworkBehaviour {
     {
         Charge = 0,
         Walking = 1,
-        Idle = 2
+        Idle = 2,
+        Patrol = 3
     }
     private AIState AiState = AIState.Idle;
     // Use this for initialization
@@ -39,32 +40,6 @@ public class BehaviourTree : NetworkBehaviour {
 
         Vector3 dir = player - me;
         Vector3 dirN = dir.normalized;
-
-        //Actual math
-        //if (dir.magnitude < aggroRadius) //Within sound aggro range, auto pull
-        //{
-        //    lastKnown = player;
-        //    return AIState.Chase;
-        //}
-        //else
-        //{
-        //    RaycastHit hitInfo;
-        //    //Physics.Raycast(me, dir.normalized, out hitInfo, maxSight);
-        //    if (playerGO != null && Physics.Raycast(me, dir.normalized, out hitInfo, maxSight) && hitInfo.collider.gameObject == playerGO)
-        //    {
-        //        lastKnown = player;
-        //        return AIState.Chase;
-        //    }
-        //    else if ((me - (lastKnown - dirN)).magnitude < 4.5)
-        //        //constant (4.5) is based a range from point to model,
-        //        //designed to not be exact but close (with original model this was roughly 1.2 units away from origin)
-        //    {
-        //        return AIState.I;
-        //    }
-        //    else
-        //        return AIState.Wait;
-        //}
-        //we done
     }
 
 	// Update is called once per frame
@@ -90,15 +65,16 @@ public class BehaviourTree : NetworkBehaviour {
 
         //draw auto aggro
         //Debug.DrawRay(me, dir, Color.red);
-        Debug.DrawRay(me, dirN * maxSight, Color.gray);
-        Debug.DrawRay(me, dirN * sightRange, Color.green);
-        Debug.DrawRay(me, dirN * aggroRadius, Color.red);
+        //Debug.DrawRay(me, dirN * maxSight, Color.gray);
+        //Debug.DrawRay(me, dirN * sightRange, Color.green);
+        //Debug.DrawRay(me, dirN * aggroRadius, Color.red);
         
         if (AiState == AIState.Idle)
         {
             //print("Idle");
             agent.destination = me;
             //AiState = State();
+            AiState = AIState.Patrol;
         }
         else if (AiState == AIState.Walking)
         {
@@ -113,6 +89,27 @@ public class BehaviourTree : NetworkBehaviour {
             lastKnown = player;
             agent.destination = lastKnown;// swap to player location for perma charge
             //AiState = State();// remove for perma charge
+        }
+        else if (AiState == AIState.Patrol)
+        {
+            
+
+
+            if ((agent.destination - me).magnitude < 0.25)
+            {
+                bool ret = false;
+                for (int i = 0; i < 10 && !ret; i++)
+                {
+                    Vector3 random = me + Random.insideUnitSphere * 2;
+                    random.y = 0;
+                    NavMeshHit hit;
+                    if (NavMesh.SamplePosition(random, out hit, 2, NavMesh.AllAreas))
+                    {
+                        agent.destination = random;
+                        ret = true;
+                    }
+                }
+            }
         }
 
         
