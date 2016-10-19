@@ -15,11 +15,11 @@ public class CAScript : MonoBehaviour
     
     [Tooltip("Determines concentration of aberration closer to the center of the screen")]
     [Range(0.1f, 3.0f)]
-    public float dispersal;
+    public float dispersal = 1.0f;
 
     [Tooltip("Determines amount of Chromatic Aberration")]
     [Range(0.0f, 0.2f)]
-    public float offset;
+    public float offset = 0.01f;
     
     
     
