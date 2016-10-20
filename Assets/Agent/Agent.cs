@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.UI;
 
-public class Agent : MonoBehaviour
+public class Agent : NetworkBehaviour
 {
 
     public GameObject AgentUI;
@@ -10,6 +11,12 @@ public class Agent : MonoBehaviour
     private Text AmmoCounter;
     // Use this for initialization
     void Start()
+    {
+        
+    }
+
+    // Called on clients for player objects for the local client (only)
+    public override void OnStartLocalPlayer()
     {
         AgentUI = Instantiate(AgentUI) as GameObject;
 
