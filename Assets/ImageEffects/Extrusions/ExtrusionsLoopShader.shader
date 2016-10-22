@@ -4,7 +4,8 @@
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
-		_ExtrusionAdd("Extrusion Amount", Range(0,1.0)) = 0.0
+		_ExtrusionAdd("Extrusion Time Amount", Range(0,1.0)) = 0.0
+		_Extrusion("Extrusion Amount", Range(0,1.0)) = 0.0
 	}
 	SubShader {
 		Tags { "RenderType"="Opaque" }
@@ -28,7 +29,7 @@
 		half _ExtrusionAdd;
 
 		void vert(inout appdata_full v) {
-			v.vertex.xyz += v.normal * sin(_Extrusion + (v.vertex.x + v.vertex.y + v.vertex.z) * 50.0f + _ExtrusionAdd * 100.0f) * 0.2f;
+			v.vertex.xyz += v.normal * sin((v.vertex.x + v.vertex.y + v.vertex.z) * 50.0f + _ExtrusionAdd * 1.0f) * _Extrusion;
 			//v.vertex.xyz *= 0.5;
 		}
 

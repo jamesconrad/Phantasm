@@ -15,6 +15,6 @@ public class ExtrusionsScript : MonoBehaviour
         float timeAmount = Time.time * 10.1f;
         //float RandomNum = Random.Range(0.0f, 1.0f);
         //effectMaterial.SetFloat("RandomNumber", RandomNum);
-        effectMaterial.SetFloat("_Extrusion", timeAmount);
+        effectMaterial.SetFloat("_ExtrusionAdd", timeAmount);
     }
 }
