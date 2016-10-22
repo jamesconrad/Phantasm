@@ -17,7 +17,8 @@ public class Phantom : NetworkBehaviour
         if (!isLocalPlayer)
         {
             //Change to apply the correct shaders when Stephen gets them done.
-            GetComponent<MeshRenderer>().enabled = false;
+            //GetComponent<MeshRenderer>().enabled = false;
+
         }
 
         if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])

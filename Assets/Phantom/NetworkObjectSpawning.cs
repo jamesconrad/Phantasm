@@ -26,12 +26,12 @@ public class NetworkObjectSpawning : NetworkBehaviour
         if (spawnLocations.Length == 0)
         {
             Debug.Log("There are no spawn locations for the phantom.");
-            NetworkServer.Spawn((GameObject)Instantiate(phantomGameObject, Vector3.up * 2, Quaternion.identity));
+            NetworkServer.Spawn(Instantiate(phantomGameObject, Vector3.up * 2, Quaternion.identity) as GameObject);
         }
         else
         {
             PhantomSpawnLocation tempPos = spawnLocations[Random.Range(0, spawnLocations.Length - 1)];
-            NetworkServer.Spawn((GameObject)Instantiate(phantomGameObject, tempPos.transform.position, Quaternion.identity));
+            NetworkServer.Spawn(Instantiate(phantomGameObject, tempPos.transform.position, Quaternion.identity) as GameObject);
             phantomGameObject.GetComponent<Phantom>().previousSpawnLocation = tempPos;
         }
     }

@@ -5,10 +5,7 @@ using System.Collections;
 
 public class CustomNetworkManager : NetworkManager
 {
-    public struct NetworkMessages
-    {
-        public static short SyncTransform = 7000;
-    }
+    public GameObject phantomGameObject;
 
     // Use this for initialization
     void Start()
@@ -40,10 +37,29 @@ public class CustomNetworkManager : NetworkManager
         base.OnStopClient();
     }
 
+    private PhantomSpawnLocation[] spawnLocations;
+
     public override void OnStartServer()
     {
         MainMenu.ActivateMainMenu();
         base.OnStartServer();
+    }
+
+    // Called on the server whenever a Network.InitializeServer was invoked and has completed
+    public void OnServerInitialized()
+    {
+        spawnLocations = FindObjectsOfType<PhantomSpawnLocation>();
+        if (spawnLocations.Length == 0)
+        {
+            Debug.Log("There are no spawn locations for the phantom.");
+            NetworkServer.Spawn(Instantiate(phantomGameObject, Vector3.up * 2, Quaternion.identity) as GameObject);
+        }
+        else
+        {
+            PhantomSpawnLocation tempPos = spawnLocations[Random.Range(0, spawnLocations.Length - 1)];
+            NetworkServer.Spawn(Instantiate(phantomGameObject, tempPos.transform.position, Quaternion.identity) as GameObject);
+            phantomGameObject.GetComponent<Phantom>().previousSpawnLocation = tempPos;
+        }
     }
 
     public override void OnStopServer()
@@ -59,7 +75,7 @@ public class CustomNetworkManager : NetworkManager
     }
 
     public override void OnServerDisconnect(NetworkConnection conn)
-    { 
+    {
         base.OnServerDisconnect(conn);
     }
 
