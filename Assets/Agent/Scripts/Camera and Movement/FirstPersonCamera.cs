@@ -7,6 +7,7 @@ public class FirstPersonCamera : NetworkBehaviour
 
     private Camera playerCamera;
     private Transform playerTransform;
+    private Transform gunTransform;
 
     private Vector2 MouseMovement;
     public float MaxCameraY;
@@ -27,8 +28,9 @@ public class FirstPersonCamera : NetworkBehaviour
 
 		playerCamera = Camera.main;
 		playerTransform = GetComponent<Transform>();
-		playerCamera.transform.position = GetComponent<Transform>().position;
-		playerCamera.transform.rotation = GetComponent<Transform>().rotation;
+        gunTransform = GetComponent<GunHandle>().transform;
+		playerCamera.transform.position = gunTransform.position;
+		playerCamera.transform.rotation = gunTransform.rotation;
 	}
 
     // Update is called once per frame
@@ -50,8 +52,7 @@ public class FirstPersonCamera : NetworkBehaviour
 
         //Generate rotation quaternion
         rot = Quaternion.Euler(-MouseMovement.y, MouseMovement.x, 0.0f);
-        playerCamera.transform.position = GetComponent<Transform>().position + Vector3.up;
-        playerCamera.transform.rotation = rot;
-		playerTransform.rotation = Quaternion.Euler(0.0f, MouseMovement.x, 0.0f);
+        gunTransform.rotation = rot;
+		//playerTransform.rotation = Quaternion.Euler(0.0f, MouseMovement.x, 0.0f);
     }
 }
