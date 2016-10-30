@@ -8,6 +8,8 @@ public class MusicManagerScript : MonoBehaviour
     public AudioMixerSnapshot HighIntensity;
     public AudioClip[] musicChannels;
     public AudioSource[] musicSource;
+    public AudioClip musicDeathChannel;
+    public AudioSource musicDeathSource;
     public GameObject AgentObject;
     public GameObject[] PhantomObject;
 
@@ -24,6 +26,11 @@ public class MusicManagerScript : MonoBehaviour
 
             //musicSource[i].volume = 0.0f;
         }
+
+        musicDeathSource.clip = musicDeathChannel;
+        musicDeathSource.Play();
+        musicDeathSource.loop = true;
+        musicDeathSource.volume = 0.0f;
         //SpookyChip
     }
 
@@ -35,6 +42,11 @@ public class MusicManagerScript : MonoBehaviour
 
         if (AgentObject != null)
         {
+            Health playerScript = AgentObject.GetComponent<Health>();
+            float deathAmount = Mathf.InverseLerp(100.0f, 0.0f, playerScript.currentHealth);
+
+            musicDeathSource.volume = deathAmount;
+
             float closestPhantom = Vector3.Distance(AgentObject.transform.position, PhantomObject[0].transform.position);
             for (int i = 1; i < PhantomObject.Length; ++i)
             {
@@ -68,6 +80,7 @@ public class MusicManagerScript : MonoBehaviour
             
             musicSource[i].volume = intensityAdjustClamp;
         }
+
 
     }
 }
