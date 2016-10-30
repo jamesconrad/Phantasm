@@ -47,7 +47,9 @@
 
 				float luminance = 0.2989 * col.r + 0.5874 * col.g + 0.1137 * col.b;
 				
-				float4 thermalRamp = tex2D(ThermalRamp, float2(luminance * 0.8f, 0.0f));
+				//float4 thermalRamp = tex2D(ThermalRamp, float2(luminance * 0.8f, 0.0f));
+				float4 thermalRamp = tex2D(ThermalRamp, float2(max(luminance, 0.05f) * 0.925f, 0.0f));
+				//float4 thermalRamp = tex2D(_ThermalRamp, float2(max(dotProduct, 0.05f) * 0.925f, 0.0f));
 				col = thermalRamp;
 				
 				return col;

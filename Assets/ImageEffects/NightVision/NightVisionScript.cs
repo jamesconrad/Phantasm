@@ -13,13 +13,26 @@ public class NightVisionScript : MonoBehaviour
 
     public float filmGrainAmount = 0.3f;
 
+    public bool NightVisionActive = true;
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            NightVisionActive = !NightVisionActive;
+        }
+
+    }
+
     public void OnPreRender()
     {
-
-        //RenderSettings.ambientSkyColor = Color.white;
-        //RenderSettings.ambientIntensity = 1.0f;
-        ambientLightTemp = RenderSettings.ambientLight;
-        RenderSettings.ambientLight = new Color(0.25f, 0.25f, 0.25f); //Color.gray; 
+        if (NightVisionActive)
+        {
+            //RenderSettings.ambientSkyColor = Color.white;
+            //RenderSettings.ambientIntensity = 1.0f;
+            ambientLightTemp = RenderSettings.ambientLight;
+            RenderSettings.ambientLight = new Color(0.25f, 0.25f, 0.25f); //Color.gray;
+        } 
     }
 
     public void OnPostRender()
@@ -29,12 +42,15 @@ public class NightVisionScript : MonoBehaviour
     // OnRenderImage is called after all rendering is complete to render image
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        RenderSettings.ambientLight = ambientLightTemp;
+        if (NightVisionActive)
+        {
+            RenderSettings.ambientLight = ambientLightTemp;
 
-        float RandomNum = Random.Range(0.0f, 1.0f);
-        effectMaterial.SetFloat("uRandom", RandomNum);
-        effectMaterial.SetFloat("uAmount", filmGrainAmount);
+            float RandomNum = Random.Range(0.0f, 1.0f);
+            effectMaterial.SetFloat("RandomNumber", RandomNum);
+            effectMaterial.SetFloat("uAmount", filmGrainAmount);
 
-        Graphics.Blit(source, destination, effectMaterial);
+            Graphics.Blit(source, destination, effectMaterial);
+        }
     }
 }
