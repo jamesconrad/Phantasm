@@ -37,13 +37,43 @@
 				return o;
 			}
 			
+			float3 Pack(float3 param)
+			{
+				return param * 0.5 + 0.5;
+			}
+
+			float3 Unpack(float3 param)
+			{
+				return param + param - 1.0;
+			}
+
+			//inline void DecodeDepthNormal(float4 enc, out float depth, out float3 normal)
+			//{
+			//	depth = DecodeFloatRG(enc.zw);
+			//	normal = DecodeViewNormalStereo(enc);
+			//}
+
 			sampler2D _MainTex;
+			sampler2D _CameraDepthNormalsTexture;
+
+			float4x4 uProjBiasMatrixInverse;
+
+			float3 normalValues;
+			float depthValue;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, i.uv);
+				DecodeDepthNormal(tex2D(_CameraDepthNormalsTexture, i.uv.xy), depthValue, normalValues);
+				fixed4 col = fixed4(Pack(normalValues), 1.0f);
+
+				float4 fragPos = mul(uProjBiasMatrixInverse, float4(i.uv.xy, depth, 1.0f));
+				fragPos.xyz /= fragPos.w;
+
+
+
+				//fixed4 col = tex2D(_MainTex, i.uv);
 				// just invert the colors
-				col = 1 - col;
+				//col.rgb = tex2D(_CameraDepthTexture, i.uv).rrr;
 				return col;
 			}
 			ENDCG

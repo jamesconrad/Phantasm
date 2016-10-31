@@ -38,12 +38,12 @@
 			}
 			
 			sampler2D _MainTex;
+			sampler2D _OcclusionTex;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, i.uv);
-				// just invert the colors
-				col = 1 - col;
+				//half occlusion = ;
+				fixed4 col = tex2D(_MainTex, i.uv) * fixed4(tex2D(_OcclusionTex, i.uv).rrr, 1.0f);
 				return col;
 			}
 			ENDCG

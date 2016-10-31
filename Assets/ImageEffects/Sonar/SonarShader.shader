@@ -77,7 +77,7 @@
 				{
 					float4 fragPos = mul(uProjBiasMatrixInverse, float4(i.uv.xy, depth, 1.0f));
 					fragPos.xyz /= fragPos.w;
-					fragPos *= 1.0f;
+					//fragPos *= 1.0f;
 					//col.rgb = fragPos.xyz * 1.0f;
 
 					float fragDistance = length(fragPos.xyz) * uParameter.x; //uMultiplier;
@@ -92,10 +92,15 @@
 					}
 					else
 					{
-						powFraction = pow(fraction, 4.0f);
+						powFraction = pow(fraction, 2.0f);
 					}
 
-					float3 addition = uColorAdd.rgb * powFraction * (rand(i.uv.xy + float2(fraction, fraction)) * 0.5f + 0.25f);
+					float2 uvRound = floor(i.uv * 2.0f * 100.0f) / 100.0f / 2.0f;
+					uvRound.x = floor(i.uv.x * 2.0f  * 177.7f) / 177.7f / 2.0f;
+					uvRound.y = floor(i.uv.y * 2.0f  * 100.0f) / 100.0f / 2.0f;
+
+					float3 addition = uColorAdd.rgb * powFraction * (rand(uvRound + uColorAdd.aa) * 0.5f + 0.25f);
+					//float3 addition = uColorAdd.rgb * powFraction * (rand(fraction.rr + uvRound) * 0.5f + 0.25f);
 
 					//float3 emissive = tex2D(uEmissiveTex, texcoord).rgb * uParameter.z;
 					//float3 color = (tex2D(uSceneTex, texcoord).rgb - (emissive)) * uParameter.y;

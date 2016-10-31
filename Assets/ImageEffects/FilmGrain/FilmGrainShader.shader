@@ -58,7 +58,7 @@
 				// just invert the colors
 				float3 vision;
 
-				float2 RandomNumber2 = float2(RandomNumber, RandomNumber);
+				float2 RandomNumber2 = RandomNumber.rr;
 
 				//outColor.rgb = mix(outColor.rgb, vec3(rand(vec2(uGrain.x + texcoord.x, uGrain.y + texcoord.y))), uAmount);
 				float2 uvRound = floor(i.uv * 100.0f) / 100.0f; 
