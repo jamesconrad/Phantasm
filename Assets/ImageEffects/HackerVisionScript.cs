@@ -5,11 +5,12 @@ public class HackerVisionScript : MonoBehaviour
 {
     public Material nightVisionMaterial;
     public Material thermalMaterial;
+    public Material sonarMaterial;
     public Material filmGrainMaterial;
     public Texture thermalRamp;
 
+    public Camera CameraSettings;
 
-    
     private Color ambientLightTemp;
     public Color ambientLight = new Color(0.25f, 0.25f, 0.25f);
 
@@ -19,10 +20,27 @@ public class HackerVisionScript : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float filmGrainNormalAmount = 0.05f;
 
-    public enum HackerVisionMode { Normal, Night, Thermal, Last };
-    public HackerVisionMode Vision = HackerVisionMode.Normal;
+    public Color SonarColor = new Color(0.5f, 0.5f, 1.0f);
+    [Range(0.0f, 1.0f)]
+    public float SonarDiffusePass = 1.0f;
+    public float SonarTimeMult = 1.0f;
+    public float SonarMult = 0.02f;
+
+
+    enum HackerVisionMode { Normal, Night, Thermal, Sonar, Last };
+    HackerVisionMode Vision = HackerVisionMode.Normal;
     
     RenderTexture temp = new RenderTexture(Screen.width, Screen.height, 0);
+
+
+    Matrix4x4 ProjBiasMatrix = new Matrix4x4();
+    void Start()
+    {
+        ProjBiasMatrix.SetRow(0, new Vector4(2.0f, 0.0f, 0.0f, -1.0f));
+        ProjBiasMatrix.SetRow(1, new Vector4(0.0f, 2.0f, 0.0f, -1.0f));
+        ProjBiasMatrix.SetRow(2, new Vector4(0.0f, 0.0f, 2.0f, -1.0f));
+        ProjBiasMatrix.SetRow(3, new Vector4(0.0f, 0.0f, 0.0f,  1.0f));
+    }
 
     public void Update()
     {
@@ -57,8 +75,19 @@ public class HackerVisionScript : MonoBehaviour
         if (Vision == HackerVisionMode.Thermal)
         {
             thermalMaterial.SetTexture("ThermalRamp", thermalRamp);
-            Graphics.Blit(source, temp, thermalMaterial);
 
+            Graphics.Blit(source, temp, thermalMaterial);
+            Graphics.Blit(temp, destination, filmGrainMaterial);
+        }
+        else if (Vision == HackerVisionMode.Sonar)
+        {
+            sonarMaterial.SetVector("uColorAdd", new Vector4(SonarColor.r, SonarColor.g, SonarColor.b, SonarTimeMult * Time.time));
+            sonarMaterial.SetVector("uParameter", new Vector4(SonarMult, SonarDiffusePass, 0.0f, 0.0f));
+
+            Matrix4x4 inverseMatrix = Matrix4x4.Inverse(CameraSettings.projectionMatrix) * ProjBiasMatrix;
+            sonarMaterial.SetMatrix("uProjBiasMatrixInverse", inverseMatrix);
+
+            Graphics.Blit(source, temp, sonarMaterial);
             Graphics.Blit(temp, destination, filmGrainMaterial);
         }
         else if (Vision == HackerVisionMode.Night)
