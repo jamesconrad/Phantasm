@@ -5,12 +5,12 @@ using System.Collections;
 [ExecuteInEditMode]
 public class ThermalVisionPostScript : MonoBehaviour
 {
-    public Material effectMaterial;
+    public Material thermalMaterial;
     public Texture thermalRamp;
 
     public bool ThermalVisionActive = false;
 
-    public void FixedUpdate()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -23,9 +23,9 @@ public class ThermalVisionPostScript : MonoBehaviour
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         if (ThermalVisionActive)
-        { 
-            effectMaterial.SetTexture("ThermalRamp", thermalRamp);
-            Graphics.Blit(source, destination, effectMaterial);
+        {
+            thermalMaterial.SetTexture("ThermalRamp", thermalRamp);
+            Graphics.Blit(source, destination, thermalMaterial);
         }
     }
 }
