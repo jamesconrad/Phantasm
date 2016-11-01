@@ -7,6 +7,7 @@ public class HackerVisionScript : MonoBehaviour
     public Material thermalMaterial;
     public Material sonarMaterial;
     public Material filmGrainMaterial;
+    public Material waveMaterial;
     public Texture thermalRamp;
 
     public Camera CameraSettings;
@@ -34,6 +35,10 @@ public class HackerVisionScript : MonoBehaviour
 
     public Material AgentMaterial;
     public Material PhantomMaterial;
+    
+    public Vector2 WaveCount = new Vector2(40.0f, 40.0f);
+    public Vector2 WaveIntensity = new Vector2(0.01f, 0.01f);
+    public Vector2 WaveTimeMult = new Vector2(1.0f, 1.0f);
 
     RenderTexture temp = new RenderTexture(Screen.width, Screen.height, 0);
 
@@ -48,24 +53,23 @@ public class HackerVisionScript : MonoBehaviour
         ProjBiasMatrix.SetRow(2, new Vector4(0.0f, 0.0f, 2.0f, -1.0f));
         ProjBiasMatrix.SetRow(3, new Vector4(0.0f, 0.0f, 0.0f,  1.0f));
 
-        //AgentObject.
-
-        
+        ambientLightTemp = RenderSettings.ambientLight;
     }
 
     public void Update()
     {
+        // Film Grain transition between vision modes
+
         timeSinceSwap += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.N))
         {
-
             timeSinceSwap = 0.0f;
 
             Vision++;
             if (Vision == HackerVisionMode.Last)
                 Vision = HackerVisionMode.Normal;
-
+            // Loop back to beginning
         }
 
 
@@ -75,14 +79,16 @@ public class HackerVisionScript : MonoBehaviour
     {
         if (Vision == HackerVisionMode.Night)
         {
+            // If night vision is on, turn the ambient light up and store actual ambient light
             ambientLightTemp = RenderSettings.ambientLight;
-            RenderSettings.ambientLight = ambientLight; //Color.gray;
+            RenderSettings.ambientLight = ambientLight; 
         }
     }
 
     // OnRenderImage is called after all rendering is complete to render image
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        // Reset the ambient light
         RenderSettings.ambientLight = ambientLightTemp;
 
         float filmGrainAmountTotal = filmGrainNormalAmount + Mathf.InverseLerp(0.3f, 0.1f, timeSinceSwap);
@@ -90,12 +96,22 @@ public class HackerVisionScript : MonoBehaviour
         float RandomNum = Random.Range(0.0f, 1.0f);
         filmGrainMaterial.SetFloat("RandomNumber", RandomNum);
         filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal);
-        
+
+        waveMaterial.SetVector("uWaveCount", WaveCount);
+        waveMaterial.SetVector("uWaveIntensity", WaveIntensity);
+        waveMaterial.SetVector("uTime", WaveTimeMult * Time.time);
+
         AgentMaterial.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 0.0f));
         PhantomMaterial.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 0.0f));
 
-        if (Vision == HackerVisionMode.Thermal)
+        if (Vision == HackerVisionMode.Normal)
         {
+            Graphics.Blit(source, temp, waveMaterial);
+            Graphics.Blit(temp, destination, filmGrainMaterial);
+        }
+        else if (Vision == HackerVisionMode.Thermal)
+        {
+            //thermalRamp.filterMode = FilterMode.Point;
             thermalMaterial.SetTexture("ThermalRamp", thermalRamp);
             
             AgentMaterial.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1.0f));
@@ -127,12 +143,6 @@ public class HackerVisionScript : MonoBehaviour
 
             Graphics.Blit(source, temp, nightVisionMaterial);
             Graphics.Blit(temp, destination, filmGrainMaterial);
-            //Graphics.Blit(source, destination, nightVisionMaterial);
-        }
-        if (Vision == HackerVisionMode.Normal)
-        {
-            
-            Graphics.Blit(source, destination, filmGrainMaterial);
         }
     }
 }

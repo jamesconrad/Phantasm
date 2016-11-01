@@ -71,6 +71,11 @@
 
 				fixed4 col = (tex2D(_MainTex, i.uv));
 				
+
+				float2 uvRound = floor(i.uv * 2.0f * 100.0f) / 100.0f / 2.0f;
+				uvRound.x = floor(i.uv.x * 2.0f  * 177.7f) / 177.7f / 2.0f;
+				uvRound.y = floor(i.uv.y * 2.0f  * 100.0f) / 100.0f / 2.0f;
+
 				//col.r = DECODE_EYEDEPTH(depth) / _ProjectionParams.z;
 				//depth = DECODE_EYEDEPTH(depth) / _ProjectionParams.z;
 				if (depth < 1.0f)
@@ -82,7 +87,7 @@
 
 					float fragDistance = length(fragPos.xyz) * uParameter.x; //uMultiplier;
 
-					float fraction = frac(fragDistance - uColorAdd.a);
+					float fraction = frac(fragDistance - uColorAdd.a + rand(uvRound + uColorAdd.aa) * 0.05f);
 					float powFraction;
 
 					if (fraction < 0.05f)
@@ -95,9 +100,6 @@
 						powFraction = pow(fraction, 2.0f);
 					}
 
-					float2 uvRound = floor(i.uv * 2.0f * 100.0f) / 100.0f / 2.0f;
-					uvRound.x = floor(i.uv.x * 2.0f  * 177.7f) / 177.7f / 2.0f;
-					uvRound.y = floor(i.uv.y * 2.0f  * 100.0f) / 100.0f / 2.0f;
 
 					float3 addition = uColorAdd.rgb * powFraction * (rand(uvRound + uColorAdd.aa) * 0.5f + 0.25f);
 					//float3 addition = uColorAdd.rgb * powFraction * (rand(fraction.rr + uvRound) * 0.5f + 0.25f);
