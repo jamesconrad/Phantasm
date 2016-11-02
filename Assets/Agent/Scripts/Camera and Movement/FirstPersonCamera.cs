@@ -53,6 +53,11 @@ public class FirstPersonCamera : NetworkBehaviour
         //Generate rotation quaternion
         rot = Quaternion.Euler(-MouseMovement.y, MouseMovement.x, 0.0f);
         gunTransform.rotation = rot;
-		//playerTransform.rotation = Quaternion.Euler(0.0f, MouseMovement.x, 0.0f);
+        //playerTransform.rotation = Quaternion.Euler(0.0f, MouseMovement.x, 0.0f);
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

@@ -48,9 +48,12 @@
 			}
 
 			sampler2D _MainTex;
+			sampler2D uScrollingTexture;
 			
 			float uAmount;
 			float RandomNumber;
+
+			float2 uScrollAmount;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
@@ -70,6 +73,10 @@
 				col.rgb = lerp(col.rgb, 
 					float3(rand(RandomNumber + uvRound), rand(RandomNumber + uvRound), rand(RandomNumber + uvRound)),
 					uAmount);
+
+
+				float4 scrollTex = tex2D(uScrollingTexture, i.uv.xy + uScrollAmount);
+				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75);
 				//(float2(RandomNumber + i.uv.x, RandomNumber + i.uv.x)
 				//col = rand(i.uv);
 

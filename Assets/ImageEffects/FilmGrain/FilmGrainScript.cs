@@ -6,7 +6,7 @@ using System.Collections;
 public class FilmGrainScript : MonoBehaviour
 {
     public Material effectMaterial;
-    
+
     [Range(0.0f, 1.0f)]
     public float filmGrainAmount = 0.3f;
     
@@ -16,6 +16,8 @@ public class FilmGrainScript : MonoBehaviour
         float RandomNum = Random.Range(0.0f, 1.0f);
         effectMaterial.SetFloat("RandomNumber", RandomNum);
         effectMaterial.SetFloat("uAmount", filmGrainAmount);
+
+
 
         Graphics.Blit(source, destination, effectMaterial);
     }

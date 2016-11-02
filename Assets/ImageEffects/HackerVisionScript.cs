@@ -10,16 +10,23 @@ public class HackerVisionScript : MonoBehaviour
     public Material waveMaterial;
     public Texture thermalRamp;
 
+    public Shader emissionShader;
+
     public Camera CameraSettings;
 
     private Color ambientLightTemp;
     public Color ambientLight = new Color(0.25f, 0.25f, 0.25f);
 
+
+    public Texture scrollingTexture;
+    public float scrollAmount;
+    private float scrollSpeed;
     [Range(0.0f, 1.0f)]
     public float filmGrainNightVisionAmount = 0.3f;
 
     [Range(0.0f, 1.0f)]
     public float filmGrainNormalAmount = 0.05f;
+
 
     public Color SonarColor = new Color(0.5f, 0.5f, 1.0f);
     [Range(0.0f, 1.0f)]
@@ -40,20 +47,32 @@ public class HackerVisionScript : MonoBehaviour
     public Vector2 WaveIntensity = new Vector2(0.01f, 0.01f);
     public Vector2 WaveTimeMult = new Vector2(1.0f, 1.0f);
 
-    RenderTexture temp = new RenderTexture(Screen.width, Screen.height, 0);
+    RenderTexture temp;
 
+    float timeNudge;
 
     Matrix4x4 ProjBiasMatrix = new Matrix4x4();
 
     float timeSinceSwap = 0.0f;
     void Start()
     {
+        scrollSpeed = Random.Range(0.8f, 1.2f);
+        scrollAmount = Random.Range(0.0f, 1000.0f);
+        temp = new RenderTexture(Screen.width, Screen.height, 0);
+        timeNudge = Random.Range(0.0f, 1000.0f);
+
+        filmGrainMaterial.SetTexture("uScrollingTexture", scrollingTexture);
+
         ProjBiasMatrix.SetRow(0, new Vector4(2.0f, 0.0f, 0.0f, -1.0f));
         ProjBiasMatrix.SetRow(1, new Vector4(0.0f, 2.0f, 0.0f, -1.0f));
         ProjBiasMatrix.SetRow(2, new Vector4(0.0f, 0.0f, 2.0f, -1.0f));
         ProjBiasMatrix.SetRow(3, new Vector4(0.0f, 0.0f, 0.0f,  1.0f));
 
         ambientLightTemp = RenderSettings.ambientLight;
+
+        thermalRamp.wrapMode = TextureWrapMode.Clamp;
+
+        Shader.SetGlobalFloat("_EmissionVisionMult", 0.0f);
     }
 
     public void Update()
@@ -81,8 +100,18 @@ public class HackerVisionScript : MonoBehaviour
         {
             // If night vision is on, turn the ambient light up and store actual ambient light
             ambientLightTemp = RenderSettings.ambientLight;
-            RenderSettings.ambientLight = ambientLight; 
+            RenderSettings.ambientLight = ambientLight;
         }
+
+        if (Vision == HackerVisionMode.Normal)
+        {
+            Shader.SetGlobalFloat("_EmissionVisionMult", 0.0f);
+        }
+        else
+        {
+            Shader.SetGlobalFloat("_EmissionVisionMult", 10.0f);
+        }
+
     }
 
     // OnRenderImage is called after all rendering is complete to render image
@@ -91,8 +120,11 @@ public class HackerVisionScript : MonoBehaviour
         // Reset the ambient light
         RenderSettings.ambientLight = ambientLightTemp;
 
-        float filmGrainAmountTotal = filmGrainNormalAmount + Mathf.InverseLerp(0.3f, 0.1f, timeSinceSwap);
 
+
+        filmGrainMaterial.SetVector("uScrollAmount", new Vector2(timeNudge + Time.time * scrollSpeed, timeNudge + Time.time * scrollSpeed));
+
+        float filmGrainAmountTotal = filmGrainNormalAmount + Mathf.InverseLerp(0.3f, 0.1f, timeSinceSwap);
         float RandomNum = Random.Range(0.0f, 1.0f);
         filmGrainMaterial.SetFloat("RandomNumber", RandomNum);
         filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal);
@@ -103,10 +135,27 @@ public class HackerVisionScript : MonoBehaviour
 
         AgentMaterial.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 0.0f));
         PhantomMaterial.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 0.0f));
+        //Shader.SetGlobalFloat(emissionShader.GetInstanceID(), 1.0f); 
+        //_EmissionMult
+        //emissionShader.
 
         if (Vision == HackerVisionMode.Normal)
         {
+
             Graphics.Blit(source, temp, waveMaterial);
+            Graphics.Blit(temp, destination, filmGrainMaterial);
+        }
+        else if (Vision == HackerVisionMode.Night)
+        {
+            //float RandomNum = Random.Range(0.0f, 1.0f);
+            nightVisionMaterial.SetFloat("RandomNumber", RandomNum);
+            nightVisionMaterial.SetFloat("uAmount", 0.0f);
+            nightVisionMaterial.SetFloat("uLightMult", 1.2f);
+
+
+            filmGrainMaterial.SetFloat("uAmount", Mathf.Max(filmGrainNightVisionAmount, filmGrainAmountTotal));
+
+            Graphics.Blit(source, temp, nightVisionMaterial);
             Graphics.Blit(temp, destination, filmGrainMaterial);
         }
         else if (Vision == HackerVisionMode.Thermal)
@@ -128,20 +177,9 @@ public class HackerVisionScript : MonoBehaviour
             Matrix4x4 inverseMatrix = Matrix4x4.Inverse(CameraSettings.projectionMatrix) * ProjBiasMatrix;
             sonarMaterial.SetMatrix("uProjBiasMatrixInverse", inverseMatrix);
 
+            filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal - filmGrainNormalAmount);  
+
             Graphics.Blit(source, temp, sonarMaterial);
-            Graphics.Blit(temp, destination, filmGrainMaterial);
-        }
-        else if (Vision == HackerVisionMode.Night)
-        {
-            //float RandomNum = Random.Range(0.0f, 1.0f);
-            nightVisionMaterial.SetFloat("RandomNumber", RandomNum);
-            nightVisionMaterial.SetFloat("uAmount", 0.0f);
-            nightVisionMaterial.SetFloat("uLightMult", 1.2f);
-
-
-            filmGrainMaterial.SetFloat("uAmount", Mathf.Max(filmGrainNightVisionAmount, filmGrainAmountTotal));
-
-            Graphics.Blit(source, temp, nightVisionMaterial);
             Graphics.Blit(temp, destination, filmGrainMaterial);
         }
     }
