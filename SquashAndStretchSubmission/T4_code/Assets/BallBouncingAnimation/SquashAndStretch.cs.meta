@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 512d049a3a2223742974833f6591083f
+timeCreated: 1476981056
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - anim: {instanceID: 0}
+  - SASClip: {fileID: 7400000, guid: 9d259f35d12bc7e4bb84f7075e01cdc9, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

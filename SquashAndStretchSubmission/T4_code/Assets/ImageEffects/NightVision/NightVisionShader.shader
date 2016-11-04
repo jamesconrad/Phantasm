@@ -1,0 +1,85 @@
+﻿Shader "Hidden/NightVisionShader"
+{
+	Properties
+	{
+		_MainTex ("Texture", 2D) = "white" {}
+	}
+	SubShader
+	{
+		// No culling or depth
+		Cull Off ZWrite Off ZTest Always
+
+		Pass
+		{
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
+			
+			#include "UnityCG.cginc"
+
+			struct appdata
+			{
+				float4 vertex : POSITION;
+				float2 uv : TEXCOORD0;
+			};
+
+			struct v2f
+			{
+				float2 uv : TEXCOORD0;
+				float4 vertex : SV_POSITION;
+			};
+
+			v2f vert (appdata v)
+			{
+				v2f o;
+				o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.uv = v.uv;
+				return o;
+			}
+			
+			float rand(float2 co)
+			{
+				return frac(sin(1000.0*dot(co.xy, float2(21.5739, 43.421))) * 617284.3);
+			}
+
+			float rand(float co)
+			{
+				return frac(sin(1000.0 * co) * 617284.3);
+			}
+
+			sampler2D _MainTex;
+			
+			float uAmount;
+			float RandomNumber;
+
+			fixed4 frag (v2f i) : SV_Target
+			{
+				fixed4 col = tex2D(_MainTex, i.uv);
+				// just invert the colors
+				float3 vision;
+
+				float2 RandomNumber2 = float2(RandomNumber, RandomNumber);
+
+				vision.r = (col.r * 0.393 * 0.1f) + (col.g * 0.769 * 0.1f) + (col.b * 0.189 * 0.1f);
+				vision.g = (col.r * 0.349 * 1.5f) + (col.g * 0.686 * 1.5f) + (col.b * 0.168 * 1.5f) + 0.1f;
+				vision.b = (col.r * 0.272 * 0.1f) + (col.g * 0.534 * 0.1f) + (col.b * 0.131 * 0.1f);
+
+				//outColor.rgb = mix(outColor.rgb, vec3(rand(vec2(uGrain.x + texcoord.x, uGrain.y + texcoord.y))), uAmount);
+
+				//outColor.rgb = mix(source.rgb, vec3(luminance), uAmount);
+				float3 filmGrain;
+				filmGrain.x = rand(RandomNumber);
+				col = float4(vision.xyz, col.w);
+				col.rgb = lerp(col.rgb, 
+					float3(rand(RandomNumber + i.uv), rand(RandomNumber + i.uv), rand(RandomNumber + i.uv)),
+					uAmount);
+				//(float2(RandomNumber + i.uv.x, RandomNumber + i.uv.x)
+				//col = rand(i.uv);
+
+				return col;
+
+			}
+			ENDCG
+		}
+	}
+}
