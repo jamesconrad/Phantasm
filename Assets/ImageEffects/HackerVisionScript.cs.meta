@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 1846987531977ca4ba172e5a46e2163d
+timeCreated: 1478003519
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - nightVisionMaterial: {fileID: 2100000, guid: a6173bcb764edce4e83fa485eaa40696,
+      type: 2}
+  - thermalMaterial: {fileID: 2100000, guid: 74347cd67be138f4d84a50394250491f, type: 2}
+  - sonarMaterial: {fileID: 2100000, guid: a53d83d391ac3554a9a897583c8a387f, type: 2}
+  - filmGrainMaterial: {fileID: 2100000, guid: aec1340562dcc2541846778d153d9a7a, type: 2}
+  - waveMaterial: {fileID: 2100000, guid: 7610a8c3d89734049af8965e6c85d6e2, type: 2}
+  - thermalRamp: {instanceID: 0}
+  - CameraSettings: {instanceID: 0}
+  - AgentMaterial: {instanceID: 0}
+  - PhantomMaterial: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

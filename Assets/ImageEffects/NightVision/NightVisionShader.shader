@@ -51,6 +51,7 @@
 			
 			float uAmount;
 			float RandomNumber;
+			float uLightMult;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
@@ -64,14 +65,18 @@
 				vision.g = (col.r * 0.349 * 1.5f) + (col.g * 0.686 * 1.5f) + (col.b * 0.168 * 1.5f) + 0.1f;
 				vision.b = (col.r * 0.272 * 0.1f) + (col.g * 0.534 * 0.1f) + (col.b * 0.131 * 0.1f);
 
-				//outColor.rgb = mix(outColor.rgb, vec3(rand(vec2(uGrain.x + texcoord.x, uGrain.y + texcoord.y))), uAmount);
+				vision.rgb *= uLightMult;
 
+				//outColor.rgb = mix(outColor.rgb, vec3(rand(vec2(uGrain.x + texcoord.x, uGrain.y + texcoord.y))), uAmount);
+				float2 uvRound = floor(i.uv * 100.0f) / 100.0f; 
+				uvRound.x = floor(i.uv.x * 177.7f) / 177.7f;
+				uvRound.y = floor(i.uv.y * 100.0f) / 100.0f;
 				//outColor.rgb = mix(source.rgb, vec3(luminance), uAmount);
 				float3 filmGrain;
 				filmGrain.x = rand(RandomNumber);
 				col = float4(vision.xyz, col.w);
 				col.rgb = lerp(col.rgb, 
-					float3(rand(RandomNumber + i.uv), rand(RandomNumber + i.uv), rand(RandomNumber + i.uv)),
+					float3(rand(RandomNumber + uvRound), rand(RandomNumber + uvRound), rand(RandomNumber + uvRound)),
 					uAmount);
 				//(float2(RandomNumber + i.uv.x, RandomNumber + i.uv.x)
 				//col = rand(i.uv);
