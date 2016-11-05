@@ -53,7 +53,14 @@ public class HackerVisionScript : MonoBehaviour
 
     Matrix4x4 ProjBiasMatrix = new Matrix4x4();
 
-    float timeSinceSwap = 0.0f;
+    float timeSinceOffset = 0.0f;
+    float timeOffsetLength = 0.1f;
+    float timeOffsetRange = 0.05f;
+    Vector2 timeOffsetValue;
+
+    float timeSinceSwap = 1.0f;
+
+
     void Start()
     {
         scrollSpeed = Random.Range(0.8f, 1.2f);
@@ -78,7 +85,18 @@ public class HackerVisionScript : MonoBehaviour
     public void Update()
     {
         // Film Grain transition between vision modes
+        if (timeSinceOffset > timeOffsetLength * 20.0f)
+        {
+            float RandomOffsetChance = Random.Range(0.0f, 1000.0f);
+            if (RandomOffsetChance > 995.0f)
+            {
+                timeSinceOffset = 0.0f;
+                timeOffsetValue = new Vector2(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
 
+            }
+        }
+
+        timeSinceOffset += Time.deltaTime;
         timeSinceSwap += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.N))
@@ -117,14 +135,26 @@ public class HackerVisionScript : MonoBehaviour
     // OnRenderImage is called after all rendering is complete to render image
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        float filmGrainAmountTotal = 0.0f;
+
         // Reset the ambient light
         RenderSettings.ambientLight = ambientLightTemp;
+        if (timeSinceOffset < timeOffsetLength && Vision != HackerVisionMode.Sonar)
+        {
+            filmGrainAmountTotal += 0.1f;
 
-
+            filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(
+                timeOffsetValue.x + Random.Range(-timeOffsetRange, timeOffsetRange),
+                timeOffsetValue.y + Random.Range(-timeOffsetRange, timeOffsetRange)));
+        }
+        else
+        {
+            filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(0.0f, 0.0f));
+        }
 
         filmGrainMaterial.SetVector("uScrollAmount", new Vector2(timeNudge + Time.time * scrollSpeed, timeNudge + Time.time * scrollSpeed));
 
-        float filmGrainAmountTotal = filmGrainNormalAmount + Mathf.InverseLerp(0.3f, 0.1f, timeSinceSwap);
+        filmGrainAmountTotal += filmGrainNormalAmount + Mathf.InverseLerp(0.3f, 0.1f, timeSinceSwap);
         float RandomNum = Random.Range(0.0f, 1.0f);
         filmGrainMaterial.SetFloat("RandomNumber", RandomNum);
         filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal);
