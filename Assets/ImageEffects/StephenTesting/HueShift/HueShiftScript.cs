@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[ImageEffectAllowedInSceneView]
+[ExecuteInEditMode]
 public class HueShiftScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public Material effectMaterial;
+
+    public void Update()
+    {
+    }
+
+    // OnRenderImage is called after all rendering is complete to render image
+    public void OnRenderImage(RenderTexture source, RenderTexture destination)
+    {
+        effectMaterial.SetFloat("uHue", Time.time * 10.0f);
+        Graphics.Blit(source, destination, effectMaterial);
+    }
 }

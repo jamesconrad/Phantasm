@@ -2,7 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class HackerInteractionWindowSetup : MonoBehaviour {
+public class HackerInteractionWindowSetup : MonoBehaviour
+{
 
     public CameraPosition cameraPosition;
 
@@ -10,9 +11,13 @@ public class HackerInteractionWindowSetup : MonoBehaviour {
     private List<Camera> survCameras;
     private List<GameObject> survCameraButtons;
 
+    private Vector2 WindowSize;
+
     // Use this for initialization
-    void Start () {
-        
+    void Start()
+    {
+        WindowSize = new Vector2(Screen.width, Screen.height);
+
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
 
         switch (cameraPosition)
@@ -49,11 +54,25 @@ public class HackerInteractionWindowSetup : MonoBehaviour {
             GameObject tempButton = Instantiate(cameraButtonPrefab);
             tempButton.GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                UnityEngine.Random.Range(-GetComponent<RectTransform>().rect.width / 2.0f + tempButton.GetComponent<RectTransform>().rect.width, GetComponent<RectTransform>().rect.width / 2.0f - tempButton.GetComponent<RectTransform>().rect.width), 
+                UnityEngine.Random.Range(-GetComponent<RectTransform>().rect.width / 2.0f + tempButton.GetComponent<RectTransform>().rect.width, GetComponent<RectTransform>().rect.width / 2.0f - tempButton.GetComponent<RectTransform>().rect.width),
                 UnityEngine.Random.Range(-GetComponent<RectTransform>().rect.height / 2.0f + tempButton.GetComponent<RectTransform>().rect.height, GetComponent<RectTransform>().rect.height / 2.0f - +tempButton.GetComponent<RectTransform>().rect.height));
             survCameraButtons.Add(tempButton);
             survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
         }
+
+    }
+
+    public void Update()
+    {
+        if (WindowSize.x != Screen.width || WindowSize.y != Screen.height)
+        {
+            SetWindowSizes();
+        }
+    }
+
+    void SetWindowSizes()
+    {
+        WindowSize = new Vector2(Screen.width, Screen.height);
 
     }
 }
