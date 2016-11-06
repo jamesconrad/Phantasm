@@ -54,6 +54,18 @@ half4 CalculateLight (unity_v2f_deferred i)
 	half3 normalWorld = gbuffer2.rgb * 2 - 1;
 	normalWorld = normalize(normalWorld);
 	float3 eyeVec = normalize(wpos-_WorldSpaceCameraPos);
+	
+	// Tube light
+	//float3 lightPos = float3(unity_ObjectToWorld[0][3], unity_ObjectToWorld[1][3], unity_ObjectToWorld[2][3]);
+	//float3 lightAxisX = normalize(float3(unity_ObjectToWorld[0][0], unity_ObjectToWorld[1][0], unity_ObjectToWorld[2][0]));
+	//
+	//if (_CustomLightKind == 10 && 1 == 0)
+	//{
+	//	float3 lightPos1 = lightPos + lightAxisX * _CustomLightLength;
+	//	float3 lightPos2 = lightPos - lightAxisX * _CustomLightLength;
+	//	light.dir = CalcTubeLightToLight(wpos, lightPos1, lightPos2, eyeVec, normalWorld, _CustomLightSize);
+	//}
+
 	half oneMinusReflectivity = 1 - SpecularStrength(specColor.rgb);
 	light.ndotl = LambertTerm (normalWorld, light.dir);
 

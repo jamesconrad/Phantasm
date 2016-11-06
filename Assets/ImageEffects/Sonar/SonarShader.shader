@@ -87,7 +87,7 @@
 
 					float fragDistance = length(fragPos.xyz) * uParameter.x; //uMultiplier;
 
-					float fraction = frac(fragDistance - uColorAdd.a + rand(uvRound + uColorAdd.aa) * 0.05f);
+					float fraction = frac(fragDistance - uColorAdd.a + (rand(uvRound + uColorAdd.aa) * 0.25f + 0.75f) * 0.05f);
 					float powFraction;
 
 					if (fraction < 0.05f)

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1846987531977ca4ba172e5a46e2163d
-timeCreated: 1478003519
+timeCreated: 1478429571
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -9,10 +9,14 @@ MonoImporter:
       type: 2}
   - thermalMaterial: {fileID: 2100000, guid: 74347cd67be138f4d84a50394250491f, type: 2}
   - sonarMaterial: {fileID: 2100000, guid: a53d83d391ac3554a9a897583c8a387f, type: 2}
-  - filmGrainMaterial: {fileID: 2100000, guid: aec1340562dcc2541846778d153d9a7a, type: 2}
+  - filmGrainMaterial: {fileID: 2100000, guid: f1a60c3172096214f87a026528d735d5, type: 2}
   - waveMaterial: {fileID: 2100000, guid: 7610a8c3d89734049af8965e6c85d6e2, type: 2}
   - thermalRamp: {instanceID: 0}
   - CameraSettings: {instanceID: 0}
+  - FilmGrainScrollingTexture: {fileID: 2800000, guid: 78df00b6c05950d49a2718aa7f68f092,
+      type: 3}
+  - FilmGrainMultTexture: {fileID: 2800000, guid: d1a860762aba40e4b9f1e5d905048341,
+      type: 3}
   - AgentMaterial: {instanceID: 0}
   - PhantomMaterial: {instanceID: 0}
   executionOrder: 0

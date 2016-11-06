@@ -1,4 +1,4 @@
-﻿Shader "Hidden/FilmGrainShader"
+﻿Shader "Hidden/FilmGrainMultShader"
 {
 	Properties
 	{
@@ -71,6 +71,7 @@
 
 			sampler2D _MainTex;
 			sampler2D uScrollingTexture;
+			sampler2D uMultTexture;
 			
 			float uAmount;
 			float RandomNumber;
@@ -80,7 +81,9 @@
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, reverseMirrorFlip(i.uv + uOffsetAmount));
+				float2 mirrorFlipUV = reverseMirrorFlip(i.uv + uOffsetAmount);
+
+				fixed4 col = tex2D(_MainTex, mirrorFlipUV);
 				// just invert the colors
 				float3 vision;
 
@@ -98,8 +101,8 @@
 					uAmount);
 
 
-				float4 scrollTex = tex2D(uScrollingTexture, i.uv.xy + uScrollAmount);
-				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75);
+				float4 scrollTex = tex2D(uScrollingTexture, mirrorFlipUV + uScrollAmount);
+				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75) * tex2D(uMultTexture, i.uv);
 				//(float2(RandomNumber + i.uv.x, RandomNumber + i.uv.x)
 				//col = rand(i.uv);
 

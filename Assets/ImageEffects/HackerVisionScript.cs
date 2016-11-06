@@ -10,15 +10,14 @@ public class HackerVisionScript : MonoBehaviour
     public Material waveMaterial;
     public Texture thermalRamp;
 
-    public Shader emissionShader;
-
     public Camera CameraSettings;
 
     private Color ambientLightTemp;
     public Color ambientLight = new Color(0.25f, 0.25f, 0.25f);
 
 
-    public Texture scrollingTexture;
+    public Texture FilmGrainScrollingTexture;
+    public Texture FilmGrainMultTexture;
     public float scrollAmount;
     private float scrollSpeed;
     [Range(0.0f, 1.0f)]
@@ -68,7 +67,8 @@ public class HackerVisionScript : MonoBehaviour
         temp = new RenderTexture(Screen.width, Screen.height, 0);
         timeNudge = Random.Range(0.0f, 1000.0f);
 
-        filmGrainMaterial.SetTexture("uScrollingTexture", scrollingTexture);
+        filmGrainMaterial.SetTexture("uScrollingTexture", FilmGrainScrollingTexture);
+        filmGrainMaterial.SetTexture("uMultTexture", FilmGrainMultTexture);
 
         ProjBiasMatrix.SetRow(0, new Vector4(2.0f, 0.0f, 0.0f, -1.0f));
         ProjBiasMatrix.SetRow(1, new Vector4(0.0f, 2.0f, 0.0f, -1.0f));
@@ -92,7 +92,7 @@ public class HackerVisionScript : MonoBehaviour
             {
                 timeSinceOffset = 0.0f;
                 timeOffsetValue = new Vector2(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
-
+                timeOffsetLength = Random.Range(0.1f, 0.3f);
             }
         }
 
