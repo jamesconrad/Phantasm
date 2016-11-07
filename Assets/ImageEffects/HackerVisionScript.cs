@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+
 
 public class HackerVisionScript : MonoBehaviour
 {
@@ -15,6 +18,11 @@ public class HackerVisionScript : MonoBehaviour
     private Color ambientLightTemp;
     public Color ambientLight = new Color(0.25f, 0.25f, 0.25f);
 
+    private Light[] all_my_damn_lights;
+
+    enum LightState { Off, On, TempOn, TempOff}
+    private bool[] lightStatus;
+    private List<float> lightStatus2;
 
     public Texture FilmGrainScrollingTexture;
     public Texture FilmGrainMultTexture;
@@ -62,6 +70,16 @@ public class HackerVisionScript : MonoBehaviour
 
     void Start()
     {
+        //all_my_damn_lights.FindAll(s => s.Equals("Light")); //= GetComponent<Light>();
+
+        all_my_damn_lights = FindObjectsOfType(typeof(Light)) as Light[];
+        for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        {
+            Debug.Log("It Works");
+            lightStatus = new bool[all_my_damn_lights.Length];
+            //lightStatus.Add(all_my_damn_lights[i].enabled);
+        }
+
         scrollSpeed = Random.Range(0.8f, 1.2f);
         scrollAmount = Random.Range(0.0f, 1000.0f);
         temp = new RenderTexture(Screen.width, Screen.height, 0);
@@ -84,6 +102,14 @@ public class HackerVisionScript : MonoBehaviour
 
     public void Update()
     {
+        if (Vision != HackerVisionMode.Sonar)
+        {
+            for (int i = 0; i < all_my_damn_lights.Length; ++i)
+            {
+                lightStatus[i] = all_my_damn_lights[i].enabled;
+            }
+        }
+
         // Film Grain transition between vision modes
         if (timeSinceOffset > timeOffsetLength * 20.0f)
         {
@@ -109,11 +135,14 @@ public class HackerVisionScript : MonoBehaviour
             // Loop back to beginning
         }
 
+       
 
     }
 
     public void OnPreRender()
     {
+        //_Light.enabled = true;
+
         if (Vision == HackerVisionMode.Night)
         {
             // If night vision is on, turn the ambient light up and store actual ambient light
@@ -130,6 +159,22 @@ public class HackerVisionScript : MonoBehaviour
             Shader.SetGlobalFloat("_EmissionVisionMult", 10.0f);
         }
 
+        if (Vision == HackerVisionMode.Sonar)
+        {
+            for (int i = 0; i < all_my_damn_lights.Length; ++i)
+            {
+                all_my_damn_lights[i].enabled = false;
+            }
+            //_Light.enabled = false;
+        }
+        else
+        {
+            for (int i = 0; i < all_my_damn_lights.Length; ++i)
+            {
+                all_my_damn_lights[i].enabled = lightStatus[i];
+            }
+
+        }
     }
 
     // OnRenderImage is called after all rendering is complete to render image
@@ -139,6 +184,9 @@ public class HackerVisionScript : MonoBehaviour
 
         // Reset the ambient light
         RenderSettings.ambientLight = ambientLightTemp;
+
+        
+
         if (timeSinceOffset < timeOffsetLength && Vision != HackerVisionMode.Sonar)
         {
             filmGrainAmountTotal += 0.1f;
