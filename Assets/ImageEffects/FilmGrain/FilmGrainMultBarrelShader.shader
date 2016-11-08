@@ -108,17 +108,14 @@
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				float2 mirrorFlipUV = reverseMirrorFlip(i.uv + uOffsetAmount);
 				//mirrorFlipUV = Distort(mirrorFlipUV);
 				//fixed4 col = tex2D(_MainTex, mirrorFlipUV);
-				float2 barrel = BarrelDistortion(mirrorFlipUV);
-				fixed4 col = tex2D(_MainTex, barrel);
+				float2 barrel = BarrelDistortion(i.uv + uOffsetAmount);
+				float2 mirrorFlipUV = reverseMirrorFlip(barrel);
+				fixed4 col = tex2D(_MainTex, mirrorFlipUV);
 
 
-				if (barrel.x > 1.0f || barrel.x < 0.0f || barrel.y > 1.0f || barrel.y < 0.0f)
-				{
-					col.rgb = float3(0.0, 0.0, 0.0);
-				}
+				
 
 				// just invert the colors
 				float3 vision;
@@ -137,10 +134,15 @@
 					uAmount);
 
 
-				float4 scrollTex = tex2D(uScrollingTexture, barrel + uScrollAmount);
+				float4 scrollTex = tex2D(uScrollingTexture, mirrorFlipUV + uScrollAmount);
 				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75f) * tex2D(uMultTexture, i.uv);
 				//(float2(RandomNumber + i.uv.x, RandomNumber + i.uv.x)
 				//col = rand(i.uv);
+
+				//if (barrel.x > 1.0f || barrel.x < 0.0f || barrel.y > 1.0f || barrel.y < 0.0f)
+				//{
+				//	col.rgb = float3(0.0, 0.0, 0.0);
+				//}
 
 				return col;
 

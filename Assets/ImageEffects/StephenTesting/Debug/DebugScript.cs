@@ -12,10 +12,11 @@ public class DebugScript : MonoBehaviour
     public Material materialGBuffer2;
     public Material materialGBuffer2ViewSpace;
     public Material materialGBuffer3;
+    public Material materialHueShift;
 
     public Font debugFont;
 
-    public Camera mainCameraSettings;
+    private Camera mainCameraSettings;
 
     //public Vector2 WaveCount = new Vector2(40.0f, 40.0f);
     //public Vector2 WaveIntensity = new Vector2(0.01f, 0.01f);
@@ -25,13 +26,13 @@ public class DebugScript : MonoBehaviour
 
     bool active = false;
 
-    enum DebugTest {First, Off, GBuffer0, GBuffer1, GBuffer2, ViewSpaceGBuffer2, GBuffer3, Last};
+    enum DebugTest {First, Off, GBuffer0, GBuffer1, GBuffer2, ViewSpaceGBuffer2, GBuffer3, HueShift, Last};
     DebugTest currentMode = DebugTest.Off;
 
     // Use this for initialization
     void Start()
     {
-
+        mainCameraSettings = GetComponent<Camera>();
     }
 
     void OnGUI()
@@ -70,6 +71,11 @@ public class DebugScript : MonoBehaviour
 
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+
+
+        if (currentMode == DebugTest.HueShift)
+            materialHueShift.SetFloat("uHue", Time.time * 2.0f);
+
         //testMaterial.SetVector("uWaveCount", WaveCount);
         //testMaterial.SetVector("uWaveIntensity", WaveIntensity);
         //testMaterial.SetVector("uTime", WaveTimeMult * Time.time);
@@ -88,5 +94,7 @@ public class DebugScript : MonoBehaviour
             Graphics.Blit(source, destination, materialGBuffer2ViewSpace);        
         if (currentMode == DebugTest.GBuffer3)
             Graphics.Blit(source, destination, materialGBuffer3);
+        if (currentMode == DebugTest.HueShift)
+            Graphics.Blit(source, destination, materialHueShift);
     }
 }

@@ -9,16 +9,22 @@ public class Agent : NetworkBehaviour
     public GameObject AgentUI;
     private Text SubObjectiveCounter;
     private Text AmmoCounter;
+
+    public Font _Font;
+
     // Use this for initialization
     void Start()
     {
-        
+
+        SubObjectiveCounter.font = _Font;
+        AmmoCounter.font = _Font;
     }
 
     // Called on clients for player objects for the local client (only)
     public override void OnStartLocalPlayer()
     {
         AgentUI = Instantiate(AgentUI) as GameObject;
+
 
         Text[] textReferences;
         textReferences = AgentUI.GetComponentsInChildren<Text>();

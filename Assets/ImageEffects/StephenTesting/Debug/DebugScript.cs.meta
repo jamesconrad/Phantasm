@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 700825c4d6c596e48b5299ac5f4ca306
-timeCreated: 1478332548
+timeCreated: 1478596504
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -12,7 +12,9 @@ MonoImporter:
   - materialGBuffer2ViewSpace: {fileID: 2100000, guid: f4cf0fe95f3cef043bc1391f8d2311cd,
       type: 2}
   - materialGBuffer3: {fileID: 2100000, guid: d9d94a412c69b1d49adc7d82f0dcbfa8, type: 2}
+  - materialHueShift: {fileID: 2100000, guid: 130f5d20ee8156a44986db49bafa36a6, type: 2}
   - debugFont: {fileID: 12800000, guid: 1a8719332351f764187b63508323de5e, type: 3}
+  - mainCameraSettings: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

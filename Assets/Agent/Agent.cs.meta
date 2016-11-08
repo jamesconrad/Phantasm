@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 99d5bee92b8e9f045a3bda8dd3649319
-timeCreated: 1476233442
+timeCreated: 1478583041
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - AgentUI: {instanceID: 0}
+  - _Font: {fileID: 12800000, guid: 20683915e69d03b458f8b6c9c85e6a27, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
