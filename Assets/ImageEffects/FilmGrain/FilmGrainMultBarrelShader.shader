@@ -1,4 +1,4 @@
-﻿Shader "Hidden/FilmGrainMultShader"
+﻿Shader "Hidden/FilmGrainMultBarrelShader"
 {
 	Properties
 	{
@@ -79,15 +79,19 @@
 				return input;
 			}
 
+			half uDistortion = 1.2f;
+
 			float2 BarrelDistortion(float2 texcoord)
 			{
 				texcoord = Unpack(texcoord);
 				float theta = atan2(texcoord.y, texcoord.x);
 				float radius = length(texcoord);
-				radius = pow(radius, 1.2f);
+				radius = pow(radius, uDistortion);
 				texcoord.x = radius * cos(theta);
 				texcoord.y = radius * sin(theta);
-				return 0.5 * (texcoord + 1.0);
+				texcoord = 0.5 * (texcoord + 1.0);
+				
+				return texcoord;
 			}
 
 
@@ -107,7 +111,15 @@
 				float2 mirrorFlipUV = reverseMirrorFlip(i.uv + uOffsetAmount);
 				//mirrorFlipUV = Distort(mirrorFlipUV);
 				//fixed4 col = tex2D(_MainTex, mirrorFlipUV);
-				fixed4 col = tex2D(_MainTex, BarrelDistortion(mirrorFlipUV));
+				float2 barrel = BarrelDistortion(mirrorFlipUV);
+				fixed4 col = tex2D(_MainTex, barrel);
+
+
+				if (barrel.x > 1.0f || barrel.x < 0.0f || barrel.y > 1.0f || barrel.y < 0.0f)
+				{
+					col.rgb = float3(0.0, 0.0, 0.0);
+				}
+
 				// just invert the colors
 				float3 vision;
 
@@ -125,8 +137,8 @@
 					uAmount);
 
 
-				float4 scrollTex = tex2D(uScrollingTexture, mirrorFlipUV + uScrollAmount);
-				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75) * tex2D(uMultTexture, i.uv);
+				float4 scrollTex = tex2D(uScrollingTexture, barrel + uScrollAmount);
+				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75f) * tex2D(uMultTexture, i.uv);
 				//(float2(RandomNumber + i.uv.x, RandomNumber + i.uv.x)
 				//col = rand(i.uv);
 
