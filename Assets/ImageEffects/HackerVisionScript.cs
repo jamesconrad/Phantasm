@@ -12,6 +12,7 @@ public class HackerVisionScript : MonoBehaviour
     public Material filmGrainMaterial;
     public Material waveMaterial;
     public Texture thermalRamp;
+    public Material[] ChromaticAberrationMaterial;
 
     private Camera CameraSettings;
 
@@ -25,15 +26,17 @@ public class HackerVisionScript : MonoBehaviour
 
     public Texture FilmGrainScrollingTexture;
     public Texture FilmGrainMultTexture;
+    public Texture FilmGrainGlitchTexture;
     private float scrollAmount;
     private float scrollSpeed;
+    private float filmGrainGlitchAmount = 0.0f;
     [Range(0.0f, 1.0f)]
     public float filmGrainNightVisionAmount = 0.3f;
 
     [Range(0.0f, 1.0f)]
     public float filmGrainNormalAmount = 0.05f;
 
-    private float filmGrainBarrel = 1.25f;
+    private float filmGrainBarrel = 1.15f;
 
     public Color SonarColor = new Color(0.5f, 0.5f, 1.0f);
     [Range(0.0f, 1.0f)]
@@ -41,6 +44,7 @@ public class HackerVisionScript : MonoBehaviour
     public float SonarTimeMult = 1.0f;
     public float SonarMult = 0.02f;
 
+    //public MovieTexture VHS;
 
     enum HackerVisionMode { Normal, Night, Thermal, Sonar, Last };
     HackerVisionMode Vision = HackerVisionMode.Normal;
@@ -53,6 +57,14 @@ public class HackerVisionScript : MonoBehaviour
     public Vector2 WaveCount = new Vector2(40.0f, 40.0f);
     public Vector2 WaveIntensity = new Vector2(0.01f, 0.01f);
     public Vector2 WaveTimeMult = new Vector2(1.0f, 1.0f);
+
+    [Tooltip("Determines concentration of aberration closer to the center of the screen")]
+    [Range(0.1f, 3.0f)]
+    public float CA_Dispersal = 1.0f;
+
+    [Tooltip("Determines amount of Chromatic Aberration")]
+    [Range(0.0f, 0.2f)]
+    public float CA_Offset = 0.025f;
 
     RenderTexture temp;
 
@@ -72,6 +84,10 @@ public class HackerVisionScript : MonoBehaviour
     {
         //all_my_damn_lights.FindAll(s => s.Equals("Light")); //= GetComponent<Light>();
 
+        //VHS.loop = true;
+
+
+
         CameraSettings = GetComponent<Camera>();
 
         all_my_damn_lights = FindObjectsOfType(typeof(Light)) as Light[];
@@ -90,6 +106,10 @@ public class HackerVisionScript : MonoBehaviour
 
         filmGrainMaterial.SetTexture("uScrollingTexture", FilmGrainScrollingTexture);
         filmGrainMaterial.SetTexture("uMultTexture", FilmGrainMultTexture);
+        filmGrainMaterial.SetTexture("uScrollingGlitchTexture", FilmGrainGlitchTexture);
+
+
+        
 
         ProjBiasMatrix.SetRow(0, new Vector4(2.0f, 0.0f, 0.0f, -1.0f));
         ProjBiasMatrix.SetRow(1, new Vector4(0.0f, 2.0f, 0.0f, -1.0f));
@@ -127,8 +147,10 @@ public class HackerVisionScript : MonoBehaviour
             if (RandomOffsetChance > 995.0f)
             {
                 timeSinceOffset = 0.0f;
-                timeOffsetValue = new Vector2(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
+                timeOffsetValue = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
                 timeOffsetLength = Random.Range(0.1f, 0.3f);
+
+                //VHS.Play();
             }
         }
 
@@ -207,6 +229,34 @@ public class HackerVisionScript : MonoBehaviour
     // OnRenderImage is called after all rendering is complete to render image
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        {
+            Material CA_Active;
+
+            if (CA_Offset < 0.15f / 16)
+            {
+                CA_Active = ChromaticAberrationMaterial[0];
+            }
+            else if (CA_Offset < 0.15f / 8)
+            {
+                CA_Active = ChromaticAberrationMaterial[1];
+            }
+            else if (CA_Offset < 0.15f / 4)
+            {
+                CA_Active = ChromaticAberrationMaterial[2];
+            }
+            else
+            {
+                CA_Active = ChromaticAberrationMaterial[3];
+            }
+
+            CA_Active.SetFloat("_Dispersal", CA_Dispersal);
+            CA_Active.SetFloat("_Offset", CA_Offset);
+
+            Graphics.Blit(source, temp, CA_Active);
+            Graphics.Blit(temp, source);
+        }
+
+
         float filmGrainAmountTotal = 0.0f;
 
         // Reset the ambient light
@@ -216,6 +266,7 @@ public class HackerVisionScript : MonoBehaviour
 
         if (timeSinceOffset < timeOffsetLength && Vision != HackerVisionMode.Sonar)
         {
+            filmGrainMaterial.SetFloat("uScrollingGlitchAmount", 1.0f);
             filmGrainAmountTotal += 0.1f;
 
             filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(
@@ -224,6 +275,9 @@ public class HackerVisionScript : MonoBehaviour
         }
         else
         {
+            //VHS.Stop();
+
+            filmGrainMaterial.SetFloat("uScrollingGlitchAmount", 0.0f);
             filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(0.0f, 0.0f));
         }
 

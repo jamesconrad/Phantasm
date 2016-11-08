@@ -98,8 +98,11 @@
 
 			sampler2D _MainTex;
 			sampler2D uScrollingTexture;
+			sampler2D uScrollingGlitchTexture;
 			sampler2D uMultTexture;
 			
+			float uScrollingGlitchAmount;
+
 			float uAmount;
 			float RandomNumber;
 
@@ -134,8 +137,11 @@
 					uAmount);
 
 
-				float4 scrollTex = tex2D(uScrollingTexture, mirrorFlipUV + uScrollAmount);
-				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75f) * tex2D(uMultTexture, i.uv);
+				float4 scrollTex = tex2D(uScrollingTexture, i.uv.xy + uScrollAmount); //mirrorFlipUV + 
+				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75f);
+				float4 scrollGlitchTex = tex2D(uScrollingGlitchTexture, frac(i.uv.xy + uScrollAmount + float2(0.0f, rand(RandomNumber))));
+				col.rgb = lerp(col.rgb, scrollGlitchTex.rgb, scrollGlitchTex.a * uScrollingGlitchAmount);
+				col.rgb *= tex2D(uMultTexture, i.uv);
 				//(float2(RandomNumber + i.uv.x, RandomNumber + i.uv.x)
 				//col = rand(i.uv);
 
