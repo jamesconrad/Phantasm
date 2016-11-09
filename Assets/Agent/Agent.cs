@@ -50,6 +50,11 @@ public class Agent : NetworkBehaviour
     // This function is called when the MonoBehaviour will be destroyed
     public void OnDestroy()
     {
-        Destroy(AgentUI);
+        AgentUI.GetComponentInChildren<SplashScreen>().createSplashScreen();
+        GetComponent<GunHandle>().gunReference.gameObject.SetActive(false);
+        GameObject actualCamera = FindObjectOfType<GlobalParameters>().gameObject;
+        actualCamera.transform.position = transform.position;
+        actualCamera.transform.rotation = GetComponent<GunHandle>().gunReference.transform.rotation;
+        //Destroy(AgentUI);
     }
 }
