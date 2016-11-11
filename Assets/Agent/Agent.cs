@@ -2,6 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Agent : NetworkBehaviour
 {
@@ -41,6 +42,12 @@ public class Agent : NetworkBehaviour
                 SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds);
             }
         }
+        CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = false;
+
+        UnityAction endGameAction = new UnityAction(FindObjectOfType<GameState>().EndGame);
+        SplashScreen endGameScreen = AgentUI.GetComponentInChildren<SplashScreen>();
+        endGameScreen.OnTimeReached.AddListener(endGameAction);
+        endGameScreen.OnTimeReached.AddListener(() => { CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = true; });
     }
 
     public void SetNumberOfObjectivesCompleted(int _objectivesCompleted)
@@ -56,6 +63,9 @@ public class Agent : NetworkBehaviour
     // This function is called when the MonoBehaviour will be destroyed
     public void OnDestroy()
     {
-        Destroy(AgentUI);
+        AgentUI.GetComponentInChildren<SplashScreen>().createSplashScreen();
+        GetComponent<GunHandle>().gunReference.gameObject.SetActive(false);
+        //Destroy(AgentUI);
+
     }
 }

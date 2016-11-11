@@ -5,7 +5,7 @@ using System.Collections;
 public class FirstPersonCamera : NetworkBehaviour
 {
 
-    private Camera playerCamera;
+    public Camera playerCamera;
     private Transform playerTransform;
     private Transform gunTransform;
 
@@ -18,28 +18,28 @@ public class FirstPersonCamera : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
     }
 
-	// Called on clients for player objects for the local client (only)
-	public override void OnStartLocalPlayer()
-	{
-		MouseMovement = new Vector2(0.0f, 0.0f);
+    // Called on clients for player objects for the local client (only)
+    public override void OnStartLocalPlayer()
+    {
+        MouseMovement = new Vector2(0.0f, 0.0f);
 
-		playerCamera = Camera.main;
-		playerTransform = GetComponent<Transform>();
+        playerCamera = Camera.main;
+        playerTransform = GetComponent<Transform>();
         gunTransform = GetComponent<GunHandle>().transform;
-		playerCamera.transform.position = gunTransform.position;
-		playerCamera.transform.rotation = gunTransform.rotation;
-	}
+        playerCamera.transform.position = gunTransform.position;
+        playerCamera.transform.rotation = gunTransform.rotation;
+    }
 
     // Update is called once per frame
     void Update()
     {
-		if (!isLocalPlayer)
-		{
-			return;
-		}
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         //Fetch mouse movement
         MouseMovement.x += Input.GetAxis("Mouse X");
         MouseMovement.y += Input.GetAxis("Mouse Y");
@@ -59,5 +59,18 @@ public class FirstPersonCamera : NetworkBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    // This function is called when the MonoBehaviour will be destroyed
+    public void OnDestroy()
+    {
+        playerCamera.transform.parent = null;
+        playerCamera.transform.position = transform.position;
+        playerCamera.transform.rotation = GetComponent<GunHandle>().gunReference.transform.rotation;
+        playerCamera.GetComponent<AudioListener>().enabled = true;
+        playerCamera.GetComponent<TAA>().enabled = true;
+        playerCamera.GetComponent<FXAAScript>().enabled = true;
+        playerCamera.GetComponent<Bloom>().enabled = true;
+
     }
 }
