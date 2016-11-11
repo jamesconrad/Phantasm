@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PortalExpertScript : MonoBehaviour
+public class PortalExpertSurfaceScript : MonoBehaviour
 {
     private Vector4 uRGB;
     private Vector4 uUVMult;

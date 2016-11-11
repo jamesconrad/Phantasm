@@ -13,6 +13,8 @@ public class GunHandle : NetworkBehaviour
 
     private Transform playerTransform;
 
+    public AudioSource gunShotSound;
+
     // Use this for initialization
     void Start()
     {
@@ -85,6 +87,8 @@ public class GunHandle : NetworkBehaviour
 
                 }
             }
+
+            gunShotSound.Play();
         }
         if (Input.GetButtonDown("Reload") || Input.GetButtonDown("GamePad Reload"))
         {

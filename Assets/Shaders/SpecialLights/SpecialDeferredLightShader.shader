@@ -119,7 +119,7 @@ Shader "SpecialLights/PointArea" {
 		half4 gbuffer1 = tex2D(_CameraGBufferTexture1, uv);
 		half4 gbuffer2 = tex2D(_CameraGBufferTexture2, uv);
 
-		light.color = (1-_SpecialLightColor.rgb) * atten;
+		light.color = (_SpecialLightColor.rgb) * atten;
 		half3 baseColor = gbuffer0.rgb;
 		half3 specColor = gbuffer1.rgb;
 		half3 normalWorld = gbuffer2.rgb * 2 - 1;
