@@ -27,6 +27,7 @@ public class HackerVisionScript : MonoBehaviour
     public Texture FilmGrainScrollingTexture;
     public Texture FilmGrainMultTexture;
     public Texture FilmGrainGlitchTexture;
+    public Texture FilmGrainFaceTexture;
     private float scrollAmount;
     private float scrollSpeed;
     private float filmGrainGlitchAmount = 0.0f;
@@ -43,8 +44,10 @@ public class HackerVisionScript : MonoBehaviour
     public float SonarDiffusePass = 1.0f;
     public float SonarTimeMult = 1.0f;
     public float SonarMult = 0.02f;
-
-    //public MovieTexture VHS;
+    
+    public MovieTexture Movie;
+    private float MovieAmount = 1.0f;
+    private float filmGrainFaceAmount = 0.0f;
 
     enum HackerVisionMode { Normal, Night, Thermal, Sonar, Last };
     HackerVisionMode Vision = HackerVisionMode.Normal;
@@ -74,6 +77,8 @@ public class HackerVisionScript : MonoBehaviour
 
     float timeSinceOffset = 0.0f;
     float timeOffsetLength = 0.1f;
+    static float timeOffsetLengthMin = 0.1f;
+    static float timeOffsetLengthMax = 0.1f * 3.0f;
     float timeOffsetRange = 0.05f;
     Vector2 timeOffsetValue;
 
@@ -84,9 +89,9 @@ public class HackerVisionScript : MonoBehaviour
     {
         //all_my_damn_lights.FindAll(s => s.Equals("Light")); //= GetComponent<Light>();
 
-        //VHS.loop = true;
+        Movie.loop = true;
 
-
+		timeSinceOffset = 10.0f;
 
         CameraSettings = GetComponent<Camera>();
 
@@ -107,9 +112,11 @@ public class HackerVisionScript : MonoBehaviour
         filmGrainMaterial.SetTexture("uScrollingTexture", FilmGrainScrollingTexture);
         filmGrainMaterial.SetTexture("uMultTexture", FilmGrainMultTexture);
         filmGrainMaterial.SetTexture("uScrollingGlitchTexture", FilmGrainGlitchTexture);
-
-
-        
+        filmGrainMaterial.SetTexture("uMovie", Movie);
+		filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
+        filmGrainMaterial.SetTexture("uSpookyFaceTexture", FilmGrainFaceTexture);
+        filmGrainMaterial.SetFloat("uSpookyAmount", 0.0f);
+        //Movie.Play();
 
         ProjBiasMatrix.SetRow(0, new Vector4(2.0f, 0.0f, 0.0f, -1.0f));
         ProjBiasMatrix.SetRow(1, new Vector4(0.0f, 2.0f, 0.0f, -1.0f));
@@ -125,6 +132,7 @@ public class HackerVisionScript : MonoBehaviour
 
     public void Update()
     {
+
         if (Vision != HackerVisionMode.Sonar)
         {
             for (int i = 0; i < all_my_damn_lights.Length; ++i)
@@ -141,16 +149,23 @@ public class HackerVisionScript : MonoBehaviour
         }
 
         // Film Grain transition between vision modes
-        if (timeSinceOffset > timeOffsetLength * 20.0f)
+        if (timeSinceOffset > timeOffsetLength * 1.0f && Time.timeSinceLevelLoad > 5.0f)
         {
             float RandomOffsetChance = Random.Range(0.0f, 1000.0f);
-            if (RandomOffsetChance > 995.0f)
+            if (RandomOffsetChance > 999.0f)
             {
                 timeSinceOffset = 0.0f;
                 timeOffsetValue = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
-                timeOffsetLength = Random.Range(0.1f, 0.3f);
+                timeOffsetLength = Random.Range(timeOffsetLengthMin, timeOffsetLengthMax);
 
-                //VHS.Play();
+                Movie.Play();
+                MovieAmount = 1.0f;
+                filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
+
+                if(Random.Range(0.0f, 1.0f) > 0.75f)
+                {
+					filmGrainFaceAmount = 1.0f;	
+                }
             }
         }
 
@@ -256,6 +271,7 @@ public class HackerVisionScript : MonoBehaviour
             Graphics.Blit(temp, source);
         }
 
+		
 
         float filmGrainAmountTotal = 0.0f;
 
@@ -269,13 +285,22 @@ public class HackerVisionScript : MonoBehaviour
             filmGrainMaterial.SetFloat("uScrollingGlitchAmount", 1.0f);
             filmGrainAmountTotal += 0.1f;
 
+			
+			//filmGrainFaceAmount -= Time.deltaTime * 2.0f;
+			//filmGrainFaceAmount = Mathf.Max(0.0f, filmGrainFaceAmount);
+			//filmGrainFaceAmount
+			filmGrainMaterial.SetFloat("uSpookyAmount", Mathf.Pow(Mathf.InverseLerp(timeOffsetLength, 0.0f, timeSinceOffset), 1.0f) );
+
             filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(
                 timeOffsetValue.x + Random.Range(-timeOffsetRange, timeOffsetRange),
                 timeOffsetValue.y + Random.Range(-timeOffsetRange, timeOffsetRange)));
         }
         else
         {
-            //VHS.Stop();
+            Movie.Stop();
+            MovieAmount = 0.0f;
+            filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
+        filmGrainMaterial.SetFloat("uSpookyAmount", 0.0f);
 
             filmGrainMaterial.SetFloat("uScrollingGlitchAmount", 0.0f);
             filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(0.0f, 0.0f));
