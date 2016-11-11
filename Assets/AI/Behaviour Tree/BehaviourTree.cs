@@ -21,7 +21,7 @@ public class BehaviourTree : NetworkBehaviour {
     private AIState AiState = AIState.Idle;
     // Use this for initialization
     void Start () {
-        AiState = AIState.Walking;
+        AiState = AIState.Charge;
         lastKnown = transform.position;
 	}
 	

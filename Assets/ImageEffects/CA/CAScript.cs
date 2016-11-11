@@ -7,11 +7,7 @@ public class CAScript : MonoBehaviour
 {
 
     public Material effectMaterial;
-
-    //private Color ambientSkyColorTemp;
-    //private float ambientIntensityTemp;
-    private Color ambientLightTemp;
-    // public float dispersal = 1.0f;
+    
     
     [Tooltip("Determines concentration of aberration closer to the center of the screen")]
     [Range(0.1f, 3.0f)]

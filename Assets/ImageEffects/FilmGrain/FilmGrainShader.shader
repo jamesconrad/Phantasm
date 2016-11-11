@@ -1,4 +1,4 @@
-﻿Shader "Hidden/NightVisionShader"
+﻿Shader "Hidden/FilmGrainShader"
 {
 	Properties
 	{
@@ -47,6 +47,28 @@
 				return frac(sin(1000.0 * co) * 617284.3);
 			}
 
+			float2 reverseMirrorFlip(float2 input)
+			{
+				input += 2.0f;
+				if ((uint)input.x % 2 == 0)
+				{
+					input.x = frac(input.x);
+				}
+				else
+				{
+					input.x = 1.0-frac(input.x);
+				}
+				if ((uint)input.y % 2 == 0)
+				{
+					input.y = frac(input.y);
+				}
+				else
+				{
+					input.y = 1.0 - frac(input.y);
+				}
+				return input;
+			}
+
 			sampler2D _MainTex;
 			sampler2D uScrollingTexture;
 			
@@ -54,10 +76,11 @@
 			float RandomNumber;
 
 			float2 uScrollAmount;
+			float2 uOffsetAmount;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, i.uv);
+				fixed4 col = tex2D(_MainTex, reverseMirrorFlip(i.uv + uOffsetAmount));
 				// just invert the colors
 				float3 vision;
 

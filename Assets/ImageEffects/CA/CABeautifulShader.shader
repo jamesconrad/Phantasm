@@ -69,7 +69,7 @@
 				float2 absTexOffset = abs(TexOffset);
 				float2 isPositive = absTexOffset / TexOffset;
 
-				//if ((TexOffset.x) != 0.0)
+				if ((TexOffset.x) != 0.0)
 				{
 					float distanceToCenter = absTexOffset.x * _Aspect.x;
 					float distanceToCenterSquared = pow(distanceToCenter, _Dispersal);
@@ -79,7 +79,7 @@
 					bTexOffset.x += _bOffset * distanceToCenterSquared * isPositive.x;
 				}
 
-				//if ((TexOffset.y) != 0.0)
+				if ((TexOffset.y) != 0.0)
 				{
 					float distanceToCenter = absTexOffset.y * _Aspect.y;
 					float distanceToCenterSquared = pow(distanceToCenter, _Dispersal);

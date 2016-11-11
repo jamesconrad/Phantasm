@@ -9,6 +9,8 @@ public class FirstPersonMovement : MonoBehaviour
     private Rigidbody playerRigidBody;
     private Vector3 movementDirection;
 
+    public AudioSource footstepSound;
+
     public float movementSpeed;
     // Use this for initialization
     void Start()
@@ -26,6 +28,19 @@ public class FirstPersonMovement : MonoBehaviour
     {
         movementDirection = (Camera.main.transform.forward /*playerTransform.forward*/ * Input.GetAxis("Vertical") + Camera.main.transform.right /*playerTransform.right*/ * Input.GetAxis("Horizontal"));
         movementDirection.y = 0.0f;
+
+        if(Vector3.Distance(Vector3.zero, movementDirection) > 0.5f)
+        {
+            if(!footstepSound.isPlaying)
+            { 
+                footstepSound.Play();
+            }
+        }
+        else
+        {
+            footstepSound.Stop();
+        }
+
         playerTransform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
     }
 }
