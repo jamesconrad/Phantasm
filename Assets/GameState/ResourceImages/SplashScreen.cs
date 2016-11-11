@@ -12,10 +12,12 @@ public class SplashScreen : MonoBehaviour
     public float opacityChangeSpeed;
 
     public UnityEvent OnTimeReached;
+    public bool destroyOnTimeReached = false;
     
     private float currentTime = 0.0f;
 
     private bool isCreated = false;
+
 
 
     // Use this for initialization
@@ -38,6 +40,10 @@ public class SplashScreen : MonoBehaviour
             if (currentTime >= splashScreenLength)
             {
                 OnTimeReached.Invoke();
+                if (destroyOnTimeReached)
+                {
+                    Destroy(GetComponentInParent<Canvas>().rootCanvas.gameObject);
+                }
             }
         }
     }

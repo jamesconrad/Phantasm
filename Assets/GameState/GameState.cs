@@ -35,7 +35,6 @@ public class GameState : NetworkBehaviour {
         {
             return;
         }
-        Camera.main.transform.parent = null;
         CustomNetworkManager.singleton.StopHost();
         NetworkServer.Shutdown();
         Cursor.lockState = CursorLockMode.None;
@@ -44,7 +43,7 @@ public class GameState : NetworkBehaviour {
     public static void StaticEndGame()
     {
         CustomNetworkManager.singleton.StopHost();
-        NetworkServer.Shutdown();
+        //NetworkServer.Shutdown();
         Cursor.lockState = CursorLockMode.None;
     }
 

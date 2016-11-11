@@ -12,7 +12,7 @@ public class SpawnAgent : MonoBehaviour
     public void CreateObjectAndDisableMenu()
     {
         IntegerMessage msg = new IntegerMessage(0);
-        ClientScene.AddPlayer(NetworkManager.singleton.client.connection, 0, msg);
+        //ClientScene.AddPlayer(NetworkManager.singleton.client.connection, 0, msg);
 
         MainMenu.DeactivateMainMenu();
     }

@@ -2,6 +2,8 @@
 using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 using System.Collections;
+using UnityEngine.Networking.Match;
+using System.Collections.Generic;
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -12,8 +14,18 @@ public class CustomNetworkManager : NetworkManager
         public int minimumNumberOfEnemies;
         public int maximumNumberOfEnemies;
     }
-
     public PhantomSettings phantomSettings;
+
+    [System.Serializable]
+    public struct GameCreationSettings
+    {
+        public UnityEngine.UI.Dropdown dropDownMatches;
+        public UnityEngine.UI.Button joinMatchButton;
+    }
+    public GameCreationSettings gameCreationSettings;
+
+    //1 to be agent, 0 to be hacker. For use in getting and selecting matches. This is not a system I shouldn't actually use, as this method is for use with version control, but here we are.
+    private int currentSelectionOfCharacter = 0;
 
     // Use this for initialization
     void Start()
@@ -35,13 +47,13 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnClientConnect(NetworkConnection conn)
     {
-        MainMenu.ActivateMainMenu();
+        //MainMenu.ActivateMainMenu();
         base.OnClientConnect(conn);
     }
 
     public override void OnStopClient()
     {
-        MainMenu.DeactivateMainMenu();
+        //MainMenu.DeactivateMainMenu();
         base.OnStopClient();
     }
 
@@ -49,7 +61,7 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnStartServer()
     {
-        MainMenu.ActivateMainMenu();
+        //MainMenu.ActivateMainMenu();
         base.OnStartServer();
     }
 
@@ -74,9 +86,60 @@ public class CustomNetworkManager : NetworkManager
         }
     }
 
+    public void CreateAsAgent()
+    {
+        autoCreatePlayer = true;
+        playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[0];
+        matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 0, OnMatchCreate);
+    }
+
+    public void CreateAsHacker()
+    {
+        autoCreatePlayer = true;
+        playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1];
+        matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 1, OnMatchCreate);
+    }
+
+
+    public void GetMatchesForAgents()
+    {
+        CustomNetworkManager.singleton.matchMaker.ListMatches(0, 10, "", true, 0, 1, OnMatchList);
+        currentSelectionOfCharacter = 1;
+    }
+
+    public void GetMatchesForHackers()
+    {
+        CustomNetworkManager.singleton.matchMaker.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
+        currentSelectionOfCharacter = 0;
+    }
+
+    public override void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matchList)
+    {
+        base.OnMatchList(success, extendedInfo, matchList);
+        gameCreationSettings.dropDownMatches.ClearOptions();
+        for (int i = 0; i < matchList.Count; i++)
+        {
+            gameCreationSettings.dropDownMatches.options.Add(new UnityEngine.UI.Dropdown.OptionData(matchList[i].name));
+        }
+        if (matchList.Count > 0)
+        {
+            gameCreationSettings.joinMatchButton.interactable = true;
+        }
+    }
+
+    public void JoinMatch()
+    {
+        if (CustomNetworkManager.singleton.matches != null)
+        {
+            CustomNetworkManager.singleton.playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1 - currentSelectionOfCharacter];
+            MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value]; // Need to get this value somehow
+            CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
+        }
+    }
+
     public override void OnStopServer()
     {
-        MainMenu.DeactivateMainMenu();
+        //MainMenu.DeactivateMainMenu();
         base.OnStopServer();
     }
 
@@ -98,8 +161,13 @@ public class CustomNetworkManager : NetworkManager
             playerPrefab = spawnPrefabs[extraMessageReader.ReadMessage<IntegerMessage>().value];
             if (playerPrefab == spawnPrefabs[0])
             {
-
+                playerPrefab = spawnPrefabs[1];
             }
+            else
+            {
+                playerPrefab = spawnPrefabs[0];
+            }
+            
         }
         base.OnServerAddPlayer(conn, playerControllerId, extraMessageReader);
     }
@@ -109,4 +177,13 @@ public class CustomNetworkManager : NetworkManager
         base.OnServerRemovePlayer(conn, player);
     }
 
+    public override void OnClientSceneChanged(NetworkConnection conn)
+    {
+        base.OnClientSceneChanged(conn);
+    }
+
+    public override void OnServerSceneChanged(string sceneName)
+    {
+        base.OnServerSceneChanged(sceneName);
+    }
 }
