@@ -19,6 +19,10 @@ public class Agent : NetworkBehaviour
     // Awake is called when the script instance is being loaded
     public void Awake()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         AgentUI = Instantiate(AgentUI) as GameObject;
 
         Text[] textReferences;
