@@ -48,29 +48,28 @@ public class Agent : NetworkBehaviour
     // Called on clients for player objects for the local client (only)
     public override void OnStartLocalPlayer()
     {
-        //AgentUI = Instantiate(AgentUI) as GameObject;
+        AgentUI = Instantiate(AgentUI) as GameObject;
 
-       // Text[] textReferences;
-       // textReferences = AgentUI.GetComponentsInChildren<Text>();
-       // for (int i = 0; i < textReferences.Length; i++)
-       // {
-       //     if (textReferences[i].name == "SubObjectiveCounter")
-       //     {
-       //         SubObjectiveCounter = textReferences[i];
-       //         SetNumberOfObjectivesCompleted(FindObjectOfType<GameState>().numberOfSubObjectives);
-       //     }
-       //     else if (textReferences[i].gameObject.name == "AmmoCounter")
-       //     {
-       //         AmmoCounter = textReferences[i];
-       //         SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds);
-       //     }
-       // }
-       // CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = false;
-       //
-       // UnityAction endGameAction = new UnityAction(FindObjectOfType<GameState>().EndGame);
-       // SplashScreen endGameScreen = AgentUI.GetComponentInChildren<SplashScreen>();
-       // endGameScreen.OnTimeReached.AddListener(endGameAction);
-       // endGameScreen.OnTimeReached.AddListener(() => { CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = true; });
+        Text[] textReferences;
+        textReferences = AgentUI.GetComponentsInChildren<Text>();
+        for (int i = 0; i < textReferences.Length; i++)
+        {
+            if (textReferences[i].name == "SubObjectiveCounter")
+            {
+                SubObjectiveCounter = textReferences[i];
+                SetNumberOfObjectivesCompleted(FindObjectOfType<GameState>().numberOfSubObjectives);
+            }
+            else if (textReferences[i].gameObject.name == "AmmoCounter")
+            {
+                AmmoCounter = textReferences[i];
+                SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds);
+            }
+        }
+        CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = false;
+        
+        SplashScreen endGameScreen = AgentUI.GetComponentInChildren<SplashScreen>();
+        endGameScreen.screenOwner = gameObject;
+        endGameScreen.OnTimeReached.AddListener(() => { CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = true; });
     }
 
     public void SetNumberOfObjectivesCompleted(int _objectivesCompleted)

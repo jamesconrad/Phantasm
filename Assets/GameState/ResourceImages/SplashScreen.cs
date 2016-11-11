@@ -57,11 +57,11 @@ public class SplashScreen : MonoBehaviour
         splashImage.texture = images[screenIndex];
         splashImage.color = new Color(splashImage.color.r, splashImage.color.g, splashImage.color.b, 0.0f);
         splashImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+        
+        OnTimeReached.AddListener(() => { (CustomNetworkManager.singleton as CustomNetworkManager).endGame(); } );
 
         isCreated = true;
         screenOwner.GetComponent<FirstPersonCamera>().removeCamera();
         screenOwner.SetActive(false);
-        
-        OnTimeReached.AddListener(() => { (CustomNetworkManager.singleton as CustomNetworkManager).endGame(); } );
     }
 }
