@@ -192,10 +192,10 @@ public class HackerVisionScript : MonoBehaviour
         }
 
         // Film Grain transition between vision modes
-        if (timeSinceOffset > timeOffsetLength * 1.0f && Time.timeSinceLevelLoad > 5.0f)
+        if (timeSinceOffset > timeOffsetLength * 5.0f && Time.timeSinceLevelLoad > 5.0f)
         {
             float RandomOffsetChance = Random.Range(0.0f, 1000.0f);
-            if (RandomOffsetChance > 999.0f)
+            if (RandomOffsetChance > 990.0f)
             {
                 timeSinceOffset = 0.0f;
                 timeOffsetValue = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
