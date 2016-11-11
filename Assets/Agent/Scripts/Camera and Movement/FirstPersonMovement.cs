@@ -26,7 +26,7 @@ public class FirstPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementDirection = (Camera.main.transform.forward /*playerTransform.forward*/ * Input.GetAxis("Vertical") + Camera.main.transform.right /*playerTransform.right*/ * Input.GetAxis("Horizontal"));
+        movementDirection = (/*Camera.main.transform.forward*/ playerTransform.forward * Input.GetAxis("Vertical") + /*Camera.main.transform.right*/ playerTransform.right * Input.GetAxis("Horizontal"));
         movementDirection.y = 0.0f;
 
         if(Vector3.Distance(Vector3.zero, movementDirection) > 0.5f)

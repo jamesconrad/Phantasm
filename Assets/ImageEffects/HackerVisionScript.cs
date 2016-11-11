@@ -44,7 +44,7 @@ public class HackerVisionScript : MonoBehaviour
     public float SonarDiffusePass = 1.0f;
     public float SonarTimeMult = 1.0f;
     public float SonarMult = 0.02f;
-    
+
     public MovieTexture Movie;
     private float MovieAmount = 1.0f;
     private float filmGrainFaceAmount = 0.0f;
@@ -84,17 +84,16 @@ public class HackerVisionScript : MonoBehaviour
 
     float timeSinceSwap = 1.0f;
 
-
-    void Start()
+    // Awake is called when the script instance is being loaded
+    public void Awake()
     {
         //all_my_damn_lights.FindAll(s => s.Equals("Light")); //= GetComponent<Light>();
 
-        Movie.loop = true;
+        //Movie.loop = true;
 
-		timeSinceOffset = 10.0f;
+        timeSinceOffset = 10.0f;
 
         CameraSettings = GetComponent<Camera>();
-
         all_my_damn_lights = FindObjectsOfType(typeof(Light)) as Light[];
         for (int i = 0; i < all_my_damn_lights.Length; ++i)
         {
@@ -113,7 +112,51 @@ public class HackerVisionScript : MonoBehaviour
         filmGrainMaterial.SetTexture("uMultTexture", FilmGrainMultTexture);
         filmGrainMaterial.SetTexture("uScrollingGlitchTexture", FilmGrainGlitchTexture);
         filmGrainMaterial.SetTexture("uMovie", Movie);
-		filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
+        filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
+        filmGrainMaterial.SetTexture("uSpookyFaceTexture", FilmGrainFaceTexture);
+        filmGrainMaterial.SetFloat("uSpookyAmount", 0.0f);
+        //Movie.Play();
+
+        ProjBiasMatrix.SetRow(0, new Vector4(2.0f, 0.0f, 0.0f, -1.0f));
+        ProjBiasMatrix.SetRow(1, new Vector4(0.0f, 2.0f, 0.0f, -1.0f));
+        ProjBiasMatrix.SetRow(2, new Vector4(0.0f, 0.0f, 2.0f, -1.0f));
+        ProjBiasMatrix.SetRow(3, new Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+
+        ambientLightTemp = RenderSettings.ambientLight;
+
+        thermalRamp.wrapMode = TextureWrapMode.Clamp;
+
+        Shader.SetGlobalFloat("_EmissionVisionMult", 0.0f);
+    }
+
+    void Start()
+    {
+        //all_my_damn_lights.FindAll(s => s.Equals("Light")); //= GetComponent<Light>();
+
+        //Movie.loop = true;
+
+        timeSinceOffset = 10.0f;
+
+        CameraSettings = GetComponent<Camera>();
+        all_my_damn_lights = FindObjectsOfType(typeof(Light)) as Light[];
+        for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        {
+            //Debug.Log("It Works");
+            lightStatus = new bool[all_my_damn_lights.Length];
+            lightBrightness = new float[all_my_damn_lights.Length];
+            //lightStatus.Add(all_my_damn_lights[i].enabled);
+        }
+
+        scrollSpeed = Random.Range(0.8f, 1.2f);
+        scrollAmount = Random.Range(0.0f, 1000.0f);
+        temp = new RenderTexture(Screen.width, Screen.height, 0);
+        timeNudge = Random.Range(0.0f, 1000.0f);
+
+        filmGrainMaterial.SetTexture("uScrollingTexture", FilmGrainScrollingTexture);
+        filmGrainMaterial.SetTexture("uMultTexture", FilmGrainMultTexture);
+        filmGrainMaterial.SetTexture("uScrollingGlitchTexture", FilmGrainGlitchTexture);
+        //filmGrainMaterial.SetTexture("uMovie", Movie);
+        filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
         filmGrainMaterial.SetTexture("uSpookyFaceTexture", FilmGrainFaceTexture);
         filmGrainMaterial.SetFloat("uSpookyAmount", 0.0f);
         //Movie.Play();
@@ -157,14 +200,14 @@ public class HackerVisionScript : MonoBehaviour
                 timeSinceOffset = 0.0f;
                 timeOffsetValue = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
                 timeOffsetLength = Random.Range(timeOffsetLengthMin, timeOffsetLengthMax);
-
-                Movie.Play();
-                MovieAmount = 1.0f;
+                //
+                //Movie.Play();
+                //MovieAmount = 1.0f;
                 filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
 
-                if(Random.Range(0.0f, 1.0f) > 0.75f)
+                if (Random.Range(0.0f, 1.0f) > 0.75f)
                 {
-					filmGrainFaceAmount = 1.0f;	
+                    filmGrainFaceAmount = 1.0f;
                 }
             }
         }
@@ -271,7 +314,7 @@ public class HackerVisionScript : MonoBehaviour
             Graphics.Blit(temp, source);
         }
 
-		
+
 
         float filmGrainAmountTotal = 0.0f;
 
@@ -285,11 +328,11 @@ public class HackerVisionScript : MonoBehaviour
             filmGrainMaterial.SetFloat("uScrollingGlitchAmount", 1.0f);
             filmGrainAmountTotal += 0.1f;
 
-			
-			//filmGrainFaceAmount -= Time.deltaTime * 2.0f;
-			//filmGrainFaceAmount = Mathf.Max(0.0f, filmGrainFaceAmount);
-			//filmGrainFaceAmount
-			filmGrainMaterial.SetFloat("uSpookyAmount", Mathf.Pow(Mathf.InverseLerp(timeOffsetLength, 0.0f, timeSinceOffset), 1.0f) );
+
+            //filmGrainFaceAmount -= Time.deltaTime * 2.0f;
+            //filmGrainFaceAmount = Mathf.Max(0.0f, filmGrainFaceAmount);
+            //filmGrainFaceAmount
+            filmGrainMaterial.SetFloat("uSpookyAmount", Mathf.Pow(Mathf.InverseLerp(timeOffsetLength, 0.0f, timeSinceOffset), 1.0f));
 
             filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(
                 timeOffsetValue.x + Random.Range(-timeOffsetRange, timeOffsetRange),
@@ -297,10 +340,10 @@ public class HackerVisionScript : MonoBehaviour
         }
         else
         {
-            Movie.Stop();
-            MovieAmount = 0.0f;
+            //Movie.Stop();
+            //MovieAmount = 0.0f;
             filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
-        filmGrainMaterial.SetFloat("uSpookyAmount", 0.0f);
+            filmGrainMaterial.SetFloat("uSpookyAmount", 0.0f);
 
             filmGrainMaterial.SetFloat("uScrollingGlitchAmount", 0.0f);
             filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(0.0f, 0.0f));
@@ -312,7 +355,7 @@ public class HackerVisionScript : MonoBehaviour
         float RandomNum = Random.Range(0.0f, 1.0f);
         filmGrainMaterial.SetFloat("RandomNumber", RandomNum);
         filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal);
-        filmGrainMaterial.SetFloat("uDistortion", filmGrainBarrel); 
+        filmGrainMaterial.SetFloat("uDistortion", filmGrainBarrel);
 
         waveMaterial.SetVector("uWaveCount", WaveCount);
         waveMaterial.SetVector("uWaveIntensity", WaveIntensity);

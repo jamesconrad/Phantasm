@@ -88,7 +88,7 @@ public class GunHandle : NetworkBehaviour
                 }
             }
 
-            gunShotSound.Play();
+            //gunShotSound.Play();
         }
         if (Input.GetButtonDown("Reload") || Input.GetButtonDown("GamePad Reload"))
         {

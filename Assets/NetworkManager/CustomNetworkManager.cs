@@ -200,5 +200,6 @@ public class CustomNetworkManager : NetworkManager
     public void endGame()
     {
         Shutdown();
+        Cursor.lockState = CursorLockMode.None;
     }
 }

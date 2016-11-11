@@ -44,8 +44,8 @@ public class SplashScreen : MonoBehaviour
                 OnTimeReached.Invoke();
                 if (destroyOnTimeReached)
                 {
-                    Cursor.lockState = CursorLockMode.None;
-                    (CustomNetworkManager.singleton as CustomNetworkManager).endGame();
+                    //Cursor.lockState = CursorLockMode.None;
+                    //(CustomNetworkManager.singleton as CustomNetworkManager).endGame();
                     //Destroy(GetComponentInParent<Canvas>().rootCanvas.gameObject, Time.deltaTime * 2f);
                 }
             }
@@ -54,6 +54,14 @@ public class SplashScreen : MonoBehaviour
 
     public void createSplashScreen(int screenIndex)
     {
+        splashImage.texture = images[screenIndex];
+        splashImage.color = new Color(splashImage.color.r, splashImage.color.g, splashImage.color.b, 0.0f);
+        splashImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+
         isCreated = true;
+        screenOwner.GetComponent<FirstPersonCamera>().removeCamera();
+        screenOwner.SetActive(false);
+        
+        OnTimeReached.AddListener(() => { (CustomNetworkManager.singleton as CustomNetworkManager).endGame(); } );
     }
 }
