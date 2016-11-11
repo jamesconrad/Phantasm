@@ -6,6 +6,8 @@ using UnityEngine.Events;
 public class SplashScreen : MonoBehaviour
 {
     private RawImage splashImage;
+    public Texture[] images;
+
 
     public float splashScreenLength;
     public float maxOpacity;
@@ -18,7 +20,7 @@ public class SplashScreen : MonoBehaviour
 
     private bool isCreated = false;
 
-
+    public GameObject screenOwner;
 
     // Use this for initialization
     void Start()
@@ -42,13 +44,15 @@ public class SplashScreen : MonoBehaviour
                 OnTimeReached.Invoke();
                 if (destroyOnTimeReached)
                 {
-                    Destroy(GetComponentInParent<Canvas>().rootCanvas.gameObject);
+                    Cursor.lockState = CursorLockMode.None;
+                    (CustomNetworkManager.singleton as CustomNetworkManager).endGame();
+                    //Destroy(GetComponentInParent<Canvas>().rootCanvas.gameObject, Time.deltaTime * 2f);
                 }
             }
         }
     }
 
-    public void createSplashScreen()
+    public void createSplashScreen(int screenIndex)
     {
         isCreated = true;
     }

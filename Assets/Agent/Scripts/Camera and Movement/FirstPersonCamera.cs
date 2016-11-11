@@ -61,6 +61,17 @@ public class FirstPersonCamera : NetworkBehaviour
         }
     }
 
+    public void removeCamera()
+    {
+        playerCamera.transform.parent = null;
+        //playerCamera.transform.position = transform.position;
+        //playerCamera.transform.rotation = GetComponent<GunHandle>().gunReference.transform.rotation;
+        playerCamera.GetComponent<AudioListener>().enabled = true;
+        playerCamera.GetComponent<TAA>().enabled = true;
+        playerCamera.GetComponent<FXAAScript>().enabled = true;
+        playerCamera.GetComponent<Bloom>().enabled = true;
+    }
+
     // This function is called when the MonoBehaviour will be destroyed
     public void OnDestroy()
     {

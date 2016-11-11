@@ -31,10 +31,6 @@ public class GameState : NetworkBehaviour {
 
     public void EndGame()
     {
-        if (!isServer)
-        {
-            return;
-        }
         CustomNetworkManager.singleton.StopHost();
         NetworkServer.Shutdown();
         Cursor.lockState = CursorLockMode.None;

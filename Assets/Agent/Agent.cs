@@ -13,7 +13,7 @@ public class Agent : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        
+
     }
 
     // Called on clients for player objects for the local client (only)
@@ -42,6 +42,9 @@ public class Agent : NetworkBehaviour
         SplashScreen endGameScreen = AgentUI.GetComponentInChildren<SplashScreen>();
         endGameScreen.OnTimeReached.AddListener(endGameAction);
         endGameScreen.OnTimeReached.AddListener(() => { CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = true; });
+        endGameScreen.screenOwner = gameObject;
+        endGameScreen.OnTimeReached.AddListener(() => { Destroy(endGameScreen.screenOwner); });
+        endGameScreen.OnTimeReached.AddListener(() => { Debug.Log("This is being invoked"); });
     }
 
     public void SetNumberOfObjectivesCompleted(int _objectivesCompleted)
@@ -54,11 +57,18 @@ public class Agent : NetworkBehaviour
         AmmoCounter.text = _ammo.ToString("00");
     }
 
+    // This function is called when the behaviour becomes disabled or inactive
+    public void OnDisable()
+    {
+        AgentUI.GetComponentInChildren<SplashScreen>().createSplashScreen(0);
+        GetComponent<GunHandle>().gunReference.gameObject.SetActive(false);
+    }
+
+
+
     // This function is called when the MonoBehaviour will be destroyed
     public void OnDestroy()
     {
-        AgentUI.GetComponentInChildren<SplashScreen>().createSplashScreen();
-        GetComponent<GunHandle>().gunReference.gameObject.SetActive(false);
         //Destroy(AgentUI);
 
     }

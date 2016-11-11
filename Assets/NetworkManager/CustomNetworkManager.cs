@@ -196,4 +196,9 @@ public class CustomNetworkManager : NetworkManager
     {
         base.OnServerSceneChanged(sceneName);
     }
+
+    public void endGame()
+    {
+        Shutdown();
+    }
 }
