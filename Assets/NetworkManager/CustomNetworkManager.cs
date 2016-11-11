@@ -25,7 +25,7 @@ public class CustomNetworkManager : NetworkManager
     public GameCreationSettings gameCreationSettings;
 
     //1 to be agent, 0 to be hacker. For use in getting and selecting matches. This is not a system I shouldn't actually use, as this method is for use with version control, but here we are.
-    private int currentSelectionOfCharacter = 0;
+    private static int currentSelectionOfCharacter = 0;
 
     // Use this for initialization
     void Start()
@@ -43,10 +43,12 @@ public class CustomNetworkManager : NetworkManager
     {
         //MainMenu.ActivateMainMenu();
         base.OnStartClient(client);
-    }
+    } 
 
     public override void OnClientConnect(NetworkConnection conn)
     {
+        CustomNetworkManager.singleton.playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1 - CustomNetworkManager.currentSelectionOfCharacter];
+        ClientScene.AddPlayer(conn, 0, new IntegerMessage(1 - CustomNetworkManager.currentSelectionOfCharacter));
         //MainMenu.ActivateMainMenu();
         base.OnClientConnect(conn);
     }
@@ -88,15 +90,15 @@ public class CustomNetworkManager : NetworkManager
 
     public void CreateAsAgent()
     {
-        autoCreatePlayer = true;
         playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[0];
+        currentSelectionOfCharacter = 1;
         matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 0, OnMatchCreate);
     }
 
     public void CreateAsHacker()
     {
-        autoCreatePlayer = true;
         playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1];
+        currentSelectionOfCharacter = 0;
         matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 1, OnMatchCreate);
     }
 
@@ -105,12 +107,14 @@ public class CustomNetworkManager : NetworkManager
     {
         CustomNetworkManager.singleton.matchMaker.ListMatches(0, 10, "", true, 0, 1, OnMatchList);
         currentSelectionOfCharacter = 1;
+        gameCreationSettings.joinMatchButton.onClick.AddListener(JoinMatchAsAgent);
     }
 
     public void GetMatchesForHackers()
     {
         CustomNetworkManager.singleton.matchMaker.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
         currentSelectionOfCharacter = 0;
+        gameCreationSettings.joinMatchButton.onClick.AddListener(JoinMatchAsHacker);
     }
 
     public override void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matchList)
@@ -127,13 +131,23 @@ public class CustomNetworkManager : NetworkManager
         }
     }
 
-    public void JoinMatch()
+    public void JoinMatchAsAgent()
     {
         if (CustomNetworkManager.singleton.matches != null)
         {
-            CustomNetworkManager.singleton.playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1 - currentSelectionOfCharacter];
-            MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value]; // Need to get this value somehow
+            MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
             CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
+            
+        }
+    }
+
+    public void JoinMatchAsHacker()
+    {
+        if (CustomNetworkManager.singleton.matches != null)
+        {
+            MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
+            CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
+            
         }
     }
 
@@ -156,18 +170,14 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
     {
-        if (extraMessageReader != null)
+        int intMessage = extraMessageReader.ReadMessage<IntegerMessage>().value;
+        if (intMessage == 0)
         {
-            playerPrefab = spawnPrefabs[extraMessageReader.ReadMessage<IntegerMessage>().value];
-            if (playerPrefab == spawnPrefabs[0])
-            {
-                playerPrefab = spawnPrefabs[1];
-            }
-            else
-            {
-                playerPrefab = spawnPrefabs[0];
-            }
-            
+            playerPrefab = spawnPrefabs[0];
+        }
+        else
+        {
+            playerPrefab = spawnPrefabs[1];
         }
         base.OnServerAddPlayer(conn, playerControllerId, extraMessageReader);
     }
