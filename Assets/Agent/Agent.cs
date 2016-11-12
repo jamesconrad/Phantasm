@@ -43,6 +43,7 @@ public class Agent : NetworkBehaviour
 
         SplashScreen endGameScreen = AgentUI.GetComponentInChildren<SplashScreen>();
         endGameScreen.screenOwner = gameObject;
+        endGameScreen.OnTimeReached.AddListener(() => { CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = true; });
     }
 
     // Called on clients for player objects for the local client (only)
@@ -69,7 +70,6 @@ public class Agent : NetworkBehaviour
         
         SplashScreen endGameScreen = AgentUI.GetComponentInChildren<SplashScreen>();
         endGameScreen.screenOwner = gameObject;
-        endGameScreen.OnTimeReached.AddListener(() => { CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = true; });
     }
 
     public void SetNumberOfObjectivesCompleted(int _objectivesCompleted)

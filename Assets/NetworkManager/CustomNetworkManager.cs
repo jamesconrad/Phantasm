@@ -186,11 +186,7 @@ public class CustomNetworkManager : NetworkManager
     {
         base.OnServerRemovePlayer(conn, player);
     }
-
-    public override void OnClientSceneChanged(NetworkConnection conn)
-    {
-        base.OnClientSceneChanged(conn);
-    }
+    
 
     public override void OnServerSceneChanged(string sceneName)
     {
