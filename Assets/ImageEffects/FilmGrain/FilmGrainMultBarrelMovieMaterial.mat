@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: FilmGrainMultBarrelMaterial
+  m_Name: FilmGrainMultBarrelMovieMaterial
   m_Shader: {fileID: 4800000, guid: d77c83e2dfa603840b31bb2c87181bd4, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1

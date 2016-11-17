@@ -290,15 +290,15 @@ public class HackerVisionScript : MonoBehaviour
         {
             Material CA_Active;
 
-            if (CA_Offset < 0.15f / 16)
+            if (CA_Offset < 0.55f / 16)
             {
                 CA_Active = ChromaticAberrationMaterial[0];
             }
-            else if (CA_Offset < 0.15f / 8)
+            else if (CA_Offset < 0.55f / 8)
             {
                 CA_Active = ChromaticAberrationMaterial[1];
             }
-            else if (CA_Offset < 0.15f / 4)
+            else if (CA_Offset < 0.55f / 4)
             {
                 CA_Active = ChromaticAberrationMaterial[2];
             }
