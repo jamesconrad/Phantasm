@@ -76,13 +76,11 @@ public class PortalExpertScript : MonoBehaviour
             uLoopMult           = uNewLoopMult;
             uLoopFinalAdd       = uNewLoopFinalAdd;
             uFinalColAdd        = uNewFinalColAdd;
-
-            //Random.ColorHSV(0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f)
+            
             //                                   Hue         Sat          Value       Alpha    
             uNewRGB =           Random.ColorHSV(0.0f, 1.0f, 0.25f, 1.0f, 0.5f, 1.00f, 1.0f, 1.0f);
             uNewFinalColAdd =   Random.ColorHSV(0.0f, 1.0f, 0.25f, 1.0f, 0.0f, 0.25f, 1.0f, 1.0f);
-
-            //uNewUVMult =       new Vector4(Random.Range(5.0f, 2.0f * 5.0f), Random.Range( 5.0f, 2.0f *  5.0f), 0.0f, 0.0f);
+            
             uNewLoopAdd =      new Vector4(Random.Range(0.3f, 2.0f * 0.3f), Random.Range( 0.3f, 2.0f *  0.3f), 0.0f, 1.0f);
             uNewLoopMult =     new Vector4(Random.Range(1.0f, 2.0f * 1.0f), Random.Range(10.0f, 2.0f * 10.0f), 0.0f, 1.0f);
             uNewLoopFinalAdd = new Vector4(Random.Range(4.0f, 2.0f * 4.0f), Random.Range(-4.0f, 2.0f * -4.0f), 0.0f, 1.0f);
