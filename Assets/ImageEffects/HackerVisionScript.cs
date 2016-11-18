@@ -195,7 +195,7 @@ public class HackerVisionScript : MonoBehaviour
         if (timeSinceOffset > timeOffsetLength * 5.0f && Time.timeSinceLevelLoad > 5.0f)
         {
             float RandomOffsetChance = Random.Range(0.0f, 1000.0f);
-            if (RandomOffsetChance > 990.0f)
+            if (RandomOffsetChance > 992.0f)
             {
                 timeSinceOffset = 0.0f;
                 timeOffsetValue = new Vector2(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f));
@@ -205,7 +205,7 @@ public class HackerVisionScript : MonoBehaviour
                 //MovieAmount = 1.0f;
                 filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
 
-                if (Random.Range(0.0f, 1.0f) > 0.85f)
+                if (Random.Range(0.0f, 1.0f) > 0.95f)
                 {
                     filmGrainFaceAmount = 1.0f;
                 }

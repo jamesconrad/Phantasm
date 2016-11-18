@@ -148,9 +148,9 @@
 				col.rgb = lerp(col.rgb, scrollGlitchTex.rgb, scrollGlitchTex.a * uScrollingGlitchAmount);
 				col.rgb *= tex2D(uMultTexture, i.uv);
 
-				fixed3 MovieCol = tex2D(uMovie, i.uv).rgb;
+				//fixed3 MovieCol = tex2D(uMovie, i.uv).rgb;
 
-				col.rgb += MovieCol * uMovieAmount;
+				//col.rgb += MovieCol * uMovieAmount;
 				//(float2(RandomNumber + i.uv.x, RandomNumber + i.uv.x)
 				//col = rand(i.uv);
 

@@ -12,9 +12,7 @@ public class Health : NetworkBehaviour {
     public float currentHealth;
 
     public float deathDelay;
-
-    public bool disableOnDeath = false;
-    public UnityEvent OnDisable;
+    
     public bool destroyOnDeath = false;
     public UnityEvent OnDeath;
 
@@ -26,21 +24,12 @@ public class Health : NetworkBehaviour {
     public void takeDamage(float damage)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0.0f && disableOnDeath)
+        if (currentHealth <= 0.0f )
         {
-            gameObject.SetActive(false);
-            OnDisable.Invoke();
         }
         if (currentHealth <= 0.0f && destroyOnDeath)
         {
-            Kill(deathDelay);
             OnDeath.Invoke();
         }
-    }
-
-    public void Kill(float delay = 0.0f)
-    {
-        OnDeath.Invoke();
-        Destroy(gameObject, delay);
     }
 }

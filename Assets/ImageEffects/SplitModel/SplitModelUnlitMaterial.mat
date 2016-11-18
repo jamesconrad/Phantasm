@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GhostWavyUnlitMaterial
-  m_Shader: {fileID: 4800000, guid: 70f2d88de76ffd64b8c32dc47e2e242e, type: 3}
+  m_Name: SplitModelUnlitMaterial
+  m_Shader: {fileID: 4800000, guid: d88cb94a5dd3f424b8eaccd63006e0bd, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -48,8 +48,8 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: d77b997038a60e9479ff5d6a443ee90b, type: 3}
+        m_Scale: {x: 1, y: 100}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
@@ -83,12 +83,6 @@ Material:
         name: _DstBlend
       second: 0
     - first:
-        name: _Extrusion
-      second: 0.0025
-    - first:
-        name: _ExtrusionAdd
-      second: 0
-    - first:
         name: _GlossMapScale
       second: 1
     - first:
@@ -110,9 +104,6 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
-        name: _RimPower
-      second: 2.24
-    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
@@ -127,13 +118,28 @@ Material:
     - first:
         name: _ZWrite
       second: 1
+    - first:
+        name: uParam1
+      second: 0.75
+    - first:
+        name: uParam2
+      second: 0.374
+    - first:
+        name: uWorldSpaceX
+      second: 0
+    - first:
+        name: uWorldSpaceY
+      second: 1
+    - first:
+        name: uWorldSpaceZ
+      second: 0
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
     - first:
-        name: _RimColor
-      second: {r: 1, g: 0, b: 0, a: 0}
+        name: _OffsetUV
+      second: {r: 1, g: 1, b: 0, a: 0}
