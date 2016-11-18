@@ -119,7 +119,7 @@ MonoBehaviour:
   nightVisionMaterial: {fileID: 2100000, guid: a6173bcb764edce4e83fa485eaa40696, type: 2}
   thermalMaterial: {fileID: 2100000, guid: 74347cd67be138f4d84a50394250491f, type: 2}
   sonarMaterial: {fileID: 2100000, guid: a53d83d391ac3554a9a897583c8a387f, type: 2}
-  filmGrainMaterial: {fileID: 2100000, guid: f82cba4fb01ac974fb5196073af8aec9, type: 2}
+  filmGrainMaterial: {fileID: 2100000, guid: 9100fdb806c971e478c08ae6892d497c, type: 2}
   waveMaterial: {fileID: 2100000, guid: 7610a8c3d89734049af8965e6c85d6e2, type: 2}
   thermalRamp: {fileID: 2800000, guid: 8b47637aadcc43246b6cd5344411d5da, type: 3}
   ChromaticAberrationMaterial:
@@ -142,7 +142,7 @@ MonoBehaviour:
   SonarDiffusePass: 0
   SonarTimeMult: 1
   SonarMult: 0.05
-  Movie: {fileID: 0}
+  Movie: {fileID: 15200000, guid: 3959e9d2a29b17541a6ab05705dd3d3d, type: 3}
   AgentMaterial: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
   PhantomMaterial: {fileID: 2100000, guid: 37e3210ff95d37d438b44af08a9f7d4c, type: 2}
   WaveCount: {x: 400, y: 400}
@@ -168,7 +168,7 @@ MonoBehaviour:
       offsetSize: 0.5
       numberOfSamples: 8
     blendSettings:
-      stationaryBlend: 0.926
+      stationaryBlend: 0.87
       movingBlend: 0.3
       motionAmplification: 60
 --- !u!114 &114000013680354864

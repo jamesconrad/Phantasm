@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1846987531977ca4ba172e5a46e2163d
-timeCreated: 1478866926
+timeCreated: 1479490038
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -20,8 +20,7 @@ MonoImporter:
       type: 3}
   - FilmGrainFaceTexture: {fileID: 2800000, guid: aaee9bc435a7ed846bbbb737fb66f4e7,
       type: 3}
-  - SpookyFaceTexture: {instanceID: 0}
-  - Movie: {instanceID: 0}
+  - Movie: {fileID: 15200000, guid: 3959e9d2a29b17541a6ab05705dd3d3d, type: 3}
   - AgentMaterial: {instanceID: 0}
   - PhantomMaterial: {instanceID: 0}
   executionOrder: 0

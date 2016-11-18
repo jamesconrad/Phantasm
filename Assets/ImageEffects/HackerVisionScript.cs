@@ -164,7 +164,7 @@ public class HackerVisionScript : MonoBehaviour
         ProjBiasMatrix.SetRow(0, new Vector4(2.0f, 0.0f, 0.0f, -1.0f));
         ProjBiasMatrix.SetRow(1, new Vector4(0.0f, 2.0f, 0.0f, -1.0f));
         ProjBiasMatrix.SetRow(2, new Vector4(0.0f, 0.0f, 2.0f, -1.0f));
-        ProjBiasMatrix.SetRow(3, new Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+        ProjBiasMatrix.SetRow(3, new Vector4(0.0f, 0.0f, 0.0f,  1.0f));
 
         ambientLightTemp = RenderSettings.ambientLight;
 
@@ -205,7 +205,7 @@ public class HackerVisionScript : MonoBehaviour
                 //MovieAmount = 1.0f;
                 filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
 
-                if (Random.Range(0.0f, 1.0f) > 0.75f)
+                if (Random.Range(0.0f, 1.0f) > 0.85f)
                 {
                     filmGrainFaceAmount = 1.0f;
                 }
@@ -329,10 +329,11 @@ public class HackerVisionScript : MonoBehaviour
             filmGrainAmountTotal += 0.1f;
 
 
-            //filmGrainFaceAmount -= Time.deltaTime * 2.0f;
-            //filmGrainFaceAmount = Mathf.Max(0.0f, filmGrainFaceAmount);
+            filmGrainFaceAmount -= Time.deltaTime * 2.0f;
+            filmGrainFaceAmount = Mathf.Max(0.0f, filmGrainFaceAmount);
             //filmGrainFaceAmount
-            filmGrainMaterial.SetFloat("uSpookyAmount", Mathf.Pow(Mathf.InverseLerp(timeOffsetLength, 0.0f, timeSinceOffset), 1.0f));
+            //filmGrainMaterial.SetFloat("uSpookyAmount", Mathf.Pow(Mathf.InverseLerp(timeOffsetLength, 0.0f, timeSinceOffset), 1.0f));
+            filmGrainMaterial.SetFloat("uSpookyAmount", filmGrainFaceAmount);
 
             filmGrainMaterial.SetVector("uOffsetAmount", new Vector2(
                 timeOffsetValue.x + Random.Range(-timeOffsetRange, timeOffsetRange),
