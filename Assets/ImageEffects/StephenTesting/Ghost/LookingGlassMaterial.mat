@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GhostUnlitMaterial
-  m_Shader: {fileID: 4800000, guid: 35654cef72ccb734194070f0952c35cc, type: 3}
+  m_Name: LookingGlassMaterial
+  m_Shader: {fileID: 4800000, guid: dac3d7159c06c9e4899fe0050273324c, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -105,7 +105,7 @@ Material:
       second: 0.02
     - first:
         name: _RimPower
-      second: 1.27
+      second: 2.08
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -130,4 +130,4 @@ Material:
       second: {r: 0, g: 0, b: 0, a: 1}
     - first:
         name: _RimColor
-      second: {r: 1, g: 0, b: 0, a: 0}
+      second: {r: 1, g: 1, b: 1, a: 0}

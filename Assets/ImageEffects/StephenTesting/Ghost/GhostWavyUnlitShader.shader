@@ -5,6 +5,8 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_RimColor("Rim Color", Color) = (0.4,0.4,0.4,0.0)
 		_RimPower("Rim Power", Range(0.25,8.0)) = 3.0
+		_ExtrusionAdd("Extrusion Time Amount", Range(0,1.0)) = 0.0
+		_Extrusion("Extrusion Amount", Range(0,1.0)) = 0.0
 	}
 	SubShader
 	{
@@ -33,7 +35,7 @@
 			{
 				float2 uv : TEXCOORD0;
 				half3 normal : TEXCOORD1;
-				//half3 worldNormal : TEXCOORD2;
+				half randomRim : TEXCOORD2;
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 				float3 viewDir : TEXCOORD3;
@@ -42,6 +44,9 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+
+			half _Extrusion;
+			half _ExtrusionAdd;
 			
 			v2f vert (appdata v, float3 normal : NORMAL)
 			{
@@ -53,6 +58,8 @@
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				//UNITY_TRANSFER_FOG(o,o.vertex);
 				o.normal = normal;
+				o.randomRim = sin((v.vertex.x + v.vertex.y + v.vertex.z) * 50.0f + _ExtrusionAdd * 1.0f) * 0.3 + 1.0;
+				o.vertex.xyz += normal * sin((v.vertex.x + v.vertex.y + v.vertex.z) * 50.0f + _ExtrusionAdd * 1.0f) * _Extrusion;
 				//float3 viewN = normalize(mul(UNITY_MATRIX_IT_MV, normal.xyzz).xyz);
 				//o.worldNormal = viewN;
 				return o;
@@ -71,7 +78,8 @@
 				float3 viewDirection = normalize(i.viewDir);
 
 				half rim = 1.0 - saturate(dot(viewDirection, normalDirection));
-				half rimAmount = pow(rim, _RimPower);
+				//half rimAmount = pow(rim, _RimPower * i.randomRim.r);
+				half rimAmount = pow(rim, _RimPower * i.randomRim.r);
 				col.a = rimAmount;
 				col.rgb *= _RimColor.rgb;
 

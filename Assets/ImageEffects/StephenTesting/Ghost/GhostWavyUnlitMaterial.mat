@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GhostUnlitMaterial
-  m_Shader: {fileID: 4800000, guid: 35654cef72ccb734194070f0952c35cc, type: 3}
+  m_Name: GhostWavyUnlitMaterial
+  m_Shader: {fileID: 4800000, guid: 70f2d88de76ffd64b8c32dc47e2e242e, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -81,6 +81,12 @@ Material:
       second: 1
     - first:
         name: _DstBlend
+      second: 0
+    - first:
+        name: _Extrusion
+      second: 0
+    - first:
+        name: _ExtrusionAdd
       second: 0
     - first:
         name: _GlossMapScale

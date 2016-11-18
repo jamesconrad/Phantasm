@@ -8,9 +8,8 @@
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Transparent" "IgnoreProjector"="True" "Queue"="Transparent"}
+		Tags { "RenderType"="Transparent" }
 		LOD 100
-		ZWrite Off
 		Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
@@ -69,12 +68,18 @@
 
 				float3 normalDirection = normalize(i.normal);
 				float3 viewDirection = normalize(i.viewDir);
+				//col.rgb = i.worldNormal * 0.5 + 0.5;
+				//col.rgb = i.viewDir;// * 0.5 + 0.5;
+				//col.rgb = 1-abs(dot(viewDirection, normalDirection)).rrr;
 
 				half rim = 1.0 - saturate(dot(viewDirection, normalDirection));
 				half rimAmount = pow(rim, _RimPower);
+				//col.rgb = _RimColor.rgb * rimAmount;
 				col.a = rimAmount;
-				col.rgb *= _RimColor.rgb;
 
+				//col.rgb = i.viewDir;	// * 0.5 + 0.5;
+				// apply fog
+				//UNITY_APPLY_FOG(i.fogCoord, col);
 				return col;
 			}
 			ENDCG
