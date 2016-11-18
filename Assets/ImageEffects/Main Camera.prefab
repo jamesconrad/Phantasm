@@ -1312,7 +1312,7 @@ MonoBehaviour:
       offsetSize: 0.5
       numberOfSamples: 8
     blendSettings:
-      stationaryBlend: 0.926
+      stationaryBlend: 0.87
       movingBlend: 0.3
       motionAmplification: 60
 --- !u!114 &114000011453044366
@@ -1333,7 +1333,7 @@ MonoBehaviour:
       offsetSize: 0.5
       numberOfSamples: 8
     blendSettings:
-      stationaryBlend: 0.926
+      stationaryBlend: 0.87
       movingBlend: 0.3
       motionAmplification: 60
 --- !u!114 &114000011522883828
@@ -1365,7 +1365,7 @@ MonoBehaviour:
       offsetSize: 0.5
       numberOfSamples: 8
     blendSettings:
-      stationaryBlend: 0.926
+      stationaryBlend: 0.87
       movingBlend: 0.3
       motionAmplification: 60
 --- !u!114 &114000011871355084

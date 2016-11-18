@@ -19,7 +19,7 @@
 		
 			struct v2f {
 				// we'll output world space normal as one of regular ("texcoord") interpolators
-				half3 worldNormal : TEXCOORD0;
+				half3 worldNormal : TEXCOORD1;
 				float4 pos : SV_POSITION;
 			};
 		
@@ -39,10 +39,7 @@
 			fixed4 frag(v2f i) : SV_Target
 			{
 				fixed4 c = 0;
-				// normal is a 3D vector with xyz components; in -1..1
-				// range. To display it as color, bring the range into 0..1
-				// and put into red, green, blue components
-				c.rgb = i.worldNormal*0.5 + 0.5;
+				c.rgb = i.worldNormal * 0.5 + 0.5;
 				//c.rgb = viewN * 0.5 + 0.5;
 				return c;
 			}

@@ -65,6 +65,7 @@ public class PortalExpertScript : MonoBehaviour
         effectMaterial.SetVector("uFinalColAdd",    Color.Lerp(     uFinalColAdd,   uNewFinalColAdd,    smoothInterp));
 
         
+        
         lerpInterp += Time.deltaTime * speedControlMult;
 
         if (lerpInterp > 1.0f)
