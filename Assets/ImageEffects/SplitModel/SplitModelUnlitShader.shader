@@ -17,10 +17,12 @@ Shader "Unlit/SplitModelUnlitShader"
 	{
 		Tags{ "RenderType" = "Transparent" "IgnoreProjector" = "True" "Queue" = "Transparent" }
 		LOD 100
-		Cull Front
+		//Cull Front
+		Cull Off
 		ZWrite Off
 		//ZTest Off	
-		Blend SrcAlpha OneMinusSrcAlpha
+		Blend SrcAlpha One
+		//Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass
 		{
@@ -72,9 +74,12 @@ Shader "Unlit/SplitModelUnlitShader"
 				clip(frac(((i.worldPos.x + uOffset.x) * uWorldSpaceX + (i.worldPos.y + uOffset.y) * uWorldSpaceY + (i.worldPos.z + uOffset.z) * uWorldSpaceZ) * uParam1) - uParam2);
 
 				// sample the texture
-				fixed4 col = tex2D(_MainTex, i.uv) * _Color;
+				half2 texOffset = i.uv.xy + float2(_Time.r, _Time.g * 0.5f);
+				fixed4 col = tex2D(_MainTex, texOffset) * _Color;
 
-				col.a = uAlpha;
+				float floorBlend = saturate(i.worldPos.y * 0.25) * saturate((50.0 - i.worldPos.y) * 0.025);
+
+				col.a = uAlpha * floorBlend;
 
 				return col;
 			}

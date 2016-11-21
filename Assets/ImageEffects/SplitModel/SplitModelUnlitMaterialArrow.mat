@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SplitModelUnlitMaterial
+  m_Name: SplitModelUnlitMaterialArrow
   m_Shader: {fileID: 4800000, guid: d88cb94a5dd3f424b8eaccd63006e0bd, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
@@ -48,8 +48,8 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: d77b997038a60e9479ff5d6a443ee90b, type: 3}
-        m_Scale: {x: -1, y: 40}
+        m_Texture: {fileID: 2800000, guid: 1694a369949a4cc40acee22fd87134ad, type: 3}
+        m_Scale: {x: 3, y: 80}
         m_Offset: {x: 0.5, y: 1.4}
     - first:
         name: _MetallicGlossMap
@@ -123,7 +123,7 @@ Material:
       second: 0.75
     - first:
         name: uParam2
-      second: 0.374
+      second: 0
     - first:
         name: uWorldSpaceX
       second: 0
