@@ -9,7 +9,8 @@
 		Tags { "RenderType"="Transparent" "IgnoreProjector"="True" "Queue"="Transparent"}
 		LOD 100
 		ZWrite Off
-		Blend SrcAlpha OneMinusSrcAlpha
+		//Blend SrcAlpha OneMinusSrcAlpha
+		Blend SrcAlpha One
 
 		Pass
 		{
@@ -61,7 +62,7 @@
 					p = newp;
 				}
 
-				col.a = 0.4f * sin(p.x) + 0.2f;
+				col.a = 0.4f * sin(p.x) + 0.6f;
 				return col;
 			}
 			ENDCG

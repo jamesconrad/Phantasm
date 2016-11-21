@@ -84,7 +84,7 @@ Material:
       second: 0
     - first:
         name: _Extrusion
-      second: 0.0025
+      second: 0
     - first:
         name: _ExtrusionAdd
       second: 0
