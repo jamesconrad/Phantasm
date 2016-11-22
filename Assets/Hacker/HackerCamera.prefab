@@ -142,7 +142,7 @@ MonoBehaviour:
   SonarDiffusePass: 0
   SonarTimeMult: 1
   SonarMult: 0.05
-  Movie: {fileID: 15200000, guid: 3959e9d2a29b17541a6ab05705dd3d3d, type: 3}
+  Movie: {fileID: 0}
   AgentMaterial: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
   PhantomMaterial: {fileID: 2100000, guid: 37e3210ff95d37d438b44af08a9f7d4c, type: 2}
   WaveCount: {x: 400, y: 400}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010183414722}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 641a8ee262808ef4b90dc8acdc120120, type: 3}
   m_Name: 
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010183414722}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7354d32415a63384e97282c63875ad11, type: 3}
   m_Name: 

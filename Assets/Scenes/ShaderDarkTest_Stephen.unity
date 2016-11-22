@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0039961482, g: 0.00021792945, b: 0.000000051529558,
+  m_IndirectSpecularColor: {r: 0.003996142, g: 0.00021792899, b: 0.000000051529558,
     a: 1}
 --- !u!157 &3
 LightmapSettings:
@@ -132,8 +132,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _LightType: 1
-  _Color: {r: 1, g: 0.44117647, b: 0.44117647, a: 1}
-  _Intensity: 1
+  _Color: {r: 1, g: 0.44117647, b: 0.9614605, a: 1}
+  _Intensity: 0.8
   _Range: 45
   _Radius: 0.2
   _Length: 4
@@ -178,8 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _LightType: 1
-  _Color: {r: 1, g: 0.44117647, b: 0.44117647, a: 1}
-  _Intensity: 1
+  _Color: {r: 1, g: 0.44117647, b: 0.9614605, a: 1}
+  _Intensity: 0.8
   _Range: 45
   _Radius: 0.2
   _Length: 4
@@ -354,6 +354,85 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 414777601}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &431280762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 431280766}
+  - 33: {fileID: 431280765}
+  - 135: {fileID: 431280764}
+  - 23: {fileID: 431280763}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &431280763
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431280762}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 501437a65b3d3674d8663acc6c04c428, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!135 &431280764
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431280762}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &431280765
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431280762}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &431280766
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 431280762}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.858, y: 3, z: 15.959}
+  m_LocalScale: {x: 4.9, y: 4.9, z: 4.9}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!4 &707332729 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011990815160, guid: cb84adf3a52d4904497b307ade945dd9,
@@ -664,8 +743,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _LightType: 1
-  _Color: {r: 1, g: 0.44117647, b: 0.44117647, a: 1}
-  _Intensity: 1
+  _Color: {r: 1, g: 0.44117647, b: 0.9614605, a: 1}
+  _Intensity: 0.8
   _Range: 45
   _Radius: 0.2
   _Length: 4
@@ -710,8 +789,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _LightType: 1
-  _Color: {r: 1, g: 0.44117647, b: 0.44117647, a: 1}
-  _Intensity: 1
+  _Color: {r: 1, g: 0.44117647, b: 0.9614605, a: 1}
+  _Intensity: 0.8
   _Range: 45
   _Radius: 0.2
   _Length: 4
@@ -792,7 +871,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: c38b76b3a20a33f4ebe8e70b63984ced, type: 2}
+  - {fileID: 2100000, guid: 0543743b39f5592498fd4887255842be, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
