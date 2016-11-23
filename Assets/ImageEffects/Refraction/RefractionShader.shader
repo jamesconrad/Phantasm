@@ -1,26 +1,19 @@
-﻿// Upgrade NOTE: replaced 'PositionFog()' with multiply of UNITY_MATRIX_MVP by position
-// Upgrade NOTE: replaced 'V2F_POS_FOG' with 'float4 pos : SV_POSITION'
-// Upgrade NOTE: replaced 'glstate.matrix.texture[0]' with 'UNITY_MATRIX_TEXTURE0'
-// Upgrade NOTE: replaced 'samplerRECT' with 'sampler2D'
-// Upgrade NOTE: replaced 'texRECTproj' with 'tex2Dproj'
+﻿// Per pixel bumped refraction.
+// Uses a normal map to distort the image behind, and
+// an additional texture to tint the color.
 
-// Upgrade NOTE: replaced 'samplerRECT' with 'sampler2D'
-// Upgrade NOTE: replaced 'texRECTproj' with 'tex2Dproj'
-
-Shader "Unlit/RefractionShader"
-{
+Shader "FX/Glass/Stained BumpDistort" {
 	Properties{
-		_BumpAmt("Distortion", range(0,128)) = 10.0
+		_BumpAmt("Distortion", range(0,128)) = 10
 		_MainTex("Tint Color (RGB)", 2D) = "white" {}
+	_BumpMap("Normalmap", 2D) = "bump" {}
 	}
 
 		Category{
 
 		// We must be transparent, so other objects are drawn before this one.
-		Tags{ "Queue" = "Transparent" }
+		Tags{ "Queue" = "Transparent" "RenderType" = "Opaque" }
 
-		// ------------------------------------------------------------------
-		//  ARB fragment program
 
 		SubShader{
 
@@ -31,70 +24,75 @@ Shader "Unlit/RefractionShader"
 		Tags{ "LightMode" = "Always" }
 	}
 
-		// Main pass: Take the texture grabbed above and use the normals to perturb it
+		// Main pass: Take the texture grabbed above and use the bumpmap to perturb it
 		// on to the screen
 		Pass{
 		Name "BASE"
 		Tags{ "LightMode" = "Always" }
 
 		CGPROGRAM
-		// profiles arbfp1
-		// vertex vert
-		// fragment frag
-		// fragmentoption ARB_precision_hint_fastest 
-		// fragmentoption ARB_fog_exp2
-
+#pragma vertex vert
+#pragma fragment frag
+#pragma multi_compile_fog
 #include "UnityCG.cginc"
 
-		sampler2D _MainTex : register(s1);
-	sampler2D _GrabTexture : register(s0);
-
-	struct v2f {
-		float4 pos : SV_POSITION;
-		float4 uvrefr    : TEXCOORD0;
-		float2 uv         : TEXCOORD1;
-		float3 normal    : TEXCOORD2;
+		struct appdata_t {
+		float4 vertex : POSITION;
+		float2 texcoord: TEXCOORD0;
 	};
 
-	uniform float _BumpAmt;
+	struct v2f {
+		float4 vertex : SV_POSITION;
+		float4 uvgrab : TEXCOORD0;
+		float2 uvbump : TEXCOORD1;
+		float2 uvmain : TEXCOORD2;
+		UNITY_FOG_COORDS(3)
+	};
 
-	v2f vert(appdata_base v)
+	float _BumpAmt;
+	float4 _BumpMap_ST;
+	float4 _MainTex_ST;
+
+	v2f vert(appdata_t v)
 	{
 		v2f o;
-		o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
-		o.uv = TRANSFORM_UV(1);
-		o.uvrefr = mul(UNITY_MATRIX_TEXTURE0, v.vertex);
-		//o.normal = mul((float3x3)glstate.matrix.mvp, v.normal);
-		o.normal = normalize(mul(UNITY_MATRIX_IT_MV, v.normal.xyzz).xyz);
-		//float3 viewN = normalize(mul(UNITY_MATRIX_IT_MV, normal.xyzz).xyz);
-		//o.normal = viewN;
+		o.vertex = mul(UNITY_MATRIX_MVP, v.vertex);
+#if UNITY_UV_STARTS_AT_TOP
+		float scale = -1.0;
+#else
+		float scale = 1.0;
+#endif
+		o.uvgrab.xy = (float2(o.vertex.x, o.vertex.y*scale) + o.vertex.w) * 0.5;
+		o.uvgrab.zw = o.vertex.zw;
+		o.uvbump = TRANSFORM_TEX(v.texcoord, _BumpMap);
+		o.uvmain = TRANSFORM_TEX(v.texcoord, _MainTex);
+		UNITY_TRANSFER_FOG(o,o.vertex);
 		return o;
 	}
 
-	half4 frag(v2f i) : COLOR
+	sampler2D _GrabTexture;
+	float4 _GrabTexture_TexelSize;
+	sampler2D _BumpMap;
+	sampler2D _MainTex;
+
+	half4 frag(v2f i) : SV_Target
 	{
-		i.normal = normalize(i.normal);
+		// calculate perturbed coordinates
+		half2 bump = UnpackNormal(tex2D(_BumpMap, i.uvbump)).rg; // we could optimize this by just reading the x & y without reconstructing the Z
+		float2 offset = bump * _BumpAmt * _GrabTexture_TexelSize.xy;
+#ifdef UNITY_Z_0_FAR_FROM_CLIPSPACE //to handle recent standard asset package on older version of unity (before 5.5)
+		i.uvgrab.xy = offset * UNITY_Z_0_FAR_FROM_CLIPSPACE(i.uvgrab.z) + i.uvgrab.xy;
+#else
+		i.uvgrab.xy = offset * i.uvgrab.z + i.uvgrab.xy;
+#endif
 
-	// Calculate refracted vector based on the surface normal.
-	// This is only an approximation because we don't know the
-	// thickness of the object. So just use anything that looks
-	// "good enough"
-
-	half3 refracted = i.normal * abs(i.normal);
-	//half3 refracted = refract( i.normal, half3(0,0,1), 1.333 );
-
-	// perturb coordinates of the grabbed image
-	i.uvrefr.xy = refracted.xy * (i.uvrefr.w * _BumpAmt) + i.uvrefr.xy;
-
-	half4 refr = tex2Dproj(_GrabTexture, i.uvrefr);
-	half4 col = tex2D(_MainTex, i.uv.xy);
-	return col * refr;
+		half4 col = tex2Dproj(_GrabTexture, UNITY_PROJ_COORD(i.uvgrab));
+		half4 tint = tex2D(_MainTex, i.uvmain);
+		col *= tint;
+		UNITY_APPLY_FOG(i.fogCoord, col);
+		return col;
 	}
-
 		ENDCG
-		// Set up the textures for this pass
-		SetTexture[_GrabTexture]{}    // Texture we grabbed in the pass above
-		SetTexture[_MainTex]{}        // Color tint
 	}
 	}
 

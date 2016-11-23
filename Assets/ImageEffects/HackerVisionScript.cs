@@ -307,6 +307,8 @@ public class HackerVisionScript : MonoBehaviour
                 CA_Active = ChromaticAberrationMaterial[3];
             }
 
+            CA_Active = ChromaticAberrationMaterial[2];
+
             CA_Active.SetFloat("_Dispersal", CA_Dispersal);
             CA_Active.SetFloat("_Offset", CA_Offset);
 
