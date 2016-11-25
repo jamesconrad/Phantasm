@@ -21,13 +21,14 @@ public class BehaviourTree : NetworkBehaviour {
     private AIState AiState = AIState.Idle;
     // Use this for initialization
     void Start () {
-        AiState = AIState.Charge;
+        AiState = AIState.Patrol;
         lastKnown = transform.position;
 	}
 	
     void State () {
         //AiState C is charging, the ai is aware of players current location
         //AiState W is walking, the ai knows where the player was last and is checking at that location
+        //AiState P is patrol, randomly navigating the scene
         //AiState I is idle, the ai has no information at all
         if (!GameObject.FindGameObjectWithTag("Player"))
         {
@@ -79,7 +80,7 @@ public class BehaviourTree : NetworkBehaviour {
         else if (AiState == AIState.Walking)
         {
             //print("Walking");
-            lastKnown = player;
+            //lastKnown = player;
             agent.destination = lastKnown;
             //AiState = State();
         }
@@ -92,9 +93,6 @@ public class BehaviourTree : NetworkBehaviour {
         }
         else if (AiState == AIState.Patrol)
         {
-            
-
-
             if ((agent.destination - me).magnitude < 0.25)
             {
                 bool ret = false;
@@ -111,8 +109,6 @@ public class BehaviourTree : NetworkBehaviour {
                 }
             }
         }
-
-        
 	}
 
     public void SetState(int _state)
