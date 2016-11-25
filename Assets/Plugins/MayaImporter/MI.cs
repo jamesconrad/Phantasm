@@ -42,8 +42,9 @@ namespace MayaImporter
         public Vec3 r;
         public int numpoints;
         public List<Vec3> points;
-        public List<Vec3> pointVectors;
-        public string name; 
+        public string name;
+        public List<int> index;
+        public int power;
     }
 
     public class Light
@@ -132,9 +133,15 @@ namespace MayaImporter
                                 //We only care about the ".cc" arg here
                                 if (line.Contains("setAttr \".cc\""))
                                 {
-                                    string line1 = sr.ReadLine(); //This line in the ma file confuses me, TODO learn what it means
-                                    string line2 = sr.ReadLine(); //index for knots? Not sure, test file has 2 indicies more than points
-                                    //num1 = number of numbers; numbers 2 to end are indicies?
+                                    string line1 = sr.ReadLine(); //This line in the ma file confuses me, first number is the power
+                                    c.power = int.Parse(SplitString(line1)[0]);
+                                    string line2 = sr.ReadLine(); //index for interpolation
+                                    int numind = int.Parse(SplitString(line2)[0]);
+                                    string[] ind = SplitString(line2);
+                                    for (int i = 1; i < c.numind; i++)
+                                    {
+                                        c.index.Add(ind[i]);
+                                    }
                                     string line3 = sr.ReadLine(); //number of line points
                                     c.numpoints = int.Parse(SplitString(line3)[0]);
                                     for (int i = 0; i < c.numpoints; i++)
@@ -146,11 +153,13 @@ namespace MayaImporter
                             }
                             ret.Add(c);
                         }
+                        sr.Dispose();
                     }
                 }
             }
             catch (Exception e)
             {
+                sr.Dispose();
                 error = 404;
                 errors = e.Message;
             }
@@ -217,10 +226,12 @@ namespace MayaImporter
                         }
                         ret.Add(c);
                     }
+                    sr.Dispose();
                 }
             }
             catch (Exception e)
             {
+                sr.Dispose();
                 error = 404;
                 errors = e.Message;
             }
