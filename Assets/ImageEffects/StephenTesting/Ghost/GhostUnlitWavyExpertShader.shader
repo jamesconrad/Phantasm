@@ -1,4 +1,4 @@
-﻿Shader "Unlit/GhostUnlit"
+﻿Shader "Unlit/GhostUnlitWavyExpertShader"
 {
 	Properties
 	{
@@ -72,8 +72,8 @@
 				o.screenuv = ((o.vertex.xy / o.vertex.w) + 1)/2;
 				o.screenuv.y = 1 - o.screenuv.y;
 
-				//o.viewDir = normalize(WorldSpaceViewDir(v.vertex));
-				o.viewDir = normalize(UnityWorldSpaceViewDir(mul(unity_ObjectToWorld, v.vertex)));
+				o.viewDir = normalize(ObjSpaceViewDir(v.vertex));
+				//o.viewDir = normalize(UnityWorldSpaceViewDir(mul(unity_ObjectToWorld, v.vertex)));
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
 				//o.normal = UnityObjectToWorldNormal(v.normal);

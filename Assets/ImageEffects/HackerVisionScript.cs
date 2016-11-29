@@ -57,6 +57,11 @@ public class HackerVisionScript : MonoBehaviour
     public Material AgentMaterial;
     public Material PhantomMaterial;
 
+	public GameObject	GOAgent;
+	public GameObject	GOPhantom;
+	public Agent	EntityAgent;
+	public Phantom	EntityPhantom;
+
     public Vector2 WaveCount = new Vector2(40.0f, 40.0f);
     public Vector2 WaveIntensity = new Vector2(0.01f, 0.01f);
     public Vector2 WaveTimeMult = new Vector2(1.0f, 1.0f);

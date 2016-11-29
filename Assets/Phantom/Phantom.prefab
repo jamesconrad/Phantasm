@@ -62,7 +62,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 37e3210ff95d37d438b44af08a9f7d4c, type: 2}
+  - {fileID: 2100000, guid: 05a90805b0db07b4c8f6bb77cca6bf82, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011964233812}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!54 &54000013946515514
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -189,13 +189,7 @@ MonoBehaviour:
   health: 100
   currentHealth: 0
   deathDelay: 0
-  disableOnDeath: 0
-  OnDisable:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  destroyOnDeath: 0
+  destroyOnDeath: 1
   OnDeath:
     m_PersistentCalls:
       m_Calls:

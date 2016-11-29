@@ -1,4 +1,4 @@
-﻿Shader "Unlit/GhostUnlit"
+﻿Shader "Unlit/GhostUnlitWavyShader"
 {
 	Properties
 	{

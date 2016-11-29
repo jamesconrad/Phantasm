@@ -17,10 +17,10 @@ TagManager:
   - UI
   - 
   - 
+  - EnemyLayerVisible
   - EnemyLayer
-  - 
-  - 
-  - 
+  - EnemyLayerThermal
+  - EnemyLayerSonar
   - 
   - 
   - 

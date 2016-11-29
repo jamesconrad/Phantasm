@@ -87,7 +87,7 @@
 					v2f o;
 					o.vertex = UnityObjectToClipPos(v.vertex);
 
-					o.viewDir = normalize(WorldSpaceViewDir(v.vertex));
+					o.viewDir = normalize(ObjSpaceViewDir(v.vertex));
 
 					//If UVs are fucked, unfuck them
 				#if UNITY_UV_STARTS_AT_TOP
