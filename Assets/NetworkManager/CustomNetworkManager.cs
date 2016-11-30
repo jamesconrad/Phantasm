@@ -89,21 +89,40 @@ public class CustomNetworkManager : NetworkManager
     }
 
     public void CreateAsAgent()
-    {
-        playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[0];
-        currentSelectionOfCharacter = 1;
-        matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 0, OnMatchCreate);
+	{
+		StartCoroutine(CreateMatchAsAgentDelay(1.0f));
+
     }
 
     public void CreateAsHacker()
-    {
-        playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1];
-        currentSelectionOfCharacter = 0;
-        matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 1, OnMatchCreate);
+	{
+		StartCoroutine(CreateMatchAsHackerDelay(1.0f));
+
+		
     }
+	
+
+	IEnumerator CreateMatchAsAgentDelay(float time = 1.0f)
+	{
+		yield return new WaitForSeconds(time);
 
 
-    public void GetMatchesForAgents()
+		playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[0];
+		currentSelectionOfCharacter = 1;
+		matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 0, OnMatchCreate);
+	}
+
+	IEnumerator CreateMatchAsHackerDelay(float time = 1.0f)
+	{
+		yield return new WaitForSeconds(time);
+
+		playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1];
+		currentSelectionOfCharacter = 0;
+		matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 1, OnMatchCreate);
+	}
+
+
+	public void GetMatchesForAgents()
     {
         CustomNetworkManager.singleton.matchMaker.ListMatches(0, 10, "", true, 0, 1, OnMatchList);
         currentSelectionOfCharacter = 1;

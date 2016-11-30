@@ -41,7 +41,7 @@
 			
 			sampler2D _MainTex;
 			sampler2D _FadeTex;
-			sampler2D _Amount;
+			float _Amount;
 
 			fixed4 frag (v2f i) : SV_Target
 			{

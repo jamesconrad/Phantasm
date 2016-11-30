@@ -8,7 +8,7 @@ public class ScreenFadeScript : MonoBehaviour
 
 	bool fadeActive = false;
 	float fadeAmount = 0.0f;
-	float fadeSpeed = 1.01f;
+	float fadeSpeed = 1.0f;
 
 	public void StartFade()
 	{
