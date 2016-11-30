@@ -217,119 +217,7 @@ public class HackerVisionScript : MonoBehaviour
     {
 
 
-		GOAgent = GameObject.Find("Agent(Clone)");
-		GOAgentMesh = GameObject.Find("agent_Mesh");
-        GOPhantom = GameObject.Find("Phantom(Clone)");
-		if(GOAgent != null)
-		{			
-			EntityAgent = GOAgent.GetComponent<Agent>();
-			VisibleAgent = EntityAgent.visibility;
-		}
-		if(GOPhantom != null)
-		{	
-			EntityPhantom = GOPhantom.GetComponent<Phantom>();
-			VisiblePhantom = EntityPhantom.visibility;
-		}
 		
-		
-		//Camera Layers
-
-		// 08	EnemyVisible	
-		// 09	Enemy			
-		// 10	EnemyThermal	
-		// 11	EnemySonar		
-		
-		// Default Camera Layers get added with different layer depending on camera active
-		
-		/*
-			Set Materials for Agent and Phantom next
-		 */
-		 
-
-		if (Vision == HackerVisionMode.Normal || Vision == HackerVisionMode.Night)
-        {
-			if(GOAgentMesh != null)
-			{
-				Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
-				
-				for (int c = 0; c < agentRenderers.Length; c++)
-				{
-					agentRenderers[c].material = agentMaterials.camera;
-				}
-			}
-
-			CameraSettings.cullingMask = (1 << 9) | defaultCameraLayersActive;
-
-			if(GOPhantom != null)
-			{
-				if(VisiblePhantom.camera > 0)
-				{
-					GOPhantom.layer = 9;
-					if(VisiblePhantom.camera == Plasma.SeenBy.Camera.Translucent)
-					{
-						GOPhantom.GetComponent<Renderer>().material = phantomMaterials.normal;
-					}
-					else
-					{
-						GOPhantom.GetComponent<Renderer>().material = phantomMaterials.camera;
-					}
-				}
-			}
-		}
-		else if (Vision == HackerVisionMode.Thermal)
-        {
-			if(GOAgentMesh != null)
-			{
-				Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
-				for(int c = 0; c < agentRenderers.Length; c++)
-				{
-					agentRenderers[c].material = agentMaterials.thermal;
-				}
-			}
-
-			CameraSettings.cullingMask = (1 << 10) | defaultCameraLayersActive;
-
-			if(GOPhantom != null)
-			{
-				if(VisiblePhantom.thermal > 0)
-				{
-					GOPhantom.layer = 10;
-					if(VisiblePhantom.thermal == Plasma.SeenBy.Thermal.Visible)
-					{
-						GOPhantom.GetComponent<Renderer>().material = phantomMaterials.thermal;
-					}
-				}
-			}
-		}
-		else if (Vision == HackerVisionMode.Sonar)
-        {
-			if(GOAgentMesh != null)
-			{
-				Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
-				for(int c = 0; c < agentRenderers.Length; c++)
-				{
-					agentRenderers[c].material = agentMaterials.sonar;
-				}
-			}
-
-			CameraSettings.cullingMask = (1 << 11) | defaultCameraLayersActive;
-
-			if(GOPhantom != null)
-			{
-				if(VisiblePhantom.sonar > 0)
-				{
-					GOPhantom.layer = 11;
-					if(VisiblePhantom.sonar == Plasma.SeenBy.Sonar.Visible)
-					{
-						GOPhantom.GetComponent<Renderer>().material = phantomMaterials.sonar;
-					}
-				}
-			}
-		}
-		else
-		{
-			GOPhantom.layer = 8;
-		}
 
 
 
@@ -397,7 +285,131 @@ public class HackerVisionScript : MonoBehaviour
 
     public void OnPreRender()
     {
+		GOAgent = GameObject.Find("Agent(Clone)");
+		GOAgentMesh = GameObject.Find("agent_Mesh");
+        GOPhantom = GameObject.Find("Phantom(Clone)");
+		if(GOAgent != null)
+		{			
+			EntityAgent = GOAgent.GetComponent<Agent>();
+			VisibleAgent = EntityAgent.visibility;
+		}
+		if(GOPhantom != null)
+		{	
+			EntityPhantom = GOPhantom.GetComponent<Phantom>();
+			VisiblePhantom = EntityPhantom.visibility;
+		}
 		
+		
+		//Camera Layers
+
+		// 08	EnemyVisible	
+		// 09	Enemy			
+		// 10	EnemyThermal	
+		// 11	EnemySonar		
+		
+		// Default Camera Layers get added with different layer depending on camera active
+		
+		/*
+			Set Materials for Agent and Phantom next
+		 */
+		 
+
+		if (Vision == HackerVisionMode.Normal || Vision == HackerVisionMode.Night)
+        {
+			if(GOAgentMesh != null)
+			{
+				Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+				
+				for (int c = 0; c < agentRenderers.Length; c++)
+				{
+					agentRenderers[c].material = agentMaterials.camera;
+				}
+			}
+
+			CameraSettings.cullingMask = (1 << 9) | defaultCameraLayersActive;
+
+			if(GOPhantom != null)
+			{
+				if(VisiblePhantom.camera > 0)
+				{
+					GOPhantom.layer = 9;
+					if(VisiblePhantom.camera == Plasma.SeenBy.Camera.Translucent)
+					{
+						GOPhantom.GetComponent<Renderer>().material = phantomMaterials.normal;
+					}
+					else
+					{
+						GOPhantom.GetComponent<Renderer>().material = phantomMaterials.camera;
+					}
+				}
+				else
+				{
+					GOPhantom.layer = 12;
+				}
+			}
+		}
+		else if (Vision == HackerVisionMode.Thermal)
+        {
+			if(GOAgentMesh != null)
+			{
+				Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+				for(int c = 0; c < agentRenderers.Length; c++)
+				{
+					agentRenderers[c].material = agentMaterials.thermal;
+				}
+			}
+
+			CameraSettings.cullingMask = (1 << 10) | defaultCameraLayersActive;
+
+			if(GOPhantom != null)
+			{
+				if(VisiblePhantom.thermal > 0)
+				{
+					GOPhantom.layer = 10;
+					if(VisiblePhantom.thermal == Plasma.SeenBy.Thermal.Visible)
+					{
+						GOPhantom.GetComponent<Renderer>().material = phantomMaterials.thermal;
+					}
+				}
+				else
+				{
+					GOPhantom.layer = 12;
+				}
+			}
+		}
+		else if (Vision == HackerVisionMode.Sonar)
+        {
+			if(GOAgentMesh != null)
+			{
+				Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+				for(int c = 0; c < agentRenderers.Length; c++)
+				{
+					agentRenderers[c].material = agentMaterials.sonar;
+				}
+			}
+
+			CameraSettings.cullingMask = (1 << 11) | defaultCameraLayersActive;
+
+			if(GOPhantom != null)
+			{
+				if(VisiblePhantom.sonar > 0)
+				{
+					GOPhantom.layer = 11;
+					if(VisiblePhantom.sonar == Plasma.SeenBy.Sonar.Visible)
+					{
+						GOPhantom.GetComponent<Renderer>().material = phantomMaterials.sonar;
+					}
+				}
+				else
+				{
+					GOPhantom.layer = 12;
+				}
+			}
+		}
+		else
+		{
+			GOPhantom.layer = 8;
+		}
 
 
 
