@@ -48,16 +48,19 @@ public class Phantom : NetworkBehaviour
         {
             collision.gameObject.GetComponent<Health>().takeDamage(attackDamage);
             collision.rigidbody.AddForce((collision.transform.position - transform.position).normalized * 25.0f, ForceMode.Impulse);
+			
+			numKilled = Mathf.Max(numKilled - 2, 0);
             Respawn();
+			
         }
     }
 
     public void Respawn()
     {
-		numKilled += 1;
 		Debug.Log("Phantoms Killed " + numKilled);
 
 		setVisibility();
+		numKilled += 1;
 
         Destroy(Instantiate(vanishParticleEffect, transform.position, vanishParticleEffect.transform.rotation), vanishParticleEffect.GetComponent<ParticleSystem>().duration);
         PhantomSpawnLocation spawnLoc = previousSpawnLocation;

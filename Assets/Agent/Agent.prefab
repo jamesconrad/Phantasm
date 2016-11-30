@@ -4281,22 +4281,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd3465818dde314299ce0fa29acbefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GOPhantom: {fileID: 0}
-  EntityPhantom: {fileID: 0}
-  VisiblePhantom:
-    agent: 0
-    camera: 2
-    thermal: 1
-    sonar: 1
-    temperature: 0
   phantomMaterials:
-    normal: {fileID: 0}
-    camera: {fileID: 0}
-    thermal: {fileID: 0}
-    sonar: {fileID: 0}
+    normal: {fileID: 2100000, guid: 05a90805b0db07b4c8f6bb77cca6bf82, type: 2}
+    camera: {fileID: 2100000, guid: 8b0ba1c06fc67e840a2e519c7c36bd3c, type: 2}
+    thermal: {fileID: 2100000, guid: db03c4253306cb947882c84394620907, type: 2}
+    sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
   defaultCameraLayersActive:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294963711
 --- !u!114 &114000010797910734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4429,6 +4421,12 @@ MonoBehaviour:
   health: 100
   currentHealth: 0
   deathDelay: 0
+  disableOnDeath: 0
+  OnDisable:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   destroyOnDeath: 0
   OnDeath:
     m_PersistentCalls:
