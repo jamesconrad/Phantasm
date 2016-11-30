@@ -6,10 +6,12 @@ public class IKHandler : MonoBehaviour {
     Animator anim;
     Transform me;
     Transform gun;
-
+    GameObject player;
+    Rigidbody agent;
     private Transform lIKTar;
     private Transform rIKTar;
     private float ikWeight = 1;
+    Vector3 prevFramePos;
 
     //public Transform lHint;
     //public Transform rHint;
@@ -19,12 +21,30 @@ public class IKHandler : MonoBehaviour {
         anim = GetComponent<Animator>();
         me = GetComponent<Transform>();
         gun = GetComponentInParent<GunHandle>().gunReference.transform;
+        
+        player = transform.parent.gameObject;
+        agent = GetComponentInParent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	    
-	}
+	void Update ()
+    {
+        Vector3 worldMoveDir = agent.transform.position - prevFramePos;
+        Vector3 localMoveDir = transform.InverseTransformDirection(worldMoveDir);
+        Vector3 lookDir = agent.transform.forward;
+        
+        float theta = Vector2.Dot(new Vector2(0,1), new Vector2(lookDir.x,lookDir.z));
+
+        Vector3 localVelocity = Quaternion.AngleAxis(theta, new Vector3(0,1,0)) * localMoveDir;
+        
+        print(localVelocity.magnitude + " @ X:" + localVelocity.x + " Z:" + localVelocity.z);
+                
+        anim.SetFloat("movX",localVelocity.x * 10);
+        anim.SetFloat("movY",localVelocity.z * 10);
+        anim.SetFloat("velocity",localVelocity.magnitude * 100);
+        print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY"));
+        prevFramePos = agent.transform.position;
+    }
 
     void OnAnimatorIK()
     {
