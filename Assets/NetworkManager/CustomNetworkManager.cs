@@ -25,7 +25,7 @@ public class CustomNetworkManager : NetworkManager
     public GameCreationSettings gameCreationSettings;
 
 	float agentDelay = 1.0f;
-	float hackerDelay = 2.7f;
+	float hackerDelay = 3.0f;
 
     //1 to be agent, 0 to be hacker. For use in getting and selecting matches. This is not a system I shouldn't actually use, as this method is for use with version control, but here we are.
     private static int currentSelectionOfCharacter = 0;

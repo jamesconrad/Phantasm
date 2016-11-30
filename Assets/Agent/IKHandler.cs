@@ -37,12 +37,12 @@ public class IKHandler : MonoBehaviour {
 
         Vector3 localVelocity = Quaternion.AngleAxis(theta, new Vector3(0,1,0)) * localMoveDir;
         
-        print(localVelocity.magnitude + " @ X:" + localVelocity.x + " Z:" + localVelocity.z);
+        //print(localVelocity.magnitude + " @ X:" + localVelocity.x + " Z:" + localVelocity.z);
                 
         anim.SetFloat("movX",localVelocity.x * 10);
         anim.SetFloat("movY",localVelocity.z * 10);
         anim.SetFloat("velocity",localVelocity.magnitude * 100);
-        print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY"));
+		//print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY"));
         prevFramePos = agent.transform.position;
     }
 
