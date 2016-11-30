@@ -4384,7 +4384,7 @@ MonoBehaviour:
   weaponSettings:
     bulletPrefab: {fileID: 1000010763469236, guid: bbf5a805d6493e74f97cc2fa4225ceb6,
       type: 2}
-    barrelOffset: {x: 0, y: 0.054, z: 0.2}
+    barrelOffset: {x: 0, y: 0.054, z: 1}
     Hitscan: 1
     ammoSettings:
       maxClipSize: 20
@@ -4421,22 +4421,33 @@ MonoBehaviour:
   health: 100
   currentHealth: 0
   deathDelay: 0
-  disableOnDeath: 0
+  disableOnDeath: 1
   OnDisable:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114000012543753510}
+        m_MethodName: removeCamera
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   destroyOnDeath: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: 
+      - m_Target: {fileID: 114000012543753510}
+        m_MethodName: removeCamera
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

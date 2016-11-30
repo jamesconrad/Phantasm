@@ -134,6 +134,7 @@ MonoBehaviour:
     thermal: 1
     sonar: 1
     temperature: 1
+  randomizeVisibility: 1
   vanishParticleEffect: {fileID: 154218, guid: 1b7853609334e664dbd846d859e58bb4, type: 2}
   previousSpawnLocation: {fileID: 0}
 --- !u!114 &114000011316608604
@@ -195,6 +196,23 @@ MonoBehaviour:
   health: 100
   currentHealth: 0
   deathDelay: 0
+  disableOnDeath: 0
+  OnDisable:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 114000010571385812}
+        m_MethodName: Respawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   destroyOnDeath: 1
   OnDeath:
     m_PersistentCalls:

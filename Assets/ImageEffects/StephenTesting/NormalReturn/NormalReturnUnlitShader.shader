@@ -30,9 +30,10 @@
 				o.pos = UnityObjectToClipPos(vertex);
 				// UnityCG.cginc file contains function to transform
 				// normal from object to world space, use that
-				float3 viewN = normalize(mul(UNITY_MATRIX_IT_MV, normal.xyzz).xyz);
 				//o.worldNormal = UnityObjectToWorldDir(normal);
-				o.worldNormal = viewN;
+				o.worldNormal = normalize(mul(UNITY_MATRIX_IT_MV, normal.xyzz).xyz);
+				//o.worldNormal = UnityObjectToWorldNormal(normal.xyzz);
+				//o.worldNormal = normal.xyz;
 				return o;
 			}
 		
