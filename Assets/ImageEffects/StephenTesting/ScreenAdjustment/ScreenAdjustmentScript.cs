@@ -30,6 +30,11 @@ public class ScreenAdjustmentScript : MonoBehaviour
     void Start()
     {
         material = new Material(shader);
+
+		if(!Plasma.ProjectorMode.active)
+		{
+			this.enabled = false;
+		}
     }
 
     void Awake()

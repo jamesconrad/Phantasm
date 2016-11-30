@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PhantomCamera
-  m_Shader: {fileID: 4800000, guid: 375cfe4a2a1480246a3612b5048fc1e4, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2e0a9433f1d976e498311770f9fbed77, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -58,6 +58,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _NormalMap
+      second:
+        m_Texture: {fileID: 2800000, guid: db0081811a76a60438b028a1d37aa43c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _OcclusionMap
       second:
         m_Texture: {fileID: 0}
@@ -98,11 +104,23 @@ Material:
         name: _Mode
       second: 0
     - first:
+        name: _NormalAmount
+      second: 16
+    - first:
         name: _OcclusionStrength
       second: 1
     - first:
         name: _Parallax
       second: 0.02
+    - first:
+        name: _RefractionRim
+      second: 0
+    - first:
+        name: _RimAlpha
+      second: 1
+    - first:
+        name: _RimPower
+      second: 1
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -125,3 +143,9 @@ Material:
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _RefractionSpeed
+      second: {r: 1, g: 2, b: 0.82, a: -1.55}
+    - first:
+        name: _RimColor
+      second: {r: 1, g: 0.49803922, b: 1, a: 1}

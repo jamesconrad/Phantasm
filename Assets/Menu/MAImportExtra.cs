@@ -12,6 +12,12 @@ public class MAImportExtra : MonoBehaviour {
     public bool anim;
     public bool animComplete;
 
+	public void Begin()
+	{
+		t = 0;
+		anim = true;
+	}
+
     // Use this for initialization
     void Start () {
         t = 0;

@@ -24,6 +24,9 @@ public class CustomNetworkManager : NetworkManager
     }
     public GameCreationSettings gameCreationSettings;
 
+	float agentDelay = 1.0f;
+	float hackerDelay = 2.7f;
+
     //1 to be agent, 0 to be hacker. For use in getting and selecting matches. This is not a system I shouldn't actually use, as this method is for use with version control, but here we are.
     private static int currentSelectionOfCharacter = 0;
 
@@ -90,13 +93,13 @@ public class CustomNetworkManager : NetworkManager
 
     public void CreateAsAgent()
 	{
-		StartCoroutine(CreateMatchAsAgentDelay(1.0f));
+		StartCoroutine(CreateMatchAsAgentDelay(agentDelay));
 
     }
 
     public void CreateAsHacker()
 	{
-		StartCoroutine(CreateMatchAsHackerDelay(1.0f));
+		StartCoroutine(CreateMatchAsHackerDelay(hackerDelay));
 
 		
     }
@@ -154,8 +157,10 @@ public class CustomNetworkManager : NetworkManager
     {
         if (CustomNetworkManager.singleton.matches != null)
         {
-            MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
-            CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
+			StartCoroutine(CreateMatchAsAgentDelay(agentDelay));
+
+			//MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
+            //CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
             
         }
     }
@@ -164,13 +169,33 @@ public class CustomNetworkManager : NetworkManager
     {
         if (CustomNetworkManager.singleton.matches != null)
         {
-            MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
-            CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
+			StartCoroutine(CreateMatchAsAgentDelay(hackerDelay));
+
+			//MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
+            //CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
             
         }
     }
 
-    public override void OnStopServer()
+	IEnumerator JoinMatchAsAgentDelay(float time = 1.0f)
+	{
+		yield return new WaitForSeconds(time);
+
+		MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
+		CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
+
+	}
+
+	IEnumerator JoinMatchAsHackerDelay(float time = 2.0f)
+	{
+		yield return new WaitForSeconds(time);
+
+		MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
+		CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
+
+	}
+
+	public override void OnStopServer()
     {
         //MainMenu.DeactivateMainMenu();
         base.OnStopServer();

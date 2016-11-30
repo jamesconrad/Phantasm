@@ -23,6 +23,7 @@ GameObject:
   - 114: {fileID: 114000012044494178}
   - 114: {fileID: 114000012055031408}
   - 114: {fileID: 114000011499826690}
+  - 114: {fileID: 114000012835387834}
   m_Layer: 0
   m_Name: HackerCamera
   m_TagString: HackerCamera
@@ -131,8 +132,8 @@ MonoBehaviour:
     MultTexture: {fileID: 2800000, guid: d1a860762aba40e4b9f1e5d905048341, type: 3}
     GlitchTexture: {fileID: 2800000, guid: 9836b695b2e96f847b8d624e0dc506d2, type: 3}
     FaceTexture: {fileID: 2800000, guid: aaee9bc435a7ed846bbbb737fb66f4e7, type: 3}
-    nightVisionAmount: 0.2
-    normalAmount: 0.05
+    nightVisionAmount: 0.15
+    normalAmount: 0.025
   SonarColor: {r: 0.5, g: 0.5, b: 1, a: 1}
   SonarDiffusePass: 0
   SonarTimeMult: 1
@@ -152,4 +153,23 @@ MonoBehaviour:
   WaveIntensity: {x: 0.0005, y: 0.0015}
   WaveTimeMult: {x: 100, y: 100}
   CA_Dispersal: 1
-  CA_Offset: 0.05
+  CA_Offset: 0.03
+--- !u!114 &114000012835387834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010183414722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e43c7705823cff429af0237240e2bbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 3183edf8722caf84f9625f699c6f33f8, type: 3}
+  brightness: 0
+  contrast: 1.5
+  gamma: 0.9
+  minInput: 0
+  maxInput: 1
+  minOutput: 0
+  maxOutput: 1
