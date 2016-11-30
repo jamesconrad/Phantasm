@@ -2061,6 +2061,7 @@ GameObject:
   - 114: {fileID: 114000011937748856}
   - 114: {fileID: 114000011244241914}
   - 114: {fileID: 114000011350886908}
+  - 114: {fileID: 114000010520363438}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Player
@@ -4269,6 +4270,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49411ff4b65e12444a100f735edcdacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114000010520363438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014286740798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afd3465818dde314299ce0fa29acbefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GOPhantom: {fileID: 0}
+  EntityPhantom: {fileID: 0}
+  VisiblePhantom:
+    agent: 0
+    camera: 2
+    thermal: 1
+    sonar: 1
+    temperature: 0
+  phantomMaterials:
+    normal: {fileID: 0}
+    camera: {fileID: 0}
+    thermal: {fileID: 0}
+    sonar: {fileID: 0}
+  defaultCameraLayersActive:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &114000010797910734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4307,6 +4335,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AgentUI: {fileID: 1000014243422558, guid: b89207da589cb504695bdb43cf040d70, type: 2}
+  visibility:
+    agent: 2
+    camera: 2
+    thermal: 1
+    sonar: 1
+    temperature: 1
 --- !u!114 &114000011784594182
 MonoBehaviour:
   m_ObjectHideFlags: 1

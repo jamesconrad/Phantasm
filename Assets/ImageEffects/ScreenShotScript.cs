@@ -13,21 +13,19 @@ namespace Plasma
 	        if (Input.GetKey(KeyCode.RightControl))
 	        {
 	            Magnify = 4;
-				Debug.Log("Taking High Resolution Screenshot (x4)");
 	        }
 	        else if (Input.GetKey(KeyCode.RightAlt))
 	        {
 	            Magnify = 2;
-				Debug.Log("Taking High Resolution Screenshot (x2)");
 	        }
 			else
 	        {
 	            Magnify = 1;				
-				Debug.Log("Taking Screenshot");
 	        }
 	
 	        if (Input.GetKeyDown(KeyCode.F12))
 	        {
+	            Debug.Log("Taking Screenshot (x" + Magnify + ")");
 	            Application.CaptureScreenshot("./Screenshot.png", Magnify);
 	            Debug.Log("Screenshot captured");
 	        }

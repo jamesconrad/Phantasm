@@ -45,22 +45,24 @@ public class HackerVisionScript : MonoBehaviour
     private float MovieAmount = 1.0f;
     private float filmGrainFaceAmount = 0.0f;
 
-    enum HackerVisionMode { Normal, Night, Thermal, Sonar, Last };
+    enum HackerVisionMode { Normal = 0, Night = 1, Thermal = 2, Sonar = 3, Last = 4};
     HackerVisionMode Vision = HackerVisionMode.Normal;
 
 
 	
 	[Space(10)]
-    public Material AgentMaterial;
-    public Material PhantomMaterial;
-
-	public GameObject	GOAgent;
-	public GameObject	GOPhantom;
-	public Agent	EntityAgent;
-	public Phantom	EntityPhantom;
+	private GameObject	GOAgent;
+	private GameObject	GOAgentMesh;
+	private GameObject	GOPhantom;
+	private Agent	EntityAgent;
+	private Phantom	EntityPhantom;
+	private Plasma.Visibility	VisibleAgent;
+	private Plasma.Visibility	VisiblePhantom;
 	
 	[Space(10)]
-	public PhantomMaterials phantomMaterials;
+	public CameraMaterials agentMaterials;
+	public CameraMaterials phantomMaterials;
+	private int cameraModeArray = 1;
 
 	
 	[Header("Camera Wave Amount")]
@@ -94,7 +96,7 @@ public class HackerVisionScript : MonoBehaviour
 
 
 	[System.Serializable]
-    public struct PhantomMaterials
+    public struct CameraMaterials
     {
 		public Material normal;
 		public Material camera;
@@ -214,6 +216,98 @@ public class HackerVisionScript : MonoBehaviour
     public void Update()
     {
 
+
+		GOAgent = GameObject.Find("Agent(Clone)");
+		GOAgentMesh = GameObject.Find("agent_Mesh");
+        GOPhantom = GameObject.Find("Phantom(Clone)");
+				
+		EntityAgent = GOAgent.GetComponent<Agent>();
+		EntityPhantom = GOPhantom.GetComponent<Phantom>();
+		VisibleAgent = EntityAgent.visibility;
+		VisiblePhantom = EntityPhantom.visibility;
+		
+		
+		//Camera Layers
+
+		// 08	EnemyVisible	
+		// 09	Enemy			
+		// 10	EnemyThermal	
+		// 11	EnemySonar		
+		
+		// Default Camera Layers get added with different layer depending on camera active
+		
+		/*
+			Set Materials for Agent and Phantom next
+		 */
+		 
+
+		if (Vision == HackerVisionMode.Normal || Vision == HackerVisionMode.Night)
+        {
+			Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+			for(int c = 0; c < agentRenderers.Length; c++)
+			{
+				agentRenderers[c].material = agentMaterials.camera;
+			}
+
+			CameraSettings.cullingMask = (1 << 9) | defaultCameraLayersActive;
+			if(VisiblePhantom.camera > 0)
+			{
+				GOPhantom.layer = 9;
+				if(VisiblePhantom.camera == Plasma.SeenBy.Camera.Translucent)
+				{
+					GOPhantom.GetComponent<Renderer>().material = phantomMaterials.normal;
+				}
+				else
+				{
+					GOPhantom.GetComponent<Renderer>().material = phantomMaterials.camera;
+				}
+			}
+		}
+		else if (Vision == HackerVisionMode.Thermal)
+        {
+			Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+			for(int c = 0; c < agentRenderers.Length; c++)
+			{
+				agentRenderers[c].material = agentMaterials.thermal;
+			}
+
+			CameraSettings.cullingMask = (1 << 10) | defaultCameraLayersActive;
+			if(VisiblePhantom.thermal > 0)
+			{
+				GOPhantom.layer = 10;
+				if(VisiblePhantom.thermal == Plasma.SeenBy.Thermal.Visible)
+				{
+					GOPhantom.GetComponent<Renderer>().material = phantomMaterials.thermal;
+				}
+			}
+		}
+		else if (Vision == HackerVisionMode.Sonar)
+        {
+			Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+			for(int c = 0; c < agentRenderers.Length; c++)
+			{
+				agentRenderers[c].material = agentMaterials.sonar;
+			}
+
+			CameraSettings.cullingMask = (1 << 11) | defaultCameraLayersActive;
+			if(VisiblePhantom.sonar > 0)
+			{
+				GOPhantom.layer = 11;
+				if(VisiblePhantom.sonar == Plasma.SeenBy.Sonar.Visible)
+				{
+					GOPhantom.GetComponent<Renderer>().material = phantomMaterials.sonar;
+				}
+			}
+		}
+		else
+		{
+			GOPhantom.layer = 8;
+		}
+
+
+
+
+
         if (Vision != HackerVisionMode.Sonar)
         {
             for (int i = 0; i < all_my_damn_lights.Length; ++i)
@@ -261,6 +355,13 @@ public class HackerVisionScript : MonoBehaviour
             if (Vision == HackerVisionMode.Last)
                 Vision = HackerVisionMode.Normal;
             // Loop back to beginning
+
+			if (Vision == HackerVisionMode.Normal || Vision == HackerVisionMode.Night)
+				cameraModeArray = 1;
+			else if (Vision == HackerVisionMode.Thermal)
+				cameraModeArray = 2;
+			else if (Vision == HackerVisionMode.Sonar)
+				cameraModeArray = 3;
         }
 
 
@@ -269,34 +370,7 @@ public class HackerVisionScript : MonoBehaviour
 
     public void OnPreRender()
     {
-		//Camera Layers
-
-		// 08	EnemyVisible	
-		// 09	Enemy			
-		// 10	EnemyThermal	
-		// 11	EnemySonar		
 		
-		// Default Camera Layers get added with different layer depending on camera active
-		if (Vision == HackerVisionMode.Normal || Vision == HackerVisionMode.Night)
-        {
-			CameraSettings.cullingMask = (1 << 9) | defaultCameraLayersActive;
-		}
-		else if (Vision == HackerVisionMode.Thermal)
-        {
-			CameraSettings.cullingMask = (1 << 10) | defaultCameraLayersActive;
-		}
-		else if (Vision == HackerVisionMode.Sonar)
-        {
-			CameraSettings.cullingMask = (1 << 11) | defaultCameraLayersActive;
-		}
-
-		/*
-			Set Materials for Agent and Phantom next
-		 */
-
-
-
-
 
 
 
@@ -437,8 +511,8 @@ public class HackerVisionScript : MonoBehaviour
         waveMaterial.SetVector("uWaveIntensity", WaveIntensity);
         waveMaterial.SetVector("uTime", WaveTimeMult * Time.time);
 
-        AgentMaterial.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 0.0f));
-        PhantomMaterial.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 0.0f));
+        //agentMaterials.camera.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 0.0f));
+        //phantomMaterials.camera.SetColor("_EmissionColor", new Color(0.0f, 0.0f, 0.0f));
         //Shader.SetGlobalFloat(emissionShader.GetInstanceID(), 1.0f); 
         //_EmissionMult
         //emissionShader.
@@ -466,9 +540,9 @@ public class HackerVisionScript : MonoBehaviour
         {
             //thermalRamp.filterMode = FilterMode.Point;
             thermalMaterial.SetTexture("ThermalRamp", thermalRamp);
-
-            AgentMaterial.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1.0f));
-            PhantomMaterial.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1.0f));
+			
+			agentMaterials.thermal.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1.0f));
+			phantomMaterials.thermal.SetColor("_EmissionColor", new Color(1.0f, 1.0f, 1.0f));
 
             Graphics.Blit(source, temp, thermalMaterial);
             Graphics.Blit(temp, destination, filmGrainMaterial);

@@ -10,6 +10,9 @@ public class Phantom : NetworkBehaviour
 	public Plasma.Visibility visibility;
 	[Space(5)]
 
+	public bool randomizeVisibility = true;
+	static public int numKilled = 0;
+
     public GameObject vanishParticleEffect;
 
     private PhantomSpawnLocation[] respawnPoints;
@@ -18,6 +21,9 @@ public class Phantom : NetworkBehaviour
     // Start is called just before any of the Update methods is called the first time
     public void Start()
     {
+		setVisibility();
+
+
         if (!isLocalPlayer)
         {
             //Change to apply the correct shaders when Stephen gets them done.
@@ -48,6 +54,11 @@ public class Phantom : NetworkBehaviour
 
     public void Respawn()
     {
+		numKilled += 1;
+		Debug.Log("Phantoms Killed " + numKilled);
+
+		setVisibility();
+
         Destroy(Instantiate(vanishParticleEffect, transform.position, vanishParticleEffect.transform.rotation), vanishParticleEffect.GetComponent<ParticleSystem>().duration);
         PhantomSpawnLocation spawnLoc = previousSpawnLocation;
         do
@@ -69,4 +80,88 @@ public class Phantom : NetworkBehaviour
     {
         GameState.StaticEndGame();
     }
+
+
+	public void setVisibility()
+	{
+		if(randomizeVisibility)
+		{
+			float randomMin = Mathf.Max(0.0f, numKilled / 2.0f - 1.0f);
+			float randomMax = Mathf.Min(8.0f, 2.0f + numKilled / 2.0f - 1.0f);
+			
+			int randomNum = (int) Random.Range(randomMin, randomMax);
+
+			if(numKilled < 1)
+				randomNum = 0;
+			else if(numKilled < 3)
+				randomNum = 1;
+
+			switch(randomNum)
+			{
+				case 0:
+					visibility.agent = Plasma.SeenBy.Agent.Visible;
+					visibility.camera = Plasma.SeenBy.Camera.Visible;
+					visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Visible;
+					visibility.temperature = 1.0f;
+					break;
+				case 1:
+					visibility.agent = Plasma.SeenBy.Agent.Translucent;
+					visibility.camera = Plasma.SeenBy.Camera.Visible;
+					visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Visible;
+					visibility.temperature = 1.0f;
+					break;
+				case 2:
+					visibility.agent = Plasma.SeenBy.Agent.Invisible;
+					visibility.camera = Plasma.SeenBy.Camera.Visible;
+					visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Visible;
+					visibility.temperature = 1.0f;
+					break;
+				case 3:
+					visibility.agent = Plasma.SeenBy.Agent.Invisible;
+					visibility.camera = Plasma.SeenBy.Camera.Translucent;
+					visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Visible;
+					visibility.temperature = 1.0f;
+					break;
+				case 4:
+					visibility.agent = Plasma.SeenBy.Agent.Invisible;
+					visibility.camera = Plasma.SeenBy.Camera.Invisible;
+					visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Invisible;
+					visibility.temperature = 1.0f;
+					break;
+				case 5:
+					visibility.agent = Plasma.SeenBy.Agent.Invisible;
+					visibility.camera = Plasma.SeenBy.Camera.Invisible;
+					visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Visible;
+					visibility.temperature = 0.25f;					
+					break;
+				case 6:
+					visibility.agent = Plasma.SeenBy.Agent.Invisible;
+					visibility.camera = Plasma.SeenBy.Camera.Invisible;
+					visibility.thermal = Plasma.SeenBy.Thermal.Invisible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Visible;
+					visibility.temperature = 0.0f;
+					break;
+				case 7:
+					visibility.agent = Plasma.SeenBy.Agent.Invisible;
+					visibility.camera = Plasma.SeenBy.Camera.Invisible;
+					visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Invisible;
+					visibility.temperature = 0.0f;
+					break;
+				default:
+					visibility.agent = Plasma.SeenBy.Agent.Visible;
+					visibility.camera = Plasma.SeenBy.Camera.Visible;
+					visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+					visibility.sonar = Plasma.SeenBy.Sonar.Visible;
+					visibility.temperature = 1.0f;
+					break;
+			}
+		}
+	}
 }

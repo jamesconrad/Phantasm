@@ -123,12 +123,27 @@ MonoBehaviour:
   SonarTimeMult: 1
   SonarMult: 0.05
   Movie: {fileID: 0}
-  AgentMaterial: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
-  PhantomMaterial: {fileID: 2100000, guid: 37e3210ff95d37d438b44af08a9f7d4c, type: 2}
   GOAgent: {fileID: 0}
   GOPhantom: {fileID: 0}
   EntityAgent: {fileID: 0}
   EntityPhantom: {fileID: 0}
+  VisibleAgent:
+    agent: 0
+    camera: 0
+    thermal: 0
+    sonar: 0
+    temperature: 0
+  VisiblePhantom:
+    agent: 0
+    camera: 0
+    thermal: 0
+    sonar: 0
+    temperature: 0
+  agentMaterials:
+    normal: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
+    camera: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
+    thermal: {fileID: 2100000, guid: fa63711559c5b4a4b894918d9f2c367d, type: 2}
+    sonar: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
   phantomMaterials:
     normal: {fileID: 2100000, guid: 05a90805b0db07b4c8f6bb77cca6bf82, type: 2}
     camera: {fileID: 2100000, guid: 8b0ba1c06fc67e840a2e519c7c36bd3c, type: 2}

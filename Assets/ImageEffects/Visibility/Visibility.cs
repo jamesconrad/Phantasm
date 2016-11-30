@@ -4,7 +4,7 @@ using System.Collections;
 namespace Plasma
 {
 
-    /* 
+	/* 
         Here's the scoop, these determine whether an object shows up to certain camera modes
       
         Visible will draw it with the regular material
@@ -19,53 +19,53 @@ namespace Plasma
 
     */
 
-    namespace SeenBy
-    {
-        public enum Agent
-        {
-            Visible,
-            Translucent,
-            Invisible
-        }
+	namespace SeenBy
+	{
+		public enum Agent
+		{
+			Invisible,
+			Translucent,
+			Visible
+		}
 
-        public enum Camera
-        {
-            Visible,
-            Translucent,
-            Invisible
-        }
+		public enum Camera
+		{
+			Invisible,
+			Translucent,
+			Visible
+		}
 
-        public enum Thermal
-        {
-            Visible,
-            Invisible
-        }
+		public enum Thermal
+		{
+			Invisible,
+			Visible
+		}
 
-        public enum Sonar
-        {
-            Visible,
-            Invisible
-        }
-    }
+		public enum Sonar
+		{
+			Invisible,
+			Visible
+		}
+	}
 
 
-    [System.Serializable]
-    public struct Visibility
-    {
-        [Tooltip("Sets if the Entity is visible by the Agent")]
-        public SeenBy.Agent agent;
+	[System.Serializable]
+	public struct Visibility
+	{
+		[Tooltip("Sets if the Entity is visible by the Agent")]
+		public SeenBy.Agent agent;
 
-        [Tooltip("Sets if the Entity is visible by the Cameras in Default & Night Vision modes")]        
-        public SeenBy.Camera camera;
+		[Tooltip("Sets if the Entity is visible by the Cameras in Default & Night Vision modes")]
+		public SeenBy.Camera camera;
 
-		[Tooltip("Sets if the Entity is visible by Thermal imaging")]        
-        public SeenBy.Thermal thermal;
+		[Tooltip("Sets if the Entity is visible by Thermal imaging")]
+		public SeenBy.Thermal thermal;
 
-		[Tooltip("Sets if the Entity is visible by Sonar")]        
-        public SeenBy.Sonar sonar;
+		[Tooltip("Sets if the Entity is visible by Sonar")]
+		public SeenBy.Sonar sonar;
 
-        [Tooltip("Sets how hot the Entity shows up by Thermal imaging")]
-        [Range(0.0f, 1.0f)]
-        public float temperature;
-    }
+		[Tooltip("Sets how hot the Entity shows up by Thermal imaging")]
+		[Range(0.0f, 1.0f)]
+		public float temperature;
+	}
 }

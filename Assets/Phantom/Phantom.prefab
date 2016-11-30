@@ -128,6 +128,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 34
+  visibility:
+    agent: 0
+    camera: 2
+    thermal: 1
+    sonar: 1
+    temperature: 1
   vanishParticleEffect: {fileID: 154218, guid: 1b7853609334e664dbd846d859e58bb4, type: 2}
   previousSpawnLocation: {fileID: 0}
 --- !u!114 &114000011316608604
