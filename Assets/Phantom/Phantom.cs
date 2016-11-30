@@ -11,6 +11,7 @@ public class Phantom : NetworkBehaviour
 	[Space(5)]
 
 	public bool randomizeVisibility = true;
+
 	static public int numKilled = 0;
 
     public GameObject vanishParticleEffect;

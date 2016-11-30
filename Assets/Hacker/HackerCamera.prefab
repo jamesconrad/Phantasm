@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 4000011239881564}
   - 20: {fileID: 20000012356995460}
+  - 114: {fileID: 114000012044494178}
   - 114: {fileID: 114000012055031408}
   - 114: {fileID: 114000011499826690}
   m_Layer: 0
@@ -66,7 +67,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294963711
+    m_Bits: 4294959615
   m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -88,6 +89,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderTarget: {fileID: 0}
+--- !u!114 &114000012044494178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010183414722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e9213ae2624134a8c78273985c2c2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tSpeed: 0.1
+  rotationBegin: {x: 0, y: 10, z: 0}
+  rotationEnd: {x: 0, y: -10, z: 0}
 --- !u!114 &114000012055031408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,22 +138,6 @@ MonoBehaviour:
   SonarTimeMult: 1
   SonarMult: 0.05
   Movie: {fileID: 0}
-  GOAgent: {fileID: 0}
-  GOPhantom: {fileID: 0}
-  EntityAgent: {fileID: 0}
-  EntityPhantom: {fileID: 0}
-  VisibleAgent:
-    agent: 0
-    camera: 0
-    thermal: 0
-    sonar: 0
-    temperature: 0
-  VisiblePhantom:
-    agent: 0
-    camera: 0
-    thermal: 0
-    sonar: 0
-    temperature: 0
   agentMaterials:
     normal: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
     camera: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}

@@ -47,7 +47,7 @@ public class MAImportExtra : MonoBehaviour {
             if (t >= 1)
             {
                 t = 1;
-                tmod = 0;
+                //tmod = 0;
                 animComplete = true;
             }
         }

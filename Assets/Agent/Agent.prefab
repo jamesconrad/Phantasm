@@ -4288,7 +4288,7 @@ MonoBehaviour:
     sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
   defaultCameraLayersActive:
     serializedVersion: 2
-    m_Bits: 4294963711
+    m_Bits: 4294959615
 --- !u!114 &114000010797910734
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4384,7 +4384,7 @@ MonoBehaviour:
   weaponSettings:
     bulletPrefab: {fileID: 1000010763469236, guid: bbf5a805d6493e74f97cc2fa4225ceb6,
       type: 2}
-    barrelOffset: {x: 0, y: 0.054, z: 1}
+    barrelOffset: {x: 0, y: 0.054, z: 0.2}
     Hitscan: 1
     ammoSettings:
       maxClipSize: 20
@@ -4442,12 +4442,12 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114000012543753510}
-        m_MethodName: removeCamera
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4944,7 +4944,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 0
+  m_UpdateWhenOffscreen: 1
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 4300020, guid: 9089c53a9d1ce9e4db8c8a9043c9412b, type: 3}
   m_Bones:
