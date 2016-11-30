@@ -6,14 +6,22 @@ using UnityEngine.Events;
 
 public class Agent : NetworkBehaviour
 {
-
     public GameObject AgentUI;
+	
+	[Space(5)]
+	public Plasma.Visibility visibility;
+	[Space(5)]
+
     private Text SubObjectiveCounter;
     private Text AmmoCounter;
     // Use this for initialization
     void Start()
     {
-
+		visibility.agent = Plasma.SeenBy.Agent.Visible;
+		visibility.camera = Plasma.SeenBy.Camera.Visible;
+		visibility.thermal = Plasma.SeenBy.Thermal.Visible;
+		visibility.sonar = Plasma.SeenBy.Sonar.Visible;
+		visibility.temperature = 1.0f;
     }
 
     // Awake is called when the script instance is being loaded

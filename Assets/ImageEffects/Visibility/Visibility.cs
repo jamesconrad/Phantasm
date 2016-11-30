@@ -19,7 +19,7 @@ namespace Plasma
 
     */
 
-    namespace VisibleTo
+    namespace SeenBy
     {
         public enum Agent
         {
@@ -53,16 +53,16 @@ namespace Plasma
     public struct Visibility
     {
         [Tooltip("Sets if the Entity is visible by the Agent")]
-        public VisibleTo.Agent agentVisibility;
+        public SeenBy.Agent agent;
 
         [Tooltip("Sets if the Entity is visible by the Cameras in Default & Night Vision modes")]        
-        public VisibleTo.Camera cameraVisibility;
+        public SeenBy.Camera camera;
 
 		[Tooltip("Sets if the Entity is visible by Thermal imaging")]        
-        public VisibleTo.Thermal thermalVisibility;
+        public SeenBy.Thermal thermal;
 
 		[Tooltip("Sets if the Entity is visible by Sonar")]        
-        public VisibleTo.Sonar sonarVisibility;
+        public SeenBy.Sonar sonar;
 
         [Tooltip("Sets how hot the Entity shows up by Thermal imaging")]
         [Range(0.0f, 1.0f)]

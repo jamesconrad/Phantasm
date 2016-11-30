@@ -6,6 +6,10 @@ public class Phantom : NetworkBehaviour
 {
     public float attackDamage;
 
+	[Space(5)]
+	public Plasma.Visibility visibility;
+	[Space(5)]
+
     public GameObject vanishParticleEffect;
 
     private PhantomSpawnLocation[] respawnPoints;

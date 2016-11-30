@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 public class HackerVisionScript : MonoBehaviour
 {
-    public Material nightVisionMaterial;
+	public Material nightVisionMaterial;
     public Material thermalMaterial;
     public Material sonarMaterial;
     public Material filmGrainMaterial;
@@ -14,7 +14,7 @@ public class HackerVisionScript : MonoBehaviour
     public Texture thermalRamp;
     public Material[] ChromaticAberrationMaterial;
 
-    private Camera CameraSettings;
+	private Camera CameraSettings;
 
     private Color ambientLightTemp;
     public Color ambientLight = new Color(0.25f, 0.25f, 0.25f);
@@ -23,28 +23,24 @@ public class HackerVisionScript : MonoBehaviour
 
     private bool[] lightStatus;
     private float[] lightBrightness;
-
-    public Texture FilmGrainScrollingTexture;
-    public Texture FilmGrainMultTexture;
-    public Texture FilmGrainGlitchTexture;
-    public Texture FilmGrainFaceTexture;
+	
+	[Space(10)]
+	public FilmGrain filmGrain;
     private float scrollAmount;
     private float scrollSpeed;
     private float filmGrainGlitchAmount = 0.0f;
-    [Range(0.0f, 1.0f)]
-    public float filmGrainNightVisionAmount = 0.3f;
-
-    [Range(0.0f, 1.0f)]
-    public float filmGrainNormalAmount = 0.05f;
+    
 
     private float filmGrainBarrel = 1.15f;
-
+	
+	[Space(10)]
     public Color SonarColor = new Color(0.5f, 0.5f, 1.0f);
     [Range(0.0f, 1.0f)]
     public float SonarDiffusePass = 1.0f;
     public float SonarTimeMult = 1.0f;
     public float SonarMult = 0.02f;
-
+	
+	[Space(10)]
     public MovieTexture Movie;
     private float MovieAmount = 1.0f;
     private float filmGrainFaceAmount = 0.0f;
@@ -53,7 +49,8 @@ public class HackerVisionScript : MonoBehaviour
     HackerVisionMode Vision = HackerVisionMode.Normal;
 
 
-
+	
+	[Space(10)]
     public Material AgentMaterial;
     public Material PhantomMaterial;
 
@@ -61,10 +58,16 @@ public class HackerVisionScript : MonoBehaviour
 	public GameObject	GOPhantom;
 	public Agent	EntityAgent;
 	public Phantom	EntityPhantom;
+	
+	[Space(10)]
+	public PhantomMaterials phantomMaterials;
 
+	
+	[Header("Camera Wave Amount")]
     public Vector2 WaveCount = new Vector2(40.0f, 40.0f);
     public Vector2 WaveIntensity = new Vector2(0.01f, 0.01f);
     public Vector2 WaveTimeMult = new Vector2(1.0f, 1.0f);
+	[Space(5)]
 
     [Tooltip("Determines concentration of aberration closer to the center of the screen")]
     [Range(0.1f, 3.0f)]
@@ -89,6 +92,34 @@ public class HackerVisionScript : MonoBehaviour
 
     float timeSinceSwap = 1.0f;
 
+
+	[System.Serializable]
+    public struct PhantomMaterials
+    {
+		public Material normal;
+		public Material camera;
+		public Material thermal;
+		public Material sonar;
+	}
+
+	[System.Serializable]
+    public struct FilmGrain
+    {
+		public Texture ScrollingTexture;
+		public Texture MultTexture;
+		public Texture GlitchTexture;
+		public Texture FaceTexture;
+
+		[Range(0.0f, 1.0f)]
+		public float nightVisionAmount;
+
+		[Range(0.0f, 1.0f)]
+		public float normalAmount;
+
+	}
+
+	private int defaultCameraLayersActive;
+
     // Awake is called when the script instance is being loaded
     public void Awake()
     {
@@ -99,6 +130,8 @@ public class HackerVisionScript : MonoBehaviour
         timeSinceOffset = 10.0f;
 
         CameraSettings = GetComponent<Camera>();
+		defaultCameraLayersActive = CameraSettings.cullingMask;
+
         all_my_damn_lights = FindObjectsOfType(typeof(Light)) as Light[];
         for (int i = 0; i < all_my_damn_lights.Length; ++i)
         {
@@ -113,12 +146,12 @@ public class HackerVisionScript : MonoBehaviour
         temp = new RenderTexture(Screen.width, Screen.height, 0);
         timeNudge = Random.Range(0.0f, 1000.0f);
 
-        filmGrainMaterial.SetTexture("uScrollingTexture", FilmGrainScrollingTexture);
-        filmGrainMaterial.SetTexture("uMultTexture", FilmGrainMultTexture);
-        filmGrainMaterial.SetTexture("uScrollingGlitchTexture", FilmGrainGlitchTexture);
+        filmGrainMaterial.SetTexture("uScrollingTexture", filmGrain.ScrollingTexture);
+        filmGrainMaterial.SetTexture("uMultTexture", filmGrain.MultTexture);
+        filmGrainMaterial.SetTexture("uScrollingGlitchTexture", filmGrain.GlitchTexture);
         filmGrainMaterial.SetTexture("uMovie", Movie);
         filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
-        filmGrainMaterial.SetTexture("uSpookyFaceTexture", FilmGrainFaceTexture);
+        filmGrainMaterial.SetTexture("uSpookyFaceTexture", filmGrain.FaceTexture);
         filmGrainMaterial.SetFloat("uSpookyAmount", 0.0f);
         //Movie.Play();
 
@@ -157,12 +190,12 @@ public class HackerVisionScript : MonoBehaviour
         temp = new RenderTexture(Screen.width, Screen.height, 0);
         timeNudge = Random.Range(0.0f, 1000.0f);
 
-        filmGrainMaterial.SetTexture("uScrollingTexture", FilmGrainScrollingTexture);
-        filmGrainMaterial.SetTexture("uMultTexture", FilmGrainMultTexture);
-        filmGrainMaterial.SetTexture("uScrollingGlitchTexture", FilmGrainGlitchTexture);
+        filmGrainMaterial.SetTexture("uScrollingTexture", filmGrain.ScrollingTexture);
+        filmGrainMaterial.SetTexture("uMultTexture", filmGrain.MultTexture);
+        filmGrainMaterial.SetTexture("uScrollingGlitchTexture", filmGrain.GlitchTexture);
         //filmGrainMaterial.SetTexture("uMovie", Movie);
         filmGrainMaterial.SetFloat("uMovieAmount", MovieAmount);
-        filmGrainMaterial.SetTexture("uSpookyFaceTexture", FilmGrainFaceTexture);
+        filmGrainMaterial.SetTexture("uSpookyFaceTexture", filmGrain.FaceTexture);
         filmGrainMaterial.SetFloat("uSpookyAmount", 0.0f);
         //Movie.Play();
 
@@ -236,6 +269,38 @@ public class HackerVisionScript : MonoBehaviour
 
     public void OnPreRender()
     {
+		//Camera Layers
+
+		// 08	EnemyVisible	
+		// 09	Enemy			
+		// 10	EnemyThermal	
+		// 11	EnemySonar		
+		
+		// Default Camera Layers get added with different layer depending on camera active
+		if (Vision == HackerVisionMode.Normal || Vision == HackerVisionMode.Night)
+        {
+			CameraSettings.cullingMask = (1 << 9) | defaultCameraLayersActive;
+		}
+		else if (Vision == HackerVisionMode.Thermal)
+        {
+			CameraSettings.cullingMask = (1 << 10) | defaultCameraLayersActive;
+		}
+		else if (Vision == HackerVisionMode.Sonar)
+        {
+			CameraSettings.cullingMask = (1 << 11) | defaultCameraLayersActive;
+		}
+
+		/*
+			Set Materials for Agent and Phantom next
+		 */
+
+
+
+
+
+
+
+
         //_Light.enabled = true;
 
         if (Vision == HackerVisionMode.Night)
@@ -287,6 +352,9 @@ public class HackerVisionScript : MonoBehaviour
             }
 
         }
+
+
+		
     }
 
     // OnRenderImage is called after all rendering is complete to render image
@@ -359,7 +427,7 @@ public class HackerVisionScript : MonoBehaviour
 
         filmGrainMaterial.SetVector("uScrollAmount", new Vector2(timeNudge + Time.time * scrollSpeed, timeNudge + Time.time * scrollSpeed));
 
-        filmGrainAmountTotal += Mathf.Clamp(filmGrainNormalAmount + Mathf.InverseLerp(0.3f, 0.1f, timeSinceSwap), 0.0f, 1.0f);
+        filmGrainAmountTotal += Mathf.Clamp(filmGrain.normalAmount + Mathf.InverseLerp(0.3f, 0.1f, timeSinceSwap), 0.0f, 1.0f);
         float RandomNum = Random.Range(0.0f, 1.0f);
         filmGrainMaterial.SetFloat("RandomNumber", RandomNum);
         filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal);
@@ -389,7 +457,7 @@ public class HackerVisionScript : MonoBehaviour
             nightVisionMaterial.SetFloat("uLightMult", 1.2f);
 
 
-            filmGrainMaterial.SetFloat("uAmount", Mathf.Max(filmGrainNightVisionAmount, filmGrainAmountTotal));
+            filmGrainMaterial.SetFloat("uAmount", Mathf.Max(filmGrain.nightVisionAmount, filmGrainAmountTotal));
 
             Graphics.Blit(source, temp, nightVisionMaterial);
             Graphics.Blit(temp, destination, filmGrainMaterial);
@@ -413,7 +481,7 @@ public class HackerVisionScript : MonoBehaviour
             Matrix4x4 inverseMatrix = Matrix4x4.Inverse(CameraSettings.projectionMatrix) * ProjBiasMatrix;
             sonarMaterial.SetMatrix("uProjBiasMatrixInverse", inverseMatrix);
 
-            filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal - filmGrainNormalAmount);
+            filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal - filmGrain.normalAmount);
             filmGrainMaterial.SetFloat("uDistortion", 1.0f);
 
             Graphics.Blit(source, temp, sonarMaterial);
