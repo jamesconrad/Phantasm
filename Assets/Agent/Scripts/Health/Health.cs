@@ -33,7 +33,7 @@ public class Health : NetworkBehaviour {
         }
         if (currentHealth <= 0.0f && destroyOnDeath)
         {
-            Kill(deathDelay);
+            //Kill(deathDelay);
             OnDeath.Invoke();
         }
     }

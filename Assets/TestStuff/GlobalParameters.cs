@@ -3,9 +3,12 @@ using System.Collections;
 
 public class GlobalParameters : MonoBehaviour
 {
-    void FixedUpdate ()
+
+    void Update ()
     {
         Plasma.ScreenShot.Check();
 
 	}
+
+
 }
