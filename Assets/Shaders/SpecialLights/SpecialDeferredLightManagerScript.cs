@@ -165,11 +165,13 @@ public class SpecialDeferredLightManagerScript : MonoBehaviour
 					Vector3 rotationEuler = o.transform.rotation.eulerAngles;
 					trs = Matrix4x4.TRS(o.transform.position, Quaternion.Euler(rotationEuler.x, rotationEuler.y, rotationEuler.z + 90.0f), new Vector3(o._Radius * 2.0f, o._Length * 1.0f, o._Radius * 2.0f));
 					buf._BeforeAlpha.DrawMesh(_CubeMesh, trs, _LightMaterial, 0, 1);
+					//buf._AfterLighting.DrawMesh(_CubeMesh, trs, _LightMaterial, 0, 1);
 				}
 				else if (o._LightType == SpecialLight.LightType.Sphere)
 				{
 					trs = Matrix4x4.TRS(o.transform.position, o.transform.rotation, new Vector3(o._Radius * 2.0f, o._Radius * 2.0f, o._Radius * 2.0f));
 					buf._BeforeAlpha.DrawMesh(_SphereMesh, trs, _LightMaterial, 0, 1);
+					//buf._AfterLighting.DrawMesh(_SphereMesh, trs, _LightMaterial, 0, 1);
 				}
 			}
 		}
