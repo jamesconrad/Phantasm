@@ -4301,7 +4301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepSound: {fileID: 82000011989878082}
-  movementSpeed: 7
+  movementSpeed: 3.5
 --- !u!114 &114000011244241914
 MonoBehaviour:
   m_ObjectHideFlags: 1
