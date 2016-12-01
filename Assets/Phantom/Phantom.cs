@@ -90,10 +90,10 @@ public class Phantom : NetworkBehaviour
 	{
 		if(randomizeVisibility)
 		{
-			float randomMin = Mathf.Max(0.0f, numKilled / 2.0f - 1.0f);
-			float randomMax = Mathf.Min(8.0f, 2.0f + numKilled / 2.0f - 1.0f);
+			int randomMin = Mathf.Max(0, numKilled / 2 - 1);
+			int randomMax = Mathf.Min(8, 2 + numKilled / 2 - 1);
 			
-			int randomNum = (int) Random.Range(randomMin, randomMax);
+			int randomNum = Random.Range(randomMin, randomMax);
 
 			if(numKilled < 1)
 				randomNum = 0;
