@@ -32,26 +32,28 @@ public class IKHandler : MonoBehaviour {
         Vector3 worldMoveDir = agent.transform.position - prevFramePos;
         Vector3 localMoveDir = transform.InverseTransformDirection(worldMoveDir);
         Vector3 lookDir = agent.transform.forward;
-        
-        float theta = Vector2.Dot(new Vector2(0,1), new Vector2(lookDir.x,lookDir.z));
+
+        float theta = Vector2.Angle(new Vector2(lookDir.x, lookDir.z), new Vector2(0, 1));
+        theta *= (lookDir.x > 0 ? 1.0f : -1.0f);
 
         Vector3 localVelocity = Quaternion.AngleAxis(theta, new Vector3(0,1,0)) * localMoveDir;
         
         //print(localVelocity.magnitude + " @ X:" + localVelocity.x + " Z:" + localVelocity.z);
-                
+        
         anim.SetFloat("movX",localVelocity.x * 10);
         anim.SetFloat("movY",localVelocity.z * 10);
-        anim.SetFloat("velocity",localVelocity.magnitude * 100);
-		//print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY"));
+        anim.SetFloat("velocity", localVelocity.magnitude * 100);
+		print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY") + " 0: " + theta);
         prevFramePos = agent.transform.position;
     }
 
     void OnAnimatorIK()
     {
+
         lIKTar = gun;
         rIKTar = gun;
         
-        me.eulerAngles = new Vector3(me.eulerAngles.x, me.eulerAngles.y, gun.eulerAngles.z);
+        //me.eulerAngles = new Vector3(me.eulerAngles.x, me.eulerAngles.y, gun.eulerAngles.z);
 
         anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
         anim.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
