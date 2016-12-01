@@ -469,6 +469,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012839338752, guid: 6913e81730c23b14cb41acf7140935c6,
+        type: 2}
+      propertyPath: _CubeMesh
+      value: 
+      objectReference: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6913e81730c23b14cb41acf7140935c6, type: 2}
   m_IsPrefabParent: 0
