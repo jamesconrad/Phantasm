@@ -28,3 +28,7 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+/Assets/Wwise/Editor/ProjectData/AkWwiseProjectData 2.asset.meta
+/Assets/Wwise/Editor/ProjectData/AkWwiseProjectData 2.asset
+/Assets/Wwise/Editor/ProjectData
+/Assets/Agent/Scripts/AI.meta
