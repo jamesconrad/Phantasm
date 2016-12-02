@@ -130,6 +130,64 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (!Input.GetMouseButton(0))
+        {
+            Vector3 CameraPositionMax = survCameras[0].transform.position;
+            Vector3 CameraPositionMin = survCameras[0].transform.position;
+
+            for (int i = 0, count = survCameras.Count; i < count; i++)
+            {
+                Vector3 CameraPositionTemp = survCameras[i].transform.position;
+
+                if (CameraPositionMax.x < CameraPositionTemp.x)
+                {
+                    CameraPositionMax.x = CameraPositionTemp.x + 0.0f;
+                }
+                if (CameraPositionMax.y < CameraPositionTemp.y)
+                {
+                    CameraPositionMax.y = CameraPositionTemp.y + 0.0f;
+                }
+                if (CameraPositionMax.z < CameraPositionTemp.z)
+                {
+                    CameraPositionMax.z = CameraPositionTemp.z + 0.0f;
+                }
+
+                if (CameraPositionMin.x > CameraPositionTemp.x)
+                {
+                    CameraPositionMin.x = CameraPositionTemp.x - 0.0f;
+                }
+                if (CameraPositionMin.y > CameraPositionTemp.y)
+                {
+                    CameraPositionMin.y = CameraPositionTemp.y - 0.0f;
+                }
+                if (CameraPositionMin.z > CameraPositionTemp.z)
+                {
+                    CameraPositionMin.z = CameraPositionTemp.z - 0.0f;
+                }
+            }
+
+            for (int i = 0, count = survCameras.Count; i < count; i++)
+            {
+                survCameraButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
+
+                Vector3 LerpPosition = survCameras[i].transform.position;
+                LerpPosition.x = Mathf.InverseLerp(CameraPositionMin.x, CameraPositionMax.x, survCameras[i].transform.position.x);
+                LerpPosition.y = Mathf.InverseLerp(CameraPositionMin.y, CameraPositionMax.y, survCameras[i].transform.position.y);
+                LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survCameras[i].transform.position.z);
+
+                survCameraButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        GetComponent<RectTransform>().rect.width, LerpPosition.x),
+
+                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        GetComponent<RectTransform>().rect.height, LerpPosition.z));
+                survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
+            }
+        }
+    }
+
     void SetWindowSizes()
     {
         WindowSize = new Vector2(Screen.width, Screen.height);
