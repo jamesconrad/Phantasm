@@ -39,7 +39,10 @@ public class CustomNetworkManager : NetworkManager
     // Update is called once per frame
     void Update()
     {
-
+		if(Input.GetKeyDown(KeyCode.F1))
+		{
+			UnityEngine.VR.VRSettings.enabled = !UnityEngine.VR.VRSettings.enabled;
+		}
     }
 
     public override void OnStartClient(NetworkClient client)
