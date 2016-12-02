@@ -526,7 +526,8 @@ PlayerSettings:
   PSM::VR::enabledDevices: []
   PSP2::VR::enabledDevices: []
   SamsungTV::VR::enabledDevices: []
-  Standalone::VR::enabledDevices: []
+  Standalone::VR::enabledDevices:
+  - Oculus
   Tizen::VR::enabledDevices: []
   WebGL::VR::enabledDevices: []
   WebPlayer::VR::enabledDevices: []
