@@ -157,7 +157,7 @@ public class CustomNetworkManager : NetworkManager
     {
         if (CustomNetworkManager.singleton.matches != null)
         {
-			StartCoroutine(CreateMatchAsAgentDelay(agentDelay));
+			StartCoroutine(JoinMatchAsAgentDelay(agentDelay));
 
 			//MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
             //CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);
@@ -169,7 +169,7 @@ public class CustomNetworkManager : NetworkManager
     {
         if (CustomNetworkManager.singleton.matches != null)
         {
-			StartCoroutine(CreateMatchAsHackerDelay(hackerDelay));
+			StartCoroutine(JoinMatchAsHackerDelay(hackerDelay));
 
 			//MatchInfoSnapshot MatchInfo = CustomNetworkManager.singleton.matches[gameCreationSettings.dropDownMatches.value];
             //CustomNetworkManager.singleton.matchMaker.JoinMatch(MatchInfo.networkId, "", "", "", 0, currentSelectionOfCharacter, CustomNetworkManager.singleton.OnMatchJoined);

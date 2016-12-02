@@ -165,10 +165,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 219dfbc283410974d8f149b4624249e3, type: 3}
   m_IsPrefabParent: 0
---- !u!1 &156728009 stripped
+--- !u!1 &156728009
 GameObject:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100008, guid: 219dfbc283410974d8f149b4624249e3, type: 3}
   m_PrefabInternal: {fileID: 156728008}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 156728011}
+  - 114: {fileID: 156728010}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!114 &156728010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +196,19 @@ MonoBehaviour:
   tmod: 0
   anim: 0
   animComplete: 0
+--- !u!4 &156728011
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 156728008}
+  m_GameObject: {fileID: 156728009}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1472588979}
+  m_RootOrder: 0
 --- !u!1 &264933478
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +282,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 264933478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 482, z: 0}
+  m_LocalPosition: {x: 0, y: 482, z: 32}
   m_LocalScale: {x: 2000, y: 1000, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -778,7 +803,36 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
+--- !u!1 &1472588978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 156728008}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1472588979}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1472588979
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 156728008}
+  m_GameObject: {fileID: 1472588978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children:
+  - {fileID: 156728011}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!1001 &1565914188
 Prefab:
   m_ObjectHideFlags: 0
@@ -834,7 +888,7 @@ Prefab:
     - target: {fileID: 224000014043397120, guid: f33b35efa1016ea43b755dcbdacb7a58,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224000014043397120, guid: f33b35efa1016ea43b755dcbdacb7a58,
         type: 2}
@@ -1042,7 +1096,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010585761982, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
         type: 2}
@@ -1144,7 +1198,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 35.502003, y: -10, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &1931351487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,10 +1288,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1931351487}
-  m_LocalRotation: {x: 0.1829329, y: -0, z: -0, w: 0.98312545}
-  m_LocalPosition: {x: 11, y: 162, z: -187}
+  m_LocalRotation: {x: 0.45196322, y: -0.0057156608, z: -0.09793858, w: 0.8866254}
+  m_LocalPosition: {x: 46, y: 127.6, z: -102}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 21.042002, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 53.152004, y: -9.227, z: -17.047}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
