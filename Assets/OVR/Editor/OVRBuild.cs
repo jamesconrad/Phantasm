@@ -37,7 +37,7 @@ partial class OculusBuildApp
 		UnityEditorInternal.VR.VREditor.SetVREnabled(BuildTargetGroup.Standalone, true);
 #endif
 		PlayerSettings.virtualRealitySupported = true;
-		EditorApplication.SaveAssets();
+		AssetDatabase.SaveAssets();
 	}
 
 	static void SetAndroidTarget()
@@ -52,6 +52,6 @@ partial class OculusBuildApp
 		UnityEditorInternal.VR.VREditor.SetVREnabled(BuildTargetGroup.Android, true);
 #endif
 		PlayerSettings.virtualRealitySupported = true;
-		EditorApplication.SaveAssets();
+		AssetDatabase.SaveAssets();
 	}
 }

@@ -35,7 +35,7 @@ public class BehaviourTree : NetworkBehaviour {
             return;// AIState.I;
         }
         GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         Vector3 player = playerGO.GetComponent<Transform>().position;
         Vector3 me = transform.position;
 
@@ -57,7 +57,7 @@ public class BehaviourTree : NetworkBehaviour {
             return;
         }
         GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         Vector3 player = playerGO.GetComponent<Transform>().position;
         Vector3 me = transform.position;
 
@@ -100,8 +100,8 @@ public class BehaviourTree : NetworkBehaviour {
                 {
                     Vector3 random = me + Random.insideUnitSphere * 2;
                     random.y = 0;
-                    NavMeshHit hit;
-                    if (NavMesh.SamplePosition(random, out hit, 2, NavMesh.AllAreas))
+                    UnityEngine.AI.NavMeshHit hit;
+                    if (UnityEngine.AI.NavMesh.SamplePosition(random, out hit, 2, UnityEngine.AI.NavMesh.AllAreas))
                     {
                         agent.destination = random;
                         ret = true;

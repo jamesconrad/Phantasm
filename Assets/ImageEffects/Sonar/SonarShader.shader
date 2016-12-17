@@ -68,7 +68,9 @@
 			fixed4 frag (v2f i) : SV_Target
 			{
 				float depth = tex2D(_CameraDepthTexture, i.uv).r;
-
+				#if defined(UNITY_REVERSED_Z)
+				depth = 1.0f - depth;
+				#endif
 				fixed4 col = (tex2D(_MainTex, i.uv));
 				
 

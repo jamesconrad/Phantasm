@@ -89,6 +89,17 @@
 
 			half2 GetClosestFragment(float2 uv)
 			{
+				
+
+				#if defined(UNITY_REVERSED_Z)
+				const float4 neighborhood = float4(
+				1.0f - tex2D(_CameraDepthTexture, uv - pixSize).r,
+				1.0f - tex2D(_CameraDepthTexture, uv + float2(pixSize.x, -pixSize.y)).r,
+				1.0f - tex2D(_CameraDepthTexture, uv + float2(-pixSize.x, pixSize.y)).r,
+				1.0f - tex2D(_CameraDepthTexture, uv + pixSize).r);
+
+				float3 result = float3(0., 0., 1.0f - tex2D(_CameraDepthTexture, uv).r);
+				#else
 				const float4 neighborhood = float4(
 				tex2D(_CameraDepthTexture, uv - pixSize).r,
 				tex2D(_CameraDepthTexture, uv + float2(pixSize.x, -pixSize.y)).r,
@@ -96,7 +107,7 @@
 				tex2D(_CameraDepthTexture, uv + pixSize).r);
 
 				float3 result = float3(0., 0., tex2D(_CameraDepthTexture, uv).r);
-
+				#endif
 
 				if (neighborhood.x < result.z)
 					result = float3(-1., -1., neighborhood.x);
