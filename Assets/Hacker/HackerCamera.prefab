@@ -134,6 +134,13 @@ MonoBehaviour:
     FaceTexture: {fileID: 2800000, guid: aaee9bc435a7ed846bbbb737fb66f4e7, type: 3}
     nightVisionAmount: 0.15
     normalAmount: 0.025
+  jitterAmount: {x: 8, y: 8}
+  jitterBias: 1
+  filmGrainJitterActive: 1
+  filmGrainFaceActive: 1
+  filmGrainScrollingActive: 1
+  filmGrainMultActive: 1
+  filmGrainMovieActive: 0
   SonarColor: {r: 0.5, g: 0.5, b: 1, a: 1}
   SonarDiffusePass: 0
   SonarTimeMult: 1

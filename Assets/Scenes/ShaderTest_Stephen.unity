@@ -124,6 +124,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!4 &11642844
 Transform:
   m_ObjectHideFlags: 0
@@ -500,6 +501,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1 &303065916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1490,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1 &606746912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2080,13 +2083,20 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 882799963}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 416adc875a3856d41b6eefd72bf93622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectMaterial: {fileID: 2100000, guid: aec1340562dcc2541846778d153d9a7a, type: 2}
+  effectMaterial: {fileID: 2100000, guid: 9100fdb806c971e478c08ae6892d497c, type: 2}
   filmGrainAmount: 0
+  jitterAmount: {x: 4, y: 4}
+  jitterBias: 0
+  jitterActive: 1
+  faceActive: 0
+  scrollingActive: 0
+  multActive: 0
+  movieActive: 0
 --- !u!114 &882799976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2248,6 +2258,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1 &996410488
 GameObject:
   m_ObjectHideFlags: 0
@@ -2469,6 +2480,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 3.97
   _Draw: 1
+  _Rainbow: 0
 --- !u!4 &1012475262
 Transform:
   m_ObjectHideFlags: 0
@@ -2937,6 +2949,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1 &1390626653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,6 +2997,7 @@ MonoBehaviour:
   _Radius: 1.05
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1001 &1394279665
 Prefab:
   m_ObjectHideFlags: 0
@@ -3345,6 +3359,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1001 &1523597656
 Prefab:
   m_ObjectHideFlags: 0
@@ -3461,6 +3476,7 @@ MonoBehaviour:
   _Radius: 1
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1 &1636792140
 GameObject:
   m_ObjectHideFlags: 0
@@ -3587,6 +3603,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1 &1679655721
 GameObject:
   m_ObjectHideFlags: 0
@@ -4197,6 +4214,7 @@ MonoBehaviour:
   _Radius: 0.2
   _Length: 4
   _Draw: 1
+  _Rainbow: 0
 --- !u!1 &2138396742
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,8 +30,25 @@ public class HackerVisionScript : MonoBehaviour
     private float scrollSpeed;
     private float filmGrainGlitchAmount = 0.0f;
     
+    private Vector4 jitterParam;
+    public Vector2 jitterAmount = new Vector2(8.0f, 8.0f);    
+    [Range(0.0f, 1.0f)]
+    public float jitterBias = 1.0f;
 
-    private float filmGrainBarrel = 1.15f;
+    public bool filmGrainJitterActive =      true;
+    public bool filmGrainFaceActive =        true;
+    public bool filmGrainScrollingActive =   true;
+    public bool filmGrainMultActive =        true;
+    public bool filmGrainMovieActive =       false;
+    
+
+   
+
+    private CameraModeFloat barrelDistortAmount;
+    private CameraModeFloat barrelDistortZoomAmount;
+    private float filmGrainBarrel;
+    private float filmGrainBarrelZoom;
+    
 	
 	[Space(10)]
     public Color SonarColor = new Color(0.5f, 0.5f, 1.0f);
@@ -94,6 +111,14 @@ public class HackerVisionScript : MonoBehaviour
 
     float timeSinceSwap = 1.0f;
 
+    [System.Serializable]
+    public struct CameraModeFloat
+    {
+		public float normal;
+		public float night;
+		public float thermal;
+		public float sonar;
+	}
 
 	[System.Serializable]
     public struct CameraMaterials
@@ -125,8 +150,19 @@ public class HackerVisionScript : MonoBehaviour
     // Awake is called when the script instance is being loaded
     public void Awake()
     {
-        //all_my_damn_lights.FindAll(s => s.Equals("Light")); //= GetComponent<Light>();
+        barrelDistortAmount.normal = 1.00f;
+        barrelDistortAmount.night = 1.15f;
+        barrelDistortAmount.thermal = 1.50f;
+        barrelDistortAmount.sonar = 1.00f;
 
+        barrelDistortZoomAmount.normal = 1.00f;
+        barrelDistortZoomAmount.night = 1.00f;
+        barrelDistortZoomAmount.thermal = 1.00f;
+        barrelDistortZoomAmount.sonar = 1.00f;
+
+        filmGrainBarrel = barrelDistortAmount.normal;
+        filmGrainBarrelZoom = barrelDistortZoomAmount.normal;
+        
         //Movie.loop = true;
 
         timeSinceOffset = 10.0f;
@@ -145,7 +181,7 @@ public class HackerVisionScript : MonoBehaviour
 
         scrollSpeed = Random.Range(0.8f, 1.2f);
         scrollAmount = Random.Range(0.0f, 1000.0f);
-        temp = new RenderTexture(Screen.width, Screen.height, 0);
+        temp = new RenderTexture(Screen.width / 2, Screen.height / 2, 0);
         timeNudge = Random.Range(0.0f, 1000.0f);
 
         filmGrainMaterial.SetTexture("uScrollingTexture", filmGrain.ScrollingTexture);
@@ -271,12 +307,32 @@ public class HackerVisionScript : MonoBehaviour
                 Vision = HackerVisionMode.Normal;
             // Loop back to beginning
 
-			if (Vision == HackerVisionMode.Normal || Vision == HackerVisionMode.Night)
+			if (Vision == HackerVisionMode.Normal)
+            {
 				cameraModeArray = 1;
+                filmGrainBarrel     = barrelDistortAmount.normal;
+                filmGrainBarrelZoom = barrelDistortZoomAmount.normal;
+            }
+            else if (Vision == HackerVisionMode.Night)
+            {
+				cameraModeArray = 1;
+                filmGrainBarrel     = barrelDistortAmount.night;
+                filmGrainBarrelZoom = barrelDistortZoomAmount.night;
+            }
 			else if (Vision == HackerVisionMode.Thermal)
+            {
 				cameraModeArray = 2;
+                filmGrainBarrel     = barrelDistortAmount.thermal;
+                filmGrainBarrelZoom = barrelDistortZoomAmount.thermal;
+            }
 			else if (Vision == HackerVisionMode.Sonar)
+            {
 				cameraModeArray = 3;
+                filmGrainBarrel     = barrelDistortAmount.sonar;
+                filmGrainBarrelZoom = barrelDistortZoomAmount.sonar;
+            }
+            
+            
         }
 
 
@@ -502,6 +558,32 @@ public class HackerVisionScript : MonoBehaviour
             Graphics.Blit(temp, source);
         }
 
+        #region Shader variance for the film grain
+        float jitterBiasMult = 0.0f;
+        if (filmGrainJitterActive && Vision == HackerVisionMode.Thermal)
+        //if (filmGrainJitterActive)
+        //if (true)
+        { Shader.EnableKeyword("SAT_GRAIN_JITTER"); jitterBiasMult = 1.0f; }
+        else
+            Shader.DisableKeyword("SAT_GRAIN_JITTER");
+        if(filmGrainFaceActive)
+            Shader.EnableKeyword("SAT_GRAIN_FACE");
+        else
+            Shader.DisableKeyword("SAT_GRAIN_FACE");
+        if(filmGrainScrollingActive)
+            Shader.EnableKeyword("SAT_GRAIN_SCROLLING");
+        else
+            Shader.DisableKeyword("SAT_GRAIN_SCROLLING");
+        if(filmGrainMultActive)
+            Shader.EnableKeyword("SAT_GRAIN_MULT");
+        else
+            Shader.DisableKeyword("SAT_GRAIN_MULT");
+        if(filmGrainMovieActive)
+            Shader.EnableKeyword("SAT_GRAIN_MOVIE");
+        else
+            Shader.DisableKeyword("SAT_GRAIN_MOVIE");
+        
+        #endregion
 
 
         float filmGrainAmountTotal = 0.0f;
@@ -544,7 +626,15 @@ public class HackerVisionScript : MonoBehaviour
         float RandomNum = Random.Range(0.0f, 1.0f);
         filmGrainMaterial.SetFloat("RandomNumber", RandomNum);
         filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal);
+                        
         filmGrainMaterial.SetFloat("uDistortion", filmGrainBarrel);
+        filmGrainMaterial.SetFloat("uZoom", 1.0f/filmGrainBarrelZoom);
+
+        jitterParam.x = Random.Range(0.0f, 1.0f);
+        jitterParam.y = Random.Range(0.0f, 1.0f);
+        jitterParam.z = jitterAmount.x * jitterBias * jitterBiasMult;
+        jitterParam.w = jitterAmount.y * jitterBias * jitterBiasMult;
+        filmGrainMaterial.SetVector("jitterParam", jitterParam);
 
         waveMaterial.SetVector("uWaveCount", WaveCount);
         waveMaterial.SetVector("uWaveIntensity", WaveIntensity);
@@ -555,7 +645,7 @@ public class HackerVisionScript : MonoBehaviour
         //Shader.SetGlobalFloat(emissionShader.GetInstanceID(), 1.0f); 
         //_EmissionMult
         //emissionShader.
-
+        
         if (Vision == HackerVisionMode.Normal)
         {
 
@@ -595,10 +685,10 @@ public class HackerVisionScript : MonoBehaviour
             sonarMaterial.SetMatrix("uProjBiasMatrixInverse", inverseMatrix);
 
             filmGrainMaterial.SetFloat("uAmount", filmGrainAmountTotal - filmGrain.normalAmount);
-            filmGrainMaterial.SetFloat("uDistortion", 1.0f);
 
             Graphics.Blit(source, temp, sonarMaterial);
             Graphics.Blit(temp, destination, filmGrainMaterial);
         }
+                
     }
 }

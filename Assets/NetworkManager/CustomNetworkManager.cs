@@ -33,7 +33,7 @@ public class CustomNetworkManager : NetworkManager
     // Use this for initialization
     void Start()
     {
-
+		UnityEngine.VR.VRSettings.enabled = false;
     }
 
     // Update is called once per frame
