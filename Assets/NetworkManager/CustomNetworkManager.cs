@@ -4,6 +4,7 @@ using UnityEngine.Networking.NetworkSystem;
 using System.Collections;
 using UnityEngine.Networking.Match;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class CustomNetworkManager : NetworkManager
 {
@@ -21,7 +22,12 @@ public class CustomNetworkManager : NetworkManager
     {
         public UnityEngine.UI.Dropdown dropDownMatches;
         public UnityEngine.UI.Button joinMatchButton;
+        
+        [TooltipAttribute("This is automatically set to the 'onlinescene' variable. Set that and this will act correctly.")]
+        public string sceneToSwitchTo;
     }
+    public bool OverridePlayerCountForDebugging = false;
+
     public GameCreationSettings gameCreationSettings;
 
 	float agentDelay = 1.0f;
@@ -34,6 +40,10 @@ public class CustomNetworkManager : NetworkManager
     void Start()
     {
 		UnityEngine.VR.VRSettings.enabled = false;
+        gameCreationSettings.sceneToSwitchTo = onlineScene;
+        //TODO: find some way to set this to change whenever the other player connects.
+        onlineScene = "";
+        SceneManager.activeSceneChanged += SpawnPlayers;
     }
 
     // Update is called once per frame
@@ -45,35 +55,39 @@ public class CustomNetworkManager : NetworkManager
 		}
     }
 
-    public override void OnStartClient(NetworkClient client)
+    public override void OnServerConnect(NetworkConnection conn)
     {
-        //MainMenu.ActivateMainMenu();
-        
-
-        base.OnStartClient(client);
+        base.OnServerConnect(conn);  
     } 
 
     public override void OnClientConnect(NetworkConnection conn)
     {
-        CustomNetworkManager.singleton.playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1 - CustomNetworkManager.currentSelectionOfCharacter];
-        ClientScene.AddPlayer(conn, 0, new IntegerMessage(1 - CustomNetworkManager.currentSelectionOfCharacter));
-        //MainMenu.ActivateMainMenu();
         base.OnClientConnect(conn);
-    }
+        
+        CustomNetworkManager.singleton.playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[1 - CustomNetworkManager.currentSelectionOfCharacter];
 
-    public override void OnStopClient()
-    {
-        //MainMenu.DeactivateMainMenu();
-        base.OnStopClient();
+        if (client.serverIp == client.connection.address) //if this is the host, handle the various switch times
+        {
+            Debug.Log(NetworkServer.connections.Count);
+            if (NetworkServer.connections.Count == 2 || (NetworkServer.connections.Count == 1 && OverridePlayerCountForDebugging))
+            {
+                SwitchScenes();
+            }
+            if (NetworkServer.connections.Count == 1 && !OverridePlayerCountForDebugging)
+            {
+                Debug.Log("Reminder: Turn off 'OverridePlayerCountForDebugging' in the network manager to play with less than 2 players.");
+            }
+        }
+        else // Just join.
+        {
+            SwitchScenes();
+        }
+        
+        
+        // MainMenu.ActivateMainMenu();
     }
 
     private PhantomSpawnLocation[] spawnLocations;
-
-    public override void OnStartServer()
-    {
-        //MainMenu.ActivateMainMenu();
-        base.OnStartServer();
-    }
 
     // Called on the server whenever a Network.InitializeServer was invoked and has completed
     public void OnServerInitialized()
@@ -99,16 +113,14 @@ public class CustomNetworkManager : NetworkManager
     public void CreateAsAgent()
 	{
 		StartCoroutine(CreateMatchAsAgentDelay(agentDelay));
-
+        
     }
 
     public void CreateAsHacker()
 	{
 		StartCoroutine(CreateMatchAsHackerDelay(hackerDelay));
-
-		
-    }
 	
+    }
 
 	IEnumerator CreateMatchAsAgentDelay(float time = 1.0f)
 	{
@@ -117,7 +129,7 @@ public class CustomNetworkManager : NetworkManager
 
 		playerPrefab = CustomNetworkManager.singleton.spawnPrefabs[0];
 		currentSelectionOfCharacter = 1;
-		matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 0, OnMatchCreate);
+		matchMaker.CreateMatch("Default", 2, true, "", "", "", 0, 0, OnMatchCreate);        
 	}
 
 	IEnumerator CreateMatchAsHackerDelay(float time = 1.0f)
@@ -212,11 +224,6 @@ public class CustomNetworkManager : NetworkManager
         base.OnClientDisconnect(conn);
     }
 
-    public override void OnServerDisconnect(NetworkConnection conn)
-    {
-        base.OnServerDisconnect(conn);
-    }
-
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
     {
         int intMessage = extraMessageReader.ReadMessage<IntegerMessage>().value;
@@ -235,7 +242,6 @@ public class CustomNetworkManager : NetworkManager
     {
         base.OnServerRemovePlayer(conn, player);
     }
-    
 
     public override void OnServerSceneChanged(string sceneName)
     {
@@ -248,14 +254,23 @@ public class CustomNetworkManager : NetworkManager
         Cursor.lockState = CursorLockMode.None;
     }
 
-
-
-
-
+    private void SwitchScenes()
+    {
+        onlineScene = gameCreationSettings.sceneToSwitchTo;
+        SceneManager.LoadScene(onlineScene);
+    }
 
     public GameObject PhantomFactory(Vector3 _position, Quaternion _rotation)
     {
         GameObject newPhantom = Instantiate(phantomSettings.phantomGameObject, _position, _rotation) as GameObject;
         return newPhantom;
     }
+
+    void SpawnPlayers(Scene _scene1, Scene _scene2)
+    {
+        if (_scene2.name == "Demo - (PROD)")
+        {
+            ClientScene.AddPlayer(ClientScene.readyConnection, 0, new IntegerMessage(1 - CustomNetworkManager.currentSelectionOfCharacter));
+        }
+    }   
 }
