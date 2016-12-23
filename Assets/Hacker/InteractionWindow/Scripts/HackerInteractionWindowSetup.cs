@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class HackerInteractionWindowSetup : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     public GameObject cameraButtonPrefab;
     private List<Camera> survCameras;
     private List<GameObject> survCameraButtons;
+
+    public bool WindowIsInteractive = true;
 
     private Vector2 WindowSize;
 
@@ -184,6 +187,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                         0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
                 survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
+
+
+                survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
             }
         }
     }

@@ -4409,6 +4409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AgentUI: {fileID: 1000014243422558, guid: b89207da589cb504695bdb43cf040d70, type: 2}
+  PauseUI: {fileID: 1824627639984486, guid: d7b818aa40a9f8d4b883be5017fafcd1, type: 2}
   visibility:
     agent: 2
     camera: 2

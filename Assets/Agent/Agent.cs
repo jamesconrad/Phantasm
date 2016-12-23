@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Agent : NetworkBehaviour
 {
     public GameObject AgentUI;
+    public GameObject PauseUI;
 	
 	[Space(5)]
 	public Plasma.Visibility visibility;
@@ -32,6 +33,7 @@ public class Agent : NetworkBehaviour
             return;
         }
         AgentUI = Instantiate(AgentUI) as GameObject;
+        PauseUI = Instantiate(PauseUI) as GameObject;
 
         Text[] textReferences;
         textReferences = AgentUI.GetComponentsInChildren<Text>();
@@ -57,6 +59,7 @@ public class Agent : NetworkBehaviour
     // Called on clients for player objects for the local client (only)
     public override void OnStartLocalPlayer()
     {
+        PauseUI = Instantiate(PauseUI) as GameObject;
         AgentUI = Instantiate(AgentUI) as GameObject;
 
         Text[] textReferences;
@@ -97,7 +100,16 @@ public class Agent : NetworkBehaviour
         GetComponent<GunHandle>().gunReference.gameObject.SetActive(false);
     }
 
-
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GetComponent<FirstPersonMovement>().enabled = !GetComponent<FirstPersonMovement>().enabled;
+            GetComponent<FirstPersonCamera>().enabled = !GetComponent<FirstPersonCamera>().enabled;
+            PauseUI.SetActive(!PauseUI.activeSelf);
+        }
+    }
 
     // This function is called when the MonoBehaviour will be destroyed
     public void OnDestroy()
