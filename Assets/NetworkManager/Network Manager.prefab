@@ -16,13 +16,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000010585761982}
-  - 114: {fileID: 114000013350055010}
-  - 114: {fileID: 114000010314758414}
-  - 114: {fileID: 114000010861266450}
-  - 114: {fileID: 114000010154288612}
+  - component: {fileID: 4000010585761982}
+  - component: {fileID: 114000013350055010}
+  - component: {fileID: 114000010314758414}
+  - component: {fileID: 114217009450961098}
+  - component: {fileID: 114660995410640762}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -39,21 +39,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &114000010154288612
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012536579816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010314758414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,26 +116,17 @@ MonoBehaviour:
   matchName: default
   matchSize: 4
   isNetworkActive: 0
-  matchMaker: {fileID: 114000010154288612}
+  matchMaker: {fileID: 114660995410640762}
   phantomSettings:
     phantomGameObject: {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b,
       type: 2}
     minimumNumberOfEnemies: 1
     maximumNumberOfEnemies: 1
+  OverridePlayerCountForDebugging: 0
   gameCreationSettings:
     dropDownMatches: {fileID: 0}
     joinMatchButton: {fileID: 0}
---- !u!114 &114000010861266450
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012536579816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
+    sceneToSwitchTo: 
 --- !u!114 &114000013350055010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,3 +142,25 @@ MonoBehaviour:
   showGUI: 1
   offsetX: 0
   offsetY: 0
+--- !u!114 &114217009450961098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114660995410640762
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
