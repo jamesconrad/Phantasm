@@ -124,7 +124,8 @@
 				half4 frag(v2f i) : SV_Target
 				{
 					half2 norm = UnpackNormal(tex2D(_NormalMap, i.uvNorm + float2(_Time.r, _Time.r * 2.0f))).rg;
-					float2 offset = norm * _NormalAmount * _GrabTexture_TexelSize.xy;
+					//float2 offset = norm * _NormalAmount;// * _GrabTexture_TexelSize.xy;
+					float2 offset = norm * _NormalAmount * _GrabTexture_TexelSize.xy * 100.0f;
 
 					i.uvGrab.xy += offset * i.uvGrab.z;
 

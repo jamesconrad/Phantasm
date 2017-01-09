@@ -137,7 +137,7 @@
 					half2 norm = (
 					UnpackNormal(tex2D(_NormalMap, i.uvNorm + float2(_Time.r * _RefractionSpeed.x, _Time.r * _RefractionSpeed.y))).rg +
 					UnpackNormal(tex2D(_NormalMap, i.uvNorm + float2(_Time.r * _RefractionSpeed.z, _Time.r * _RefractionSpeed.w))).rg) * 0.5f;
-					float2 offset = norm * _NormalAmount * _GrabTexture_TexelSize.xy;
+					float2 offset = norm * _NormalAmount * _GrabTexture_TexelSize.xy * 100.0f;
 
 					i.uvGrab.xy += offset * i.uvGrab.z * lerp(rim * rim * rim, 1.0f, _RefractionRim);
 

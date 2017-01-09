@@ -21,7 +21,7 @@ public class MAImportExtra : MonoBehaviour {
     // Use this for initialization
     void Start () {
         t = 0;
-        tmod = 0.005f;
+        tmod = 0.3f;
         anim = false;
         animComplete = false;
         importer = new MayaImp();
@@ -49,7 +49,7 @@ public class MAImportExtra : MonoBehaviour {
     {
         if (anim)
         {
-            t += tmod;
+            t += tmod * Time.deltaTime;
             if (t >= 1)
             {
                 t = 1;

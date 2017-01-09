@@ -43,16 +43,17 @@
 
 			half4 frag (v2f i) : SV_Target
 			{
+				half pixelSize = 1.0f / _ScreenParams.y;
 				half4 col;
-				col.rgb  = tex2D(_MainTex, float2(i.uv.x, i.uv.y - 4.0 * PixelSize)).rgb * 0.06;
-				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y - 3.0 * PixelSize)).rgb * 0.09;
-				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y - 2.0 * PixelSize)).rgb * 0.12;
-				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y -		 PixelSize)).rgb * 0.15;
+				col.rgb  = tex2D(_MainTex, float2(i.uv.x, i.uv.y - 4.0 * pixelSize)).rgb * 0.06;
+				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y - 3.0 * pixelSize)).rgb * 0.09;
+				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y - 2.0 * pixelSize)).rgb * 0.12;
+				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y -		 pixelSize)).rgb * 0.15;
 				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y				  )).rgb * 0.16;
-				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y +		 PixelSize)).rgb * 0.15;
-				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y + 2.0 * PixelSize)).rgb * 0.12;
-				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y + 3.0 * PixelSize)).rgb * 0.09;
-				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y + 4.0 * PixelSize)).rgb * 0.06;
+				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y +		 pixelSize)).rgb * 0.15;
+				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y + 2.0 * pixelSize)).rgb * 0.12;
+				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y + 3.0 * pixelSize)).rgb * 0.09;
+				col.rgb += tex2D(_MainTex, float2(i.uv.x, i.uv.y + 4.0 * pixelSize)).rgb * 0.06;
 				col.a = 1.0;
 				return col;
 			}

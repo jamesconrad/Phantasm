@@ -71,6 +71,12 @@
 
 			sampler2D _MainTex;
 			sampler2D uScrollingTexture;
+
+			
+			float4 jitterParam;
+
+#define jitterRandomNumber jitterParam.xy
+#define jitterAmount jitterParam.zw
 			
 			float uAmount;
 			float RandomNumber;
@@ -80,7 +86,11 @@
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, reverseMirrorFlip(i.uv + uOffsetAmount));
+				float2 jitterOffset = float2(rand(jitterRandomNumber.xx + i.uv), rand(jitterRandomNumber.yy + i.uv));
+				jitterOffset = jitterOffset + jitterOffset - 1.0f;
+				jitterOffset = jitterOffset * jitterAmount / _ScreenParams.xy;
+
+				fixed4 col = tex2D(_MainTex, reverseMirrorFlip(i.uv + uOffsetAmount + jitterOffset));
 				// just invert the colors
 				float3 vision;
 

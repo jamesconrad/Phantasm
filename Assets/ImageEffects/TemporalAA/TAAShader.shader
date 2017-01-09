@@ -48,7 +48,7 @@
 			sampler2D _CameraDepthTexture;
 			sampler2D_half _CameraMotionVectorsTexture;
 
-			float2 pixSize;
+			//float2 pixSize;
 
 			uniform float4x4 _PreviousProjMat;
 			float4x4 _VPMatrix;
@@ -61,6 +61,8 @@
 
 			Output frag(v2f i) : SV_Target
 			{
+				half2 pixSize = 1.0f / _ScreenParams.xy;
+
 				half2 motion = tex2D(_CameraMotionVectorsTexture, i.uv).xy;
 				float motionLen = length(motion);
 											
@@ -90,6 +92,7 @@
 			half2 GetClosestFragment(float2 uv)
 			{
 				
+				half2 pixSize = 1.0f / _ScreenParams.xy;
 
 				#if defined(UNITY_REVERSED_Z)
 				const float4 neighborhood = float4(

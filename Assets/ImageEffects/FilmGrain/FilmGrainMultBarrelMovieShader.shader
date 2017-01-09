@@ -137,9 +137,9 @@
 			float2 uScrollAmount;
 		#endif
 
-		#if defined (SAT_GRAIN_MULT)
+		//#if defined (SAT_GRAIN_MULT)
 			sampler2D uMultTexture;
-		#endif
+		//#endif
 
 		#if defined (SAT_GRAIN_MOVIE)
 			sampler2D uMovie;
@@ -205,9 +205,9 @@
 				col.rgb += MovieCol * uMovieAmount;
 			#endif
 			
-			#if HAS_MULT
+			//#if HAS_MULT
 				col.rgb *= tex2D(uMultTexture, i.uv);
-			#endif
+			//#endif
 				
 				//Clamp the barrel
 				//if (barrel.x > 1.0f || barrel.x < 0.0f || barrel.y > 1.0f || barrel.y < 0.0f)

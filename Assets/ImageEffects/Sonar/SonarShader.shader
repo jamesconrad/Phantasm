@@ -36,7 +36,40 @@
 				o.uv = v.uv;
 				return o;
 			}
+
+
 			
+			float edgeThresholdNormal = 6.0; //5.0
+			float edgeThresholdDepth = 0.24; //0.0010
+			
+			float Sobel_Depth_NWSE_thicc(sampler2D texmap, float2 texcoord, float2 pixelSize)
+			{
+				float sum = 0.0;
+				
+				float2 pixelSize2 = pixelSize + pixelSize;
+				float2 pixelSize3 = pixelSize2 + pixelSize;
+
+				//NW
+				sum -= tex2D(texmap, float2(texcoord.x - pixelSize.x,  texcoord.y + pixelSize.y	)).r;
+				sum -= tex2D(texmap, float2(texcoord.x - pixelSize2.x, texcoord.y + pixelSize2.y)).r * 2.0f;
+				sum -= tex2D(texmap, float2(texcoord.x - pixelSize3.x, texcoord.y + pixelSize3.y)).r;
+				
+				//SE				
+				sum += tex2D(texmap, float2(texcoord.x + pixelSize.x,  texcoord.y - pixelSize.y	)).r;
+				sum += tex2D(texmap, float2(texcoord.x + pixelSize2.x, texcoord.y - pixelSize2.y)).r * 2.0f;
+				sum += tex2D(texmap, float2(texcoord.x + pixelSize3.x, texcoord.y - pixelSize3.y)).r;
+							
+				return abs(sum) * 5.5;
+				//if(abs(sum) < edgeThresholdDepth)
+				//{
+				//	return 1.0;
+				//}
+				//else
+				//{
+				//	return 0.0;
+				//}
+			}
+
 			float InverseLerp(float v, float v0, float v1)
 			{
 				return (v - v0) / (v1 - v0);
@@ -89,7 +122,7 @@
 
 					float fragDistance = length(fragPos.xyz) * uParameter.x; //uMultiplier;
 
-					float fraction = frac(fragDistance - uColorAdd.a + (rand(uvRound + uColorAdd.aa) * 0.25f + 0.75f) * 0.05f);
+					float fraction = frac(fragDistance - uColorAdd.a + (rand(uvRound + uColorAdd.aa) * 0.5f + 0.5f) * 0.05f);
 					float powFraction;
 
 					if (fraction < 0.05f)
@@ -103,7 +136,13 @@
 					}
 
 
-					float3 addition = uColorAdd.rgb * powFraction * (rand(uvRound + uColorAdd.aa) * 0.5f + 0.25f);
+					float3 addition = uColorAdd.rgb * powFraction * (rand(uvRound + uColorAdd.aa) * 0.3f + 0.7f);
+
+					if (int(i.uv.y * _ScreenParams.y * 0.5f) % 2 == 0)
+					{
+						addition *= 0.25;
+					}
+
 					//float3 addition = uColorAdd.rgb * powFraction * (rand(fraction.rr + uvRound) * 0.5f + 0.25f);
 
 					//float3 emissive = tex2D(uEmissiveTex, texcoord).rgb * uParameter.z;
@@ -111,15 +150,20 @@
 					//fixed4 col = tex2D(_MainTex, i.uv);
 					col = col * uParameter.y;
 					float result = lerp(fraction, 1.0f, uParameter.a);
-					col.rgb = (col.rgb + addition) * float3(result, result, result);// * (1.0 - pow(depth, 8.0));
+					col.rgb = (col.rgb + addition) * (result.xxx);// * (1.0 - pow(depth, 8.0));
 					
 
+					
+					edgeThresholdNormal = 6.0; //5.0
+					edgeThresholdDepth = 0.02; //0.0010
+					
+					float depthSobel = Sobel_Depth_NWSE_thicc(_CameraDepthTexture, i.uv, 1.0f / _ScreenParams.xy);
+					col.rgb += depthSobel.xxx * uColorAdd.rgb;
 				}
 				else
 				{
 					
 				}
-
 				col.a = 1.0f;
 
 				//col.rgb = float3(fragPos.xyz);
