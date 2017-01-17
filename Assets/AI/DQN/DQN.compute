@@ -1,0 +1,79 @@
+﻿//Refrence: https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf
+
+// Each #kernel tells which function to compile; you can have many kernels
+//SV_DispatchThreadID is the x,y,z position in the Dispatch Set
+//SV_GroupID is the x,y,z position in the numthreads Set
+
+//filters always start at x:(filterWidth - 1 /) 2, y:(filterWidth - 1 /) 2
+//and increment along x until the Convolute_X_0_0 is reached
+//Convolute_0_0_Z will allow for Z number of filters to be passed
+//To pick the correct Convolute call, take the image resoultion 
+//DQNConvoluteX_Y_Z(Prev, filters, globals, Result)
+#pragma kernel DQNConvolute
+#pragma kernel DQNConvoluteColour
+
+
+#pragma kernel DQNPool
+
+
+#pragma kernal DQNReLU
+
+
+#pragma kernal DQNFCL
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+Texture3D<float> Prev;		//previous image layer in network
+Texture3D<float3> PrevCol;
+RWTexture3D<float> Result;	//layer being calculated
+
+//1d array of 3d arrays, see filterXYZ for accessing
+//top left is 0,0 bottom right is sx,sy
+Buffer<float> inputFilters : register(t0); //SRV bind
+
+Buffer<float> outputFilters : register(u0); //UAV bind
+
+cbuffer globals : register(b0)
+{
+	int filterWidth;	//width of the filter
+	int filterArea;		//filterWidth^2
+	int filterStride;	//distance from center to center of filter movement
+	int filterStartOffset; //(filterWidth - 1 /) 2
+	int filterSegmentationOffset; //TODO: start working on chunking large input fields
+	float2 pixelSize;	//size of 1 pixel in uv space
+};
+
+//filterStrideMax = 32
+
+SamplerState SampleType
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
+
+[numthreads(8,8,1)]
+void DQNConvolute (uint3 gid : SV_GroupID, uint did : SV_DispatchThreadID)
+{
+	//gid = position in filters the thread is responsible for
+	//did.z = number filters input/TextureChannels
+
+	uint2 start = uint2(filterStartOffset + gid.x * filterStride,filterStartOffset + gid.y * filterStride);
+	float weightedTotal = 0;
+	uint filterStartIndex = filterXYZ(0,0,did.z);
+
+	for (int y = -filterStartOffset; y <= filterStartOffset; y++)
+	{
+		for (int x = -filterStartOffset; x <= filterStartOffset; x++)
+		{
+			float3 uvw = float3((start.x + x) * pixelSize, (start.y + y) * pixelSize, did.z);
+			weightedTotal = inputFilters[filterStartIndex + x + (y * filterWidth)] * Prev.sample(SampleType, uvw);
+		}
+	} 
+}
+
+//z is filter number
+float filterXYZ(int x, int y, int z)
+{
+	return (z * globals.filterArea + x + y * filterWidth);
+}

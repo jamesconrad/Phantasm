@@ -131,10 +131,13 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         {
             SetWindowSizes();
         }
-    }
 
-    private void FixedUpdate()
-    {
+        for (int i = 0, count = survCameras.Count; i < count; i++)
+        {
+            survCameraButtons[i].GetComponent<RectTransform>().rotation = 
+                Quaternion.Euler(0.0f, 0.0f, -survCameras[i].transform.rotation.eulerAngles.y);
+        }
+
         if (!Input.GetMouseButton(0))
         {
             Vector3 CameraPositionMax = survCameras[0].transform.position;
@@ -192,6 +195,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     void SetWindowSizes()
