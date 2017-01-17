@@ -4610,10 +4610,10 @@ MonoBehaviour:
     ScrollingTexture: {fileID: 2800000, guid: 78df00b6c05950d49a2718aa7f68f092, type: 3}
     MultTexture: {fileID: 2800000, guid: d1a860762aba40e4b9f1e5d905048341, type: 3}
     GlitchTexture: {fileID: 2800000, guid: 9836b695b2e96f847b8d624e0dc506d2, type: 3}
-    FaceTexture: {fileID: 2800000, guid: aaee9bc435a7ed846bbbb737fb66f4e7, type: 3}
+    FaceTexture: {fileID: 2800000, guid: 6ffca5bf713cbe84b8ff03ecb98998b4, type: 3}
     nightVisionAmount: 0.15
     normalAmount: 0.025
-  jitterAmount: {x: 8, y: 8}
+  jitterAmount: {x: 3, y: 3}
   jitterBias: 1
   filmGrainJitterActive: 1
   filmGrainFaceActive: 1

@@ -16,14 +16,14 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000011239881564}
-  - 20: {fileID: 20000012356995460}
-  - 114: {fileID: 114000012044494178}
-  - 114: {fileID: 114000012055031408}
-  - 114: {fileID: 114000011499826690}
-  - 114: {fileID: 114000012835387834}
+  - component: {fileID: 4000011239881564}
+  - component: {fileID: 20000012356995460}
+  - component: {fileID: 114000012044494178}
+  - component: {fileID: 114000012055031408}
+  - component: {fileID: 114000011499826690}
+  - component: {fileID: 114000012835387834}
   m_Layer: 0
   m_Name: HackerCamera
   m_TagString: HackerCamera
@@ -40,10 +40,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.9234479, y: 10.238674, z: -45.121246}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &20000012356995460
 Camera:
   m_ObjectHideFlags: 1
@@ -131,10 +131,10 @@ MonoBehaviour:
     ScrollingTexture: {fileID: 2800000, guid: 78df00b6c05950d49a2718aa7f68f092, type: 3}
     MultTexture: {fileID: 2800000, guid: d1a860762aba40e4b9f1e5d905048341, type: 3}
     GlitchTexture: {fileID: 2800000, guid: 9836b695b2e96f847b8d624e0dc506d2, type: 3}
-    FaceTexture: {fileID: 2800000, guid: aaee9bc435a7ed846bbbb737fb66f4e7, type: 3}
+    FaceTexture: {fileID: 2800000, guid: 6ffca5bf713cbe84b8ff03ecb98998b4, type: 3}
     nightVisionAmount: 0.15
     normalAmount: 0.025
-  jitterAmount: {x: 8, y: 8}
+  jitterAmount: {x: 3, y: 3}
   jitterBias: 1
   filmGrainJitterActive: 1
   filmGrainFaceActive: 1
