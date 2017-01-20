@@ -944,7 +944,7 @@ Prefab:
         type: 2}
       propertyPath: fadeTexture
       value: 
-      objectReference: {fileID: 2800000, guid: 1694a369949a4cc40acee22fd87134ad, type: 3}
+      objectReference: {fileID: 2800000, guid: a025c23fceb7d4966b603419f551ce99, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dae1de2b0b16ee4991963cb27ea29d2, type: 2}
   m_IsPrefabParent: 0
