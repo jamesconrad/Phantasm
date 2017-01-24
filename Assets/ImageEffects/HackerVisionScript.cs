@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-
+[ImageEffectAllowedInSceneView]
+[ExecuteInEditMode]
 public class HackerVisionScript : MonoBehaviour
 {
 	public Material nightVisionMaterial;
