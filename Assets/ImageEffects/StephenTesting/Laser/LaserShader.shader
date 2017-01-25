@@ -8,7 +8,7 @@
 	{
 		Tags { "RenderType"="Transparent" "IgnoreProjector"="True" "Queue"="Transparent"}
 		LOD 100
-		ZWrite Off
+		ZWrite On
 		//Blend SrcAlpha OneMinusSrcAlpha
 		Blend SrcAlpha One
 
