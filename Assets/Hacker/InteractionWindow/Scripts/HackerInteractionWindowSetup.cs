@@ -185,10 +185,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                 survCameraButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
                         0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
-                        GetComponent<RectTransform>().rect.width, LerpPosition.x),
-
+                        GetComponent<RectTransform>().rect.width, LerpPosition.x) - 0.01f,
                         0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
-                        GetComponent<RectTransform>().rect.height, LerpPosition.z));
+                        GetComponent<RectTransform>().rect.height, LerpPosition.z) - 0.01f);
                 survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
 
 

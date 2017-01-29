@@ -5,7 +5,7 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_RimColor("Rim Color", Color) = (0.4,0.4,0.4,0.0)
 		_RimPower("Rim Power", Range(0.0,8.0)) = 3.0
-		_ExtrusionAdd("Extrusion Time Amount", Range(0,1.0)) = 0.0
+		//_ExtrusionAdd("Extrusion Time Amount", Range(0,1.0)) = 0.0
 		_Extrusion("Extrusion Amount", Range(0,1.0)) = 0.0
 	}
 	SubShader
