@@ -60,7 +60,7 @@
 				};
 	
 						//GrabTexture contains the scene fragments to be used in the refraction
-					sampler2D _GrabTexture;
+				sampler2D _GrabTexture;
 				float4 _GrabTexture_TexelSize;
 	
 	
