@@ -3,39 +3,49 @@ using UnityEngine.Networking;
 using System.Collections;
 
 public class BehaviourTree : NetworkBehaviour {
+    public enum AI_TYPE {  Listener, Basic, Hiding };
+
+
     public float aggroRadius = 5;
     public float sightRange = 10;
     public float maxSight = 15;
     public float chargeSpeed = 1;
     public float transparencyScale = 1;
+    public bool chargeAttack = false;
+    public bool alternatesVisibility = false;
+    public Patrol patrolPath;
+
+    public AI_TYPE type = AI_TYPE.Basic;
  
     private Vector3 lastKnown;
 
-    public enum AIState
+    GameObject playerGO;
+
+    public enum AI_STATE
     {
         Charge = 0,
         Walking = 1,
         Idle = 2,
         Patrol = 3
     }
-    private AIState AiState = AIState.Idle;
+    private AI_STATE aistate = AI_STATE.Idle;
     // Use this for initialization
     void Start () {
-        AiState = AIState.Charge;
+        aistate = AI_STATE.Charge;
         lastKnown = transform.position;
-	}
-	
-    void State () {
-        //AiState C is charging, the ai is aware of players current location
-        //AiState W is walking, the ai knows where the player was last and is checking at that location
-        //AiState P is patrol, randomly navigating the scene
-        //AiState I is idle, the ai has no information at all
-        if (!GameObject.FindGameObjectWithTag("Player"))
-        {
-            return;// AIState.I;
-        }
         GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
         UnityEngine.AI.NavMeshAgent agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+    }
+	
+    void State () {
+        //AI_STATE C is charging, the ai is aware of players current location
+        //AI_STATE W is walking, the ai knows where the player was last and is checking at that location
+        //AI_STATE P is patrol, randomly navigating the scene
+        //AI_STATE I is idle, the ai has no information at all
+        if (!GameObject.FindGameObjectWithTag("Player"))
+        {
+            return;// AI_STATE.I;
+        }
         Vector3 player = playerGO.GetComponent<Transform>().position;
         Vector3 me = transform.position;
 
@@ -70,28 +80,28 @@ public class BehaviourTree : NetworkBehaviour {
         //Debug.DrawRay(me, dirN * sightRange, Color.green);
         //Debug.DrawRay(me, dirN * aggroRadius, Color.red);
         
-        if (AiState == AIState.Idle)
+        if (aistate == AI_STATE.Idle)
         {
             //print("Idle");
             agent.destination = me;
-            //AiState = State();
-            AiState = AIState.Patrol;
+            //AI_STATE = State();
+            aistate = AI_STATE.Patrol;
         }
-        else if (AiState == AIState.Walking)
+        else if (aistate == AI_STATE.Walking)
         {
             //print("Walking");
             //lastKnown = player;
             agent.destination = lastKnown;
-            //AiState = State();
+            //AI_STATE = State();
         }
-        else if (AiState == AIState.Charge)
+        else if (aistate == AI_STATE.Charge)
         {
             //print("Charge");
             lastKnown = player;
             agent.destination = lastKnown;// swap to player location for perma charge
-            //AiState = State();// remove for perma charge
+            //AI_STATE = State();// remove for perma charge
         }
-        else if (AiState == AIState.Patrol)
+        else if (aistate == AI_STATE.Patrol)
         {
             if ((agent.destination - me).magnitude < 0.25)
             {
@@ -113,6 +123,85 @@ public class BehaviourTree : NetworkBehaviour {
 
     public void SetState(int _state)
     {
-        AiState = (AIState)_state;
+        aistate = (AI_STATE)_state;
     }
+
+    public class AIState
+    {
+        private Vector3 lastKnown;
+        public virtual void update() { }
+        public virtual void nextstate() { }
+        public Vector3 getPlayerPosition()
+        {
+            Vector3 p = lastKnown;
+
+            return p;
+        }
+        public bool hasLineOfSight()
+        {
+
+            return false;
+        }
+    }
+    public class AIPatrol : AIState
+    {
+        public void update()
+        {
+            //follow path
+        }
+        public  void nextstate()
+        {
+            //swap to chase if line of sight
+        }
+    };
+    public class AIChase : AIState
+    {
+
+        public void update()
+        {
+            //chase last known
+        }
+        public void nextstate()
+        {
+            //if near/at last known and no line of sight for x seconds
+            //swap to retrun
+        }
+    };
+    public class AIReturnToPatrol : AIState
+    {
+
+        public void update()
+        {
+            //pathfind to patrol path
+        }
+        public void nextstate()
+        {
+            //swap to patrol on arrival
+            //swap to chase on line of sight
+        }
+    };
+    public class AIWait : AIState
+    {
+
+        public void update()
+        {
+            //wait for line of sight or range
+        }
+        public void nextstate()
+        {
+            //swap to chase on line of sight or range
+        }
+    };
+    public class AIAttack : AIState
+    {
+
+        public void update()
+        {
+            //attack or charge
+        }
+        public void nextstate()
+        {
+            //reset to chase
+        }
+    };
 }
