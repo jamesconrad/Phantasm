@@ -10,6 +10,8 @@ public class FirstPersonCamera : NetworkBehaviour
     private Transform gunTransform;
 
     private Vector2 MouseMovement;
+    private Vector2 RecoilMovement;
+    private Vector2 ClampMovement;
     public float MaxCameraY;
     public float MinCameraY;
 
@@ -19,6 +21,16 @@ public class FirstPersonCamera : NetworkBehaviour
     void Start()
     {
 
+    }
+
+    public void AddCameraRotation(Vector2 vector)
+    {
+        RecoilMovement += vector;
+    }
+
+    public void AddCameraRotation(float x, float y)
+    {
+        AddCameraRotation(new Vector2(x, y));
     }
 
     // Called on clients for player objects for the local client (only)
@@ -33,9 +45,18 @@ public class FirstPersonCamera : NetworkBehaviour
         playerCamera.transform.rotation = gunTransform.rotation;
     }
 
+    public void FixedUpdate()
+    {
+        RecoilMovement *= 0.95f;
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
+        //RecoilMovement.y = Mathf.Max(0.0f, RecoilMovement.y - Time.deltaTime * 8.0f);
+
         if (!isLocalPlayer)
         {
             return;
@@ -48,10 +69,13 @@ public class FirstPersonCamera : NetworkBehaviour
         MouseMovement.y += Input.GetAxis("GamePad Y");
 
         //Clamp pitch angle
+        ClampMovement = MouseMovement;
+        ClampMovement += RecoilMovement;
         MouseMovement.y = Mathf.Clamp(MouseMovement.y, MinCameraY, MaxCameraY);
+        ClampMovement.y = Mathf.Clamp(ClampMovement.y, MinCameraY, MaxCameraY);
 
         //Generate rotation quaternion
-        rot = Quaternion.Euler(-MouseMovement.y, MouseMovement.x, 0.0f);
+        rot = Quaternion.Euler(-ClampMovement.y, ClampMovement.x, 0.0f);
         gunTransform.rotation = rot;
         //playerTransform.rotation = Quaternion.Euler(0.0f, MouseMovement.x, 0.0f);
 

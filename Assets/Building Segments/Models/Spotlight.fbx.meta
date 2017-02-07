@@ -1,17 +1,16 @@
 fileFormatVersion: 2
-guid: e36a8008e9eafcb4fa83d5ac07c87c2e
-timeCreated: 1480618107
+guid: 67979517ec597bd4e97e681ff65600d9
+timeCreated: 1486477585
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: pSphere3
     400000: //RootNode
-    400002: pSphere3
-    2300000: pSphere3
-    3300000: pSphere3
-    4300000: pSphere3
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: pSphere1
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -36,7 +35,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.075
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -72,9 +71,9 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

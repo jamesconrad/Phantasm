@@ -68,7 +68,7 @@ public class Phantom : NetworkBehaviour
         //PlayThenDelete audioSettings = new PlayThenDelete();
         if (audioObject.GetComponent<AudioSource>() != null)
         {
-            GameObject temp = Instantiate(audioObject);
+            GameObject temp = Instantiate(audioObject, transform.position, Quaternion.identity);
             temp.GetComponent<PlayThenDelete>().Play();
             //audio.AddComponent<PlayThenDelete>();
             //audio.transform.position = this.transform.position;

@@ -14,6 +14,7 @@ public class GunHandle : NetworkBehaviour
     private Transform playerTransform;
 
     public AudioSource gunShotSound;
+    public AudioSource gunShotReloadSound;
 
     // Use this for initialization
     void Start()
@@ -88,6 +89,9 @@ public class GunHandle : NetworkBehaviour
                 }
             }
 
+            GetComponent<FirstPersonCamera>().AddCameraRotation(Random.Range(-3.0f, 3.0f), Random.Range(2.0f, 8.0f));
+            //playerTransform.rotation = playerTransform.rotation * Quaternion.Euler(new Vector3(Random.Range(-4.0f, 0.0f), Random.Range(-1.0f, 1.0f), 0.0f));
+
             gunShotSound.Play();
         }
         if (Input.GetButtonDown("Reload") || Input.GetButtonDown("GamePad Reload"))
@@ -97,6 +101,8 @@ public class GunHandle : NetworkBehaviour
                 weaponSettings.currentNumberOfClips--;
                 weaponSettings.currentNumberOfRounds = weaponSettings.ammoSettings.maxClipSize;
                 GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds);
+
+                gunShotReloadSound.Play();
             }
         }
 
