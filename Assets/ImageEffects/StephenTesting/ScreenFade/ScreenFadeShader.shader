@@ -4,7 +4,6 @@
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_FadeTex("FadeTexture", 2D) = "white" {}
-		_Amount("Amount", Float) = 0.0
 	}
 	SubShader
 	{

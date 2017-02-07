@@ -16,19 +16,19 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000014179194596}
-  - 33: {fileID: 33000012758443488}
-  - 136: {fileID: 136000013789357516}
-  - 23: {fileID: 23000011448935522}
-  - 195: {fileID: 195000013483004164}
-  - 114: {fileID: 114000010244229320}
-  - 54: {fileID: 54000013946515514}
-  - 114: {fileID: 114000011716397156}
-  - 114: {fileID: 114000011316608604}
-  - 114: {fileID: 114000013458449686}
-  - 114: {fileID: 114000010571385812}
+  - component: {fileID: 4000014179194596}
+  - component: {fileID: 33000012758443488}
+  - component: {fileID: 136000013789357516}
+  - component: {fileID: 23000011448935522}
+  - component: {fileID: 195000013483004164}
+  - component: {fileID: 114000010244229320}
+  - component: {fileID: 54000013946515514}
+  - component: {fileID: 114000011716397156}
+  - component: {fileID: 114000011316608604}
+  - component: {fileID: 114000013458449686}
+  - component: {fileID: 114000010571385812}
   m_Layer: 8
   m_Name: Phantom
   m_TagString: Enemy
@@ -43,12 +43,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011964233812}
   m_LocalRotation: {x: -0, y: -0.00000001665981, z: -0, w: 1}
-  m_LocalPosition: {x: 4.8808746, y: 1.28, z: -36.03331}
+  m_LocalPosition: {x: 4, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23000011448935522
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -63,7 +63,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 05a90805b0db07b4c8f6bb77cca6bf82, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -71,7 +73,7 @@ MeshRenderer:
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -134,8 +136,10 @@ MonoBehaviour:
     thermal: 1
     sonar: 1
     temperature: 1
+  randomizeVisibility: 1
   vanishParticleEffect: {fileID: 154218, guid: 1b7853609334e664dbd846d859e58bb4, type: 2}
   previousSpawnLocation: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: 8412b51a0bd2cc04eb11e7cb1cd8ae52, type: 3}
 --- !u!114 &114000011316608604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,6 +199,12 @@ MonoBehaviour:
   health: 100
   currentHealth: 0
   deathDelay: 0
+  disableOnDeath: 0
+  OnDisable:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   destroyOnDeath: 1
   OnDeath:
     m_PersistentCalls:

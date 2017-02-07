@@ -10,6 +10,7 @@
 		_RimAlpha("Rim Amount", Range(0.0,1.0)) = 1.0
 		_RefractionSpeed("Distortion Speed", Vector) = (1.0, 2.0, 0.82, -1.55)
 		_RefractionRim("Distortion Rim", range(0,1)) = 1.0
+		_DepthMult("Depth Mult", range(0.0001 ,0.01)) = 0.01
 	}
 		Category
 		{
@@ -71,6 +72,7 @@
 				float4 _MainTex_ST;
 				float4 _NormalMap_ST;
 				float _NormalAmount;
+				float _DepthMult;
 	
 	
 				v2f vert(appdata v, float3 normal : NORMAL)

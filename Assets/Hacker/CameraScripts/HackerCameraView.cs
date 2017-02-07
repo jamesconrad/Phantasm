@@ -22,14 +22,21 @@ public class HackerCameraView : MonoBehaviour, IDropHandler
     public Camera selectedCamera;
 
     public CameraPosition cameraPosition;
-    
+
+    private Vector2 WindowSize;
+
+
     // Use this for initialization
     void Start() {
+
+        WindowSize = new Vector2(Screen.width, Screen.height);
+
         //GetComponent<Canvas>().worldCamera = Camera.main;
         //GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
 
         // Number for clock
         //randomTimeAdd = UnityEngine.Random.Range(60000.0f, 100000.0f);
+
         randomTimeAdd = 79200 + 2460 + 10;
 
         Camera[] tempCameras = FindObjectsOfType<Camera>();
@@ -85,6 +92,14 @@ public class HackerCameraView : MonoBehaviour, IDropHandler
         GetComponent<RawImage>().SetNativeSize();
     }
     
+    void Update()
+    {
+        if (WindowSize.x != Screen.width || WindowSize.y != Screen.height)
+        {
+            SetWindowSizes();
+        }
+    }
+
     void IDropHandler.OnDrop(PointerEventData eventData)
     {
         if (selectedCamera != eventData.pointerDrag.GetComponent<CameraButtonManipulation>().associatedCamera)
@@ -187,5 +202,13 @@ public class HackerCameraView : MonoBehaviour, IDropHandler
             return "0" + Mathf.RoundToInt(Mathf.Floor(num)).ToString();
         else
             return Mathf.RoundToInt(Mathf.Floor(num)).ToString();
+    }
+
+
+    void SetWindowSizes()
+    {
+        WindowSize = new Vector2(Screen.width, Screen.height);
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
     }
 }

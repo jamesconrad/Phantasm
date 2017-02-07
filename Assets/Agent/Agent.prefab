@@ -4438,7 +4438,7 @@ MonoBehaviour:
       startingNumberOfClips: 0
     currentNumberOfRounds: 0
     currentNumberOfClips: 0
-  gunReference: {fileID: 0}
+  gunReference: {fileID: 1000010272846346}
   gunShotSound: {fileID: 82000011765907664}
 --- !u!114 &114000011937748856
 MonoBehaviour:

@@ -205,5 +205,24 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     {
         WindowSize = new Vector2(Screen.width, Screen.height);
 
+        switch (cameraPosition)
+        {
+            case CameraPosition.BottomLeft:
+                GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
+                break;
+            case CameraPosition.BottomRight:
+                GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, Screen.height / 4.0f);
+                break;
+            case CameraPosition.TopLeft:
+                GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
+                break;
+            case CameraPosition.TopRight:
+                GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
+                break;
+            default:
+                GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
+                break;
+        }
+
     }
 }

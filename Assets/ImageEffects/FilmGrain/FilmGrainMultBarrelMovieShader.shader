@@ -21,9 +21,9 @@
 			#define HAS_FACE 1
 			#endif
 
-			#if defined (SAT_GRAIN_SCROLLING)
-			#define HAS_SCROLLING 1
-			#endif
+			//#if defined (SAT_GRAIN_SCROLLING)
+			//#define HAS_SCROLLING 1
+			//#endif
 			
 			#if defined (SAT_GRAIN_MULT)
 			#define HAS_MULT 1
@@ -131,11 +131,12 @@
 			float uSpookyAmount;
 		#endif
 
-		#if defined (SAT_GRAIN_SCROLLING)
+		//#if defined (SAT_GRAIN_SCROLLING)
 			sampler2D uScrollingTexture;
 			sampler2D uScrollingGlitchTexture;
 			float2 uScrollAmount;
-		#endif
+			float uScrollingGlitchAmount;
+		//#endif
 
 		//#if defined (SAT_GRAIN_MULT)
 			sampler2D uMultTexture;
@@ -145,11 +146,7 @@
 			sampler2D uMovie;
 			float uMovieAmount;
 		#endif
-			
-		#if defined (SAT_GRAIN_SCROLLING)
-			float uScrollingGlitchAmount;
-		#endif
-			
+						
 		//#if defined (SAT_GRAIN_JITTER)
 			float4 jitterParam;
 			
@@ -193,12 +190,12 @@
 					float3(rand(RandomNumber + uvRound), rand(RandomNumber + uvRound), rand(RandomNumber + uvRound)),
 					uAmount);
 
-			#if HAS_SCROLLING
+			//#if HAS_SCROLLING
 				float4 scrollTex = tex2D(uScrollingTexture, i.uv.xy + uScrollAmount); 
 				col.rgb = lerp(col.rgb, scrollTex.rgb, scrollTex.a * uAmount * 1.75f);
 				float4 scrollGlitchTex = tex2D(uScrollingGlitchTexture, frac(i.uv.xy + uScrollAmount + float2(0.0f, rand(RandomNumber))));
 				col.rgb = lerp(col.rgb, scrollGlitchTex.rgb, scrollGlitchTex.a * uScrollingGlitchAmount);
-			#endif
+			//#endif
 				
 			#if HAS_MOVIE
 				fixed3 MovieCol = tex2D(uMovie, i.uv).rgb;

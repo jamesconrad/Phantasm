@@ -157,7 +157,7 @@ MonoBehaviour:
     thermal: {fileID: 2100000, guid: db03c4253306cb947882c84394620907, type: 2}
     sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
   WaveCount: {x: 400, y: 400}
-  WaveIntensity: {x: 0.0005, y: 0.0015}
+  WaveIntensity: {x: 0.0015, y: 0.0005}
   WaveTimeMult: {x: 100, y: 100}
   CA_Dispersal: 1
   CA_Offset: 0.03
