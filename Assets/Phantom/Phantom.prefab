@@ -140,6 +140,8 @@ MonoBehaviour:
   vanishParticleEffect: {fileID: 154218, guid: 1b7853609334e664dbd846d859e58bb4, type: 2}
   previousSpawnLocation: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 8412b51a0bd2cc04eb11e7cb1cd8ae52, type: 3}
+  audioObject: {fileID: 1572752409540518, guid: 09c6a05125827fd49bde2a6c90ef883a,
+    type: 2}
 --- !u!114 &114000011316608604
 MonoBehaviour:
   m_ObjectHideFlags: 1
