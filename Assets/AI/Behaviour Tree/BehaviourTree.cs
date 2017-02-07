@@ -10,6 +10,14 @@ public class BehaviourTree : NetworkBehaviour {
     //Hiding : Missing Attack Information
     public enum AI_TYPE {  Listener, Basic, Hiding };
 
+    public float maxSight = 50; //how far the ai can see, for raycasting line of sight
+    public float patience = 3; //how long the ai will wait at the lastknown position before returning back to 
+    public float arrivalDistance = 0.1f; //accuracy for arrival points, if within x units it considers it as arrived
+    public bool chargeAttack = false; //wether the ai can do a pounce like attack or melee
+    public bool alternatesVisibility = false; //wether the ai alternates between agent vision to hacker vision and back
+    public Patrol patrolPath; //path the ai will idly patrol around
+    public AI_TYPE type = AI_TYPE.Basic; //the class of ai
+
     //Implementation Status
     //Complete
     //Complete
@@ -20,21 +28,23 @@ public class BehaviourTree : NetworkBehaviour {
     //Implementating
     public struct AISettings
     {
-        public float maxSight; //how far the ai can see, for raycasting line of sight
-        public float patience; //how long the ai will wait at the lastknown position before returning back to 
-        public float arrivalDistance; //accuracy for arrival points, if within x units it considers it as arrived
-        public bool chargeAttack; //wether the ai can do a pounce like attack or melee
-        public bool alternatesVisibility; //wether the ai alternates between agent vision to hacker vision and back
-        public Patrol patrolPath; //path the ai will idly patrol around
-        public AI_TYPE type; //the class of ai
+        public float maxSight;
+        public float patience;
+        public float arrivalDistance;
+        public bool chargeAttack;
+        public bool alternatesVisibility;
+        public Patrol patrolPath;
+        public AI_TYPE type;
     }
 
     public AISettings aiSettings;
  
+    private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 lastKnown;
 
+    private AIState ai;
+
     static GameObject playerGO;
-    private UnityEngine.AI.NavMeshAgent agent;
 
     public enum AI_STATE
     {
@@ -46,29 +56,58 @@ public class BehaviourTree : NetworkBehaviour {
     }
 
     private AI_STATE aistate = AI_STATE.Wait;
-
-    // Use this for initialization
-    void Start () {
+    
+    void Start ()
+    {
+        aiSettings.alternatesVisibility = alternatesVisibility;
+        aiSettings.arrivalDistance = arrivalDistance;
+        aiSettings.chargeAttack = chargeAttack;
+        aiSettings.maxSight = maxSight;
+        aiSettings.patience = patience;
+        aiSettings.patrolPath = patrolPath;
+        aiSettings.type = type;
+        
         GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+        if (aiSettings.type == AI_TYPE.Basic)
+            ai = new AIPatrol(ref aiSettings, transform, ref agent);
+        else if (aiSettings.type == AI_TYPE.Hiding)
+            ai = new AIPatrol(ref aiSettings, transform, ref agent);
+        else
+            print("Unimplemented AI Type.");
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         //BehavTree
         if (!isServer)
         {
             return;
         }
 
-        
-        
+        ai.update();
+        AI_STATE nextstate = ai.nextstate();
+        if (aistate != nextstate)
+        {
+            if (nextstate == AI_STATE.Attack)
+                ai = new AIAttack(ref aiSettings, transform, ref agent);
+            else if (nextstate == AI_STATE.Chase)
+                ai = new AIChase(ref aiSettings, transform, ref agent);
+            else if (nextstate == AI_STATE.Wait)
+                ai = new AIWait(ref aiSettings, transform, ref agent);
+            else if (nextstate == AI_STATE.Patrol)
+                ai = new AIPatrol(ref aiSettings, transform, ref agent);
+            else if (nextstate == AI_STATE.ReturnToPatrol)
+                ai = new AIReturnToPatrol(ref aiSettings, transform, ref agent);
+        }
 	}
     
 
     public class AIState
     {
-        public AIState(ref AISettings settings, ref Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
+        public AIState(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
         { aiS = settings; t = transform; nav = navAgent; }
 
         protected Vector3 lastKnown;
@@ -93,15 +132,30 @@ public class BehaviourTree : NetworkBehaviour {
         }
     }
     
-    //Missing Patrol Logic
+    //Complete
     public class AIPatrol : AIState
     {
-        public AIPatrol(ref AISettings settings, ref Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
-            : base(ref settings, ref transform, ref navAgent)
+        public AIPatrol(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
+            : base(ref settings, transform, ref navAgent)
         { aiS = settings; t = transform; nav = navAgent; }
+
+        private bool haspoint = false;
+        private Vector3 point;
+
         public override void update()
         {
             //follow path
+            if (!haspoint)
+            {
+                point = aiS.patrolPath.NextPoint(t.position);
+                nav.SetDestination(point);
+            }
+
+            if ((t.position - point).magnitude >= aiS.arrivalDistance)
+            {
+                point = aiS.patrolPath.NextPoint(point);
+                nav.SetDestination(point);
+            }
         }
         public override AI_STATE nextstate()
         {
@@ -114,8 +168,8 @@ public class BehaviourTree : NetworkBehaviour {
     //Missing Attack State Transition
     public class AIChase : AIState
     {
-        public AIChase(ref AISettings settings, ref Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
-            : base(ref settings, ref transform, ref navAgent)
+        public AIChase(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
+            : base(ref settings, transform, ref navAgent)
         { aiS = settings; t = transform; nav = navAgent; }
 
         private bool arrived = false;
@@ -124,7 +178,8 @@ public class BehaviourTree : NetworkBehaviour {
         public override void update()
         {
             //chase last known
-            nav.destination = lastKnown;
+            if (nav.destination != lastKnown)
+                nav.SetDestination(lastKnown);
         }
         public override AI_STATE nextstate()
         {
@@ -150,13 +205,13 @@ public class BehaviourTree : NetworkBehaviour {
     //Complete
     public class AIReturnToPatrol : AIState
     {
-        public AIReturnToPatrol(ref AISettings settings, ref Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
-            : base(ref settings, ref transform, ref navAgent)
-        { aiS = settings; t = transform; nav = navAgent; }
+        public AIReturnToPatrol(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
+            : base(ref settings, transform, ref navAgent)
+        { aiS = settings; t = transform; nav = navAgent; nav.SetDestination(aiS.patrolPath.NextPoint(t.position)); }
         public override void update()
         {
             //pathfind to patrol path
-            nav.destination = aiS.patrolPath.transform.GetChild(0).transform.position;
+            //pathfind set on constructor
         }
         public override AI_STATE nextstate()
         {
@@ -173,8 +228,8 @@ public class BehaviourTree : NetworkBehaviour {
     //Complete
     public class AIWait : AIState
     {
-        public AIWait(ref AISettings settings, ref Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
-            : base(ref settings, ref transform, ref navAgent)
+        public AIWait(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
+            : base(ref settings, transform, ref navAgent)
         { aiS = settings; t = transform; nav = navAgent; }
         public override void update()
         {
@@ -192,8 +247,8 @@ public class BehaviourTree : NetworkBehaviour {
     //Missing All Logic
     public class AIAttack : AIState
     {
-        public AIAttack(ref AISettings settings, ref Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
-            : base(ref settings, ref transform, ref navAgent)
+        public AIAttack(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
+            : base(ref settings, transform, ref navAgent)
         { aiS = settings; t = transform; nav = navAgent; }
         public override void update()
         {
