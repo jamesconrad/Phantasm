@@ -17,6 +17,7 @@ public class BehaviourTree : NetworkBehaviour {
     public bool alternatesVisibility = false; //wether the ai alternates between agent vision to hacker vision and back
     public Patrol patrolPath; //path the ai will idly patrol around
     public AI_TYPE type = AI_TYPE.Basic; //the class of ai
+    public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
 
     //Implementation Status
     //Complete
@@ -38,7 +39,6 @@ public class BehaviourTree : NetworkBehaviour {
     }
 
     public AISettings aiSettings;
- 
     private UnityEngine.AI.NavMeshAgent agent;
     private Vector3 lastKnown;
 
@@ -87,23 +87,35 @@ public class BehaviourTree : NetworkBehaviour {
             return;
         }
 
-        ai.update();
-        AI_STATE nextstate = ai.nextstate();
-        if (aistate != nextstate)
+        if (triggered)
         {
-            if (nextstate == AI_STATE.Attack)
-                ai = new AIAttack(ref aiSettings, transform, ref agent);
-            else if (nextstate == AI_STATE.Chase)
-                ai = new AIChase(ref aiSettings, transform, ref agent);
-            else if (nextstate == AI_STATE.Wait)
-                ai = new AIWait(ref aiSettings, transform, ref agent);
-            else if (nextstate == AI_STATE.Patrol)
-                ai = new AIPatrol(ref aiSettings, transform, ref agent);
-            else if (nextstate == AI_STATE.ReturnToPatrol)
-                ai = new AIReturnToPatrol(ref aiSettings, transform, ref agent);
+            ai.update();
+            AI_STATE nextstate = ai.nextstate();
+            if (aistate != nextstate)
+            {
+                if (nextstate == AI_STATE.Attack)
+                    ai = new AIAttack(ref aiSettings, transform, ref agent);
+                else if (nextstate == AI_STATE.Chase)
+                    ai = new AIChase(ref aiSettings, transform, ref agent);
+                else if (nextstate == AI_STATE.Wait)
+                    ai = new AIWait(ref aiSettings, transform, ref agent);
+                else if (nextstate == AI_STATE.Patrol)
+                    ai = new AIPatrol(ref aiSettings, transform, ref agent);
+                else if (nextstate == AI_STATE.ReturnToPatrol)
+                    ai = new AIReturnToPatrol(ref aiSettings, transform, ref agent);
+            }
         }
 	}
     
+    //called on trigger through message, used if it needs to be activated or deactivated
+    void Trigger()
+    {
+        triggered = !triggered;
+        if (triggered)
+            Start();
+        else
+            ai = new AIWait(ref aiSettings, transform, ref agent);
+    }
 
     public class AIState
     {
@@ -230,7 +242,7 @@ public class BehaviourTree : NetworkBehaviour {
     {
         public AIWait(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
             : base(ref settings, transform, ref navAgent)
-        { aiS = settings; t = transform; nav = navAgent; }
+        { aiS = settings; t = transform; nav = navAgent; nav.SetDestination(t.position); }
         public override void update()
         {
             //wait for line of sight or range
