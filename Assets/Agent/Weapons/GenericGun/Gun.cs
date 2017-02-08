@@ -31,7 +31,7 @@ public struct GunSettings
 public class Gun : MonoBehaviour
 {
     public GunSettings weaponSettings;
-
+    
     // Start is called just before any of the Update methods is called the first time
     public void Start()
     {

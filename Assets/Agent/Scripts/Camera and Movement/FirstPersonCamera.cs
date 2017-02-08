@@ -47,7 +47,7 @@ public class FirstPersonCamera : NetworkBehaviour
 
     public void FixedUpdate()
     {
-        RecoilMovement *= 0.95f;
+        RecoilMovement *= 0.965f;
     }
 
 

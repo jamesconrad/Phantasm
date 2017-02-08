@@ -9,8 +9,10 @@ public class GunLaserScript : MonoBehaviour
     public LayerMask whatToCollideWith;
     public Material material;
 
+    public bool active = true;
+
     void Start()
-    {
+    {        
         line = gameObject.GetComponent<LineRenderer>();
         line.enabled = true;
         hitTriggers = QueryTriggerInteraction.Ignore;
@@ -23,7 +25,7 @@ public class GunLaserScript : MonoBehaviour
 
     void Update()
     {
-
+        line.enabled = active;
     }
 
     public void OnDestroy()
@@ -36,19 +38,22 @@ public class GunLaserScript : MonoBehaviour
     {
         while (true)
         {
-            Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
+            if (active)
+            {
+                Ray ray = new Ray(transform.position, transform.forward);
+                RaycastHit hit;
 
-            line.SetPosition(0, ray.origin);
-            if (Physics.Raycast(ray, out hit, distanceMax, whatToCollideWith, hitTriggers))
-            {
-                line.SetPosition(1, hit.point);
-                material.SetFloat("uDistance", Vector3.Distance(ray.origin, hit.point));
-            }
-            else
-            {
-                line.SetPosition(1, ray.GetPoint(distanceMax));
-                material.SetFloat("uDistance", distanceMax);
+                line.SetPosition(0, ray.origin);
+                if (Physics.Raycast(ray, out hit, distanceMax, whatToCollideWith, hitTriggers))
+                {
+                    line.SetPosition(1, hit.point);
+                    material.SetFloat("uDistance", Vector3.Distance(ray.origin, hit.point));
+                }
+                else
+                {
+                    line.SetPosition(1, ray.GetPoint(distanceMax));
+                    material.SetFloat("uDistance", distanceMax);
+                }
             }
 
             yield return null;

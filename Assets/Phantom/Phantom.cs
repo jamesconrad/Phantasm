@@ -18,8 +18,7 @@ public class Phantom : NetworkBehaviour
 
     private PhantomSpawnLocation[] respawnPoints;
     public PhantomSpawnLocation previousSpawnLocation = null;
-
-    public AudioClip deathSound;
+    
     public GameObject audioObject;
 
     // Start is called just before any of the Update methods is called the first time
@@ -65,14 +64,10 @@ public class Phantom : NetworkBehaviour
 
 		setVisibility();
 		numKilled += 1;
-        //PlayThenDelete audioSettings = new PlayThenDelete();
         if (audioObject.GetComponent<AudioSource>() != null)
         {
             GameObject temp = Instantiate(audioObject, transform.position, Quaternion.identity);
             temp.GetComponent<PlayThenDelete>().Play();
-            //audio.AddComponent<PlayThenDelete>();
-            //audio.transform.position = this.transform.position;
-            //audio.GetComponent<PlayThenDelete>().Play();
         }
 
         Destroy(Instantiate(vanishParticleEffect, transform.position, vanishParticleEffect.transform.rotation), vanishParticleEffect.GetComponent<ParticleSystem>().duration);
