@@ -36,6 +36,7 @@ public class BehaviourTree : NetworkBehaviour {
         public bool alternatesVisibility;
         public Patrol patrolPath;
         public AI_TYPE type;
+        public bool triggered;
     }
 
     public AISettings aiSettings;
@@ -66,11 +67,32 @@ public class BehaviourTree : NetworkBehaviour {
         aiSettings.patience = patience;
         aiSettings.patrolPath = patrolPath;
         aiSettings.type = type;
+        aiSettings.triggered = triggered;
         
         //GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
         //
         //Debug.Log(playerGO.name);
         
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
+        if (aiSettings.type == AI_TYPE.Basic)
+            ai = new AIPatrol(ref aiSettings, transform, ref agent);
+        else if (aiSettings.type == AI_TYPE.Hiding)
+            ai = new AIWait(ref aiSettings, transform, ref agent);
+        else if (aiSettings.type == AI_TYPE.Wallhack)
+            ai = new AIChase(ref aiSettings, transform, ref agent);
+        else
+            print("Unimplemented AI Type.");
+        AIState.playerGO = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public void UpdateSettings(AISettings s)
+    {
+        aiSettings = s;
+    }
+
+    public void RestartWithoutDefaultSettings()
+    {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         if (aiSettings.type == AI_TYPE.Basic)
