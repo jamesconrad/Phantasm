@@ -30,8 +30,14 @@ public class NetworkObjectSpawning : NetworkBehaviour
         }
         else
         {
-            PhantomSpawnLocation tempPos = spawnLocations[Random.Range(0, spawnLocations.Length - 1)];
-            NetworkServer.Spawn(Instantiate(phantomGameObject, tempPos.transform.position, Quaternion.identity) as GameObject);
+            int index = Random.Range(0, spawnLocations.Length - 1);
+            PhantomSpawnLocation tempPos = spawnLocations[index];
+            GameObject phantom = Instantiate(phantomGameObject, tempPos.transform.position, Quaternion.identity);
+            BehaviourTree ai = phantom.GetComponent<BehaviourTree>();
+            ai.UpdateSettings(spawnLocations[index].aiSettings());
+            ai.RestartWithoutDefaultSettings();
+
+            NetworkServer.Spawn(phantom as GameObject);
             phantomGameObject.GetComponent<Phantom>().previousSpawnLocation = tempPos;
         }
     }
