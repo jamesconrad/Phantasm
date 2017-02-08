@@ -207,8 +207,8 @@ public class BehaviourTree : NetworkBehaviour {
         public override void update()
         {
             //chase last known
-            Debug.Log(lastKnown);
-            Debug.Log(playerGO.transform.position);
+            //Debug.Log(lastKnown);
+            //Debug.Log(playerGO.transform.position);
            
 
             if (aiS.type == AI_TYPE.Wallhack)

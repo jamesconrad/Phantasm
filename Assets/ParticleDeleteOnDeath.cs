@@ -21,9 +21,9 @@ public class ParticleDeleteOnDeath : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		if(!particle.isPlaying)
+		if(!particle.IsAlive())
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 	}
 }

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - MainMenu
   - Door
+  - Laser
   layers:
   - Default
   - TransparentFX

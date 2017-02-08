@@ -166,7 +166,9 @@ MonoBehaviour:
   currentLife: 0
   damage: 100
   speed: 600
-  onDeath: {fileID: 1136337349554634, guid: 2eabf2d4193ec114fadd2d575f0e84e3, type: 2}
+  onDeath: {fileID: 1136337349554634, guid: 0d544b4cefc5fdc46adf963d82ccb72f, type: 2}
+  onDeathMetallic: {fileID: 1136337349554634, guid: 2eabf2d4193ec114fadd2d575f0e84e3,
+    type: 2}
 --- !u!135 &135000013809959630
 SphereCollider:
   m_ObjectHideFlags: 1

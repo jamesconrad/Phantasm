@@ -8,6 +8,8 @@ public class GunLaserScript : MonoBehaviour
     QueryTriggerInteraction hitTriggers;
     public LayerMask whatToCollideWith;
     public Material material;
+    public static Color colorHit = Color.black;
+    public static float metallicHit = 0.0f;
 
     public bool active = true;
 
@@ -48,6 +50,20 @@ public class GunLaserScript : MonoBehaviour
                 {
                     line.SetPosition(1, hit.point);
                     material.SetFloat("uDistance", Vector3.Distance(ray.origin, hit.point));
+                    Vector2 texcoord = hit.textureCoord;
+                    Debug.Log(texcoord);
+                    if (hit.collider.gameObject.GetComponent<MeshRenderer>() != null)
+                    {
+                        Texture2D tex = (Texture2D)hit.collider.gameObject.GetComponent<MeshRenderer>().material.GetTexture("_MainTex");
+                        metallicHit = hit.collider.gameObject.GetComponent<MeshRenderer>().material.GetFloat("_Metallic");
+                        //Debug.Log(metallicHit);
+                        if (tex != null)
+                            colorHit = tex.GetPixel((int)(tex.width * texcoord.x), (int)(tex.height * texcoord.y));
+                    }
+                    else
+                    {
+                        colorHit = Color.black;
+                    }
                 }
                 else
                 {

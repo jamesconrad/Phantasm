@@ -41,7 +41,7 @@ public class PlayThenDelete : MonoBehaviour
     {
 		if(activated && !this.gameObject.GetComponent<AudioSource>().isPlaying)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
 	}
 }
