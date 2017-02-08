@@ -113,15 +113,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6875423addd788340bb4f731a1363fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aggroRadius: 5
-  sightRange: 10
   maxSight: 15
-  chargeSpeed: 1
-  transparencyScale: 1
+  patience: 3
+  arrivalDistance: 0.1
   chargeAttack: 0
   alternatesVisibility: 0
   patrolPath: {fileID: 0}
-  type: 1
+  type: 3
+  triggered: 1
 --- !u!114 &114000010571385812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,7 +142,6 @@ MonoBehaviour:
   randomizeVisibility: 1
   vanishParticleEffect: {fileID: 154218, guid: 1b7853609334e664dbd846d859e58bb4, type: 2}
   previousSpawnLocation: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: b71d10aa3dd6d5d428b4ce3c966c9651, type: 3}
   audioObject: {fileID: 1572752409540518, guid: 09c6a05125827fd49bde2a6c90ef883a,
     type: 2}
 --- !u!114 &114000011316608604

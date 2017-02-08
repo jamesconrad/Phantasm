@@ -8,7 +8,7 @@ public class BehaviourTree : NetworkBehaviour {
     //Listener : Current Scope Restriction
     //Basic : Missing Attack Information
     //Hiding : Missing Attack Information
-    public enum AI_TYPE {  Listener, Basic, Hiding };
+    public enum AI_TYPE {  Listener, Basic, Hiding, Wallhack };
 
     public float maxSight = 50; //how far the ai can see, for raycasting line of sight
     public float patience = 3; //how long the ai will wait at the lastknown position before returning back to 
@@ -16,7 +16,7 @@ public class BehaviourTree : NetworkBehaviour {
     public bool chargeAttack = false; //wether the ai can do a pounce like attack or melee
     public bool alternatesVisibility = false; //wether the ai alternates between agent vision to hacker vision and back
     public Patrol patrolPath; //path the ai will idly patrol around
-    public AI_TYPE type = AI_TYPE.Basic; //the class of ai
+    public AI_TYPE type = AI_TYPE.Wallhack; //the class of ai
     public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
 
     //Implementation Status
@@ -44,7 +44,7 @@ public class BehaviourTree : NetworkBehaviour {
 
     private AIState ai;
 
-    static GameObject playerGO;
+    //static GameObject playerGO;
 
     public enum AI_STATE
     {
@@ -67,15 +67,21 @@ public class BehaviourTree : NetworkBehaviour {
         aiSettings.patrolPath = patrolPath;
         aiSettings.type = type;
         
-        GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+        //GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
+        //
+        //Debug.Log(playerGO.name);
+        
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         if (aiSettings.type == AI_TYPE.Basic)
             ai = new AIPatrol(ref aiSettings, transform, ref agent);
         else if (aiSettings.type == AI_TYPE.Hiding)
-            ai = new AIPatrol(ref aiSettings, transform, ref agent);
+            ai = new AIWait(ref aiSettings, transform, ref agent);
+        else if (aiSettings.type == AI_TYPE.Wallhack)
+            ai = new AIChase(ref aiSettings, transform, ref agent);
         else
             print("Unimplemented AI Type.");
+        AIState.playerGO = GameObject.FindGameObjectWithTag("Player");
     }
 	
 	// Update is called once per frame
@@ -122,10 +128,11 @@ public class BehaviourTree : NetworkBehaviour {
         public AIState(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
         { aiS = settings; t = transform; nav = navAgent; }
 
-        protected Vector3 lastKnown;
+        protected Vector3 lastKnown = new Vector3();
         protected AISettings aiS;
         protected Transform t;
         protected UnityEngine.AI.NavMeshAgent nav;
+        public static GameObject playerGO;
 
         public virtual void update() { }
         public virtual AI_STATE nextstate() { return AI_STATE.Wait; }
@@ -156,6 +163,13 @@ public class BehaviourTree : NetworkBehaviour {
 
         public override void update()
         {
+            if (aiS.type == AI_TYPE.Wallhack)
+            {
+                lastKnown = playerGO.transform.position;
+                nav.SetDestination(lastKnown);
+                return;
+            }
+
             //follow path
             if (!haspoint)
             {
@@ -171,6 +185,9 @@ public class BehaviourTree : NetworkBehaviour {
         }
         public override AI_STATE nextstate()
         {
+            if (aiS.type == AI_TYPE.Wallhack)
+                return AI_STATE.Chase;
+
             if (hasLineOfSight())
                 return AI_STATE.Chase;
             return AI_STATE.Patrol;
@@ -190,6 +207,13 @@ public class BehaviourTree : NetworkBehaviour {
         public override void update()
         {
             //chase last known
+            Debug.Log(lastKnown);
+            Debug.Log(playerGO.transform.position);
+           
+
+            if (aiS.type == AI_TYPE.Wallhack)
+                lastKnown = playerGO.transform.position;
+
             if (nav.destination != lastKnown)
                 nav.SetDestination(lastKnown);
         }

@@ -23,18 +23,18 @@ public class PlayThenDelete : MonoBehaviour
         activated = true;
     }
 
-    public void Play(float delay)
-    {
-        StartCoroutine("SetActive", delay);        
-    }
+    //public void Play(float delay)
+    //{
+    //    StartCoroutine("SetActive", delay);        
+    //}
 
-    IEnumerator SetActive(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-
-        this.gameObject.GetComponent<AudioSource>().Play();
-        activated = true;
-    }
+    //IEnumerator SetActive(float waitTime)
+    //{
+    //    yield return new WaitForSeconds(waitTime);
+    //
+    //    this.gameObject.GetComponent<AudioSource>().Play();
+    //    activated = true;
+    //}
 
     // Update is called once per frame 
     void Update ()

@@ -9,6 +9,9 @@ public class GenericBullet : MonoBehaviour {
     public float damage;
     public float speed;
 
+    [Tooltip("Object to create on death")]
+    public GameObject onDeath;
+
     // Use this for initialization
     void Start()
     {
@@ -36,6 +39,7 @@ public class GenericBullet : MonoBehaviour {
         }
 		if (collision.gameObject.CompareTag("Player") != true)
 		{
+            Instantiate(onDeath, this.transform.position, this.transform.rotation);
 			Destroy(gameObject);
 		}
 	}

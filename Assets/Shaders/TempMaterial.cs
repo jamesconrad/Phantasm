@@ -11,7 +11,7 @@ public class TempMaterial : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        material = new Material(gameObject.GetComponent<MeshRenderer>().material);
+        material = new Material(gameObject.GetComponent<MeshRenderer>().sharedMaterial);
         gameObject.GetComponent<MeshRenderer>().material = material;// = new Material(gameObject.GetComponent<MeshRenderer>().material);
         material.SetColor("_Color", color);
     }

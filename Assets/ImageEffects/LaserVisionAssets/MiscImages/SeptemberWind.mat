@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GhostUnlitWavyMaterial
-  m_Shader: {fileID: 4800000, guid: 70f2d88de76ffd64b8c32dc47e2e242e, type: 3}
+  m_Name: SeptemberWind
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -43,13 +43,13 @@ Material:
         name: _EmissionMap
       second:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 2, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 48df34396e82eda4da540db119d3d8ba, type: 3}
+        m_Scale: {x: 2, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
@@ -83,23 +83,17 @@ Material:
         name: _DstBlend
       second: 0
     - first:
-        name: _Extrusion
-      second: 0.0025
-    - first:
-        name: _ExtrusionAdd
-      second: 4750.365
-    - first:
         name: _GlossMapScale
       second: 1
     - first:
         name: _Glossiness
-      second: 0.5
+      second: 0
     - first:
         name: _GlossyReflections
       second: 1
     - first:
         name: _Metallic
-      second: 0
+      second: 1
     - first:
         name: _Mode
       second: 0
@@ -109,9 +103,6 @@ Material:
     - first:
         name: _Parallax
       second: 0.02
-    - first:
-        name: _RimPower
-      second: 1
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -130,10 +121,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
-    - first:
-        name: _RimColor
-      second: {r: 1, g: 0.46323532, b: 0.98519284, a: 0}

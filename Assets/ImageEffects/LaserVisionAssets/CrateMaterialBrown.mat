@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GhostUnlitWavyMaterial
-  m_Shader: {fileID: 4800000, guid: 70f2d88de76ffd64b8c32dc47e2e242e, type: 3}
-  m_ShaderKeywords: _EMISSION
+  m_Name: CrateMaterialBrown
+  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -18,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 98445903a1083d84ab5f235e6f266c17, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -48,7 +48,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: d3917647ffc41ee488ad5bac76fd66e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -83,14 +83,8 @@ Material:
         name: _DstBlend
       second: 0
     - first:
-        name: _Extrusion
-      second: 0.0025
-    - first:
-        name: _ExtrusionAdd
-      second: 4750.365
-    - first:
         name: _GlossMapScale
-      second: 1
+      second: 0.4
     - first:
         name: _Glossiness
       second: 0.5
@@ -110,11 +104,8 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
-        name: _RimPower
-      second: 1
-    - first:
         name: _SmoothnessTextureChannel
-      second: 0
+      second: 1
     - first:
         name: _SpecularHighlights
       second: 1
@@ -130,10 +121,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 0.7647059, g: 0.48162517, b: 0.35423878, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
-    - first:
-        name: _RimColor
-      second: {r: 1, g: 0.46323532, b: 0.98519284, a: 0}

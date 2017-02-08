@@ -5,6 +5,6 @@ namespace Plasma
 { 
 	public class ProjectorMode
 	{
-		static public bool active = false;
+		static public bool active = true;
 	}
 }
