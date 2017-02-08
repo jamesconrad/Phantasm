@@ -87,7 +87,7 @@ Material:
       second: 0.0025
     - first:
         name: _ExtrusionAdd
-      second: 37.235336
+      second: 0.202
     - first:
         name: _GlossMapScale
       second: 1
