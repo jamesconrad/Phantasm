@@ -134,6 +134,16 @@ public class Patrol : MonoBehaviour {
         return p;
     }
 
+    public Vector3 NextPoint(Vector3 prevPoint)
+    {
+        for (int i = 0; i < curve.Count; i++)
+        {
+            if (curve[i].v == prevPoint)
+                return curve[i + 1 >= curve.Count ? 0 : i].v;
+        }
+        return curve[0].v;
+    }
+
     public void DrawDebug()
     {
         for (int i = 0; i < curve.Count; i++)
