@@ -431,13 +431,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _LightType: 1
-  _Color: {r: 0, g: 1, b: 0.120000124, a: 1}
+  _Color: {r: 0, g: 0, b: 1, a: 1}
   _Intensity: 1
   _Range: 60
   _Radius: 1
   _Length: 10
   _Draw: 0
-  _Rainbow: 1
+  _Rainbow: 0
 --- !u!4 &941978746
 Transform:
   m_ObjectHideFlags: 0
@@ -600,13 +600,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _LightType: 1
-  _Color: {r: 1, g: 0.12, b: 0, a: 1}
+  _Color: {r: 1, g: 0, b: 0, a: 1}
   _Intensity: 1
   _Range: 60
   _Radius: 1
   _Length: 10
   _Draw: 0
-  _Rainbow: 1
+  _Rainbow: 0
 --- !u!114 &1331555803 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000014143731620, guid: f33b35efa1016ea43b755dcbdacb7a58,

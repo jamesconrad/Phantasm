@@ -148,4 +148,4 @@ Material:
       second: {r: 1, g: 2, b: 0.82, a: -1.55}
     - first:
         name: _RimColor
-      second: {r: 1, g: 0.38235295, b: 0.9318458, a: 1}
+      second: {r: 0.03529412, g: 0.30980393, b: 0, a: 1}

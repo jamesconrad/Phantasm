@@ -52,6 +52,7 @@ public class GunLaserScript : MonoBehaviour
                     material.SetFloat("uDistance", Vector3.Distance(ray.origin, hit.point));
                     Vector2 texcoord = hit.textureCoord;
                     Debug.Log(texcoord);
+
                     if (hit.collider.gameObject.GetComponent<MeshRenderer>() != null)
                     {
                         Texture2D tex = (Texture2D)hit.collider.gameObject.GetComponent<MeshRenderer>().material.GetTexture("_MainTex");
@@ -63,6 +64,11 @@ public class GunLaserScript : MonoBehaviour
                     else
                     {
                         colorHit = Color.black;
+                    }
+
+                    if (hit.collider.gameObject.GetComponent<Terrain>() != null)
+                    {
+                        metallicHit = 1.0f;
                     }
                 }
                 else
