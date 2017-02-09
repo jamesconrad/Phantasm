@@ -268,7 +268,7 @@ public class CustomNetworkManager : NetworkManager
 
     void SpawnPlayers(Scene _scene1, Scene _scene2)
     {
-        if (_scene2.name != "Menu")
+        if (_scene2.name == "Demo - (PROD)")
         {
             ClientScene.AddPlayer(ClientScene.readyConnection, 0, new IntegerMessage(1 - CustomNetworkManager.currentSelectionOfCharacter));
         }
