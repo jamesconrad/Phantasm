@@ -943,7 +943,7 @@ Prefab:
     - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
         type: 2}
       propertyPath: m_OnlineScene
-      value: Demo - (PROD)
+      value: SceneTemplate
       objectReference: {fileID: 0}
     - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
         type: 2}
@@ -989,6 +989,11 @@ Prefab:
         type: 2}
       propertyPath: OverridePlayerCountForDebugging
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
+        type: 2}
+      propertyPath: gameCreationSettings.sceneToSwitchTo
+      value: SceneTemplate
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
@@ -1219,7 +1224,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
