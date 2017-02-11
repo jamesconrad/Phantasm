@@ -5,6 +5,7 @@ public class GunLaserScript : MonoBehaviour
 {
     public LineRenderer line;
     float distanceMax = 100.0f;
+    float distance = 100.0f;
     QueryTriggerInteraction hitTriggers;
     public LayerMask whatToCollideWith;
     public Material material;
@@ -36,6 +37,11 @@ public class GunLaserScript : MonoBehaviour
         
     }
 
+    float GetDistance()
+    {
+        return distance;
+    }
+
     IEnumerator FireLaser()
     {
         while (true)
@@ -49,7 +55,8 @@ public class GunLaserScript : MonoBehaviour
                 if (Physics.Raycast(ray, out hit, distanceMax, whatToCollideWith, hitTriggers))
                 {
                     line.SetPosition(1, hit.point);
-                    material.SetFloat("uDistance", Vector3.Distance(ray.origin, hit.point));
+                    distance = Vector3.Distance(ray.origin, hit.point);
+                    material.SetFloat("uDistance", distance);
                     Vector2 texcoord = hit.textureCoord;
                     Debug.Log(texcoord);
 

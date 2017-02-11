@@ -266,12 +266,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &391166814 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000011700005204, guid: f33b35efa1016ea43b755dcbdacb7a58,
-    type: 2}
-  m_PrefabInternal: {fileID: 1565914188}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!114 &592822654 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
@@ -607,12 +601,6 @@ MonoBehaviour:
   _Length: 10
   _Draw: 0
   _Rainbow: 0
---- !u!114 &1331555803 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114000014143731620, guid: f33b35efa1016ea43b755dcbdacb7a58,
-    type: 2}
-  m_PrefabInternal: {fileID: 1565914188}
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1417388820
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,54 +930,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
         type: 2}
-      propertyPath: m_OnlineScene
-      value: Demo - (PROD)
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: m_OfflineScene
-      value: Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013350055010, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
       propertyPath: gameCreationSettings.dropDownMatches
       value: 
       objectReference: {fileID: 669518109}
     - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
         type: 2}
-      propertyPath: gameCreationSettings.joinAsAgentButton
-      value: 
-      objectReference: {fileID: 391166814}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: gameCreationSettings.joingAsHackerButton
-      value: 
-      objectReference: {fileID: 1331555803}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
       propertyPath: gameCreationSettings.joinMatchButton
       value: 
       objectReference: {fileID: 864297203}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: m_MaxPlayers
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: m_MinPlayers
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: OverridePlayerCountForDebugging
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
   m_IsPrefabParent: 0
