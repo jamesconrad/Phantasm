@@ -21,11 +21,15 @@ public class GunHandle : NetworkBehaviour
     public AudioSource gunShotEmptySound;
 
     private float timeSinceFired = 10000.0f;
+    private float reloadTime = 1.0f;
+    private float reloadTimeSpent = 0.0f;
     private float shootSpeed = 0.25f;
 
     private Vector2 gunShotAngle;
     private float gunShotAdd = 0.0f;
     private bool reloading = false;
+
+    private Vector3 gunLocalPosition;
 
     // Use this for initialization
     void Start()
@@ -63,14 +67,17 @@ public class GunHandle : NetworkBehaviour
             weaponSettings.currentNumberOfRounds = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfRounds;
 
             Camera.main.transform.parent = gunReference.transform.parent;
+            
+            // There's a proper way to do this right? Unity isn't this retarded right?
+            gunLocalPosition = new Vector3(gunReference.transform.localPosition.x, gunReference.transform.localPosition.y, gunReference.transform.localPosition.z);
         }
     }
 
     public void FixedUpdate()
     {
-        if (timeSinceFired < 0.0f)
+        if (reloading)
         {
-            if (timeSinceFired < -0.5f)
+            if (reloadTimeSpent <= reloadTime * 0.5f)
             {
                 gunReference.transform.localPosition -= new Vector3(0.0f, Time.fixedDeltaTime * 0.75f, 0.0f);
             }
@@ -78,7 +85,23 @@ public class GunHandle : NetworkBehaviour
             {
                 gunReference.transform.localPosition += new Vector3(0.0f, Time.fixedDeltaTime * 0.75f, 0.0f);
             }
+
+            reloadTimeSpent += Time.fixedDeltaTime;
+
+            if (reloadTimeSpent >= reloadTime)
+            {
+                reloading = false;
+                weaponSettings.currentNumberOfClips--;
+                weaponSettings.currentNumberOfRounds = weaponSettings.ammoSettings.maxClipSize;
+                GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds);
+
+                //gunReference.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
+                gunReference.transform.localPosition = gunLocalPosition;
+            }
+
         }
+
+        
     }
     
     // Update is called once per frame
@@ -104,7 +127,7 @@ public class GunHandle : NetworkBehaviour
             {
                 laser.active = false;
             }
-            reloading = false;
+            //reloading = false;
         }
         else
         {
@@ -166,15 +189,14 @@ public class GunHandle : NetworkBehaviour
                 reloading = true;
                 laser.active = !reloading;
 
-                weaponSettings.currentNumberOfClips--;
-                weaponSettings.currentNumberOfRounds = weaponSettings.ammoSettings.maxClipSize;
-                GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds);
 
+                
 
                 gunShotReloadSound.pitch = Random.Range(0.90f, 1.10f);
                 gunShotReloadSound.Play();
-
-                timeSinceFired = -1.0f;
+                
+                reloadTimeSpent = 0.0f;
+                timeSinceFired = -1.0f;// + Time.fixedDeltaTime;
             }
         }
 
