@@ -97,7 +97,10 @@ public class CustomNetworkManager : NetworkManager
         if (spawnLocations.Length == 0)
         {
             Debug.Log("There are no spawn locations for the phantom.");
-            NetworkServer.Spawn(PhantomFactory(Vector3.up * 2, Quaternion.identity) as GameObject);
+            for (int i = 0; i < numOfEnemies; i++)
+            {
+                NetworkServer.Spawn(PhantomFactory(Vector3.up * 2, Quaternion.identity) as GameObject);
+            }
         }
         else
         {

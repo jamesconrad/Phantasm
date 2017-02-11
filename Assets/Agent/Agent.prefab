@@ -4568,6 +4568,8 @@ MonoBehaviour:
     currentNumberOfClips: 0
   gunReference: {fileID: 1000010272846346}
   laser: {fileID: 114000014016322976}
+  smokeTrailReference: {fileID: 1957275954028906, guid: 2e40cf3fec49260479bb8740f051a0c4,
+    type: 2}
   gunShotShootSound: {fileID: 82000011765907664}
   gunShotReloadSound: {fileID: 82059740789537780}
   gunShotEmptySound: {fileID: 82102635838964726}

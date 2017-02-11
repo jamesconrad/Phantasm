@@ -8,8 +8,9 @@ public class GunHandle : NetworkBehaviour
     public GunSettings weaponSettings;
 
     public GameObject gunReference;
-    
+
     public GunLaserScript laser;
+    public GameObject smokeTrailReference;
 
     private RaycastHit raycastResult;
 
@@ -65,8 +66,21 @@ public class GunHandle : NetworkBehaviour
         }
     }
 
-
-
+    public void FixedUpdate()
+    {
+        if (timeSinceFired < 0.0f)
+        {
+            if (timeSinceFired < -0.5f)
+            {
+                gunReference.transform.localPosition -= new Vector3(0.0f, Time.fixedDeltaTime * 0.75f, 0.0f);
+            }
+            else
+            {
+                gunReference.transform.localPosition += new Vector3(0.0f, Time.fixedDeltaTime * 0.75f, 0.0f);
+            }
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -77,14 +91,14 @@ public class GunHandle : NetworkBehaviour
         //{
         //    gunShotAdd = Random.Range(0.15f, 0.25f);
         //}
-        
+
         timeSinceFired += Time.deltaTime;
 
         if (timeSinceFired > 0.0f)
         {
-            if(weaponSettings.bulletPrefab != null && weaponSettings.currentNumberOfRounds > 0)
+            if (weaponSettings.bulletPrefab != null && weaponSettings.currentNumberOfRounds > 0)
             {
-                laser.active = true; 
+                laser.active = true;
             }
             else
             {
@@ -133,6 +147,9 @@ public class GunHandle : NetworkBehaviour
                     }
                 }
 
+                GameObject smokeTrail = Instantiate(smokeTrailReference);
+                smokeTrail.GetComponent<SmokeTrail>().SetLinePosition(laser.line);
+
                 gunShotShootSound.pitch = Random.Range(0.90f, 1.10f);
                 gunShotShootSound.Play();
             }
@@ -161,19 +178,7 @@ public class GunHandle : NetworkBehaviour
             }
         }
 
-        if (timeSinceFired < 0.0f)
-        {
-            if (timeSinceFired < -0.5f)
-            {
-                //gunReference.transform.rotation *= Quaternion.Euler(5.0f, 0.0f, 0.0f);
-                gunReference.transform.localPosition -= new Vector3(0.0f, Time.deltaTime * 0.75f, 0.0f);
-            }
-            else
-            {
-                gunReference.transform.localPosition += new Vector3(0.0f, Time.deltaTime * 0.75f, 0.0f);
-                //gunReference.transform.rotation *= Quaternion.Euler(-5.0f, 0.0f, 0.0f);
-            }
-        }
+        
 
         if (Input.GetMouseButtonDown(2))
         {
