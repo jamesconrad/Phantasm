@@ -1210,7 +1210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 4187fd78ed8951349956f84a6dc0ec3e, type: 2}
-  fadeTexture: {fileID: 2800000, guid: a025c23fceb7d4966b603419f551ce99, type: 3}
+  fadeTexture: {fileID: 2800000, guid: 05c9cf78e47b3e74b8558076daa8eafc, type: 3}
   fadeActive: 0
   fadeSpeed: 1
 --- !u!114 &1931351498
