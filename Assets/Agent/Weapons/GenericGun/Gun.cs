@@ -2,9 +2,19 @@
 using System.Collections;
 
 [System.Serializable]
+public struct GunImpactObjects
+{
+    public GameObject onDeath;
+    public GameObject onDeathMetallic;
+};
+
+[System.Serializable]
 public struct GunSettings
 {
     public GameObject bulletPrefab;
+    
+    [Tooltip("Object to create on death")]
+    public GunImpactObjects impactObjects;
 
     [Tooltip("Offset of the barrel from the player's transform.")]
     public Vector3 barrelOffset;
@@ -31,7 +41,7 @@ public struct GunSettings
 public class Gun : MonoBehaviour
 {
     public GunSettings weaponSettings;
-    
+
     // Start is called just before any of the Update methods is called the first time
     public void Start()
     {

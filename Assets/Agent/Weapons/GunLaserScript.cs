@@ -4,6 +4,9 @@ using System.Collections;
 public class GunLaserScript : MonoBehaviour
 {
     public LineRenderer line;
+    RaycastHit rayHit;
+
+    Vector3 laserDirection;
     float distanceMax = 100.0f;
     float distance = 100.0f;
     QueryTriggerInteraction hitTriggers;
@@ -37,9 +40,19 @@ public class GunLaserScript : MonoBehaviour
         
     }
 
-    float GetDistance()
+    public float GetDistance()
     {
         return distance;
+    }
+
+    public RaycastHit getRaycastHit()
+    {
+        return rayHit;
+    }
+
+    public Vector3 getLaserDirection()
+    {
+        return laserDirection;
     }
 
     IEnumerator FireLaser()
@@ -49,21 +62,22 @@ public class GunLaserScript : MonoBehaviour
             if (active)
             {
                 Ray ray = new Ray(transform.position, transform.forward);
-                RaycastHit hit;
 
                 line.SetPosition(0, ray.origin);
-                if (Physics.Raycast(ray, out hit, distanceMax, whatToCollideWith, hitTriggers))
+                if (Physics.Raycast(ray, out rayHit, distanceMax, whatToCollideWith, hitTriggers))
                 {
-                    line.SetPosition(1, hit.point);
-                    distance = Vector3.Distance(ray.origin, hit.point);
+                    line.SetPosition(1, rayHit.point);
+                    distance = Vector3.Distance(ray.origin, rayHit.point);
                     material.SetFloat("uDistance", distance);
-                    Vector2 texcoord = hit.textureCoord;
-                    Debug.Log(texcoord);
+                    Vector2 texcoord = rayHit.textureCoord;
+                    Debug.Log(rayHit.textureCoord);
 
-                    if (hit.collider.gameObject.GetComponent<MeshRenderer>() != null)
+                    if (rayHit.collider.gameObject.GetComponent<MeshRenderer>() != null)
                     {
-                        Texture2D tex = (Texture2D)hit.collider.gameObject.GetComponent<MeshRenderer>().material.GetTexture("_MainTex");
-                        metallicHit = hit.collider.gameObject.GetComponent<MeshRenderer>().material.GetFloat("_Metallic");
+                        Texture2D tex = (Texture2D)rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.GetTexture("_MainTex");
+                        //rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.
+                        if(rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.HasProperty("_Metallic"))
+                            metallicHit = rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.GetFloat("_Metallic");
                         //Debug.Log(metallicHit);
                         if (tex != null)
                             colorHit = tex.GetPixel((int)(tex.width * texcoord.x), (int)(tex.height * texcoord.y));
@@ -73,7 +87,7 @@ public class GunLaserScript : MonoBehaviour
                         colorHit = Color.black;
                     }
 
-                    if (hit.collider.gameObject.GetComponent<Terrain>() != null)
+                    if (rayHit.collider.gameObject.GetComponent<Terrain>() != null)
                     {
                         metallicHit = 1.0f;
                     }
@@ -83,6 +97,8 @@ public class GunLaserScript : MonoBehaviour
                     line.SetPosition(1, ray.GetPoint(distanceMax));
                     material.SetFloat("uDistance", distanceMax);
                 }
+
+                laserDirection = Vector3.Normalize(line.GetPosition(1) - line.GetPosition(0));
             }
 
             yield return null;

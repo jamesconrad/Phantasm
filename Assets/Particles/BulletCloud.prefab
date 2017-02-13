@@ -455,7 +455,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 3
     enabled: 1
-    type: 0
+    type: 4
     radius: 0.01
     angle: 25
     length: 5

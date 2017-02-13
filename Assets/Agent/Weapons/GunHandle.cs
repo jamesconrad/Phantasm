@@ -20,6 +20,7 @@ public class GunHandle : NetworkBehaviour
     public AudioSource gunShotReloadSound;
     public AudioSource gunShotEmptySound;
 
+
     private float timeSinceFired = 10000.0f;
     private float reloadTime = 1.0f;
     private float reloadTimeSpent = 0.0f;
@@ -142,7 +143,7 @@ public class GunHandle : NetworkBehaviour
         }
 
 
-        Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.forward, out raycastResult);
+        //Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.forward, out raycastResult);
         //if (raycastResult.collider)
         //{
         //    Camera.main.transform.rotation = Quaternion.LookRotation((raycastResult.point - Camera.main.transform.position).normalized, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation((raycastResult.point - Camera.main.transform.position).normalized, Vector3.up), Time.deltaTime * 2f);
@@ -156,18 +157,26 @@ public class GunHandle : NetworkBehaviour
         {
             if (weaponSettings.currentNumberOfRounds > 0 && timeSinceFired > shootSpeed)
             {
+                weaponSettings.currentNumberOfRounds--;
+
                 gunShotAngle = new Vector2(Random.Range(-2.0f, 4.0f), Random.Range(4.0f, 6.0f));
                 gunShotAdd = 1.0f;
                 timeSinceFired = 0.0f;
 
-                CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
+                //CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
                 GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds);
 
                 if (weaponSettings.Hitscan)
                 {
                     {
+                        CheckHit();
                         //Add in some tag related collision stuff here.
+
                     }
+                }
+                else
+                {
+                    CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
                 }
 
                 GameObject smokeTrail = Instantiate(smokeTrailReference);
@@ -216,7 +225,7 @@ public class GunHandle : NetworkBehaviour
     public void CmdFireWeapon(Vector3 spawnPosition, Quaternion spawnRotation)
     {
         GameObject tempBullet = (GameObject)Instantiate(weaponSettings.bulletPrefab, spawnPosition, spawnRotation);
-        weaponSettings.currentNumberOfRounds--;
+        //weaponSettings.currentNumberOfRounds--;
         NetworkServer.Spawn(tempBullet);
 
     }
@@ -230,4 +239,38 @@ public class GunHandle : NetworkBehaviour
         }
         GameState.StaticEndGame();
     }
+
+    public void CheckHit()
+    {
+        raycastResult = laser.getRaycastHit();
+             
+        //Debug.Log("Checking Bullet");
+        //hit.collider.gameObject
+        if (raycastResult.collider.gameObject.CompareTag("Enemy"))
+        {
+            //Debug.Log("It's an Enemy");
+            raycastResult.collider.gameObject.GetComponent<Health>().takeDamage(weaponSettings.bulletPrefab.GetComponent<GenericBullet>().damage);
+        }
+        if (raycastResult.collider.gameObject.CompareTag("Player") != true)
+        {
+            //Debug.Log("Not the Player");
+            //Debug.Log(raycastResult.point);
+
+            if (raycastResult.rigidbody != null)
+                raycastResult.rigidbody.AddForceAtPosition(50.0f * (laser.getLaserDirection()), raycastResult.point);
+
+            if (GunLaserScript.metallicHit < 0.5f)
+            {
+                Instantiate(weaponSettings.impactObjects.onDeath, raycastResult.point, Quaternion.LookRotation(raycastResult.normal));
+            }
+            else
+            {
+                Instantiate(weaponSettings.impactObjects.onDeathMetallic, raycastResult.point, Quaternion.LookRotation(raycastResult.normal));
+            }
+            //Destroy(gameObject);
+        }
+
+    }
+
+
 }

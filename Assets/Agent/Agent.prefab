@@ -4557,6 +4557,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSettings:
     bulletPrefab: {fileID: 0}
+    impactObjects:
+      onDeath: {fileID: 0}
+      onDeathMetallic: {fileID: 0}
     barrelOffset: {x: 0, y: 0, z: 0}
     Hitscan: 0
     ammoSettings:
@@ -4600,6 +4603,11 @@ MonoBehaviour:
   weaponSettings:
     bulletPrefab: {fileID: 1000010763469236, guid: bbf5a805d6493e74f97cc2fa4225ceb6,
       type: 2}
+    impactObjects:
+      onDeath: {fileID: 1136337349554634, guid: 0d544b4cefc5fdc46adf963d82ccb72f,
+        type: 2}
+      onDeathMetallic: {fileID: 1317353710184490, guid: 2eabf2d4193ec114fadd2d575f0e84e3,
+        type: 2}
     barrelOffset: {x: 0, y: 0.054, z: 0.2}
     Hitscan: 1
     ammoSettings:
