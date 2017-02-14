@@ -96,7 +96,7 @@ public class GoodDoor : MonoBehaviour {
         public override int update()
         {
             door.RotateAround(hinge.position, hinge.up, swingDir * swingSpeed * Time.deltaTime);
-            if (door.localRotation.eulerAngles.y >= openLimit)
+            if (swingDir > 0 ? door.localRotation.eulerAngles.y >= openLimit : door.localRotation.eulerAngles.y <= openLimit)
             {
                 return 3;
             }
@@ -118,7 +118,7 @@ public class GoodDoor : MonoBehaviour {
         public override int update()
         {
             door.RotateAround(hinge.position, hinge.up, -swingDir * swingSpeed * Time.deltaTime);
-            if (door.localRotation.eulerAngles.y >= 315 && door.localRotation.eulerAngles.y <= 360)
+            if (door.localRotation.eulerAngles.y >= 359 && door.localRotation.eulerAngles.y <= 360)
             {
                 return 4;
             }
