@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class WorldCameraOrientation : MonoBehaviour {
 
-    private Transform cam;
-    private Vector3 brot;
+    public Transform cam;
 
 	// Use this for initialization
 	void Start () {
-        cam = transform.parent.transform.parent.transform.parent.transform;
-        brot = new Vector3(90, 0, 0);
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
         Vector3 crot = cam.eulerAngles;
-        Vector3 rot = crot + brot;
-        transform.rotation.Equals(Quaternion.Euler(rot));
+        Vector3 rot = Vector3.zero;
+        rot.z = crot.x;
+        rot.x = crot.y;
+        rot.y = crot.z;
+        //transform.rotation.Equals(Quaternion.Euler(rot));
+        transform.localEulerAngles = rot;
 	}
 }
