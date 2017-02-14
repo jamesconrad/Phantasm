@@ -82,8 +82,10 @@ public class GunLaserScript : MonoBehaviour
                         if(rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.HasProperty("_Metallic"))
                             metallicHit = rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.GetFloat("_Metallic");
                         //Debug.Log(metallicHit);
-                        if (tex != null)
-                            colorHit = tex.GetPixel((int)(tex.width * texcoord.x), (int)(tex.height * texcoord.y));
+                        colorHit = Color.white;
+
+                        //if (tex != null)
+                        //colorHit = tex.GetPixel((int)(tex.width * texcoord.x), (int)(tex.height * texcoord.y));
                     }
                     else
                     {
