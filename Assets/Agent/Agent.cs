@@ -47,7 +47,7 @@ public class Agent : NetworkBehaviour
             else if (textReferences[i].gameObject.name == "AmmoCounter")
             {
                 AmmoCounter = textReferences[i];
-                SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds);
+                SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds, GetComponent<GunHandle>().weaponSettings.currentNumberOfClips);
             }
         }
 
@@ -74,7 +74,7 @@ public class Agent : NetworkBehaviour
             else if (textReferences[i].gameObject.name == "AmmoCounter")
             {
                 AmmoCounter = textReferences[i];
-                SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds);
+                SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds, GetComponent<GunHandle>().weaponSettings.currentNumberOfClips);
             }
         }
         CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = false;
@@ -88,9 +88,9 @@ public class Agent : NetworkBehaviour
         SubObjectiveCounter.text = _objectivesCompleted.ToString();
     }
 
-    public void SetAmmoCount(int _ammo)
+    public void SetAmmoCount(int _ammo, int _mags)
     {
-        AmmoCounter.text = _ammo.ToString("00");
+        AmmoCounter.text = _ammo.ToString("00") + "/" + _mags.ToString("00");
     }
 
     // This function is called when the behaviour becomes disabled or inactive

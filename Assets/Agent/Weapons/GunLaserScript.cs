@@ -70,7 +70,10 @@ public class GunLaserScript : MonoBehaviour
                     distance = Vector3.Distance(ray.origin, rayHit.point);
                     material.SetFloat("uDistance", distance);
                     Vector2 texcoord = rayHit.textureCoord;
-                    Debug.Log(rayHit.textureCoord);
+                    //Debug.Log(texcoord);
+
+                    texcoord.x = Random.Range(0.0f, 1.0f);
+                    texcoord.y = Random.Range(0.0f, 1.0f);
 
                     if (rayHit.collider.gameObject.GetComponent<MeshRenderer>() != null)
                     {

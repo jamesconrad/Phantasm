@@ -94,7 +94,7 @@ public class GunHandle : NetworkBehaviour
                 reloading = false;
                 weaponSettings.currentNumberOfClips--;
                 weaponSettings.currentNumberOfRounds = weaponSettings.ammoSettings.maxClipSize;
-                GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds);
+                GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds, weaponSettings.currentNumberOfClips);
 
                 //gunReference.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
                 gunReference.transform.localPosition = gunLocalPosition;
@@ -164,7 +164,7 @@ public class GunHandle : NetworkBehaviour
                 timeSinceFired = 0.0f;
 
                 //CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
-                GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds);
+                GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds, weaponSettings.currentNumberOfClips);
 
                 if (weaponSettings.Hitscan)
                 {
