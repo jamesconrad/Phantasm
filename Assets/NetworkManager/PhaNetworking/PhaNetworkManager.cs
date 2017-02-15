@@ -297,6 +297,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				return false;
 			}
 		}
+		if (PhaNetworkingAPI.targetIP.ToString() != targetIP)
+		{		
+			PhaNetworkingAPI.targetIP = new StringBuilder(targetIP);
+		}
 		return true;
 	}
 	//Send message to IPAddress
