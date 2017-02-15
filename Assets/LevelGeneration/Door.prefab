@@ -41,21 +41,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1464265344031282
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4050328878374650}
-  m_Layer: 0
-  m_Name: Handle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1556238014893212
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,9 +67,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4418064786900116}
   - component: {fileID: 33721851372514614}
-  - component: {fileID: 65193392295440984}
   - component: {fileID: 23434247282883486}
   - component: {fileID: 114379778186797346}
+  - component: {fileID: 65949923278888096}
+  - component: {fileID: 208941996304697226}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -92,19 +78,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4050328878374650
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1464265344031282}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.375, y: 0, z: -0.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4418064786900116}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4304463275966340
 Transform:
   m_ObjectHideFlags: 1
@@ -126,9 +99,8 @@ Transform:
   m_GameObject: {fileID: 1596532976303052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 3, z: 0.25}
-  m_Children:
-  - {fileID: 4050328878374650}
+  m_LocalScale: {x: 0.2237339, y: 0.22373389, z: 0.22373389}
+  m_Children: []
   m_Father: {fileID: 4863354513701738}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -151,9 +123,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1053302526411742}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.88, y: 1.61, z: -29.932}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.3307, y: 20.75, z: -11.26}
+  m_LocalScale: {x: 0.61247474, y: 0.5886973, z: 0.70799464}
   m_Children:
   - {fileID: 4304463275966340}
   - {fileID: 4802847165314776}
@@ -198,19 +170,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1596532976303052}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65193392295440984
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1596532976303052}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Mesh: {fileID: 4300334, guid: 8dbe5e411ea04fd4e8d44c498c0a0000, type: 3}
 --- !u!65 &65409064095944090
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -223,6 +183,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65949923278888096
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596532976303052}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.0265193, y: 23.188818, z: 9.677141}
+  m_Center: {x: -150.05939, y: 11.575072, z: -139.75479}
 --- !u!114 &114379778186797346
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,7 +210,7 @@ MonoBehaviour:
   swingSpeed: 45
   openLimit: 90
   hinge: {fileID: 4802847165314776}
-  handle: {fileID: 4050328878374650}
+  handle: {fileID: 0}
   currentState: 0
 --- !u!114 &114598876159079308
 MonoBehaviour:
@@ -290,3 +262,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!208 &208941996304697226
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1596532976303052}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.5130001, y: 11.594001, z: 4.839}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -150.059, y: 11.575001, z: -139.755}
+  m_TimeToStationary: 0.5
