@@ -47,11 +47,12 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	//Receive a message that tells you what character the other player has chosen.
 	protected int ReceiveCharacterLockMessage()
 	{
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
-		Debug.Log("receive from receive character lock " +  receiveBuffer.ToString());
-		if (receiveBuffer.ToString().StartsWith(((int)MessageType.CharacterLock).ToString()))
+		StringBuilder characterLockMessage = new StringBuilder(recvBufferSize);
+		Debug.Log("bytes received: " + PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, characterLockMessage, recvBufferSize));
+		Debug.Log("receive from receive character lock " +  characterLockMessage.ToString());
+		if (characterLockMessage.ToString().StartsWith(((int)MessageType.CharacterLock).ToString()))
 		{
-			string[] message = receiveBuffer.ToString().Split(' ');
+			string[] message = characterLockMessage.ToString().Split(' ');
 			Debug.Log(message);
 			if (message.Length > 0)
 			{
