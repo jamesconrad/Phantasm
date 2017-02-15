@@ -22,7 +22,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	//Tell the other player that you are online
 	protected int SendConnectionMessage(StringBuilder givenAddress)
 	{
-		StringBuilder sendBuffer = new StringBuilder((int)MessageType.Connection, recvBufferSize);
+		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.Connection).ToString(), recvBufferSize);
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 	//Receive information that the other player is online.

@@ -129,6 +129,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 
 	void FixedUpdate()
 	{
+		Debug.Log("mainMenu state: " + mainMenuState);
 		switch (mainMenuState)
 		{
 			case MainMenuState.Menu:
@@ -138,7 +139,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			case MainMenuState.HostWaiting:
 				//Do some logic to change into CharacterSelect. Recv, check the message, check for confirmation and if yes, go to CharacterSelect.
 				//Debug.Log(ReceiveConnectionMessage());
-				if (ReceiveConnectionMessage() == 1)
+				int Result = 0;
+				Result = ReceiveConnectionMessage();
+				Debug.Log("Result of the receive: " + Result);
+				if (Result == 1)
 				{
 					SetMenuState(MainMenuState.CharacterSelect);
 				}
@@ -288,7 +292,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			return;
 		}
 		//Then send.
-		Debug.Log(SendConnectionMessage(new StringBuilder(ipInput.text)));
+		Debug.Log("Send Connection result: " + SendConnectionMessage(new StringBuilder(ipInput.text)));
 	}
 
 //Lobby loading|unloading
