@@ -101,7 +101,7 @@ public class GunHandle : NetworkBehaviour
 
         if (!isLocalPlayer)
         {
-            return;
+        //    return;
         }
 
 

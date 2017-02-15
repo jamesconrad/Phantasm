@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class Hacker : NetworkBehaviour {
+public class Hacker : MonoBehaviour {
 
     public GameObject PauseUI;
 
@@ -10,10 +10,7 @@ public class Hacker : NetworkBehaviour {
 	void Start () {
         PauseUI = Instantiate(PauseUI) as GameObject;
         
-        if (!isLocalPlayer)
-        {
-            gameObject.SetActive(false);
-        }
+ 
     }
 	
 	// Update is called once per frame
