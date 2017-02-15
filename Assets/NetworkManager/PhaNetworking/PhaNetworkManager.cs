@@ -34,6 +34,9 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				break;
 
 			case MainMenuState.ClientWaiting:
+				LoadLobby();
+				waitingScreen.GetComponentInChildren<Text>().text = "Choose your character";
+				LoadButtons();
 				break;
 		
 			case MainMenuState.CharacterSelect:
