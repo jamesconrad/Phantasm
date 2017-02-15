@@ -1443,7 +1443,7 @@ Prefab:
     - target: {fileID: 114000011700005204, guid: f33b35efa1016ea43b755dcbdacb7a58,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224000014043397120, guid: f33b35efa1016ea43b755dcbdacb7a58,
         type: 2}
@@ -1734,11 +1734,11 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1591772775}
     - target: {fileID: 114000011700005204, guid: f33b35efa1016ea43b755dcbdacb7a58,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SendStartMessageTo
+      value: GoToClientWait
       objectReference: {fileID: 0}
     - target: {fileID: 114000011700005204, guid: f33b35efa1016ea43b755dcbdacb7a58,
         type: 2}

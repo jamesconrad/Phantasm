@@ -72,6 +72,11 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		 localSelection = selection; 
 		 SendCharacterLockMessage(localSelection, PhaNetworkingAPI.targetIP);
 	}
+	public void GoToClientWait()
+	{
+		SetMenuState(MainMenuState.ClientWaiting);
+	}
+
 
 	public System.IntPtr secondarysocket;
 	// Use this for initialization
