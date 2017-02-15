@@ -9172,12 +9172,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponSettings:
-    bulletPrefab: {fileID: 0}
+    bulletPrefab: {fileID: 1000010763469236, guid: bbf5a805d6493e74f97cc2fa4225ceb6,
+      type: 2}
     impactObjects:
       onDeath: {fileID: 0}
       onDeathMetallic: {fileID: 0}
     barrelOffset: {x: 0, y: 0, z: 0}
-    Hitscan: 0
+    Hitscan: 1
     ammoSettings:
       maxClipSize: 0
       startingNumberOfRounds: 0

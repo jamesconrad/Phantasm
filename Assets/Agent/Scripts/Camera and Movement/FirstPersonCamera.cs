@@ -40,9 +40,10 @@ public class FirstPersonCamera : NetworkBehaviour
 
         playerCamera = Camera.main;
         playerTransform = GetComponent<Transform>();
-        gunTransform = GetComponent<GunHandle>().transform;
-        playerCamera.transform.position = gunTransform.position;
-        playerCamera.transform.rotation = gunTransform.rotation;
+        GunHandle temp = GetComponent<GunHandle>();
+        gunTransform = temp.transform;
+        playerCamera.transform.position = temp.gunReference.transform.position + new Vector3(-0.10f, 0.1f, -0.2f);// + new Vector3(0.0f, 1.5f, 0.5f);
+        playerCamera.transform.rotation = temp.gunReference.transform.rotation; // gunTransform.rotation;
     }
 
     public void FixedUpdate()

@@ -50,25 +50,25 @@ public class IKHandler : MonoBehaviour {
     void OnAnimatorIK()
     {
 
-        lIKTar = gun;
-        rIKTar = gun;
-        
-        //me.eulerAngles = new Vector3(me.eulerAngles.x, me.eulerAngles.y, gun.eulerAngles.z);
-
-        anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
-        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
-        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, ikWeight);
-        anim.SetIKRotationWeight(AvatarIKGoal.RightHand, ikWeight);
-
-        //anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, ikWeight);
-        //anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, ikWeight);
-
-        anim.SetIKPosition(AvatarIKGoal.LeftHand, lIKTar.position);
-        anim.SetIKPosition(AvatarIKGoal.RightHand, rIKTar.position);
-        anim.SetIKRotation(AvatarIKGoal.LeftHand, lIKTar.rotation * Quaternion.Euler(0, 0, 90));
-        anim.SetIKRotation(AvatarIKGoal.RightHand, rIKTar.rotation * Quaternion.Euler(0, 0, -90));
-
-        //anim.SetIKHintPosition(AvatarIKHint.LeftElbow, lHint.position);
-        //anim.SetIKHintPosition(AvatarIKHint.RightElbow, rHint.position);
+        //lIKTar = gun;
+        //rIKTar = gun;
+        //
+        ////me.eulerAngles = new Vector3(me.eulerAngles.x, me.eulerAngles.y, gun.eulerAngles.z);
+        //
+        //anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
+        //anim.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
+        //anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, ikWeight);
+        //anim.SetIKRotationWeight(AvatarIKGoal.RightHand, ikWeight);
+        //
+        ////anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, ikWeight);
+        ////anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, ikWeight);
+        //
+        //anim.SetIKPosition(AvatarIKGoal.LeftHand, lIKTar.position);
+        //anim.SetIKPosition(AvatarIKGoal.RightHand, rIKTar.position);
+        //anim.SetIKRotation(AvatarIKGoal.LeftHand, lIKTar.rotation * Quaternion.Euler(0, 0, 90));
+        //anim.SetIKRotation(AvatarIKGoal.RightHand, rIKTar.rotation * Quaternion.Euler(0, 0, -90));
+        //
+        ////anim.SetIKHintPosition(AvatarIKHint.LeftElbow, lHint.position);
+        ////anim.SetIKHintPosition(AvatarIKHint.RightElbow, rHint.position);
     }
 }
