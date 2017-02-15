@@ -56,7 +56,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	public GameObject HackerObj;
 	GameObject playerPrefab;
 	public GameObject otherAgentPrefab;
-	GameObject phantomPrefab;
+	public GameObject phantomPrefab;
 
 	public GameObject waitingScreen;
 	const int waitBufSize = 256;
