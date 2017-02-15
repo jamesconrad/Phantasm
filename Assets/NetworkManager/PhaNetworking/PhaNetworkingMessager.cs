@@ -50,6 +50,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		if (receiveBuffer.ToString().StartsWith(((int)MessageType.CharacterLock).ToString()))
 		{
 			string[] message = receiveBuffer.ToString().Split(' ');
+			Debug.Log(message);
 			if (message.Length > 0)
 			{
 				int result;

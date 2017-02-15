@@ -40,7 +40,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				break;
 		
 			case MainMenuState.CharacterSelect:
-				LoadLobby();
+				waitingScreen.SetActive(true);
 				waitingScreen.GetComponentInChildren<Text>().text = "Choose your character";
 				LoadButtons();
 				break;
@@ -73,7 +73,8 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	public void SetLocalSelection(int selection) 
 	{
 		 localSelection = selection; 
-		 SendCharacterLockMessage(localSelection, PhaNetworkingAPI.targetIP);
+		 Debug.Log(PhaNetworkingAPI.targetIP);
+		 Debug.Log("Sent characterlock: " + SendCharacterLockMessage(localSelection, PhaNetworkingAPI.targetIP));
 	}
 	public void GoToClientWait()
 	{
@@ -186,6 +187,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				else
 				{
 					int ReceiveResult = ReceiveCharacterLockMessage();
+					Debug.Log("CharacterLock : " + ReceiveResult);
 					if (ReceiveResult == 1)
 					{
 						selectAgentButton.interactable = false;
