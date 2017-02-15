@@ -27,7 +27,7 @@ public class MAImportExtra : MonoBehaviour {
         importer = new MayaImp();
         curves = new List<Curve>();
         //print(Application.dataPath + "/Menu/Menu Scene/menu scene.ma");
-        curves = importer.ParseCurves("Assets/Menu/Menu Scene/menu scene.ma");
+        curves = importer.ParseCurves("Assets/Menu/Menu Scene/menu scene.ma.maimport");
         GameObject camera = GameObject.Find("Main Camera");
         //initial positionng
 

@@ -1,34 +1,26 @@
 fileFormatVersion: 2
-guid: 219dfbc283410974d8f149b4624249e3
-timeCreated: 1480286875
+guid: e7ac629609fd28744858e14cd419471e
+timeCreated: 1487192404
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: curve1
-    100002: curve2
-    100004: imagePlane1
-    100006: laptop_pCube1
-    100008: //RootNode
-    100010: pCube1
-    100012: polySurface1
-    100014: polySurface1 1
-    100016: polySurface2
-    100018: polySurface2 1
-    100020: polySurface3
-    100022: spotLight1
-    400000: curve1
-    400002: curve2
-    400004: imagePlane1
-    400006: laptop_pCube1
-    400008: //RootNode
-    400010: pCube1
-    400012: polySurface1
-    400014: polySurface1 1
-    400016: polySurface2
-    400018: polySurface2 1
-    400020: polySurface3
-    400022: spotLight1
+    100000: laptop_pCube1
+    100002: //RootNode
+    100004: pCube1
+    100006: polySurface1
+    100008: polySurface1 1
+    100010: polySurface2
+    100012: polySurface2 1
+    100014: polySurface3
+    400000: laptop_pCube1
+    400002: //RootNode
+    400004: pCube1
+    400006: polySurface1
+    400008: polySurface1 1
+    400010: polySurface2
+    400012: polySurface2 1
+    400014: polySurface3
     2300000: polySurface1
     2300002: polySurface1 1
     2300004: polySurface2
@@ -105,7 +97,7 @@ ModelImporter:
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
-    skeletonHasParents: 0
+    skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   humanoidOversampling: 1
