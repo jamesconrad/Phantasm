@@ -357,6 +357,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			{
 				agentPos = FindObjectOfType<PlayerStartLocation>().transform.position;
 			}
+			else
+			{
+				Instantiate(otherAgentPrefab, agentPos, Quaternion.identity);
+			}
             playerPrefab = Instantiate(playerPrefab, agentPos, Quaternion.identity);
         }
 		phantomPrefab = Instantiate(phantomPrefab);
