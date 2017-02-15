@@ -2265,6 +2265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4623671262806790}
   - component: {fileID: 95749586723028732}
+  - component: {fileID: 114463530017584376}
   m_Layer: 0
   m_Name: Atmpt 4
   m_TagString: Untagged
@@ -9415,6 +9416,17 @@ MonoBehaviour:
     m_Bits: 4294967291
   material: {fileID: 2100000, guid: 0161d33feccd00c46912d0cd23511077, type: 2}
   active: 1
+--- !u!114 &114463530017584376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1111898041915798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49411ff4b65e12444a100f735edcdacd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114486842551564596
 MonoBehaviour:
   m_ObjectHideFlags: 1
