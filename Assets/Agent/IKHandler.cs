@@ -8,6 +8,9 @@ public class IKHandler : MonoBehaviour {
     Transform gun;
     GameObject player;
     Rigidbody agent;
+
+	public bool shittyFix = true;
+
     private Transform lIKTar;
     private Transform rIKTar;
     private float ikWeight = 1;
@@ -45,6 +48,9 @@ public class IKHandler : MonoBehaviour {
         anim.SetFloat("velocity", localVelocity.magnitude * 125);
 		//print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY") + " 0: " + theta);
         prevFramePos = agent.transform.position;
+
+		if (shittyFix)
+			transform.localPosition = Vector3.zero;
     }
 
     void OnAnimatorIK()
