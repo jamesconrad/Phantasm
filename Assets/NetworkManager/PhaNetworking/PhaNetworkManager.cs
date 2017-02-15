@@ -143,6 +143,11 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			break;
 			
 			case MainMenuState.ClientWaiting:
+				//Hear back from the other player
+				if (ReceiveConnectionMessage() == 1)
+				{
+					SetMenuState(MainMenuState.CharacterSelect);
+				}
 			break;
 
 			case MainMenuState.CharacterSelect:
