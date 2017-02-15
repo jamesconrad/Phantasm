@@ -21,7 +21,10 @@ public class PhaNetworkingAPI : MonoBehaviour {
 	
 	[DllImport("PhaNetworking", EntryPoint="Receive", CallingConvention = CallingConvention.Cdecl)]
 	public static extern int ReceiveFrom(System.IntPtr givenSocket, StringBuilder receiveBuffer, int bufferLength);
-
+	
+	[DllImport("PhaNetworking", EntryPoint="GetRemoteAddress", CallingConvention = CallingConvention.Cdecl)]
+	public static extern void GetRemoteAddress(System.IntPtr givenSocket, StringBuilder buffer, int bufferLength);
+	
 	[DllImport("PhaNetworking", EntryPoint="CloseDown", CallingConvention = CallingConvention.Cdecl)]
 	public static extern void ShutDownNetwork(System.IntPtr givenSocket);
 

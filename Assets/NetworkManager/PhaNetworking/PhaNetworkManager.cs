@@ -70,7 +70,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	public void SetLocalSelection(int selection) 
 	{
 		 localSelection = selection; 
-		 SendCharacterLockMessage(localSelection, new StringBuilder(ipInput.text));
+		 SendCharacterLockMessage(localSelection, PhaNetworkingAPI.targetIP);
 	}
 
 	public System.IntPtr secondarysocket;
@@ -146,6 +146,9 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				Debug.Log("Result of the receive: " + Result);
 				if (Result == 1)
 				{
+					PhaNetworkingAPI.targetIP = new StringBuilder(recvBufferSize);
+					PhaNetworkingAPI.GetRemoteAddress(PhaNetworkingAPI.mainSocket, PhaNetworkingAPI.targetIP, recvBufferSize);
+					SendStartMessageTo();
 					SetMenuState(MainMenuState.CharacterSelect);
 				}
 			break;
@@ -294,8 +297,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			return;
 		}
 		//Then send.
-		Debug.Log("Send Connection result: " + SendConnectionMessage(new StringBuilder(ipInput.text)));
-		SetMenuState(MainMenuState.CharacterSelect);
+		Debug.Log("Send Connection result: " + SendConnectionMessage(PhaNetworkingAPI.targetIP));
 	}
 
 //Lobby loading|unloading
