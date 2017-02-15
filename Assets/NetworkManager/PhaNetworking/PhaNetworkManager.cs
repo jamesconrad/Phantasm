@@ -293,6 +293,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		}
 		//Then send.
 		Debug.Log("Send Connection result: " + SendConnectionMessage(new StringBuilder(ipInput.text)));
+		SetMenuState(MainMenuState.CharacterSelect);
 	}
 
 //Lobby loading|unloading
