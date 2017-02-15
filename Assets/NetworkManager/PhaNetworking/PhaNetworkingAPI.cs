@@ -11,6 +11,7 @@ public class PhaNetworkingAPI : MonoBehaviour {
 	public static System.IntPtr mainSocket;
 	const int mainPort = 8889;
 	public static IPAddress hostAddress;
+	public static StringBuilder targetIP;
 
 	[DllImport("PhaNetworking", EntryPoint="Initialize", CallingConvention = CallingConvention.Cdecl)]
 	public static extern System.IntPtr InitializeNetworking(int port = mainPort);

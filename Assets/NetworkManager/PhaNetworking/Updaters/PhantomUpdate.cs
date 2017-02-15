@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PhantomUpdate : PhaNetworkingMessager {
 
+
 	// Use this for initialization
 	void Start () {
 		

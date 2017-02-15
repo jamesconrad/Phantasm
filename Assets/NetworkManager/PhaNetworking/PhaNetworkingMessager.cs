@@ -15,7 +15,8 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		CharacterLock,
 		LoadLevel,
 		PlayerUpdate,
-		EnemyUpdate
+		EnemyUpdate,
+		HealthUpdate
 	}
 
 	//Tell the other player that you are online
@@ -141,5 +142,32 @@ public class PhaNetworkingMessager : MonoBehaviour {
 			playerTransform.position = position;
 			playerTransform.rotation = orientation;
 		}
+	}
+
+	protected int SendHealthUpdate(int damageTaken, StringBuilder givenAddress)
+	{
+		StringBuilder sendBuffer = new StringBuilder(MessageType.HealthUpdate.ToString() + " " + damageTaken.ToString());
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Capacity, givenAddress);
+	}
+
+	protected int ReceiveHealthUpdate()
+	{
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
+
+		if (receiveBuffer.ToString().StartsWith(MessageType.HealthUpdate.ToString()))
+		{
+			return int.Parse(receiveBuffer.ToString().Split()[1]);
+		}
+		return 0;
+	}
+
+	protected int ReceiveInGameMessage()
+	{
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
+		if (receiveBuffer.Length > 0)
+		{
+			return int.Parse(receiveBuffer.ToString().Split(' ')[0]);
+		}
+		return -1;
 	}
 }

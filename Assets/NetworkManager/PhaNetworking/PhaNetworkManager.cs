@@ -55,6 +55,8 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	public GameObject agentObj;
 	public GameObject HackerObj;
 	GameObject playerPrefab;
+	public GameObject otherAgentPrefab;
+	GameObject phantomPrefab;
 
 	public GameObject waitingScreen;
 	const int waitBufSize = 256;
@@ -193,11 +195,63 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			break;
 			
 			case MainMenuState.InGame:
-				
+				DelegateInGameUpdates();
 			break;
 			
 			default:
 			break;
+		}
+	}
+
+	float posX, posY, posZ, oriW, oriX, oriY, oriZ;
+	private void DelegateInGameUpdates()
+	{
+		MessageType result = (MessageType) ReceiveInGameMessage();
+		if (result >= 0)
+		{
+			string[] message;
+			switch (result)
+			{
+				case MessageType.PlayerUpdate:
+					message = receiveBuffer.ToString().Split(' ');
+					posX = float.Parse(message[1]);
+					posY = float.Parse(message[2]);
+					posZ = float.Parse(message[3]);
+
+					otherAgentPrefab.transform.position = new Vector3(posX, posY, posZ);
+
+					oriW = float.Parse(message[4]);
+					oriX = float.Parse(message[5]);
+					oriY = float.Parse(message[6]);
+					oriZ = float.Parse(message[7]);
+
+					otherAgentPrefab.transform.rotation = new Quaternion(oriX, oriY, oriZ, oriW);
+					break;
+
+				case MessageType.EnemyUpdate:
+					message = receiveBuffer.ToString().Split(' ');
+					message = receiveBuffer.ToString().Split(' ');
+					posX = float.Parse(message[1]);
+					posY = float.Parse(message[2]);
+					posZ = float.Parse(message[3]);
+
+					phantomPrefab.transform.position = new Vector3(posX, posY, posZ);
+
+					oriW = float.Parse(message[4]);
+					oriX = float.Parse(message[5]);
+					oriY = float.Parse(message[6]);
+					oriZ = float.Parse(message[7]);
+
+					phantomPrefab.transform.rotation = new Quaternion(oriX, oriY, oriZ, oriW);
+					break;
+
+				case MessageType.HealthUpdate:
+					//message = receiveBuffer.ToString().Split(' ');
+					break;
+
+				default:
+					break;
+			}
 		}
 	}
 
@@ -219,6 +273,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				return false;
 			}
 		}
+		PhaNetworkingAPI.targetIP = new StringBuilder(targetIP);
 		return true;
 	}
 	//Send message to IPAddress
@@ -274,8 +329,9 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			{
 				agentPos = FindObjectOfType<PlayerStartLocation>().transform.position;
 			}
-            Instantiate(playerPrefab, agentPos, Quaternion.identity);
+            playerPrefab = Instantiate(playerPrefab, agentPos, Quaternion.identity);
         }
+		phantomPrefab = FindObjectOfType<Phantom>().gameObject;
     }  
 
 	/// <summary>
