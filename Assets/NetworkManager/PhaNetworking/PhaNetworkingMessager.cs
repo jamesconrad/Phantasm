@@ -41,12 +41,14 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	protected int SendCharacterLockMessage(int choice, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.CharacterLock).ToString() + " " + choice.ToString(), recvBufferSize);
+		Debug.Log("Send buffer contents: " + sendBuffer.ToString());
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 	//Receive a message that tells you what character the other player has chosen.
 	protected int ReceiveCharacterLockMessage()
 	{
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
+		Debug.Log("receive from receive character lock " +  receiveBuffer.ToString());
 		if (receiveBuffer.ToString().StartsWith(((int)MessageType.CharacterLock).ToString()))
 		{
 			string[] message = receiveBuffer.ToString().Split(' ');
@@ -54,7 +56,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 			if (message.Length > 0)
 			{
 				int result;
-				int.TryParse(message[1], out result);
+				result = int.Parse(message[1]);
 				return result;
 			}
 		}

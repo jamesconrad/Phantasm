@@ -157,6 +157,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				{
 					PhaNetworkingAPI.targetIP = new StringBuilder(recvBufferSize);
 					PhaNetworkingAPI.GetRemoteAddress(PhaNetworkingAPI.mainSocket, PhaNetworkingAPI.targetIP, recvBufferSize);
+					Debug.Log("rmeote address: " + PhaNetworkingAPI.targetIP);
 					SendStartMessageTo();
 					SetMenuState(MainMenuState.CharacterSelect);
 				}
@@ -277,6 +278,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	public InputField ipInput;
 	public bool VerifyIP()
 	{
+		if (mainMenuState != MainMenuState.Menu)
+		{
+			return true;
+		}
 		ipInput.text.Trim();
 		string targetIP = ipInput.text;
 		string[] ipSegments = targetIP.Split('.');
@@ -292,7 +297,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				return false;
 			}
 		}
-		PhaNetworkingAPI.targetIP = new StringBuilder(targetIP);
+		if (PhaNetworkingAPI.targetIP.ToString() != targetIP)
+		{		
+			PhaNetworkingAPI.targetIP = new StringBuilder(targetIP);
+		}
 		return true;
 	}
 	//Send message to IPAddress
@@ -331,6 +339,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	{
 		selectAgentUI.SetActive(true);
 		selectHackerUI.SetActive(true);
+		mainMenuState = MainMenuState.CharacterSelect;
 	}
 	public void UnloadLobby()
 	{
