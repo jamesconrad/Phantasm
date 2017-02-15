@@ -25,8 +25,7 @@ GameObject:
   - component: {fileID: 114660995410640762}
   - component: {fileID: 114976447045518452}
   - component: {fileID: 114267549566952884}
-  - component: {fileID: 114197655756015328}
-  - component: {fileID: 114207281580604614}
+  - component: {fileID: 114117934440920922}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -120,7 +119,7 @@ MonoBehaviour:
   matchName: default
   matchSize: 4
   isNetworkActive: 0
-  matchMaker: {fileID: 114207281580604614}
+  matchMaker: {fileID: 114117934440920922}
   phantomSettings:
     phantomGameObject: {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b,
       type: 2}
@@ -130,7 +129,7 @@ MonoBehaviour:
   gameCreationSettings:
     dropDownMatches: {fileID: 0}
     joinMatchButton: {fileID: 0}
-    sceneToSwitchTo: 
+    sceneToSwitchTo: "\U0001F345\U0001F345SceneTemplate"
 --- !u!114 &114000013350055010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,18 +145,7 @@ MonoBehaviour:
   showGUI: 1
   offsetX: 0
   offsetY: 0
---- !u!114 &114197655756015328
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012536579816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114207281580604614
+--- !u!114 &114117934440920922
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
