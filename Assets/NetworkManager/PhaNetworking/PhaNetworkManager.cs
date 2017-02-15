@@ -331,7 +331,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			}
             playerPrefab = Instantiate(playerPrefab, agentPos, Quaternion.identity);
         }
-		phantomPrefab = FindObjectOfType<Phantom>().gameObject;
+		phantomPrefab = Instantiate(phantomPrefab);
     }  
 
 	/// <summary>
