@@ -12,6 +12,8 @@ ModelImporter:
     100008: joint1
     100010: joint2
     100012: joint3
+    100014: Camera_Controller
+    100016: Camera_IK
     400000: Ceiling_Base
     400002: //RootNode
     400004: Ceiling_Camera
@@ -19,9 +21,12 @@ ModelImporter:
     400008: joint1
     400010: joint2
     400012: joint3
+    400014: Camera_Controller
+    400016: Camera_IK
     4300000: Ceiling_Base
     4300002: Ceiling_Camera
     4300004: Emissive_Texture
+    7400000: Take 001
     9500000: //RootNode
     13700000: Ceiling_Base
     13700002: Ceiling_Camera
