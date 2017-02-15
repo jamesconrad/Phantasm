@@ -8772,7 +8772,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 623ffbb69b443834ea7ad200c0fa32b8, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -8829,7 +8829,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -9173,6 +9173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponSettings:
     bulletPrefab: {fileID: 0}
+    impactObjects:
+      onDeath: {fileID: 0}
+      onDeathMetallic: {fileID: 0}
     barrelOffset: {x: 0, y: 0, z: 0}
     Hitscan: 0
     ammoSettings:
@@ -9184,6 +9187,8 @@ MonoBehaviour:
     currentNumberOfClips: 0
   gunReference: {fileID: 1000010272846346}
   laser: {fileID: 114000014016322976}
+  smokeTrailReference: {fileID: 1957275954028906, guid: 2e40cf3fec49260479bb8740f051a0c4,
+    type: 2}
   gunShotShootSound: {fileID: 82000011765907664}
   gunShotReloadSound: {fileID: 82059740789537780}
   gunShotEmptySound: {fileID: 82102635838964726}
@@ -9214,6 +9219,11 @@ MonoBehaviour:
   weaponSettings:
     bulletPrefab: {fileID: 1000010763469236, guid: bbf5a805d6493e74f97cc2fa4225ceb6,
       type: 2}
+    impactObjects:
+      onDeath: {fileID: 1136337349554634, guid: 0d544b4cefc5fdc46adf963d82ccb72f,
+        type: 2}
+      onDeathMetallic: {fileID: 1317353710184490, guid: 2eabf2d4193ec114fadd2d575f0e84e3,
+        type: 2}
     barrelOffset: {x: 0, y: 0.054, z: 0.2}
     Hitscan: 1
     ammoSettings:
