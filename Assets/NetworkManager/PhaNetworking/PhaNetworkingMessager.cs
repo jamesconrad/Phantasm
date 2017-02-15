@@ -13,7 +13,9 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	{
 		Connection = 0,
 		CharacterLock,
-		LoadLevel
+		LoadLevel,
+		PlayerUpdate,
+		EnemyUpdate
 	}
 
 	//Tell the other player that you are online
@@ -71,5 +73,73 @@ public class PhaNetworkingMessager : MonoBehaviour {
 			return 1;
 		}
 		return 0;
+	}
+
+	protected int SendPlayerUpdate(Vector3 position, Quaternion orientation, StringBuilder givenAddress)
+	{
+		StringBuilder sendBuffer = new StringBuilder(
+		MessageType.PlayerUpdate.ToString() + " " + 
+		position.x + " " + position.y + " " + position.z + " " +
+		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
+		 recvBufferSize);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+	}
+
+	protected void ReceivePlayerUpdate(Transform playerTransform)
+	{
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
+		if (receiveBuffer.ToString().StartsWith(MessageType.PlayerUpdate.ToString()))
+		{
+			string[] message = receiveBuffer.ToString().Split(' ');
+			Vector3 position;
+			Quaternion orientation;
+
+			position.x = float.Parse(message[1]);
+			position.y = float.Parse(message[2]);
+			position.z = float.Parse(message[3]);
+
+			orientation.w = float.Parse(message[4]);
+			orientation.x = float.Parse(message[5]);
+			orientation.y = float.Parse(message[6]);
+			orientation.z = float.Parse(message[7]);
+
+			playerTransform.position = position;
+			playerTransform.rotation = orientation;
+		}
+	}
+
+
+//Have multiple sockets instead of this. This could cause a backlog of issues, but it's fine for now.
+	protected int SendEnemyUpdate(Vector3 position, Quaternion orientation, StringBuilder givenAddress)
+	{
+		StringBuilder sendBuffer = new StringBuilder(
+		MessageType.EnemyUpdate.ToString() + " " + 
+		position.x + " " + position.y + " " + position.z + " " +
+		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
+		 recvBufferSize);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+	}
+
+	protected void ReceiveEnemyUpdate(Transform playerTransform)
+	{
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
+		if (receiveBuffer.ToString().StartsWith(MessageType.EnemyUpdate.ToString()))
+		{
+			string[] message = receiveBuffer.ToString().Split(' ');
+			Vector3 position;
+			Quaternion orientation;
+
+			position.x = float.Parse(message[1]);
+			position.y = float.Parse(message[2]);
+			position.z = float.Parse(message[3]);
+
+			orientation.w = float.Parse(message[4]);
+			orientation.x = float.Parse(message[5]);
+			orientation.y = float.Parse(message[6]);
+			orientation.z = float.Parse(message[7]);
+
+			playerTransform.position = position;
+			playerTransform.rotation = orientation;
+		}
 	}
 }
