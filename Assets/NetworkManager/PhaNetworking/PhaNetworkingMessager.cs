@@ -72,8 +72,9 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	}
 	protected int ReceiveLoadLevelMessage()
 	{
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
-		if (receiveBuffer.ToString().StartsWith(((int)MessageType.LoadLevel).ToString()))
+		StringBuilder LevelReceiveBuffer = new StringBuilder(recvBufferSize);
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, LevelReceiveBuffer, recvBufferSize);
+		if (LevelReceiveBuffer.ToString().StartsWith(((int)MessageType.LoadLevel).ToString()))
 		{
 			return 1;
 		}
@@ -92,10 +93,11 @@ public class PhaNetworkingMessager : MonoBehaviour {
 
 	protected void ReceivePlayerUpdate(Transform playerTransform)
 	{
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
-		if (receiveBuffer.ToString().StartsWith(((int)MessageType.PlayerUpdate).ToString()))
+		StringBuilder PlayerReceiveBuffer = new StringBuilder(recvBufferSize);
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, PlayerReceiveBuffer, recvBufferSize);
+		if (PlayerReceiveBuffer.ToString().StartsWith(((int)MessageType.PlayerUpdate).ToString()))
 		{
-			string[] message = receiveBuffer.ToString().Split(' ');
+			string[] message = PlayerReceiveBuffer.ToString().Split(' ');
 			Vector3 position;
 			Quaternion orientation;
 
@@ -127,10 +129,11 @@ public class PhaNetworkingMessager : MonoBehaviour {
 
 	protected void ReceiveEnemyUpdate(Transform playerTransform)
 	{
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
-		if (receiveBuffer.ToString().StartsWith(((int)MessageType.EnemyUpdate).ToString()))
+		StringBuilder EnemyReceiveBuffer = new StringBuilder(recvBufferSize);
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, EnemyReceiveBuffer, recvBufferSize);
+		if (EnemyReceiveBuffer.ToString().StartsWith(((int)MessageType.EnemyUpdate).ToString()))
 		{
-			string[] message = receiveBuffer.ToString().Split(' ');
+			string[] message = EnemyReceiveBuffer.ToString().Split(' ');
 			Vector3 position;
 			Quaternion orientation;
 
