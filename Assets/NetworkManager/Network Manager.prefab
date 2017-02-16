@@ -28,6 +28,8 @@ GameObject:
   - component: {fileID: 114197655756015328}
   - component: {fileID: 114207281580604614}
   - component: {fileID: 114480117211789358}
+  - component: {fileID: 114912663808304864}
+  - component: {fileID: 114749481846697482}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -121,7 +123,7 @@ MonoBehaviour:
   matchName: default
   matchSize: 4
   isNetworkActive: 0
-  matchMaker: {fileID: 114480117211789358}
+  matchMaker: {fileID: 114749481846697482}
   phantomSettings:
     phantomGameObject: {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b,
       type: 2}
@@ -203,6 +205,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114660995410640762
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114749481846697482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114912663808304864
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
