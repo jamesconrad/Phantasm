@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour {
 	public enum MainMenuState
@@ -30,30 +31,32 @@ public class MainMenuManager : MonoBehaviour {
 		{
 			case MainMenuState.Menu:
 			SelectionUI.SetActive(false);
-			selectAgentButton.enabled = false;
-			selectHackerButton.enabled = false;
+			selectAgentButton.interactable = false;
+			selectHackerButton.interactable = false;
 			break;
 
 			case MainMenuState.HostWaiting:
 			SelectionUI.SetActive(true);
-			selectAgentButton.enabled = false;
-			selectHackerButton.enabled = false;
+			selectAgentButton.interactable = false;
+			selectHackerButton.interactable = false;
 			UIText.text = "Waiting for connection...\nYour ip: " + PhaNetworkManager.GetLocalHost().ToString();
+
+			PhaNetworkManager.Ishost = true;
 			break;
 
 			case MainMenuState.ClientWaiting:
 			if (VerifyIP(ipInput.text))
-			{
+			{//If the ip is a valid ip, set the api's target ip and send the connection message to it.
 				PhaNetworkingAPI.targetIP = new StringBuilder(ipInput.text);
-				Debug.Log(PhaNetworkingAPI.targetIP);
-				Debug.Log(PhaNetworkManager.Singleton);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 
-				SelectionUI.SetActive(true);
-				selectAgentButton.enabled = false;
-				selectHackerButton.enabled = false;
+				//Settings for splash screen.
+				SelectionUI.SetActive(true); 
+				selectAgentButton.interactable = false;
+				selectHackerButton.interactable = false;
 				UIText.text = "Waiting for reply...\n";
-			
+
+				PhaNetworkManager.Ishost = false;
 			}
 			else
 			{
@@ -64,13 +67,14 @@ public class MainMenuManager : MonoBehaviour {
 
 			case MainMenuState.CharacterSelect:
 			SelectionUI.SetActive(true);
-			selectAgentButton.enabled = true;
-			selectHackerButton.enabled = true;
+			selectAgentButton.interactable = true;
+			selectHackerButton.interactable = true;
 			UIText.text = "Connection confirmed, Select your character.";
-			
 			break;
 			
 			case MainMenuState.InGame:
+			//Load the scene if both players have decided on their choice.
+			SceneManager.LoadScene(PhaNetworkManager.Singleton.OnlineSceneName);
 			break;
 
 			default:
@@ -85,19 +89,41 @@ public class MainMenuManager : MonoBehaviour {
 		selectHackerButton = buttons[1];
 		UIText = SelectionUI.GetComponentInChildren<Text>();
 		ipInput = GetComponentInChildren<InputField>();
+
+		PhaNetworkManager.characterSelection = -1;
+		enemyPlayerSelection = -1;
 	}
 	
+	/// method for Create buttton
 	public void CreateMethod()
 	{
 		SetMenuState(MainMenuState.HostWaiting);
 	}
 
+	/// method for Join buttton
 	public void JoinMethod()
 	{
 		SetMenuState(MainMenuState.ClientWaiting);
 	}
 
-	/// Update is called every frame, if the MonoBehaviour is enabled.
+	/// method for Agent selection button
+	public void SelectAgent()
+	{
+		selectAgentButton.interactable = false;
+		PhaNetworkManager.characterSelection = 0;
+		PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
+	}
+
+	/// method for Hacker selection button
+	public void SelectHacker()
+	{
+		selectHackerButton.interactable = false;
+		PhaNetworkManager.characterSelection = 1;
+		PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
+	}
+	
+	private int enemyPlayerSelection = -1;
+	/// Update is called every frame, if the MonoBehaviour is interactable.
 	void Update()
 	{
 		switch (mainMenuState)
@@ -130,6 +156,30 @@ public class MainMenuManager : MonoBehaviour {
 			break;
 
 			case MainMenuState.CharacterSelect:
+			enemyPlayerSelection = PhaNetworkManager.Singleton.ReceiveCharacterLockMessage();
+			if (enemyPlayerSelection == 0)
+			{//Select players properly, disable the other 
+				selectAgentButton.interactable = false;
+				selectHackerButton.targetGraphic.color = Color.black;
+			}
+			if (enemyPlayerSelection == 1)
+			{
+				selectHackerButton.interactable = false;
+				selectAgentButton.targetGraphic.color = Color.black;
+			}
+
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{//Return to main menu
+				selectAgentButton.targetGraphic.color = Color.white;
+				selectHackerButton.targetGraphic.color = Color.white;
+				SetMenuState(MainMenuState.Menu);
+				
+			}
+			
+			if (PhaNetworkManager.characterSelection != -1 && enemyPlayerSelection != -1)
+			{//Go to in game if both players have selected 
+				SetMenuState(MainMenuState.InGame);
+			}
 			break;
 			
 			case MainMenuState.InGame:

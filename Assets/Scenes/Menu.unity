@@ -445,7 +445,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 145477333}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1138116452}
+        m_MethodName: SelectHacker
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!222 &145477335
@@ -2261,6 +2272,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 966068684}
+--- !u!1 &1039088985 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012536579816, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1631765608}
+--- !u!114 &1039088986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1039088985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb5851c90d16d724e8d5100f0b0c66c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnlineSceneName: SceneTemplate
 --- !u!1 &1105272745
 GameObject:
   m_ObjectHideFlags: 0
@@ -3353,7 +3381,18 @@ Prefab:
       propertyPath: gameCreationSettings.sceneToSwitchTo
       value: SceneTemplate
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114217009450961098, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114660995410640762, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114267549566952884, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114197655756015328, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114976447045518452, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114207281580604614, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114480117211789358, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114912663808304864, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114749481846697482, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114000013350055010, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1672653185
@@ -3682,7 +3721,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1778817918}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1138116452}
+        m_MethodName: SelectAgent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!222 &1778817920

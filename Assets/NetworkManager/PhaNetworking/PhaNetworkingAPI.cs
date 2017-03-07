@@ -13,6 +13,9 @@ public class PhaNetworkingAPI : MonoBehaviour {
 	public static IPAddress hostAddress;
 	public static StringBuilder targetIP = new StringBuilder("127.0.0.1");
 
+	/// <summary>
+	///Returns a socket pointer. Should be assigned to the mainSocket variable.>
+	/// </summary>
 	[DllImport("PhaNetworking", EntryPoint="Initialize", CallingConvention = CallingConvention.Cdecl)]
 	public static extern System.IntPtr InitializeNetworking(int port = mainPort);
 

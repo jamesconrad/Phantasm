@@ -5,8 +5,28 @@ using UnityEngine;
 
 public class PhaNetworkManager : PhaNetworkingMessager {
 
-	private static readonly PhaNetworkManager singleton = new PhaNetworkManager();
-	public static PhaNetworkManager Singleton { get { return singleton; } }
+	public string OnlineSceneName = ""; 
+	private static PhaNetworkManager singleton;
+	public static PhaNetworkManager Singleton 
+	{ 
+		get 
+		{ 
+			return singleton; 
+		} 
+	}
+	public static bool Ishost = false;
+
+	//0 for agent, 1 for hacker.
+	public static int characterSelection = 0;
+
+	/// This function is called when the object becomes enabled and active.
+	void OnEnable()
+	{
+		singleton = this;
+		PhaNetworkingAPI.mainSocket = PhaNetworkingAPI.InitializeNetworking();
+		Debug.Log("Networking initialized");
+	}
+
 	public static IPAddress GetLocalHost()
 	{
 		//Get local IP address. Hope it doesn't change. It could. I should change this to whenever it specically tries to create a game.

@@ -61,7 +61,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 				return result;
 			}
 		}
-		return 0;
+		return -1;
 	}
 
 	//Send a message to inform the other player to begin loading the level.
