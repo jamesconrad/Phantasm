@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class PhaNetworkingMessager : MonoBehaviour {
 
-	protected const int recvBufferSize = 256;
-	protected StringBuilder receiveBuffer = new StringBuilder("Nothing", recvBufferSize);
+	public const int recvBufferSize = 256;
+	public StringBuilder receiveBuffer = new StringBuilder("Nothing", recvBufferSize);
 
-	protected enum MessageType
+	public enum MessageType
 	{
 		Connection = 0,
 		CharacterLock,
@@ -20,13 +20,13 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	}
 
 	//Tell the other player that you are online
-	protected int SendConnectionMessage(StringBuilder givenAddress)
+	public int SendConnectionMessage(StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.Connection).ToString(), recvBufferSize);
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 	//Receive information that the other player is online.
-	protected int ReceiveConnectionMessage()
+	public int ReceiveConnectionMessage()
 	{
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
 		if (receiveBuffer.ToString().StartsWith(((int)MessageType.Connection).ToString()))
@@ -38,14 +38,14 @@ public class PhaNetworkingMessager : MonoBehaviour {
 
 
 	//Send a message informing the other player what character you have chosen.
-	protected int SendCharacterLockMessage(int choice, StringBuilder givenAddress)
+	public int SendCharacterLockMessage(int choice, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.CharacterLock).ToString() + " " + choice.ToString(), recvBufferSize);
 		Debug.Log("Send buffer contents: " + sendBuffer.ToString());
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 	//Receive a message that tells you what character the other player has chosen.
-	protected int ReceiveCharacterLockMessage()
+	public int ReceiveCharacterLockMessage()
 	{
 		StringBuilder characterLockMessage = new StringBuilder(recvBufferSize);
 		Debug.Log("bytes received: " + PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, characterLockMessage, recvBufferSize));
@@ -65,12 +65,12 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	}
 
 	//Send a message to inform the other player to begin loading the level.
-	protected int SendLoadLevelMessage(StringBuilder givenAddress)
+	public int SendLoadLevelMessage(StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.LoadLevel).ToString(), recvBufferSize);
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
-	protected int ReceiveLoadLevelMessage()
+	public int ReceiveLoadLevelMessage()
 	{
 		StringBuilder LevelReceiveBuffer = new StringBuilder(recvBufferSize);
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, LevelReceiveBuffer, recvBufferSize);
@@ -81,7 +81,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		return 0;
 	}
 
-	protected int SendPlayerUpdate(Vector3 position, Quaternion orientation, StringBuilder givenAddress)
+	public int SendPlayerUpdate(Vector3 position, Quaternion orientation, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(
 		((int)MessageType.PlayerUpdate).ToString() + " " + 
@@ -91,7 +91,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 
-	protected void ReceivePlayerUpdate(Transform playerTransform)
+	public void ReceivePlayerUpdate(Transform playerTransform)
 	{
 		StringBuilder PlayerReceiveBuffer = new StringBuilder(recvBufferSize);
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, PlayerReceiveBuffer, recvBufferSize);
@@ -117,7 +117,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 
 
 //Have multiple sockets instead of this. This could cause a backlog of issues, but it's fine for now.
-	protected int SendEnemyUpdate(Vector3 position, Quaternion orientation, StringBuilder givenAddress)
+	public int SendEnemyUpdate(Vector3 position, Quaternion orientation, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(
 		((int)MessageType.EnemyUpdate).ToString() + " " + 
@@ -127,7 +127,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 
-	protected void ReceiveEnemyUpdate(Transform playerTransform)
+	public void ReceiveEnemyUpdate(Transform playerTransform)
 	{
 		StringBuilder EnemyReceiveBuffer = new StringBuilder(recvBufferSize);
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, EnemyReceiveBuffer, recvBufferSize);
@@ -151,13 +151,13 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		}
 	}
 
-	protected int SendHealthUpdate(int damageTaken, StringBuilder givenAddress)
+	public int SendHealthUpdate(int damageTaken, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.HealthUpdate).ToString() + " " + damageTaken.ToString());
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Capacity, givenAddress);
 	}
 
-	protected int ReceiveHealthUpdate()
+	public int ReceiveHealthUpdate()
 	{
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
 
@@ -168,7 +168,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		return 0;
 	}
 
-	protected int ReceiveInGameMessage()
+	public int ReceiveInGameMessage()
 	{
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
 		if (receiveBuffer.Length > 0)

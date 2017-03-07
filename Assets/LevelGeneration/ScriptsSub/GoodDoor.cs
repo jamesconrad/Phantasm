@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GoodDoor : MonoBehaviour {
+public class GoodDoor : NetworkBehaviour {
 
     public int swingDir = 1;
     public float swingSpeed = 0.8f;
@@ -10,12 +11,23 @@ public class GoodDoor : MonoBehaviour {
     public Transform hinge;
     public Transform handle;
     public int currentState;
+    [SyncVar]
     private DoorSwingState state = new Shut();
     private bool inputSpamming = false;
     private int prevstate;
 
     bool active = false;
-
+    //[SyncVar]
+    //private Vector3 thisPosition;
+    //[SyncVar]
+    //private Quaternion thisRotation;
+    //
+    //void Start()
+    //{
+    //    thisPosition = this.transform.position;
+    //    thisRotation = this.transform.rotation;
+    //
+    //}
 
     void Activate()
     {
@@ -96,7 +108,7 @@ public class GoodDoor : MonoBehaviour {
         public override int update()
         {
             door.RotateAround(hinge.position, hinge.up, swingDir * swingSpeed * Time.deltaTime);
-            if (door.localRotation.eulerAngles.y >= openLimit)
+            if (swingDir > 0 ? door.localRotation.eulerAngles.y >= openLimit : door.localRotation.eulerAngles.y <= openLimit)
             {
                 return 3;
             }
@@ -118,7 +130,7 @@ public class GoodDoor : MonoBehaviour {
         public override int update()
         {
             door.RotateAround(hinge.position, hinge.up, -swingDir * swingSpeed * Time.deltaTime);
-            if (door.localRotation.eulerAngles.y >= 315 && door.localRotation.eulerAngles.y <= 360)
+            if (door.localRotation.eulerAngles.y >= 359 && door.localRotation.eulerAngles.y <= 360)
             {
                 return 4;
             }

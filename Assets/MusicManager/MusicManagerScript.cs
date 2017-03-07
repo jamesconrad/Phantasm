@@ -13,6 +13,8 @@ public class MusicManagerScript : MonoBehaviour
     public GameObject AgentObject;
     public GameObject[] PhantomObject;
 
+    float maxVolume = 0.75f;
+
     float intensity = 0.3f;
 
     // Use this for initialization
@@ -78,7 +80,7 @@ public class MusicManagerScript : MonoBehaviour
         {
             float intensityAdjustClamp = Mathf.Clamp(intensityAdjust - i, 0.0f, 1.0f);
             
-            musicSource[i].volume = intensityAdjustClamp;
+            musicSource[i].volume = intensityAdjustClamp * maxVolume;
         }
 
 

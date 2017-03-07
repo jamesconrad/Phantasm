@@ -25,7 +25,7 @@ public class Phantom : NetworkBehaviour
     public void Start()
     {
 		setVisibility();
-		gameObject.SetActive(true);
+
 
         if (!isLocalPlayer)
         {
@@ -34,17 +34,12 @@ public class Phantom : NetworkBehaviour
 
         }
 
-        // if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])
-        // {
-        //     GetComponent<Collider>().enabled = false;
-        // }
+        if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])
+        {
+            GetComponent<Collider>().enabled = false;
+        }
 
         respawnPoints = FindObjectsOfType<PhantomSpawnLocation>();
-		if (respawnPoints.Length > 0)
-		{
-			transform.position = respawnPoints[Random.Range(0, respawnPoints.Length-1)].transform.position;
-		}
-Debug.Log ("Phantom Spawn Methods");
     }
 
 
