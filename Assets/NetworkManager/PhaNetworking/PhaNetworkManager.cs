@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using System.Net;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	{
 		singleton = this;
 		PhaNetworkingAPI.mainSocket = PhaNetworkingAPI.InitializeNetworking();
+		PhaNetworkManager.singleton.SendConnectionMessage(new StringBuilder("0.0.0.1"));
 		Debug.Log("Networking initialized");
 	}
 
