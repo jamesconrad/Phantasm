@@ -140,6 +140,8 @@ public class MainMenuManager : MonoBehaviour {
 			{
 				SetMenuState(MainMenuState.CharacterSelect);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
+				PhaNetworkingAPI.targetIP = new StringBuilder(PhaNetworkManager.recvBufferSize);
+				PhaNetworkingAPI.GetRemoteAddress(PhaNetworkingAPI.mainSocket, PhaNetworkingAPI.targetIP, PhaNetworkManager.recvBufferSize);
 			}
 			break;
 
