@@ -14,6 +14,7 @@ public class FirstPersonCamera : NetworkBehaviour
     private Vector2 ClampMovement;
     public float MaxCameraY;
     public float MinCameraY;
+    public float fov = 45;
 
     private Quaternion rot;
 
@@ -39,10 +40,11 @@ public class FirstPersonCamera : NetworkBehaviour
         MouseMovement = new Vector2(0.0f, 0.0f);
 
         playerCamera = Camera.main;
+        playerCamera.fieldOfView = fov;
         playerTransform = GetComponent<Transform>();
         GunHandle temp = GetComponent<GunHandle>();
         gunTransform = temp.transform;
-        playerCamera.transform.position = temp.gunReference.transform.position + new Vector3(-0.10f, 0.1f, -0.2f);// + new Vector3(0.0f, 1.5f, 0.5f);
+        playerCamera.transform.position = temp.gunReference.transform.position + new Vector3(-0.10f, 0.25f, -0.4f);// + new Vector3(0.0f, 1.5f, 0.5f);
         playerCamera.transform.rotation = temp.gunReference.transform.rotation; // gunTransform.rotation;
     }
 

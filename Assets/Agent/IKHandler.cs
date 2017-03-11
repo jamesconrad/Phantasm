@@ -44,7 +44,7 @@ public class IKHandler : MonoBehaviour {
         //print(localVelocity.magnitude + " @ X:" + localVelocity.x + " Z:" + localVelocity.z);
         
         anim.SetFloat("movX",localVelocity.x * 10);
-        anim.SetFloat("movY",localVelocity.z * 10);
+        anim.SetFloat("movY",localVelocity.z * 10 * -1);
         anim.SetFloat("velocity", localVelocity.magnitude * 125);
 		//print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY") + " 0: " + theta);
         prevFramePos = agent.transform.position;

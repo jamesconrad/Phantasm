@@ -5265,7 +5265,7 @@ Transform:
   m_GameObject: {fileID: 1000014286740798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.2, z: 1}
   m_Children:
   - {fileID: 4623671262806790}
   - {fileID: 4000010182490586}
@@ -9283,6 +9283,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   MaxCameraY: 45
   MinCameraY: -45
+  FoV: 45
 --- !u!114 &114000012956721870
 MonoBehaviour:
   m_ObjectHideFlags: 1
