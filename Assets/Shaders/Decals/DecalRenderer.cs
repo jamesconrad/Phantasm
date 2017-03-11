@@ -57,7 +57,12 @@ public class DecalRenderer : MonoBehaviour
 		}
 	}
 
-	public void OnWillRenderObject()
+    //public void OnWillRenderObject()
+    //{
+    //    Update();
+    //}
+
+	public void Update()
 	{
 		var act = gameObject.activeInHierarchy && enabled;
 		if (!act)

@@ -2084,6 +2084,7 @@ GameObject:
   - component: {fileID: 114000011350886908}
   - component: {fileID: 114000010520363438}
   - component: {fileID: 114486842551564596}
+  - component: {fileID: 114664240226818570}
   m_Layer: 30
   m_Name: Agent
   m_TagString: Player
@@ -9192,6 +9193,8 @@ MonoBehaviour:
   laser: {fileID: 114000014016322976}
   smokeTrailReference: {fileID: 1957275954028906, guid: 2e40cf3fec49260479bb8740f051a0c4,
     type: 2}
+  gunShotDecal: {fileID: 1620735203439594, guid: 2c22db7781b01414b9f1d53305ca7bbb,
+    type: 2}
   gunShotShootSound: {fileID: 82000011765907664}
   gunShotReloadSound: {fileID: 82059740789537780}
   gunShotEmptySound: {fileID: 82102635838964726}
@@ -9283,7 +9286,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   MaxCameraY: 45
   MinCameraY: -45
-  FoV: 45
+  fov: 45
 --- !u!114 &114000012956721870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9443,6 +9446,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunHandle: {fileID: 114000011784594182}
   healthHandle: {fileID: 114000013077425356}
+--- !u!114 &114664240226818570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014286740798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213970222cf303f4794a3978e48f3206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CubeMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!120 &120000013785742176
 LineRenderer:
   m_ObjectHideFlags: 1

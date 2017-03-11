@@ -11,6 +11,7 @@ public class GunHandle : NetworkBehaviour
 
     public GunLaserScript laser;
     public GameObject smokeTrailReference;
+    public GameObject gunShotDecal;
 
     private RaycastHit raycastResult;
 
@@ -267,6 +268,13 @@ public class GunHandle : NetworkBehaviour
             {
                 Instantiate(weaponSettings.impactObjects.onDeathMetallic, raycastResult.point, Quaternion.LookRotation(raycastResult.normal));
             }
+
+            
+            Instantiate(gunShotDecal, raycastResult.point, 
+                Quaternion.LookRotation(-raycastResult.normal) * 
+                Quaternion.Euler(-90.0f, 0.0f, 0.0f) * 
+                Quaternion.Euler(0.0f, Random.Range(0.0f, 359.9f), 0.0f));
+            
             //Destroy(gameObject);
         }
 
