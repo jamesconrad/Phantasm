@@ -15,13 +15,26 @@ public class MainMenuManager : MonoBehaviour {
 		InGame = 4
 	} 	
 
-	public GameObject SelectionUI; Button selectAgentButton; Button selectHackerButton; Text UIText;
+	public GameObject SelectionUI; Button selectAgentButton; Button selectHackerButton;
+	public  Text UIText;
 	public Button createGameButton;
 	public Button JoinGameButton;
 	public InputField ipInput;
 
 	MainMenuState mainMenuState = MainMenuState.Menu;
 
+	// Use this for initialization
+	void Start () {
+		Button[] buttons = SelectionUI.GetComponentsInChildren<Button>();
+		selectAgentButton = buttons[0];
+		selectHackerButton = buttons[1];
+		UIText = SelectionUI.GetComponentInChildren<Text>();
+		ipInput = GetComponentInChildren<InputField>();
+
+		PhaNetworkManager.characterSelection = -1;
+		enemyPlayerSelection = -1;
+	}
+	
 	//Handle various changes for each state
 	//Try to manage all menu changes from here.
 	public void SetMenuState(MainMenuState state)
@@ -39,7 +52,10 @@ public class MainMenuManager : MonoBehaviour {
 			SelectionUI.SetActive(true);
 			selectAgentButton.interactable = false;
 			selectHackerButton.interactable = false;
-			UIText.text = "Waiting for connection...\nYour ip: " + PhaNetworkManager.GetLocalHost().ToString();
+			UIText.text = "Waiting for connection...\nYour ip: " 
+			+ PhaNetworkManager
+			.GetLocalHost()
+			.ToString();
 
 			PhaNetworkManager.Ishost = true;
 			break;
@@ -82,18 +98,6 @@ public class MainMenuManager : MonoBehaviour {
 		}
 	}
 
-	// Use this for initialization
-	void Start () {
-		Button[] buttons = SelectionUI.GetComponentsInChildren<Button>();
-		selectAgentButton = buttons[0];
-		selectHackerButton = buttons[1];
-		UIText = SelectionUI.GetComponentInChildren<Text>();
-		ipInput = GetComponentInChildren<InputField>();
-
-		PhaNetworkManager.characterSelection = -1;
-		enemyPlayerSelection = -1;
-	}
-	
 	/// method for Create buttton
 	public void CreateMethod()
 	{
@@ -139,9 +143,9 @@ public class MainMenuManager : MonoBehaviour {
 			if (PhaNetworkManager.Singleton.ReceiveConnectionMessage() > 0)
 			{
 				SetMenuState(MainMenuState.CharacterSelect);
-				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 				PhaNetworkingAPI.targetIP = new StringBuilder(PhaNetworkManager.recvBufferSize);
 				PhaNetworkingAPI.GetRemoteAddress(PhaNetworkingAPI.mainSocket, PhaNetworkingAPI.targetIP, PhaNetworkManager.recvBufferSize);
+				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 			}
 			break;
 
@@ -158,16 +162,20 @@ public class MainMenuManager : MonoBehaviour {
 			break;
 
 			case MainMenuState.CharacterSelect:
-			enemyPlayerSelection = PhaNetworkManager.Singleton.ReceiveCharacterLockMessage();
-			if (enemyPlayerSelection == 0)
-			{//Select players properly, disable the other 
-				selectAgentButton.interactable = false;
-				selectHackerButton.targetGraphic.color = Color.black;
-			}
-			if (enemyPlayerSelection == 1)
+			int i = PhaNetworkManager.Singleton.ReceiveCharacterLockMessage();
+			if (i > 0 && i != 10035)
 			{
-				selectHackerButton.interactable = false;
-				selectAgentButton.targetGraphic.color = Color.black;
+				enemyPlayerSelection = i;
+				if (enemyPlayerSelection == 0)
+				{//Select players properly, disable the other 
+					selectAgentButton.interactable = false;
+					selectAgentButton.targetGraphic.color = Color.black;
+				}
+				if (enemyPlayerSelection == 1)
+				{
+					selectHackerButton.interactable = false;
+					selectHackerButton.targetGraphic.color = Color.black;
+				}
 			}
 
 			if (Input.GetKeyDown(KeyCode.Escape))
