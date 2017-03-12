@@ -29,6 +29,12 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		Debug.Log("Networking initialized");
 	}
 
+	/// This function is called when the MonoBehaviour will be destroyed.
+	void OnDestroy()
+	{
+		PhaNetworkingAPI.ShutDownNetwork(PhaNetworkingAPI.mainSocket);
+	}
+
 	public static IPAddress GetLocalHost()
 	{
 		//Get local IP address. Hope it doesn't change. It could. I should change this to whenever it specically tries to create a game.
