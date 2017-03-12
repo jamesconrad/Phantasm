@@ -34,5 +34,10 @@ public class PhantomSpawnLocation : MonoBehaviour
 
     }
 
+    public void Start()
+    {
+        Instantiate(Resources.Load("Phantom"));
+    }
+
 
 }
