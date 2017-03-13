@@ -151,12 +151,34 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		}
 	}
 
+	public void ParseObjectUpdate(StringBuilder buffer, Transform objectTransform)
+	{
+		string[] message = buffer.ToString().Split(' ');
+		Vector3 position;
+		Quaternion orientation;
+
+		position.x = float.Parse(message[1]);
+		position.y = float.Parse(message[2]);
+		position.z = float.Parse(message[3]);
+
+		orientation.w = float.Parse(message[4]);
+		orientation.x = float.Parse(message[5]);
+		orientation.y = float.Parse(message[6]);
+		orientation.z = float.Parse(message[7]);
+
+		objectTransform.position = position;
+		objectTransform.rotation = orientation;
+
+		return;
+	}
+
 	public int SendHealthUpdate(int damageTaken, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.HealthUpdate).ToString() + " " + damageTaken.ToString());
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Capacity, givenAddress);
 	}
 
+	///returns the value of damage taken.
 	public int ReceiveHealthUpdate()
 	{
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
@@ -168,7 +190,14 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		return 0;
 	}
 
-	public int ReceiveInGameMessage()
+	public int ParseHealthUpdate(StringBuilder buffer)
+	{
+		string[] message = buffer.ToString().Split(' ');
+
+		return int.Parse(message[1]);
+	}
+
+	public int ReceiveInGameMessage() 
 	{
 		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
 		if (receiveBuffer.Length > 0)
