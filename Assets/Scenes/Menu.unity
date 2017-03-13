@@ -3310,18 +3310,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114585640059533612, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: RemoteAgentPrefab
-      value: 
-      objectReference: {fileID: 1421206583815630, guid: 0d6c5bc08c4ad674493d65db06bb47d2,
-        type: 2}
-    - target: {fileID: 114585640059533612, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: PhantomPrefab
-      value: 
-      objectReference: {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
   m_IsPrefabParent: 0
