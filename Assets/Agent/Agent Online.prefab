@@ -998,7 +998,6 @@ GameObject:
   - component: {fileID: 4744981939860504}
   - component: {fileID: 54239036382245936}
   - component: {fileID: 136071156993785656}
-  - component: {fileID: 114204601651866770}
   m_Layer: 0
   m_Name: Agent Online
   m_TagString: Player
@@ -5832,17 +5831,6 @@ MonoBehaviour:
   Contrast: 1.5
   HorizontalStretch: 1
   VerticalStretch: 1
---- !u!114 &114204601651866770
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1421206583815630}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035212354d80cbc47b841f548b9a2282, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114206453496603994
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6009,6 +5997,9 @@ MonoBehaviour:
   weaponSettings:
     bulletPrefab: {fileID: 1000010763469236, guid: bbf5a805d6493e74f97cc2fa4225ceb6,
       type: 2}
+    impactObjects:
+      onDeath: {fileID: 0}
+      onDeathMetallic: {fileID: 0}
     barrelOffset: {x: 0, y: 0.054, z: 0.2}
     Hitscan: 1
     ammoSettings:
@@ -6029,6 +6020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49411ff4b65e12444a100f735edcdacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shittyFix: 1
 --- !u!114 &114473468261951830
 MonoBehaviour:
   m_ObjectHideFlags: 1

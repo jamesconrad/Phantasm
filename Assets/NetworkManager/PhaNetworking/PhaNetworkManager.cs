@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PhaNetworkManager : PhaNetworkingMessager {
 
@@ -20,6 +21,9 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	//0 for agent, 1 for hacker.
 	public static int characterSelection = 0;
 
+	public GameObject AgentPrefab;
+	public GameObject HackerPrefab;
+
 	/// This function is called when the object becomes enabled and active.
 	void OnEnable()
 	{
@@ -27,6 +31,8 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		PhaNetworkingAPI.mainSocket = PhaNetworkingAPI.InitializeNetworking();
 		PhaNetworkManager.singleton.SendConnectionMessage(new StringBuilder("0.0.0.1"));
 		Debug.Log("Networking initialized");
+
+		SceneManager.activeSceneChanged += SpawnPlayer;
 	}
 
 	/// This function is called when the MonoBehaviour will be destroyed.
@@ -53,5 +59,17 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+	
+	void SpawnPlayer(Scene _scene1, Scene _scene2)
+	{
+		if (characterSelection == 0)
+		{
+			GameObject.Instantiate(AgentPrefab);
+		}
+		else if (characterSelection == 1)
+		{
+			GameObject.Instantiate(HackerPrefab);
+		}
 	}
 }
