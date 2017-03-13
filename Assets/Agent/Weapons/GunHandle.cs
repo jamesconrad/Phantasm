@@ -45,11 +45,7 @@ public class GunHandle : NetworkBehaviour
             weaponSettings.currentNumberOfRounds = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfRounds;
 
         }
-    }
 
-    // Called on clients for player objects for the local client (only)
-    public override void OnStartLocalPlayer()
-    {
         playerTransform = GetComponent<Transform>();
 
         weaponSettings.currentNumberOfClips = weaponSettings.ammoSettings.startingNumberOfClips;
@@ -134,14 +130,6 @@ public class GunHandle : NetworkBehaviour
         {
 
         }
-
-
-
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
 
         //Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.forward, out raycastResult);
         //if (raycastResult.collider)

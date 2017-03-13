@@ -9136,7 +9136,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014286740798}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4400fe75c41ae8044b390219dfcf8503, type: 3}
   m_Name: 
@@ -9201,7 +9201,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014286740798}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87dc45f759f4bf843b05d7c8dc86b08f, type: 3}
   m_Name: 
@@ -9309,7 +9309,7 @@ MonoBehaviour:
   health: 100
   currentHealth: 0
   deathDelay: 0
-  disableOnDeath: 1
+  disableOnDeath: 0
   OnDisable:
     m_PersistentCalls:
       m_Calls:

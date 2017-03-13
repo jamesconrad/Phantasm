@@ -63,13 +63,16 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	
 	void SpawnPlayer(Scene _scene1, Scene _scene2)
 	{
-		if (characterSelection == 0)
-		{
-			GameObject.Instantiate(AgentPrefab);
-		}
-		else if (characterSelection == 1)
-		{
-			GameObject.Instantiate(HackerPrefab);
+		if (_scene2.name != "Menu")
+		{		
+			if (characterSelection == 0)
+			{
+				GameObject.Instantiate(AgentPrefab);
+			}
+			else if (characterSelection == 1)
+			{
+				GameObject.Instantiate(HackerPrefab);
+			}
 		}
 	}
 }

@@ -163,7 +163,7 @@ public class MainMenuManager : MonoBehaviour {
 
 			case MainMenuState.CharacterSelect:
 			int i = PhaNetworkManager.Singleton.ReceiveCharacterLockMessage();
-			if (i > 0 && i != 10035)
+			if (i > -1)
 			{
 				enemyPlayerSelection = i;
 				if (enemyPlayerSelection == 0)
