@@ -998,6 +998,8 @@ GameObject:
   - component: {fileID: 4744981939860504}
   - component: {fileID: 54239036382245936}
   - component: {fileID: 136071156993785656}
+  - component: {fileID: 114097263169052956}
+  - component: {fileID: 114385307672967826}
   m_Layer: 0
   m_Name: Agent Online
   m_TagString: Player
@@ -5799,6 +5801,38 @@ MonoBehaviour:
   maxInput: 1
   minOutput: 0
   maxOutput: 1
+--- !u!114 &114097263169052956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1421206583815630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 13
+    i1: 108
+    i2: 91
+    i3: 192
+    i4: 140
+    i5: 74
+    i6: 214
+    i7: 116
+    i8: 73
+    i9: 61
+    i10: 101
+    i11: 219
+    i12: 6
+    i13: 187
+    i14: 71
+    i15: 210
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114127943348704856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5905,6 +5939,32 @@ MonoBehaviour:
   fadeTexture: {fileID: 2800000, guid: a025c23fceb7d4966b603419f551ce99, type: 3}
   fadeActive: 1
   fadeSpeed: 0.15
+--- !u!114 &114385307672967826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1421206583815630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27808e97f6df41041a987549802c6437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  currentHealth: 0
+  deathDelay: 0
+  disableOnDeath: 0
+  OnDisable:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  destroyOnDeath: 0
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114389303032010504
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -2272,27 +2272,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 966068684}
---- !u!1 &1039088985 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000012536579816, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1631765608}
---- !u!114 &1039088986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1039088985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5851c90d16d724e8d5100f0b0c66c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnlineSceneName: SceneTemplate
-  AgentPrefab: {fileID: 1000014286740798, guid: cb84adf3a52d4904497b307ade945dd9,
-    type: 2}
-  HackerPrefab: {fileID: 1000010077982806, guid: 7930d10bb2cafaf4984aa6c0f3b75106,
-    type: 2}
 --- !u!1 &1105272745
 GameObject:
   m_ObjectHideFlags: 0
@@ -3331,73 +3310,19 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
+    - target: {fileID: 114585640059533612, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
         type: 2}
-      propertyPath: m_OnlineScene
-      value: SceneTemplate
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: m_OfflineScene
-      value: Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000013350055010, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: gameCreationSettings.dropDownMatches
+      propertyPath: RemoteAgentPrefab
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
+      objectReference: {fileID: 1421206583815630, guid: 0d6c5bc08c4ad674493d65db06bb47d2,
         type: 2}
-      propertyPath: gameCreationSettings.joinAsAgentButton
+    - target: {fileID: 114585640059533612, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
+        type: 2}
+      propertyPath: PhantomPrefab
       value: 
-      objectReference: {fileID: 391166814}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
+      objectReference: {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b,
         type: 2}
-      propertyPath: gameCreationSettings.joingAsHackerButton
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: gameCreationSettings.joinMatchButton
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: m_MaxPlayers
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: m_MinPlayers
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: OverridePlayerCountForDebugging
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
-        type: 2}
-      propertyPath: gameCreationSettings.sceneToSwitchTo
-      value: SceneTemplate
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114217009450961098, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114660995410640762, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114267549566952884, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114197655756015328, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114976447045518452, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114207281580604614, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114480117211789358, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114912663808304864, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114749481846697482, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114000013350055010, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
-    - {fileID: 114000010314758414, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1672653185
