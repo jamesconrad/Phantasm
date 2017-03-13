@@ -117,7 +117,6 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			else if (characterSelection == 1)
 			{
 				HackerPrefab = GameObject.Instantiate(HackerPrefab); //Local Player is Hacker
-				HackerPrefab.gameObject.SetActive(true);
 
 				AgentPrefab = GameObject.Instantiate(RemoteAgentPrefab);
 				AgentHealth = AgentPrefab.GetComponent<Health>();
