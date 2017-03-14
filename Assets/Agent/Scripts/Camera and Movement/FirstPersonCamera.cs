@@ -26,7 +26,7 @@ public class FirstPersonCamera : MonoBehaviour
         playerCamera.transform.parent = transform;
         playerTransform = GetComponent<Transform>();
         GunHandle temp = GetComponent<GunHandle>();
-        playerCamera.transform.position = new Vector3(0, 1.38f, 0.25f);
+        playerCamera.transform.localPosition = new Vector3(0, 1.38f, 0.25f);
         gunTransform = temp.transform;
         //playerCamera.transform.position = temp.gunReference.transform.position + new Vector3(-0.10f, 0.1f, -0.2f);// + new Vector3(0.0f, 1.5f, 0.5f);
         playerCamera.transform.rotation = temp.gunReference.transform.rotation; // gunTransform.rotation;
