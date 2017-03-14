@@ -73,18 +73,22 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	void Update () {
 		if (SceneManager.GetActiveScene().name != "Menu")
 		{
+			Debug.Log("target ip address: " + PhaNetworkingAPI.targetIP);
 			if (characterSelection == 0)
 			{//Sending
-				SendPlayerUpdate(AgentPrefab.transform.position, AgentPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
+				Debug.Log("Send player update: " + SendPlayerUpdate(AgentPrefab.transform.position, AgentPrefab.transform.rotation, PhaNetworkingAPI.targetIP));
 			}
 			if (Ishost)
 			{
-				SendEnemyUpdate(PhantomPrefab.transform.position, PhantomPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
+				Debug.Log("Send Enemy Update: " + SendEnemyUpdate(PhantomPrefab.transform.position, PhantomPrefab.transform.rotation, PhaNetworkingAPI.targetIP));
 			} 
+			MessageType receivedType;
 			//So you know, this is a terrible set up, but it'll be functional.
 			for (int i = 0; i < /*numChecks*/ 3; i++)
 			{//Receiving
-				switch	((MessageType)ReceiveInGameMessage())
+			receivedType = (MessageType)ReceiveInGameMessage();
+			Debug.Log("receivedType: " + receivedType);
+				switch	(receivedType)
 				{
 					case MessageType.PlayerUpdate:
 					ParseObjectUpdate(receiveBuffer, AgentPrefab.transform);
