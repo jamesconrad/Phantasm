@@ -123,7 +123,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		((int)MessageType.EnemyUpdate).ToString() + " " + 
 		position.x + " " + position.y + " " + position.z + " " +
 		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
-		 recvBufferSize);
+		recvBufferSize);
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 
@@ -199,9 +199,11 @@ public class PhaNetworkingMessager : MonoBehaviour {
 
 	public int ReceiveInGameMessage() 
 	{
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
+		receiveBuffer = new StringBuilder(recvBufferSize);
+		Debug.Log(PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize));
 		if (receiveBuffer.Length > 0)
 		{
+			Debug.Log("Received Game Message contents: " + receiveBuffer);
 			return int.Parse(receiveBuffer.ToString().Split(' ')[0]);
 		}
 		return -1;

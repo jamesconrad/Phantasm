@@ -76,11 +76,11 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			Debug.Log("target ip address: " + PhaNetworkingAPI.targetIP);
 			if (characterSelection == 0)
 			{//Sending
-				Debug.Log("Send player update: " + SendPlayerUpdate(AgentPrefab.transform.position, AgentPrefab.transform.rotation, PhaNetworkingAPI.targetIP));
+				SendPlayerUpdate(AgentPrefab.transform.position, AgentPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
 			}
 			if (Ishost)
 			{
-				Debug.Log("Send Enemy Update: " + SendEnemyUpdate(PhantomPrefab.transform.position, PhantomPrefab.transform.rotation, PhaNetworkingAPI.targetIP));
+				SendEnemyUpdate(PhantomPrefab.transform.position, PhantomPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
 			} 
 			MessageType receivedType;
 			//So you know, this is a terrible set up, but it'll be functional.
