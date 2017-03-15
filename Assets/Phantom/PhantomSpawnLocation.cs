@@ -37,7 +37,13 @@ public class PhantomSpawnLocation : MonoBehaviour
 
     public void Start()
     {
-        NetworkServer.Spawn(Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject);
+        GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform) as GameObject;
+
+        //GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject;
+        BehaviourTree bt = Phantom.GetComponent<BehaviourTree>();
+        bt.UpdateSettings(aiSettings());
+        bt.RestartWithoutDefaultSettings();
+        NetworkServer.Spawn(Phantom);
     }
 
 

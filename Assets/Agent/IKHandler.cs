@@ -9,6 +9,8 @@ public class IKHandler : MonoBehaviour {
     GameObject player;
     Rigidbody agent;
 
+    public float threshold;
+
 	public bool shittyFix = true;
 
     private Transform lIKTar;
@@ -40,9 +42,9 @@ public class IKHandler : MonoBehaviour {
         theta *= (lookDir.x > 0 ? 1.0f : -1.0f);
 
         Vector3 localVelocity = Quaternion.AngleAxis(theta, new Vector3(0,1,0)) * localMoveDir;
-        
+
         //print(localVelocity.magnitude + " @ X:" + localVelocity.x + " Z:" + localVelocity.z);
-        
+        localVelocity = localVelocity.magnitude < threshold ? Vector3.zero : localVelocity;
         anim.SetFloat("movX",localVelocity.x * 10);
         anim.SetFloat("movY",localVelocity.z * 10 * -1);
         anim.SetFloat("velocity", localVelocity.magnitude * 125);
@@ -53,9 +55,15 @@ public class IKHandler : MonoBehaviour {
 			transform.localPosition = Vector3.zero;
     }
 
+    public void LateUpdate()
+    {
+        //override the animations spine
+        FirstPersonCamera fpc = transform.parent.GetComponent<FirstPersonCamera>();
+        fpc.lookRotationBone.rotation = fpc.rotclamp;
+    }
+
     void OnAnimatorIK()
     {
-
         //lIKTar = gun;
         //rIKTar = gun;
         //

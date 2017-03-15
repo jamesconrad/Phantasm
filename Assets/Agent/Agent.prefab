@@ -9098,6 +9098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49411ff4b65e12444a100f735edcdacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  threshold: 0
   shittyFix: 1
 --- !u!114 &114000010520363438
 MonoBehaviour:
@@ -9130,7 +9131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepSound: {fileID: 82000011989878082}
-  movementSpeed: 4
+  movementSpeed: 3
 --- !u!114 &114000011244241914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9210,6 +9211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0.01
+  syncedPosition: {x: 0, y: 0, z: 0}
   objectIsClient: 1
 --- !u!114 &114000012208308146
 MonoBehaviour:
@@ -9287,6 +9289,10 @@ MonoBehaviour:
   MaxCameraY: 45
   MinCameraY: -45
   fov: 45
+  lookRotationBone: {fileID: 0}
+  actualGunTransform: {fileID: 0}
+  rot: {x: 0, y: 0, z: 0, w: 0}
+  rotclamp: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114000012956721870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9432,6 +9438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49411ff4b65e12444a100f735edcdacd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  threshold: 0.000001
   shittyFix: 1
 --- !u!114 &114486842551564596
 MonoBehaviour:
