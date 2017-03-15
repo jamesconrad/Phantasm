@@ -15,6 +15,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     public bool WindowIsInteractive = true;
 
     private Vector2 WindowSize;
+    
+    public int numOfFloors = 3;
+    public int viewFloor = 0;
+    private float floorHeight;
 
     // Use this for initialization
     void Start()
@@ -87,6 +91,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 CameraPositionMin.z = CameraPositionTemp.z - 0.0f;
             }
         }
+        floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
         for (int i = 0; i < survCameras.Count; i++)
         {
@@ -127,6 +132,19 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
     public void Update()
     {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            viewFloor = 0;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            viewFloor = 1;
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            viewFloor = 2;
+        }
+
         if (WindowSize.x != Screen.width || WindowSize.y != Screen.height)
         {
             SetWindowSizes();
@@ -184,14 +202,26 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survCameras[i].transform.position.z);
 
                 survCameraButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
-                        GetComponent<RectTransform>().rect.width, LerpPosition.x) - 0.01f,
+                        0.35f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        GetComponent<RectTransform>().rect.width, LerpPosition.x) + 0.11f,
                         0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z) - 0.01f);
                 survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
 
 
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
+
+                if(survCameras[i].transform.position.y > CameraPositionMin.y + viewFloor * floorHeight
+                && survCameras[i].transform.position.y < CameraPositionMin.y + (viewFloor + 1) * floorHeight)
+                {
+                    survCameraButtons[i].SetActive(true);
+                }
+                else
+                {
+                    survCameraButtons[i].SetActive(false);
+                }
+
+                
             }
         }
     }
