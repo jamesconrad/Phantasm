@@ -150,9 +150,9 @@ public class GunHandle : NetworkBehaviour
         //    Camera.main.transform.rotation = Quaternion.LookRotation((raycastResult.point - Camera.main.transform.position).normalized, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation((raycastResult.point - Camera.main.transform.position).normalized, Vector3.up), Time.deltaTime * 2f);
         //}
         //else
-        {
-            Camera.main.transform.rotation = Quaternion.LookRotation(gunReference.transform.forward, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation(gunReference.transform.forward, Vector3.up), Time.deltaTime * 2f);
-        }
+        //{
+        //    Camera.main.transform.rotation = Quaternion.LookRotation(gunReference.transform.forward, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation(gunReference.transform.forward, Vector3.up), Time.deltaTime * 2f);
+        //}
 
         if ((Input.GetButton("GamePad Fire") || Input.GetButton("Fire1")) && weaponSettings.bulletPrefab != null)
         {
