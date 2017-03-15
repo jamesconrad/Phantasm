@@ -20,7 +20,6 @@ public class BehaviourTree : NetworkBehaviour {
     public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
 
     public Vector3 lk;
-    public RaycastHit hi;
 
     //Implementation Status
     //Complete
@@ -44,7 +43,6 @@ public class BehaviourTree : NetworkBehaviour {
 
     public AISettings aiSettings;
     private UnityEngine.AI.NavMeshAgent agent;
-    private Vector3 lastKnown;
 
     private AIState ai;
 
@@ -92,15 +90,6 @@ public class BehaviourTree : NetworkBehaviour {
     public void UpdateSettings(AISettings s)
     {
         aiSettings = s;
-
-        if (aiSettings.type == AI_TYPE.Basic)
-            ai = new AIPatrol(ref aiSettings, transform, ref agent);
-        else if (aiSettings.type == AI_TYPE.Hiding)
-            ai = new AIWait(ref aiSettings, transform, ref agent);
-        else if (aiSettings.type == AI_TYPE.Wallhack)
-            ai = new AIChase(ref aiSettings, transform, ref agent);
-        else
-            print("Unimplemented AI Type.");
     }
 
     public void RestartWithoutDefaultSettings()
@@ -145,7 +134,6 @@ public class BehaviourTree : NetworkBehaviour {
                     ai = new AIReturnToPatrol(ref aiSettings, transform, ref agent);
             }
             lk = ai.lastKnown;
-            hi = ai.hinfo;
         }
 	}
     
@@ -178,12 +166,11 @@ public class BehaviourTree : NetworkBehaviour {
         {
             Vector3 dir = playerGO.transform.position - t.position;
             RaycastHit hitInfo;
-            Physics.Raycast(t.position, dir.normalized, out hitInfo, aiS.maxSight);
-            hinfo = hitInfo;
-            if (playerGO != null && Physics.Raycast(t.position, dir.normalized, out hitInfo, aiS.maxSight) && hitInfo.collider.gameObject == playerGO)
+            bool hit = Physics.Raycast(t.position, dir.normalized, out hitInfo, aiS.maxSight);
+            if (playerGO != null && hit && hitInfo.transform.tag == "Player")
             {
                 print("Saw player at: " + hitInfo.point);
-                lastKnown = playerGO.transform.position;
+                lastKnown = hitInfo.point;
                 return true;
             }
             return false;
@@ -241,6 +228,7 @@ public class BehaviourTree : NetworkBehaviour {
         { aiS = settings; t = transform; nav = navAgent; }
 
         private bool arrived = false;
+        private bool haslos = false;
         private float waitingTime = 0;
 
         public override void update()
@@ -248,7 +236,8 @@ public class BehaviourTree : NetworkBehaviour {
             //chase last known
             //Debug.Log(lastKnown);
             //Debug.Log(playerGO.transform.position);
-           
+            if (hasLineOfSight())
+                haslos = true;
 
             if (aiS.type == AI_TYPE.Wallhack)
                 lastKnown = playerGO.transform.position;
@@ -264,7 +253,7 @@ public class BehaviourTree : NetworkBehaviour {
                 arrived = true;
             if(arrived)
             {
-                if (hasLineOfSight())
+                if (haslos)
                     return AI_STATE.Chase;
                 else
                     waitingTime += Time.deltaTime;
@@ -305,7 +294,13 @@ public class BehaviourTree : NetworkBehaviour {
     {
         public AIWait(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
             : base(ref settings, transform, ref navAgent)
-        { aiS = settings; t = transform; nav = navAgent; nav.SetDestination(t.position); lastKnown = t.position; }
+        {
+            aiS = settings;
+            t = transform;
+            nav = navAgent;
+            nav.SetDestination(t.position);
+            lastKnown = t.position;
+        }
         public override void update()
         {
             //wait for line of sight or range
