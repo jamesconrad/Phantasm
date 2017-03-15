@@ -150,12 +150,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011964233812}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87dc45f759f4bf843b05d7c8dc86b08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0.1
+  syncedPosition: {x: 0, y: 0, z: 0}
   objectIsClient: 0
 --- !u!114 &114000011716397156
 MonoBehaviour:
@@ -235,8 +236,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
-  m_Height: 2
+  m_Radius: 0.35
+  m_Height: 1.75
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!195 &195000013483004164
@@ -246,7 +247,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011964233812}
   m_Enabled: 1
-  m_Radius: 0.5000001
+  m_Radius: 0.35
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 0
@@ -255,7 +256,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.75
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

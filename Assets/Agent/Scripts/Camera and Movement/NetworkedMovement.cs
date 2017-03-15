@@ -13,7 +13,7 @@ public class NetworkedMovement : NetworkBehaviour
     [SyncVar]
     private double startTime = 0.0;
     [SyncVar]
-    private Vector3 syncedPosition;
+    public Vector3 syncedPosition;
     [SyncVar]
     private Quaternion syncedRotation;
     [SyncVar]

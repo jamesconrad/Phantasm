@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 public class PhantomSpawnLocation : MonoBehaviour
@@ -36,7 +37,7 @@ public class PhantomSpawnLocation : MonoBehaviour
 
     public void Start()
     {
-        Instantiate(Resources.Load("Phantom"), transform);
+        NetworkServer.Spawn(Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject);
     }
 
 
