@@ -121,6 +121,7 @@ MonoBehaviour:
   patrolPath: {fileID: 0}
   type: 2
   triggered: 1
+  lk: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010571385812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,7 +205,7 @@ MonoBehaviour:
   health: 100
   currentHealth: 0
   deathDelay: 0
-  disableOnDeath: 0
+  disableOnDeath: 1
   OnDisable:
     m_PersistentCalls:
       m_Calls: []
@@ -214,9 +215,9 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114000010571385812}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1000011964233812}
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

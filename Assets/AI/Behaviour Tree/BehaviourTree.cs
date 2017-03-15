@@ -19,6 +19,9 @@ public class BehaviourTree : NetworkBehaviour {
     public AI_TYPE type = AI_TYPE.Wallhack; //the class of ai
     public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
 
+    public Vector3 lk;
+    public RaycastHit hi;
+
     //Implementation Status
     //Complete
     //Complete
@@ -89,6 +92,15 @@ public class BehaviourTree : NetworkBehaviour {
     public void UpdateSettings(AISettings s)
     {
         aiSettings = s;
+
+        if (aiSettings.type == AI_TYPE.Basic)
+            ai = new AIPatrol(ref aiSettings, transform, ref agent);
+        else if (aiSettings.type == AI_TYPE.Hiding)
+            ai = new AIWait(ref aiSettings, transform, ref agent);
+        else if (aiSettings.type == AI_TYPE.Wallhack)
+            ai = new AIChase(ref aiSettings, transform, ref agent);
+        else
+            print("Unimplemented AI Type.");
     }
 
     public void RestartWithoutDefaultSettings()
@@ -132,6 +144,8 @@ public class BehaviourTree : NetworkBehaviour {
                 else if (nextstate == AI_STATE.ReturnToPatrol)
                     ai = new AIReturnToPatrol(ref aiSettings, transform, ref agent);
             }
+            lk = ai.lastKnown;
+            hi = ai.hinfo;
         }
 	}
     
@@ -150,11 +164,12 @@ public class BehaviourTree : NetworkBehaviour {
         public AIState(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
         { aiS = settings; t = transform; nav = navAgent; }
 
-        protected Vector3 lastKnown = new Vector3();
+        public Vector3 lastKnown = new Vector3();
         protected AISettings aiS;
         protected Transform t;
         protected UnityEngine.AI.NavMeshAgent nav;
         public static GameObject playerGO;
+        public RaycastHit hinfo;
 
         public virtual void update() { }
         public virtual AI_STATE nextstate() { return AI_STATE.Wait; }
@@ -164,8 +179,10 @@ public class BehaviourTree : NetworkBehaviour {
             Vector3 dir = playerGO.transform.position - t.position;
             RaycastHit hitInfo;
             Physics.Raycast(t.position, dir.normalized, out hitInfo, aiS.maxSight);
+            hinfo = hitInfo;
             if (playerGO != null && Physics.Raycast(t.position, dir.normalized, out hitInfo, aiS.maxSight) && hitInfo.collider.gameObject == playerGO)
             {
+                print("Saw player at: " + hitInfo.point);
                 lastKnown = playerGO.transform.position;
                 return true;
             }
@@ -288,7 +305,7 @@ public class BehaviourTree : NetworkBehaviour {
     {
         public AIWait(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
             : base(ref settings, transform, ref navAgent)
-        { aiS = settings; t = transform; nav = navAgent; nav.SetDestination(t.position); }
+        { aiS = settings; t = transform; nav = navAgent; nav.SetDestination(t.position); lastKnown = t.position; }
         public override void update()
         {
             //wait for line of sight or range
