@@ -40,7 +40,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Agent
   - SpecialLights
   m_SortingLayers:
   - name: Default

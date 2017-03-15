@@ -12,7 +12,7 @@ public class Phantom : NetworkBehaviour
 
 	public bool randomizeVisibility = true;
 
-	static public int numKilled = 0;
+	static public int numKilled = 80000;
 
     public GameObject vanishParticleEffect;
 
@@ -63,7 +63,7 @@ public class Phantom : NetworkBehaviour
 		Debug.Log("Phantoms Killed " + numKilled);
 
 		setVisibility();
-		numKilled += 1;
+		numKilled += 100;
         if (audioObject.GetComponent<AudioSource>() != null)
         {
             GameObject temp = Instantiate(audioObject, transform.position, Quaternion.identity);

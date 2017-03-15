@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class FirstPersonCamera : MonoBehaviour
+public class FirstPersonCamera : NetworkBehaviour
 {
 
     public Camera playerCamera;
@@ -14,22 +14,17 @@ public class FirstPersonCamera : MonoBehaviour
     private Vector2 ClampMovement;
     public float MaxCameraY;
     public float MinCameraY;
+    public float fov = 45;
 
-    private Quaternion rot;
+    public Transform lookRotationBone;
+    public Transform actualGunTransform;
+
+    public Quaternion rot;
+    public Quaternion rotclamp;
 
     // Use this for initialization
     void Start()
     {
-        MouseMovement = new Vector2(0.0f, 0.0f);
-
-        playerCamera = Camera.main;
-        playerCamera.transform.parent = transform;
-        playerTransform = GetComponent<Transform>();
-        GunHandle temp = GetComponent<GunHandle>();
-        playerCamera.transform.localPosition = new Vector3(0, 1.38f, 0.25f);
-        gunTransform = temp.transform;
-        //playerCamera.transform.position = temp.gunReference.transform.position + new Vector3(-0.10f, 0.1f, -0.2f);// + new Vector3(0.0f, 1.5f, 0.5f);
-        playerCamera.transform.rotation = temp.gunReference.transform.rotation; // gunTransform.rotation;
     }
 
     public void AddCameraRotation(Vector2 vector)
@@ -42,14 +37,48 @@ public class FirstPersonCamera : MonoBehaviour
         AddCameraRotation(new Vector2(x, y));
     }
 
+    // Called on clients for player objects for the local client (only)
+    public override void OnStartLocalPlayer()
+    {
+        MouseMovement = new Vector2(0.0f, 0.0f);
+
+        playerCamera = Camera.main;
+        playerCamera.fieldOfView = fov;
+        playerTransform = GetComponent<Transform>();
+        GunHandle temp = GetComponent<GunHandle>();
+        gunTransform = temp.transform;
+        playerCamera.transform.position = temp.gunReference.transform.position + new Vector3(-0.10f, 0.25f, -0.4f);// + new Vector3(0.0f, 1.5f, 0.5f);
+        playerCamera.transform.rotation = temp.gunReference.transform.rotation; // gunTransform.rotation;
+
+        temp.gunReference.transform.SetParent(playerCamera.transform);
+        temp.gunReference.transform.position += new Vector3(0,0.05f,0);
+        playerCamera.transform.SetParent(transform);
+
+
+        Transform a4 = transform.GetChild(0);
+        Transform hip = a4.GetChild(2);
+        Transform s0 = hip.GetChild(2);
+        Transform s1 = s0.GetChild(0);
+        lookRotationBone = s1.GetChild(0);
+        actualGunTransform = transform.GetChild(1);
+    }
+
     public void FixedUpdate()
     {
         RecoilMovement *= 0.965f;
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
+        //RecoilMovement.y = Mathf.Max(0.0f, RecoilMovement.y - Time.deltaTime * 8.0f);
+
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         //Fetch mouse movement
         MouseMovement.x += Input.GetAxis("Mouse X");
         MouseMovement.y += Input.GetAxis("Mouse Y");
@@ -64,8 +93,13 @@ public class FirstPersonCamera : MonoBehaviour
         ClampMovement.y = Mathf.Clamp(ClampMovement.y, MinCameraY, MaxCameraY);
 
         //Generate rotation quaternion
-        rot = Quaternion.Euler(-ClampMovement.y, ClampMovement.x, 0.0f);
-        gunTransform.rotation = rot;
+        rot = Quaternion.Euler(-ClampMovement.y, 0.0f/*ClampMovement.x*/, 0.0f);
+        rotclamp = Quaternion.Euler(-ClampMovement.y, ClampMovement.x, 0.0f);
+        gunTransform.rotation = Quaternion.Euler(0.0f, ClampMovement.x, 0.0f);
+        //lookRotationBone.rotation = rot;
+        actualGunTransform.rotation = Quaternion.Euler(-ClampMovement.y, 0.0f, 0.0f);
+
+        playerCamera.transform.rotation = Quaternion.Euler(-ClampMovement.y, ClampMovement.x, 0.0f);
         //playerTransform.rotation = Quaternion.Euler(0.0f, MouseMovement.x, 0.0f);
 
         if (Input.GetMouseButtonDown(2))

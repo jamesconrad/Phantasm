@@ -19,7 +19,18 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000010585761982}
-  - component: {fileID: 114585640059533612}
+  - component: {fileID: 114000013350055010}
+  - component: {fileID: 114000010314758414}
+  - component: {fileID: 114217009450961098}
+  - component: {fileID: 114660995410640762}
+  - component: {fileID: 114976447045518452}
+  - component: {fileID: 114267549566952884}
+  - component: {fileID: 114197655756015328}
+  - component: {fileID: 114207281580604614}
+  - component: {fileID: 114480117211789358}
+  - component: {fileID: 114912663808304864}
+  - component: {fileID: 114749481846697482}
+  - component: {fileID: 114688283862784736}
   m_Layer: 0
   m_Name: Network Manager
   m_TagString: Untagged
@@ -40,7 +51,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114585640059533612
+--- !u!114 &114000010314758414
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,17 +59,204 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012536579816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5851c90d16d724e8d5100f0b0c66c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 942cb5e40e92cd1489d0d333ca011a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnlineSceneName: SceneTemplate
-  AgentPrefab: {fileID: 1000014286740798, guid: cb84adf3a52d4904497b307ade945dd9,
+  m_NetworkPort: 7777
+  m_ServerBindToIP: 0
+  m_ServerBindAddress: 
+  m_NetworkAddress: localhost
+  m_DontDestroyOnLoad: 1
+  m_RunInBackground: 1
+  m_ScriptCRCCheck: 1
+  m_MaxDelay: 0.01
+  m_LogLevel: 2
+  m_PlayerPrefab: {fileID: 1000014286740798, guid: cb84adf3a52d4904497b307ade945dd9,
     type: 2}
-  RemoteAgentPrefab: {fileID: 1421206583815630, guid: 0d6c5bc08c4ad674493d65db06bb47d2,
-    type: 2}
-  HackerPrefab: {fileID: 1000010077982806, guid: 7930d10bb2cafaf4984aa6c0f3b75106,
-    type: 2}
-  PhantomPrefab: {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b,
-    type: 2}
-  remotePhantomPrefab: {fileID: 1847414977262880, guid: 1d12eece894363f46a04ab6824875574,
-    type: 2}
+  m_AutoCreatePlayer: 0
+  m_PlayerSpawnMethod: 0
+  m_OfflineScene: Menu
+  m_OnlineScene: Demo - (PROD)
+  m_SpawnPrefabs:
+  - {fileID: 1000014286740798, guid: cb84adf3a52d4904497b307ade945dd9, type: 2}
+  - {fileID: 1000010077982806, guid: 7930d10bb2cafaf4984aa6c0f3b75106, type: 2}
+  - {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b, type: 2}
+  - {fileID: 1000013731575384, guid: cce1cac778ff6dc42bd28a151629935c, type: 2}
+  - {fileID: 1000010763469236, guid: bbf5a805d6493e74f97cc2fa4225ceb6, type: 2}
+  m_CustomConfig: 0
+  m_MaxConnections: 4
+  m_ConnectionConfig:
+    m_PacketSize: 1500
+    m_FragmentSize: 500
+    m_ResendTimeout: 1200
+    m_DisconnectTimeout: 2000
+    m_ConnectTimeout: 2000
+    m_MinUpdateTimeout: 10
+    m_PingTimeout: 500
+    m_ReducedPingTimeout: 100
+    m_AllCostTimeout: 20
+    m_NetworkDropThreshold: 5
+    m_OverflowDropThreshold: 5
+    m_MaxConnectionAttempt: 10
+    m_AckDelay: 33
+    m_MaxCombinedReliableMessageSize: 100
+    m_MaxCombinedReliableMessageCount: 10
+    m_MaxSentMessageQueueSize: 128
+    m_IsAcksLong: 0
+    m_UsePlatformSpecificProtocols: 0
+    m_WebSocketReceiveBufferMaxSize: 0
+    m_Channels: []
+  m_GlobalConfig:
+    m_ThreadAwakeTimeout: 1
+    m_ReactorModel: 0
+    m_ReactorMaximumReceivedMessages: 1024
+    m_ReactorMaximumSentMessages: 1024
+    m_MaxPacketSize: 2000
+  m_Channels: 0500000000000000
+  m_UseWebSockets: 0
+  m_UseSimulator: 0
+  m_SimulatedLatency: 1
+  m_PacketLossPercentage: 0
+  m_MaxBufferedPackets: 16
+  m_AllowFragmentation: 1
+  m_MatchHost: mm.unet.unity3d.com
+  m_MatchPort: 443
+  matchName: default
+  matchSize: 4
+  isNetworkActive: 0
+  matchMaker: {fileID: 114688283862784736}
+  phantomSettings:
+    phantomGameObject: {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b,
+      type: 2}
+    minimumNumberOfEnemies: 1
+    maximumNumberOfEnemies: 1
+  OverridePlayerCountForDebugging: 0
+  gameCreationSettings:
+    dropDownMatches: {fileID: 0}
+    joinMatchButton: {fileID: 0}
+    sceneToSwitchTo: 
+--- !u!114 &114000013350055010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 227461547, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 114000010314758414}
+  showGUI: 1
+  offsetX: 0
+  offsetY: 0
+--- !u!114 &114197655756015328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114207281580604614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114217009450961098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114267549566952884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114480117211789358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114660995410640762
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114688283862784736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114749481846697482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114912663808304864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114976447045518452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012536579816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 

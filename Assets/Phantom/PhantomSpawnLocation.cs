@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 public class PhantomSpawnLocation : MonoBehaviour
@@ -32,6 +33,14 @@ public class PhantomSpawnLocation : MonoBehaviour
     public void OnDrawGizmosSelected()
     {
 
+    }
+
+    public void Start()
+    {
+        GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject;
+        BehaviourTree bt = Phantom.GetComponent<BehaviourTree>();
+        bt.UpdateSettings(aiSettings());
+        NetworkServer.Spawn(Phantom);
     }
 
 

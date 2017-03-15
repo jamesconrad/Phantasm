@@ -11,6 +11,7 @@ public class GunHandle : NetworkBehaviour
 
     public GunLaserScript laser;
     public GameObject smokeTrailReference;
+    public GameObject gunShotDecal;
 
     private RaycastHit raycastResult;
 
@@ -45,7 +46,11 @@ public class GunHandle : NetworkBehaviour
             weaponSettings.currentNumberOfRounds = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfRounds;
 
         }
+    }
 
+    // Called on clients for player objects for the local client (only)
+    public override void OnStartLocalPlayer()
+    {
         playerTransform = GetComponent<Transform>();
 
         weaponSettings.currentNumberOfClips = weaponSettings.ammoSettings.startingNumberOfClips;
@@ -131,15 +136,23 @@ public class GunHandle : NetworkBehaviour
 
         }
 
+
+
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
+
         //Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.forward, out raycastResult);
         //if (raycastResult.collider)
         //{
         //    Camera.main.transform.rotation = Quaternion.LookRotation((raycastResult.point - Camera.main.transform.position).normalized, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation((raycastResult.point - Camera.main.transform.position).normalized, Vector3.up), Time.deltaTime * 2f);
         //}
         //else
-        {
-            Camera.main.transform.rotation = Quaternion.LookRotation(gunReference.transform.forward, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation(gunReference.transform.forward, Vector3.up), Time.deltaTime * 2f);
-        }
+        //{
+        //    Camera.main.transform.rotation = Quaternion.LookRotation(gunReference.transform.forward, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation(gunReference.transform.forward, Vector3.up), Time.deltaTime * 2f);
+        //}
 
         if ((Input.GetButton("GamePad Fire") || Input.GetButton("Fire1")) && weaponSettings.bulletPrefab != null)
         {
@@ -255,6 +268,13 @@ public class GunHandle : NetworkBehaviour
             {
                 Instantiate(weaponSettings.impactObjects.onDeathMetallic, raycastResult.point, Quaternion.LookRotation(raycastResult.normal));
             }
+
+            
+            Instantiate(gunShotDecal, raycastResult.point, 
+                Quaternion.LookRotation(-raycastResult.normal) * 
+                Quaternion.Euler(-90.0f, 0.0f, 0.0f) * 
+                Quaternion.Euler(0.0f, Random.Range(0.0f, 359.9f), 0.0f));
+            
             //Destroy(gameObject);
         }
 

@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 213970222cf303f4794a3978e48f3206
-timeCreated: 1483451720
+timeCreated: 1489260327
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_CubeMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
