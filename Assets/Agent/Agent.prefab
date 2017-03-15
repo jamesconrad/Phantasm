@@ -9131,7 +9131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   footstepSound: {fileID: 82000011989878082}
-  movementSpeed: 4
+  movementSpeed: 3
 --- !u!114 &114000011244241914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9211,6 +9211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0.01
+  syncedPosition: {x: 0, y: 0, z: 0}
   objectIsClient: 1
 --- !u!114 &114000012208308146
 MonoBehaviour:
