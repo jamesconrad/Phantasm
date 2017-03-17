@@ -39,8 +39,8 @@ public class MusicManagerScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        AgentObject = GameObject.Find("Agent(Clone)");
-        PhantomObject[0] = GameObject.Find("Phantom(Clone)");
+        AgentObject = GameObject.FindGameObjectWithTag("Player");
+        PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
 
         if (AgentObject != null)
         {

@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: DecalGunShotMaterial
-  m_Shader: {fileID: 4800000, guid: 5988bb688664b27479ccb65317ec638e, type: 3}
+  m_Name: PhantomDieParticleMaterial
+  m_Shader: {fileID: 4800000, guid: d2cd5d59b1e56e34dab1b72b80b6378e, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -18,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: dab4398cd1b1134408270c18bd78f06d, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -48,7 +48,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: c2596bb9023c5b248bf69c7526709458, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9b84b602307c1d440b5a83f537d24e84, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -118,7 +118,19 @@ Material:
     - first:
         name: _ZWrite
       second: 1
+    - first:
+        name: alphaAdd
+      second: 0.4
+    - first:
+        name: alphaAmount
+      second: 0.4
+    - first:
+        name: timeMult
+      second: 10000
     m_Colors:
+    - first:
+        name: ColorMult
+      second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _Color
       second: {r: 1, g: 1, b: 1, a: 1}

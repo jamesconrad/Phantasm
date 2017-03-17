@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1846987531977ca4ba172e5a46e2163d
-timeCreated: 1479490038
+timeCreated: 1489778582
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
@@ -11,18 +11,8 @@ MonoImporter:
   - sonarMaterial: {fileID: 2100000, guid: a53d83d391ac3554a9a897583c8a387f, type: 2}
   - filmGrainMaterial: {fileID: 2100000, guid: 9100fdb806c971e478c08ae6892d497c, type: 2}
   - waveMaterial: {fileID: 2100000, guid: 7610a8c3d89734049af8965e6c85d6e2, type: 2}
-  - thermalRamp: {fileID: 2800000, guid: 8b47637aadcc43246b6cd5344411d5da, type: 3}
-  - FilmGrainScrollingTexture: {fileID: 2800000, guid: 78df00b6c05950d49a2718aa7f68f092,
-      type: 3}
-  - FilmGrainMultTexture: {fileID: 2800000, guid: d1a860762aba40e4b9f1e5d905048341,
-      type: 3}
-  - FilmGrainGlitchTexture: {fileID: 2800000, guid: 9836b695b2e96f847b8d624e0dc506d2,
-      type: 3}
-  - FilmGrainFaceTexture: {fileID: 2800000, guid: aaee9bc435a7ed846bbbb737fb66f4e7,
-      type: 3}
-  - Movie: {fileID: 15200000, guid: 3959e9d2a29b17541a6ab05705dd3d3d, type: 3}
-  - AgentMaterial: {instanceID: 0}
-  - PhantomMaterial: {instanceID: 0}
+  - thermalRamp: {fileID: 2800000, guid: 5cd5a7d2555edb340b2dd986e65e6fb6, type: 3}
+  - Movie: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
