@@ -7,6 +7,7 @@ public class Decal : MonoBehaviour
 	{
 		DiffuseOnly,
 		NormalsOnly,
+        Specular,
 		Both
 	}
 	public Kind m_Kind;

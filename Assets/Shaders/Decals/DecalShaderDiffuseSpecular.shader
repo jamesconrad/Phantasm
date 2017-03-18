@@ -10,6 +10,7 @@ Shader "Decal/DecalShader"
 	Properties
 	{
 		_MainTex ("Diffuse", 2D) = "white" {}
+		_SpecularTex ("Specular", 2D) = "white" {}
 	}
 	SubShader
 	{
@@ -52,10 +53,21 @@ Shader "Decal/DecalShader"
 			CBUFFER_END
 
 			sampler2D _MainTex;
+			sampler2D _SpecularTex;
 			sampler2D_float _CameraDepthTexture;
 			sampler2D _NormalsCopy;
 
-			fixed4 frag(v2f i) : SV_Target
+			//fixed4 frag(v2f i) : SV_Target
+			//{
+
+			//void frag(
+			//	v2f i,
+			//	out half4 outDiffuse : COLOR0,			// RT0: diffuse color (rgb), --unused-- (a)
+			//	out half4 outSpecRoughness : COLOR1,	// RT1: spec color (rgb), roughness (a)
+			//	out half4 outNormal : COLOR2,			// RT2: normal (rgb), --unused-- (a)
+			//	out half4 outEmission : COLOR3			// RT3: emission (rgb), --unused-- (a)
+			//)
+			void frag(v2f i, out half4 outDiffuse : COLOR0, out half4 outSpecRoughness : COLOR1)
 			{
 				i.ray = i.ray * (_ProjectionParams.z / i.ray.z);
 				float2 uv = i.screenUV.xy / i.screenUV.w;
@@ -75,8 +87,8 @@ Shader "Decal/DecalShader"
 				fixed3 wnormal = normal.rgb * 2.0 - 1.0;
 				clip (dot(wnormal, i.orientation) - 0.3);
 
-				fixed4 col = tex2D (_MainTex, i.uv);
-				return col;
+				outDiffuse = tex2D (_MainTex, i.uv);
+				outSpecRoughness = tex2D (_SpecularTex, i.uv);
 			}
 			ENDCG
 		}		

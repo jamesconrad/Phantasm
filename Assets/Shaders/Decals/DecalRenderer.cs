@@ -20,6 +20,7 @@ public class DecalSystem
 
 	internal HashSet<Decal> m_DecalsDiffuse = new HashSet<Decal>();
 	internal HashSet<Decal> m_DecalsNormals = new HashSet<Decal>();
+	internal HashSet<Decal> m_DecalsSpecular = new HashSet<Decal>();
 	internal HashSet<Decal> m_DecalsBoth = new HashSet<Decal>();
 
 	public void AddDecal (Decal d)
@@ -29,6 +30,8 @@ public class DecalSystem
 			m_DecalsDiffuse.Add (d);
 		if (d.m_Kind == Decal.Kind.NormalsOnly)
 			m_DecalsNormals.Add (d);
+		if (d.m_Kind == Decal.Kind.Specular)
+			m_DecalsSpecular.Add (d);
 		if (d.m_Kind == Decal.Kind.Both)
 			m_DecalsBoth.Add (d);
 	}
@@ -36,6 +39,7 @@ public class DecalSystem
 	{
 		m_DecalsDiffuse.Remove (d);
 		m_DecalsNormals.Remove (d);
+		m_DecalsSpecular.Remove (d);
 		m_DecalsBoth.Remove (d);
 	}
 }
@@ -120,6 +124,15 @@ public class DecalRenderer : MonoBehaviour
 		{
 			buf.DrawMesh (m_CubeMesh, decal.transform.localToWorldMatrix, decal.m_Material);
 		}
+
+        // render diffuse+specular decals into two MRTs
+		RenderTargetIdentifier[] mrt2 = {BuiltinRenderTextureType.GBuffer0, BuiltinRenderTextureType.GBuffer1};
+		buf.SetRenderTarget (mrt2, BuiltinRenderTextureType.CameraTarget);
+		foreach (var decal in system.m_DecalsSpecular)
+		{
+			buf.DrawMesh (m_CubeMesh, decal.transform.localToWorldMatrix, decal.m_Material);
+		}
+
 		// release temporary normals RT
 		buf.ReleaseTemporaryRT (normalsID);
 	}

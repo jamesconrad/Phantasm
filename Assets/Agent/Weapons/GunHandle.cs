@@ -274,7 +274,8 @@ public class GunHandle : NetworkBehaviour
                 Quaternion.LookRotation(-raycastResult.normal) * 
                 Quaternion.Euler(-90.0f, 0.0f, 0.0f) * 
                 Quaternion.Euler(0.0f, Random.Range(0.0f, 359.9f), 0.0f));
-            decalReference.transform.parent = raycastResult.collider.gameObject.transform;
+            if(!raycastResult.collider.gameObject.isStatic)
+                decalReference.transform.parent = raycastResult.collider.gameObject.transform;
 
             //Destroy(gameObject);
         }
