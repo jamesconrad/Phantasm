@@ -1,4 +1,4 @@
-﻿Shader "Unlit/LaserHueShift"
+﻿Shader "Particle/HueShiftParticle"
 {
 	Properties
 	{
