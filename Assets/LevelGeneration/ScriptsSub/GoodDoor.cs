@@ -15,6 +15,7 @@ public class GoodDoor : NetworkBehaviour {
     private DoorSwingState state = new Shut();
     private bool inputSpamming = false;
     private int prevstate;
+    private float baseRot;
 
     bool active = false;
     //[SyncVar]
@@ -28,6 +29,10 @@ public class GoodDoor : NetworkBehaviour {
     //    thisRotation = this.transform.rotation;
     //
     //}
+    void Start()
+    {
+        baseRot = transform.localEulerAngles.y;
+    }
 
     void Activate()
     {
@@ -35,17 +40,18 @@ public class GoodDoor : NetworkBehaviour {
     }
     	
 	// Update is called once per frame
-	void Update () {
-        int curstate = state.state();
+	void Update ()
+    {
+        currentState = state.state();
         if (active && Input.GetKeyDown("e"))
         {
             if (!inputSpamming)
             {
                 inputSpamming = true;
-                if (curstate % 2 == 1)
-                    state = new SwingingShut(swingDir, swingSpeed, openLimit, hinge, transform);
+                if (currentState % 2 == 1)
+                    state = new SwingingShut(swingDir, swingSpeed, openLimit, hinge, transform, baseRot);
                 else
-                    state = new SwingingOpen(swingDir, swingSpeed, openLimit, hinge, transform);
+                    state = new SwingingOpen(swingDir, swingSpeed, openLimit, hinge, transform, baseRot);
             }
 
             //ik right hand to handle
@@ -53,7 +59,7 @@ public class GoodDoor : NetworkBehaviour {
         else
             inputSpamming = false;
 
-        if (curstate <= 2 || active)
+        if (currentState <= 2 || active)
         {
             int nextstate = state.update();
 
@@ -62,10 +68,10 @@ public class GoodDoor : NetworkBehaviour {
                 switch (nextstate)
                 {
                     case 1:
-                        state = new SwingingOpen(swingDir, swingSpeed, openLimit, hinge, transform);
+                        state = new SwingingOpen(swingDir, swingSpeed, openLimit, hinge, transform, baseRot);
                         break;
                     case 2:
-                        state = new SwingingShut(swingDir, swingSpeed, openLimit, hinge, transform);
+                        state = new SwingingShut(swingDir, swingSpeed, openLimit, hinge, transform, baseRot);
                         break;
                     case 3:
                         state = new Open();
@@ -79,20 +85,21 @@ public class GoodDoor : NetworkBehaviour {
             }
             prevstate = nextstate;
         }
-	}
+    }
 
 
     private class DoorSwingState
     {
         public virtual int update() { return -1; }
         public virtual int state() { return -1; }
-        public DoorSwingState(int swingD, float swingS, float openL, Transform h, Transform d)
+        public DoorSwingState(int swingD, float swingS, float openL, Transform h, Transform d, float bR)
         {
             swingDir = swingD;
             swingSpeed = swingS;
             openLimit = openL;
             hinge = h;
             door = d;
+            baseRot = bR;
         }
         public DoorSwingState() { }
         //vars
@@ -101,6 +108,7 @@ public class GoodDoor : NetworkBehaviour {
         protected float openLimit;
         protected Transform hinge;
         protected Transform door;
+        protected float baseRot;
     }
 
     private class SwingingOpen : DoorSwingState
@@ -108,20 +116,21 @@ public class GoodDoor : NetworkBehaviour {
         public override int update()
         {
             door.RotateAround(hinge.position, hinge.up, swingDir * swingSpeed * Time.deltaTime);
-            if (swingDir > 0 ? door.localRotation.eulerAngles.y >= openLimit : door.localRotation.eulerAngles.y <= openLimit)
+            if (swingDir > 0 ? door.localRotation.eulerAngles.y - baseRot >= openLimit : door.localRotation.eulerAngles.y - baseRot <= openLimit)
             {
                 return 3;
             }
             return 0;
         }
         public override int state() { return 1; }
-        public SwingingOpen(int swingD, float swingS, float openL, Transform h, Transform d)
+        public SwingingOpen(int swingD, float swingS, float openL, Transform h, Transform d, float bR)
         {
             swingDir = swingD;
             swingSpeed = swingS;
             openLimit = openL;
             hinge = h;
             door = d;
+            baseRot = bR;
         }
     }
 
@@ -130,20 +139,21 @@ public class GoodDoor : NetworkBehaviour {
         public override int update()
         {
             door.RotateAround(hinge.position, hinge.up, -swingDir * swingSpeed * Time.deltaTime);
-            if (door.localRotation.eulerAngles.y >= 359 && door.localRotation.eulerAngles.y <= 360)
+            if (door.localRotation.eulerAngles.y >= baseRot - 1 && door.localRotation.eulerAngles.y <= baseRot + 1)
             {
                 return 4;
             }
             return 0;
         }
         public override int state() { return 2; }
-        public SwingingShut(int swingD, float swingS, float openL, Transform h, Transform d)
+        public SwingingShut(int swingD, float swingS, float openL, Transform h, Transform d, float bR)
         {
             swingDir = swingD;
             swingSpeed = swingS;
             openLimit = openL;
             hinge = h;
             door = d;
+            baseRot = bR;
         }
     }
 
