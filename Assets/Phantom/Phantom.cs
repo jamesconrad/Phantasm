@@ -24,7 +24,7 @@ public class Phantom : NetworkBehaviour
     // Start is called just before any of the Update methods is called the first time
     public void Start()
     {
-		setVisibility();
+		//setVisibility();
 
 
         if (!isLocalPlayer)
@@ -62,7 +62,7 @@ public class Phantom : NetworkBehaviour
     {
 		Debug.Log("Phantoms Killed " + numKilled);
 
-		setVisibility();
+		//setVisibility();
 		numKilled += 100;
         if (audioObject.GetComponent<AudioSource>() != null)
         {

@@ -76,6 +76,7 @@ Shader "Decal/DecalEmissiveShader"
 				clip (dot(wnormal, i.orientation) - 0.3);
 
 				fixed4 col = tex2D (_MainTex, i.uv);
+				col.rgb = (1.0f - col.rgb);// * -10000.0f;
 				return col;
 			}
 			ENDCG

@@ -14,6 +14,10 @@ public class PhantomSpawnLocation : MonoBehaviour
     public BehaviourTree.AI_TYPE type = BehaviourTree.AI_TYPE.Wallhack; //the class of ai
     public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
 
+    [Space(5)]
+	public Plasma.Visibility visibility;
+	//[Space(5)]
+
     public BehaviourTree.AISettings aiSettings()
     {
         BehaviourTree.AISettings s;
@@ -34,6 +38,7 @@ public class PhantomSpawnLocation : MonoBehaviour
         GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform) as GameObject;
 
         //GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject;
+        Phantom.GetComponent<Phantom>().visibility = visibility;
         BehaviourTree bt = Phantom.GetComponent<BehaviourTree>();
         BehaviourTree.AISettings s = aiSettings();
         bt.RestartWithoutDefaultSettings(s);

@@ -3,8 +3,8 @@ using System.Collections;
 
 public class AgentVisionScript : MonoBehaviour 
 {
-	private GameObject GOPhantom;
-	private Phantom	EntityPhantom;
+	private GameObject[] GOPhantom;
+	private Phantom EntityPhantom;
 	private Plasma.Visibility	VisiblePhantom;
 
 	[Space(10)]
@@ -31,26 +31,29 @@ public class AgentVisionScript : MonoBehaviour
 	void Update () 
 	{
 		
-        GOPhantom = GameObject.Find("Phantom(Clone)");
-		EntityPhantom = GOPhantom.GetComponent<Phantom>();
-		VisiblePhantom = EntityPhantom.visibility;
-
-		//CameraSettings.cullingMask = (1 << 9) | defaultCameraLayersActive;
-		if(VisiblePhantom.agent > 0)
+        GOPhantom = GameObject.FindGameObjectsWithTag("Enemy");
+		for(int i = 0; i < GOPhantom.Length; ++i)
 		{
-			GOPhantom.layer = 8;
-			if(VisiblePhantom.agent == Plasma.SeenBy.Agent.Translucent)
+			EntityPhantom = GOPhantom[i].GetComponent<Phantom>();
+			VisiblePhantom = EntityPhantom.visibility;
+
+			//CameraSettings.cullingMask = (1 << 9) | defaultCameraLayersActive;
+			if(VisiblePhantom.agent > 0)
 			{
-				GOPhantom.GetComponent<Renderer>().material = phantomMaterials.normal;
+				GOPhantom[i].layer = 8;
+				if(VisiblePhantom.agent == Plasma.SeenBy.Agent.Translucent)
+				{
+					GOPhantom[i].GetComponent<Renderer>().material = phantomMaterials.normal;
+				}
+				else
+				{
+					GOPhantom[i].GetComponent<Renderer>().material = phantomMaterials.camera;
+				}
 			}
 			else
-			{
-				GOPhantom.GetComponent<Renderer>().material = phantomMaterials.camera;
+			{			
+				GOPhantom[i].layer = 9;
 			}
-		}
-		else
-		{			
-			GOPhantom.layer = 9;
 		}
 	}
 }
