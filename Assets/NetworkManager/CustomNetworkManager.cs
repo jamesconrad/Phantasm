@@ -92,22 +92,22 @@ public class CustomNetworkManager : NetworkManager
     // Called on the server whenever a Network.InitializeServer was invoked and has completed
     public void OnServerInitialized()
     {
-        int numOfEnemies = Random.Range(phantomSettings.minimumNumberOfEnemies, phantomSettings.maximumNumberOfEnemies);
-        spawnLocations = FindObjectsOfType<PhantomSpawnLocation>();
-        if (spawnLocations.Length == 0)
-        {
-            Debug.Log("There are no spawn locations for the phantom.");
-            NetworkServer.Spawn(PhantomFactory(Vector3.up * 2, Quaternion.identity) as GameObject);
-        }
-        else
-        {
-            for (int i = 0; i < numOfEnemies; i++)
-            {
-                PhantomSpawnLocation tempPos = spawnLocations[Random.Range(0, spawnLocations.Length - 1)];
-                NetworkServer.Spawn(PhantomFactory(tempPos.transform.position, Quaternion.identity) as GameObject);
-                phantomSettings.phantomGameObject.GetComponent<Phantom>().previousSpawnLocation = tempPos;
-            }
-        }
+        //int numOfEnemies = Random.Range(phantomSettings.minimumNumberOfEnemies, phantomSettings.maximumNumberOfEnemies);
+        //spawnLocations = FindObjectsOfType<PhantomSpawnLocation>();
+        //if (spawnLocations.Length == 0)
+        //{
+        //    Debug.Log("There are no spawn locations for the phantom.");
+        //    NetworkServer.Spawn(PhantomFactory(Vector3.up * 2, Quaternion.identity) as GameObject);
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < numOfEnemies; i++)
+        //    {
+        //        PhantomSpawnLocation tempPos = spawnLocations[Random.Range(0, spawnLocations.Length - 1)];
+        //        NetworkServer.Spawn(PhantomFactory(tempPos.transform.position, Quaternion.identity) as GameObject);
+        //        phantomSettings.phantomGameObject.GetComponent<Phantom>().previousSpawnLocation = tempPos;
+        //    }
+        //}
     }
 
     public void CreateAsAgent()

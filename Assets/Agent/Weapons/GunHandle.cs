@@ -269,12 +269,14 @@ public class GunHandle : NetworkBehaviour
                 Instantiate(weaponSettings.impactObjects.onDeathMetallic, raycastResult.point, Quaternion.LookRotation(raycastResult.normal));
             }
 
-            
+            GameObject decalReference = 
             Instantiate(gunShotDecal, raycastResult.point, 
                 Quaternion.LookRotation(-raycastResult.normal) * 
                 Quaternion.Euler(-90.0f, 0.0f, 0.0f) * 
                 Quaternion.Euler(0.0f, Random.Range(0.0f, 359.9f), 0.0f));
-            
+            if(!raycastResult.collider.gameObject.isStatic)
+                decalReference.transform.parent = raycastResult.collider.gameObject.transform;
+
             //Destroy(gameObject);
         }
 

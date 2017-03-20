@@ -1,0 +1,642 @@
+fileFormatVersion: 2
+guid: 34f924ef85c73584eaa240f62506391c
+timeCreated: 1490029468
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Enemy_Monster
+    100002: Head_1
+    100004: Head_2
+    100006: Head_3
+    100008: left
+    100010: Left_Ankle
+    100012: Left_Ankle_IK
+    100014: Left_Arm_Controller
+    100016: Left_Arm_IK
+    100018: Left_Ball_IK
+    100020: Left_Clavicle
+    100022: Left_Foot
+    100024: Left_Foot_Controller
+    100026: Left_Forearm
+    100028: Left_Hip
+    100030: Left_Knee_Pole_Vector
+    100032: Left_Leg
+    100034: Left_Middle1
+    100036: Left_Middle2
+    100038: LEft_Middle3
+    100040: LEft_Middle3 1
+    100042: Left_Palm
+    100044: Left_Pinky1
+    100046: Left_Pinky2
+    100048: Left_Pinky3
+    100050: Left_Reverse_Ankle
+    100052: Left_Reverse_Ball
+    100054: Left_Reverse_Heel
+    100056: Left_Reverse_Toe
+    100058: Left_Shoulder
+    100060: Left_Thigh
+    100062: Left_Thumb1
+    100064: Left_Thumb2
+    100066: Left_Thumb3
+    100068: Left_Toe_IK
+    100070: Left_Upperarm
+    100072: Left_Wrist
+    100074: Lower_Body_Master_Joint
+    100076: Master_Controller
+    100078: Master_Joint
+    100080: //RootNode
+    100082: Mouth_1
+    100084: Mouth_2
+    100086: Mouth_3
+    100088: Neck
+    100090: Neck_Controller
+    100092: Pelvic_Controller
+    100094: Right_Ankle
+    100096: Right_Ankle_IK
+    100098: Right_Arm_Controller
+    100100: Right_Arm_IK
+    100102: Right_Ball_IK
+    100104: Right_Clavicle
+    100106: Right_Foot
+    100108: Right_Foot_Controller
+    100110: Right_Forearm
+    100112: Right_Hip
+    100114: Right_Knee_Pole_Vector
+    100116: Right_Leg
+    100118: Right_Middle1
+    100120: Right_Middle2
+    100122: Right_Palm
+    100124: Right_Pinky1
+    100126: Right_Pinky2
+    100128: Right_Pinky3
+    100130: Right_Reverse_Ankle
+    100132: Right_Reverse_Ball
+    100134: Right_Reverse_Heel
+    100136: Right_Reverse_Toe
+    100138: Right_Shoulder
+    100140: Right_Thigh
+    100142: Right_Thumb1
+    100144: Right_Thumb2
+    100146: Right_Thumb3
+    100148: Right_Toe_IK
+    100150: Right_Upperarm
+    100152: Right_Wrist
+    100154: spine_1
+    100156: Spine_2
+    100158: Spine_3
+    100160: Spine_4
+    100162: Spine_5
+    100164: Upper_Body_Controller
+    100166: Upper_Body_Master_Joint
+    400000: Enemy_Monster
+    400002: Head_1
+    400004: Head_2
+    400006: Head_3
+    400008: left
+    400010: Left_Ankle
+    400012: Left_Ankle_IK
+    400014: Left_Arm_Controller
+    400016: Left_Arm_IK
+    400018: Left_Ball_IK
+    400020: Left_Clavicle
+    400022: Left_Foot
+    400024: Left_Foot_Controller
+    400026: Left_Forearm
+    400028: Left_Hip
+    400030: Left_Knee_Pole_Vector
+    400032: Left_Leg
+    400034: Left_Middle1
+    400036: Left_Middle2
+    400038: LEft_Middle3
+    400040: LEft_Middle3 1
+    400042: Left_Palm
+    400044: Left_Pinky1
+    400046: Left_Pinky2
+    400048: Left_Pinky3
+    400050: Left_Reverse_Ankle
+    400052: Left_Reverse_Ball
+    400054: Left_Reverse_Heel
+    400056: Left_Reverse_Toe
+    400058: Left_Shoulder
+    400060: Left_Thigh
+    400062: Left_Thumb1
+    400064: Left_Thumb2
+    400066: Left_Thumb3
+    400068: Left_Toe_IK
+    400070: Left_Upperarm
+    400072: Left_Wrist
+    400074: Lower_Body_Master_Joint
+    400076: Master_Controller
+    400078: Master_Joint
+    400080: //RootNode
+    400082: Mouth_1
+    400084: Mouth_2
+    400086: Mouth_3
+    400088: Neck
+    400090: Neck_Controller
+    400092: Pelvic_Controller
+    400094: Right_Ankle
+    400096: Right_Ankle_IK
+    400098: Right_Arm_Controller
+    400100: Right_Arm_IK
+    400102: Right_Ball_IK
+    400104: Right_Clavicle
+    400106: Right_Foot
+    400108: Right_Foot_Controller
+    400110: Right_Forearm
+    400112: Right_Hip
+    400114: Right_Knee_Pole_Vector
+    400116: Right_Leg
+    400118: Right_Middle1
+    400120: Right_Middle2
+    400122: Right_Palm
+    400124: Right_Pinky1
+    400126: Right_Pinky2
+    400128: Right_Pinky3
+    400130: Right_Reverse_Ankle
+    400132: Right_Reverse_Ball
+    400134: Right_Reverse_Heel
+    400136: Right_Reverse_Toe
+    400138: Right_Shoulder
+    400140: Right_Thigh
+    400142: Right_Thumb1
+    400144: Right_Thumb2
+    400146: Right_Thumb3
+    400148: Right_Toe_IK
+    400150: Right_Upperarm
+    400152: Right_Wrist
+    400154: spine_1
+    400156: Spine_2
+    400158: Spine_3
+    400160: Spine_4
+    400162: Spine_5
+    400164: Upper_Body_Controller
+    400166: Upper_Body_Master_Joint
+    4300000: Enemy_Monster
+    7400000: Run
+    7400002: Idle
+    9500000: //RootNode
+    13700000: Enemy_Monster
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Run
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Enemy_Monster
+        weight: 1
+      - path: left
+        weight: 1
+      - path: Left_Arm_Controller
+        weight: 1
+      - path: Left_Arm_Controller/Left_Arm_IK
+        weight: 1
+      - path: Left_Foot_Controller
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Reverse_Ball
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Reverse_Ball/Left_Ball_IK
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Reverse_Ball/Left_Reverse_Ankle
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Reverse_Ball/Left_Reverse_Ankle/Left_Ankle_IK
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Toe_IK
+        weight: 1
+      - path: Left_Knee_Pole_Vector
+        weight: 1
+      - path: Master_Controller
+        weight: 1
+      - path: Master_Joint
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip/Left_Thigh
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip/Left_Thigh/Left_Leg
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip/Left_Thigh/Left_Leg/Left_Ankle
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip/Left_Thigh/Left_Leg/Left_Ankle/Left_Foot
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip/Right_Thigh
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip/Right_Thigh/Right_Leg
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip/Right_Thigh/Right_Leg/Right_Ankle
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip/Right_Thigh/Right_Leg/Right_Ankle/Right_Foot
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Middle1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Middle1/Left_Middle2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Middle1/Left_Middle2/LEft_Middle3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Pinky1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Pinky1/Left_Pinky2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Pinky1/Left_Pinky2/Left_Pinky3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Thumb1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Thumb1/Left_Thumb2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Thumb1/Left_Thumb2/Left_Thumb3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Middle1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Middle1/Right_Middle2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Middle1/Right_Middle2/LEft_Middle3
+          1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Pinky1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Pinky1/Right_Pinky2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Pinky1/Right_Pinky2/Right_Pinky3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Thumb1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Thumb1/Right_Thumb2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Thumb1/Right_Thumb2/Right_Thumb3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2/Head_3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2/Mouth_1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2/Mouth_1/Mouth_2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2/Mouth_1/Mouth_2/Mouth_3
+        weight: 1
+      - path: Neck_Controller
+        weight: 1
+      - path: Pelvic_Controller
+        weight: 1
+      - path: Right_Arm_Controller
+        weight: 1
+      - path: Right_Arm_Controller/Right_Arm_IK
+        weight: 1
+      - path: Right_Foot_Controller
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Reverse_Ball
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Reverse_Ball/Right_Ball_IK
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Reverse_Ball/Right_Reverse_Ankle
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Reverse_Ball/Right_Reverse_Ankle/Right_Ankle_IK
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Toe_IK
+        weight: 1
+      - path: Right_Knee_Pole_Vector
+        weight: 1
+      - path: Upper_Body_Controller
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 61
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Enemy_Monster
+        weight: 1
+      - path: left
+        weight: 1
+      - path: Left_Arm_Controller
+        weight: 1
+      - path: Left_Arm_Controller/Left_Arm_IK
+        weight: 1
+      - path: Left_Foot_Controller
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Reverse_Ball
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Reverse_Ball/Left_Ball_IK
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Reverse_Ball/Left_Reverse_Ankle
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Reverse_Ball/Left_Reverse_Ankle/Left_Ankle_IK
+        weight: 1
+      - path: Left_Foot_Controller/Left_Reverse_Heel/Left_Reverse_Toe/Left_Toe_IK
+        weight: 1
+      - path: Left_Knee_Pole_Vector
+        weight: 1
+      - path: Master_Controller
+        weight: 1
+      - path: Master_Joint
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip/Left_Thigh
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip/Left_Thigh/Left_Leg
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip/Left_Thigh/Left_Leg/Left_Ankle
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Left_Hip/Left_Thigh/Left_Leg/Left_Ankle/Left_Foot
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip/Right_Thigh
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip/Right_Thigh/Right_Leg
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip/Right_Thigh/Right_Leg/Right_Ankle
+        weight: 1
+      - path: Master_Joint/Lower_Body_Master_Joint/Right_Hip/Right_Thigh/Right_Leg/Right_Ankle/Right_Foot
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Middle1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Middle1/Left_Middle2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Middle1/Left_Middle2/LEft_Middle3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Pinky1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Pinky1/Left_Pinky2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Palm/Left_Pinky1/Left_Pinky2/Left_Pinky3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Thumb1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Thumb1/Left_Thumb2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Left_Clavicle/Left_Shoulder/Left_Upperarm/Left_Forearm/Left_Wrist/Left_Thumb1/Left_Thumb2/Left_Thumb3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Middle1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Middle1/Right_Middle2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Middle1/Right_Middle2/LEft_Middle3
+          1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Pinky1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Pinky1/Right_Pinky2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Palm/Right_Pinky1/Right_Pinky2/Right_Pinky3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Thumb1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Thumb1/Right_Thumb2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Right_Clavicle/Right_Shoulder/Right_Upperarm/Right_Forearm/Right_Wrist/Right_Thumb1/Right_Thumb2/Right_Thumb3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2/Head_3
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2/Mouth_1
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2/Mouth_1/Mouth_2
+        weight: 1
+      - path: Master_Joint/Upper_Body_Master_Joint/spine_1/Spine_2/Spine_3/Spine_4/Spine_5/Neck/Head_1/Head_2/Mouth_1/Mouth_2/Mouth_3
+        weight: 1
+      - path: Neck_Controller
+        weight: 1
+      - path: Pelvic_Controller
+        weight: 1
+      - path: Right_Arm_Controller
+        weight: 1
+      - path: Right_Arm_Controller/Right_Arm_IK
+        weight: 1
+      - path: Right_Foot_Controller
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Reverse_Ball
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Reverse_Ball/Right_Ball_IK
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Reverse_Ball/Right_Reverse_Ankle
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Reverse_Ball/Right_Reverse_Ankle/Right_Ankle_IK
+        weight: 1
+      - path: Right_Foot_Controller/Right_Reverse_Heel/Right_Reverse_Toe/Right_Toe_IK
+        weight: 1
+      - path: Right_Knee_Pole_Vector
+        weight: 1
+      - path: Upper_Body_Controller
+        weight: 1
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

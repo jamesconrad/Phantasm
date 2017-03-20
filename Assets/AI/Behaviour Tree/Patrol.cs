@@ -134,14 +134,18 @@ public class Patrol : MonoBehaviour {
         return p;
     }
 
-    public Vector3 NextPoint(Vector3 prevPoint)
+    public Vector4 NextPoint(Vector3 currentPoint, float arrivalDistance, float lastIndex)
     {
-        for (int i = 0; i < curve.Count; i++)
+        for (int i = (int)lastIndex + 1; i < curve.Count; i++)
         {
-            if (curve[i].v == prevPoint)
-                return curve[i + 1 >= curve.Count ? 0 : i].v;
+            if ((currentPoint - curve[i].v).magnitude <= arrivalDistance)
+            {
+                Vector3 p = curve[i + 1 >= curve.Count ? 0 : i].v;
+                return new Vector4(p.x, p.y, p.z, i);
+            }
         }
-        return curve[0].v;
+        Vector3 a = curve[0].v;
+        return new Vector4(a.x, a.y, a.z, 0);
     }
 
     public void DrawDebug()

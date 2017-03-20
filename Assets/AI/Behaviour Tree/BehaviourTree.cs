@@ -3,24 +3,24 @@ using UnityEngine.Networking;
 using System.Collections;
 
 public class BehaviourTree : NetworkBehaviour {
-
+    
     //Implementation Status:
     //Listener : Current Scope Restriction
     //Basic : Missing Attack Information
     //Hiding : Missing Attack Information
     public enum AI_TYPE {  Listener, Basic, Hiding, Wallhack };
-
-    public float maxSight = 50; //how far the ai can see, for raycasting line of sight
-    public float patience = 3; //how long the ai will wait at the lastknown position before returning back to 
-    public float arrivalDistance = 0.1f; //accuracy for arrival points, if within x units it considers it as arrived
-    public bool chargeAttack = false; //wether the ai can do a pounce like attack or melee
-    public bool alternatesVisibility = false; //wether the ai alternates between agent vision to hacker vision and back
-    public Patrol patrolPath; //path the ai will idly patrol around
-    public AI_TYPE type = AI_TYPE.Wallhack; //the class of ai
-    public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
-
+    //
+    //public float maxSight = 50; //how far the ai can see, for raycasting line of sight
+    //public float patience = 3; //how long the ai will wait at the lastknown position before returning back to 
+    //public float arrivalDistance = 0.1f; //accuracy for arrival points, if within x units it considers it as arrived
+    //public bool chargeAttack = false; //wether the ai can do a pounce like attack or melee
+    //public bool alternatesVisibility = false; //wether the ai alternates between agent vision to hacker vision and back
+    //public Patrol patrolPath; //path the ai will idly patrol around
+    //public AI_TYPE type = AI_TYPE.Wallhack; //the class of ai
+    //public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
+    public AI_TYPE DebugaiT;
+    public AI_STATE DebugaiS;
     public Vector3 lk;
-    public RaycastHit hi;
 
     //Implementation Status
     //Complete
@@ -44,7 +44,6 @@ public class BehaviourTree : NetworkBehaviour {
 
     public AISettings aiSettings;
     private UnityEngine.AI.NavMeshAgent agent;
-    private Vector3 lastKnown;
 
     private AIState ai;
 
@@ -63,14 +62,14 @@ public class BehaviourTree : NetworkBehaviour {
     
     void Start ()
     {
-        aiSettings.alternatesVisibility = alternatesVisibility;
-        aiSettings.arrivalDistance = arrivalDistance;
-        aiSettings.chargeAttack = chargeAttack;
-        aiSettings.maxSight = maxSight;
-        aiSettings.patience = patience;
-        aiSettings.patrolPath = patrolPath;
-        aiSettings.type = type;
-        aiSettings.triggered = triggered;
+        //aiSettings.alternatesVisibility = alternatesVisibility;
+        //aiSettings.arrivalDistance = arrivalDistance;
+        //aiSettings.chargeAttack = chargeAttack;
+        //aiSettings.maxSight = maxSight;
+        //aiSettings.patience = patience;
+        //aiSettings.patrolPath = patrolPath;
+        //aiSettings.type = type;
+        //aiSettings.triggered = triggered;
         
         //GameObject playerGO = GameObject.FindGameObjectWithTag("Player");
         //
@@ -85,26 +84,16 @@ public class BehaviourTree : NetworkBehaviour {
         else if (aiSettings.type == AI_TYPE.Wallhack)
             ai = new AIChase(ref aiSettings, transform, ref agent);
         else
-            print("Unimplemented AI Type.");
+        {
+            print("Unimplemented AI Type. Killing Myself.\nI am most likley the phantom without a spawner parent, this is an issue. YOU SHOULD NOT BE SEEING THIS TEXT");
+            Destroy(this);
+        }
         AIState.playerGO = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public void UpdateSettings(AISettings s)
+    public void RestartWithoutDefaultSettings(AISettings s)
     {
         aiSettings = s;
-
-        if (aiSettings.type == AI_TYPE.Basic)
-            ai = new AIPatrol(ref aiSettings, transform, ref agent);
-        else if (aiSettings.type == AI_TYPE.Hiding)
-            ai = new AIWait(ref aiSettings, transform, ref agent);
-        else if (aiSettings.type == AI_TYPE.Wallhack)
-            ai = new AIChase(ref aiSettings, transform, ref agent);
-        else
-            print("Unimplemented AI Type.");
-    }
-
-    public void RestartWithoutDefaultSettings()
-    {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         if (aiSettings.type == AI_TYPE.Basic)
@@ -114,8 +103,16 @@ public class BehaviourTree : NetworkBehaviour {
         else if (aiSettings.type == AI_TYPE.Wallhack)
             ai = new AIChase(ref aiSettings, transform, ref agent);
         else
-            print("Unimplemented AI Type.");
+        {
+            print("Unimplemented AI Type. Killing Myself.\nI am most likley the phantom without a spawner parent, this is an issue. YOU SHOULD NOT BE SEEING THIS TEXT");
+            Destroy(gameObject);
+        }
         AIState.playerGO = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public AISettings GetSettings()
+    {
+        return aiSettings;
     }
 	
 	// Update is called once per frame
@@ -127,7 +124,7 @@ public class BehaviourTree : NetworkBehaviour {
             return;
         }
 
-        if (triggered)
+        if (aiSettings.triggered)
         {
             ai.update();
             AI_STATE nextstate = ai.nextstate();
@@ -143,18 +140,24 @@ public class BehaviourTree : NetworkBehaviour {
                     ai = new AIPatrol(ref aiSettings, transform, ref agent);
                 else if (nextstate == AI_STATE.ReturnToPatrol)
                     ai = new AIReturnToPatrol(ref aiSettings, transform, ref agent);
+                aistate = nextstate;
+                ai.lastKnown = lk;
             }
             lk = ai.lastKnown;
-            hi = ai.hinfo;
+            DebugaiS = aistate;
+            DebugaiT = aiSettings.type;
+            //Debug.DrawLine(lk - Vector3.right * 0.5f, lk + Vector3.right * 0.5f, Color.red);
+            //Debug.DrawLine(lk - Vector3.forward * 0.5f, lk + Vector3.forward * 0.5f, Color.blue);
+            //Debug.DrawLine(lk - Vector3.up * 0.5f, lk + Vector3.up * 0.5f, Color.green);
         }
 	}
     
     //called on trigger through message, used if it needs to be activated or deactivated
     void Trigger()
     {
-        triggered = !triggered;
-        if (triggered)
-            Start();
+        aiSettings.triggered = !aiSettings.triggered;
+        if (aiSettings.triggered)
+            RestartWithoutDefaultSettings(aiSettings);
         else
             ai = new AIWait(ref aiSettings, transform, ref agent);
     }
@@ -178,12 +181,11 @@ public class BehaviourTree : NetworkBehaviour {
         {
             Vector3 dir = playerGO.transform.position - t.position;
             RaycastHit hitInfo;
-            Physics.Raycast(t.position, dir.normalized, out hitInfo, aiS.maxSight);
-            hinfo = hitInfo;
-            if (playerGO != null && Physics.Raycast(t.position, dir.normalized, out hitInfo, aiS.maxSight) && hitInfo.collider.gameObject == playerGO)
+            bool hit = Physics.Raycast(t.position + new Vector3(0, 0.75f, 0), dir.normalized, out hitInfo, aiS.maxSight);
+            if (playerGO != null && hit && hitInfo.transform.tag == "Player")
             {
-                print("Saw player at: " + hitInfo.point);
-                lastKnown = playerGO.transform.position;
+                //Debug.DrawLine(t.position + new Vector3(0, 0.75f, 0), t.position + dir * aiS.maxSight, Color.cyan);
+                lastKnown = hitInfo.point;
                 return true;
             }
             return false;
@@ -195,10 +197,11 @@ public class BehaviourTree : NetworkBehaviour {
     {
         public AIPatrol(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
             : base(ref settings, transform, ref navAgent)
-        { aiS = settings; t = transform; nav = navAgent; }
+        { aiS = settings; t = transform; nav = navAgent; lastIndex = 0; }
 
         private bool haspoint = false;
         private Vector3 point;
+        private float lastIndex;
 
         public override void update()
         {
@@ -212,13 +215,16 @@ public class BehaviourTree : NetworkBehaviour {
             //follow path
             if (!haspoint)
             {
-                point = aiS.patrolPath.NextPoint(t.position);
+                point = aiS.patrolPath.NextPoint(t.position, aiS.arrivalDistance, lastIndex);
                 nav.SetDestination(point);
+                haspoint = true;
             }
 
-            if ((t.position - point).magnitude >= aiS.arrivalDistance)
+            if ((t.position - point).magnitude <= aiS.arrivalDistance)
             {
-                point = aiS.patrolPath.NextPoint(point);
+                Vector4 ret = aiS.patrolPath.NextPoint(point, aiS.arrivalDistance, lastIndex);
+                point = new Vector3(ret.x, ret.y, ret.z);
+                lastIndex = ret.w;
                 nav.SetDestination(point);
             }
         }
@@ -241,6 +247,7 @@ public class BehaviourTree : NetworkBehaviour {
         { aiS = settings; t = transform; nav = navAgent; }
 
         private bool arrived = false;
+        private bool haslos = false;
         private float waitingTime = 0;
 
         public override void update()
@@ -248,7 +255,8 @@ public class BehaviourTree : NetworkBehaviour {
             //chase last known
             //Debug.Log(lastKnown);
             //Debug.Log(playerGO.transform.position);
-           
+            if (hasLineOfSight())
+                haslos = true;
 
             if (aiS.type == AI_TYPE.Wallhack)
                 lastKnown = playerGO.transform.position;
@@ -264,7 +272,7 @@ public class BehaviourTree : NetworkBehaviour {
                 arrived = true;
             if(arrived)
             {
-                if (hasLineOfSight())
+                if (haslos)
                     return AI_STATE.Chase;
                 else
                     waitingTime += Time.deltaTime;
@@ -282,7 +290,7 @@ public class BehaviourTree : NetworkBehaviour {
     {
         public AIReturnToPatrol(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
             : base(ref settings, transform, ref navAgent)
-        { aiS = settings; t = transform; nav = navAgent; nav.SetDestination(aiS.patrolPath.NextPoint(t.position)); }
+        { aiS = settings; t = transform; nav = navAgent; nav.SetDestination(aiS.patrolPath.NextPoint(t.position, aiS.arrivalDistance, 0)); }
         public override void update()
         {
             //pathfind to patrol path
@@ -305,7 +313,13 @@ public class BehaviourTree : NetworkBehaviour {
     {
         public AIWait(ref AISettings settings, Transform transform, ref UnityEngine.AI.NavMeshAgent navAgent)
             : base(ref settings, transform, ref navAgent)
-        { aiS = settings; t = transform; nav = navAgent; nav.SetDestination(t.position); lastKnown = t.position; }
+        {
+            aiS = settings;
+            t = transform;
+            nav = navAgent;
+            nav.SetDestination(t.position);
+            lastKnown = t.position;
+        }
         public override void update()
         {
             //wait for line of sight or range

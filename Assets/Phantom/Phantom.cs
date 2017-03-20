@@ -24,7 +24,7 @@ public class Phantom : NetworkBehaviour
     // Start is called just before any of the Update methods is called the first time
     public void Start()
     {
-		setVisibility();
+		//setVisibility();
 
 
         if (!isLocalPlayer)
@@ -62,7 +62,7 @@ public class Phantom : NetworkBehaviour
     {
 		Debug.Log("Phantoms Killed " + numKilled);
 
-		setVisibility();
+		//setVisibility();
 		numKilled += 100;
         if (audioObject.GetComponent<AudioSource>() != null)
         {
@@ -90,9 +90,19 @@ public class Phantom : NetworkBehaviour
     // This function is called when the MonoBehaviour will be destroyed
     public void OnDestroy()
     {
-        GameState.StaticEndGame();
+        //GameState.StaticEndGame();
     }
 
+    public void die()
+    {
+        Instantiate(vanishParticleEffect, transform.position, vanishParticleEffect.transform.rotation);
+
+        if (audioObject.GetComponent<AudioSource>() != null)
+        {
+            GameObject temp = Instantiate(audioObject, transform.position, Quaternion.identity);
+            temp.GetComponent<PlayThenDelete>().Play();
+        }
+    }
 
 	public void setVisibility()
 	{

@@ -14,6 +14,10 @@ public class PhantomSpawnLocation : MonoBehaviour
     public BehaviourTree.AI_TYPE type = BehaviourTree.AI_TYPE.Wallhack; //the class of ai
     public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
 
+    [Space(5)]
+	public Plasma.Visibility visibility;
+	//[Space(5)]
+
     public BehaviourTree.AISettings aiSettings()
     {
         BehaviourTree.AISettings s;
@@ -29,17 +33,15 @@ public class PhantomSpawnLocation : MonoBehaviour
         return s;
     }
 
-    // Implement this OnDrawGizmo if you want to draw gizmos for the object
-    public void OnDrawGizmosSelected()
-    {
-
-    }
-
     public void Start()
     {
-        GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject;
+        GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform) as GameObject;
+
+        //GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject;
+        Phantom.GetComponent<Phantom>().visibility = visibility;
         BehaviourTree bt = Phantom.GetComponent<BehaviourTree>();
-        bt.UpdateSettings(aiSettings());
+        BehaviourTree.AISettings s = aiSettings();
+        bt.RestartWithoutDefaultSettings(s);
         NetworkServer.Spawn(Phantom);
     }
 

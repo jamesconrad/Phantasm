@@ -55,13 +55,6 @@ Shader "Decal/DecalShader"
 			sampler2D_float _CameraDepthTexture;
 			sampler2D _NormalsCopy;
 
-			//void frag(
-			//	v2f i,
-			//	out half4 outDiffuse : COLOR0,			// RT0: diffuse color (rgb), --unused-- (a)
-			//	out half4 outSpecRoughness : COLOR1,	// RT1: spec color (rgb), roughness (a)
-			//	out half4 outNormal : COLOR2,			// RT2: normal (rgb), --unused-- (a)
-			//	out half4 outEmission : COLOR3			// RT3: emission (rgb), --unused-- (a)
-			//)
 			fixed4 frag(v2f i) : SV_Target
 			{
 				i.ray = i.ray * (_ProjectionParams.z / i.ray.z);
