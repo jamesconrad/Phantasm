@@ -45,8 +45,8 @@
 			half4 frag(v2f i) : SV_Target
 			{
 				half4 col= half4(0.0f, 0.0f, 0.0f, 1.0f);
-				//col.rgb = 2.0 * tex2D(_MainTex, i.uv).rgb - 1.0;
-				col.rgb = 1.0f - tex2D(_CameraGBufferTexture2, i.uv).rgb * 1.0f;
+				col.rgb = tex2D(_MainTex, i.uv).rgb;
+				//col.rgb = 1.0f - tex2D(_CameraGBufferTexture2, i.uv).rgb * 1.0f;
 				return col;
 			}
 			ENDCG
