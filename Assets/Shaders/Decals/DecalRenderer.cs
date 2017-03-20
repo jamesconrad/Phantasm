@@ -21,6 +21,7 @@ public class DecalSystem
 	internal HashSet<Decal> m_DecalsDiffuse = new HashSet<Decal>();
 	internal HashSet<Decal> m_DecalsNormals = new HashSet<Decal>();
 	internal HashSet<Decal> m_DecalsSpecular = new HashSet<Decal>();
+	internal HashSet<Decal> m_DecalsEmissive = new HashSet<Decal>();
 	internal HashSet<Decal> m_DecalsBoth = new HashSet<Decal>();
 
 	public void AddDecal (Decal d)
@@ -32,6 +33,8 @@ public class DecalSystem
 			m_DecalsNormals.Add (d);
 		if (d.m_Kind == Decal.Kind.Specular)
 			m_DecalsSpecular.Add (d);
+		if (d.m_Kind == Decal.Kind.Emissive)
+			m_DecalsEmissive.Add (d);
 		if (d.m_Kind == Decal.Kind.Both)
 			m_DecalsBoth.Add (d);
 	}
@@ -40,6 +43,7 @@ public class DecalSystem
 		m_DecalsDiffuse.Remove (d);
 		m_DecalsNormals.Remove (d);
 		m_DecalsSpecular.Remove (d);
+		m_DecalsEmissive.Remove (d);
 		m_DecalsBoth.Remove (d);
 	}
 }
@@ -114,6 +118,12 @@ public class DecalRenderer : MonoBehaviour
 		// render normals-only decals into normals channel
 		buf.SetRenderTarget (BuiltinRenderTextureType.GBuffer2, BuiltinRenderTextureType.CameraTarget);
 		foreach (var decal in system.m_DecalsNormals)
+		{
+			buf.DrawMesh (m_CubeMesh, decal.transform.localToWorldMatrix, decal.m_Material);
+		}
+		// render emissive-only decals into normals channel
+		buf.SetRenderTarget (BuiltinRenderTextureType.GBuffer3, BuiltinRenderTextureType.CameraTarget);
+		foreach (var decal in system.m_DecalsEmissive)
 		{
 			buf.DrawMesh (m_CubeMesh, decal.transform.localToWorldMatrix, decal.m_Material);
 		}

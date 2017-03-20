@@ -59,3 +59,9 @@ MonoBehaviour:
   patrolPath: {fileID: 0}
   type: 1
   triggered: 1
+  visibility:
+    agent: 0
+    camera: 2
+    thermal: 1
+    sonar: 1
+    temperature: 1
