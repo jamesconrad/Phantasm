@@ -995,7 +995,17 @@ Prefab:
       propertyPath: gameCreationSettings.sceneToSwitchTo
       value: SceneTemplate
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114217009450961098, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114660995410640762, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114976447045518452, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114267549566952884, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114197655756015328, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114207281580604614, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114688283862784736, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114749481846697482, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114912663808304864, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
+    - {fileID: 114480117211789358, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1887968808

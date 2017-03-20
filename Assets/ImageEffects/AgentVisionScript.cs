@@ -27,11 +27,21 @@ public class AgentVisionScript : MonoBehaviour
 	{
 	
 	}
-	
-	void Update () 
+
+    const float timeToWaitTillSearch = 10.0f;
+    float timeSinceLastSearch = timeToWaitTillSearch;
+
+    void Update () 
 	{
-		
-        GOPhantom = GameObject.FindGameObjectsWithTag("Enemy");
+
+        timeSinceLastSearch += Time.deltaTime;
+        if (timeSinceLastSearch > timeToWaitTillSearch)
+        {
+            GOPhantom = GameObject.FindGameObjectsWithTag("Enemy");
+            timeSinceLastSearch = 0.0f;
+        }
+
+        
 		for(int i = 0; i < GOPhantom.Length; ++i)
 		{
 			EntityPhantom = GOPhantom[i].GetComponent<Phantom>();

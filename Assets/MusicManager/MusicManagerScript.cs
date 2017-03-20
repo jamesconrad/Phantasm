@@ -36,11 +36,22 @@ public class MusicManagerScript : MonoBehaviour
         //SpookyChip
     }
 
+    const float timeToWaitTillSearch = 10.0f;
+    float timeSinceLastSearch = timeToWaitTillSearch;
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        AgentObject = GameObject.FindGameObjectWithTag("Player");
-        PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
+        //AgentObject = GameObject.FindGameObjectWithTag("Player");
+        //PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
+
+         timeSinceLastSearch += Time.fixedTime;
+        if(timeSinceLastSearch > timeToWaitTillSearch)
+        {
+            AgentObject = GameObject.FindGameObjectWithTag("Player");
+            PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
+            timeSinceLastSearch = 0.0f;
+        }
 
         if (AgentObject != null)
         {

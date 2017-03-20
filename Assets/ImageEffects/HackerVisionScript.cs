@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 
 
 [ImageEffectAllowedInSceneView]
@@ -70,12 +70,12 @@ public class HackerVisionScript : MonoBehaviour
 	
 	[Space(10)]
 	private GameObject	GOAgent;
-	private GameObject	GOAgentMesh;
+	//private GameObject	GOAgentMesh;
 	private GameObject[]	GOPhantom;
 	private Agent	EntityAgent;
 	private Phantom	EntityPhantom;
 	private Plasma.Visibility	VisibleAgent;
-	private Plasma.Visibility[]	VisiblePhantom;
+	private Plasma.Visibility   VisiblePhantom;
 	
 	[Space(10)]
 	public CameraMaterials agentMaterials;
@@ -340,23 +340,39 @@ public class HackerVisionScript : MonoBehaviour
 
     }
 
+    const float timeToWaitTillSearch = 10.0f;
+    float timeSinceLastSearch = timeToWaitTillSearch;
+
     public void OnPreRender()
     {
-		GOAgent = GameObject.Find("Agent(Clone)");
-		GOAgentMesh = GameObject.Find("agent_Mesh");
-        GOPhantom = GameObject.FindGameObjectsWithTag("Enemy");
+        //Profiling.Profiler.BeginSample ("MyPieceOfCode");
+		//GOAgentMesh = GameObject.Find("agent_Mesh");
 
+        timeSinceLastSearch += Time.deltaTime;
+        if(timeSinceLastSearch > timeToWaitTillSearch)
+        {
+            GOAgent = GameObject.FindGameObjectWithTag("Player");
+            GOPhantom = GameObject.FindGameObjectsWithTag("Enemy");
+            timeSinceLastSearch = 0.0f;
+        }
+        
 		if(GOAgent != null)
 		{			
 			EntityAgent = GOAgent.GetComponent<Agent>();
 			VisibleAgent = EntityAgent.visibility;
 		}
-        for (int i = 1; i < GOPhantom.Length; ++i)
+        for (int i = 0; i < GOPhantom.Length; ++i)
         {
-		    if(GOPhantom[i] != null)
-		    {	
-		    	VisiblePhantom[i] = GOPhantom[i].GetComponent<Phantom>().visibility;
-		    }
+            if(GOPhantom[i] == null)
+            {
+                Debug.Log("Phantom is null\nRebuilding Phantom List");
+                GOPhantom = GameObject.FindGameObjectsWithTag("Enemy");
+            }
+            //Debug.Log("Phantom #" + i + " Of " + GOPhantom.Length);
+		    //if(GOPhantom[i] != null && GOPhantom[i].GetComponent<Phantom>() != null)
+		    //{	
+		    //	
+		    //}
         }
 		
 		
@@ -372,14 +388,15 @@ public class HackerVisionScript : MonoBehaviour
 		/*
 			Set Materials for Agent and Phantom next
 		 */
-		for (int i = 1; i < GOPhantom.Length; ++i)
+		for (int i = 0; i < GOPhantom.Length; ++i)
         {
+            VisiblePhantom = GOPhantom[i].GetComponent<Phantom>().visibility;
 
 		    if (Vision == HackerVisionMode.Normal || Vision == HackerVisionMode.Night)
             {
-		    	if(GOAgentMesh != null)
+		    	if(GOAgent != null)
 		    	{
-		    		Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
                 
 		    		for (int c = 0; c < agentRenderers.Length; c++)
 		    		{
@@ -392,16 +409,24 @@ public class HackerVisionScript : MonoBehaviour
             
 		    	if(GOPhantom != null)
 		    	{
-		    		if(VisiblePhantom[i].camera > 0)
+		    		if(VisiblePhantom.camera > 0)
 		    		{
 		    			GOPhantom[i].layer = 9;
-		    			if(VisiblePhantom[i].camera == Plasma.SeenBy.Camera.Translucent)
+		    			if(VisiblePhantom.camera == Plasma.SeenBy.Camera.Translucent)
 		    			{
-		    				GOPhantom[i].GetComponent<Renderer>().material = phantomMaterials.normal;
+		    				Renderer[] phantomRenderers = GOPhantom[i].GetComponentsInChildren<Renderer>();
+                            for (int c = 0; c < phantomRenderers.Length; c++)
+		    		        {
+                                phantomRenderers[c].material = phantomMaterials.normal;
+		    		        }
 		    			}
 		    			else
 		    			{
-		    				GOPhantom[i].GetComponent<Renderer>().material = phantomMaterials.camera;
+                            Renderer[] phantomRenderers = GOPhantom[i].GetComponentsInChildren<Renderer>();
+                            for (int c = 0; c < phantomRenderers.Length; c++)
+		    		        {
+                                phantomRenderers[c].material = phantomMaterials.camera;
+		    		        }
 		    			}
 		    		}
 		    		else
@@ -413,9 +438,9 @@ public class HackerVisionScript : MonoBehaviour
 		    }
 		    else if (Vision == HackerVisionMode.Thermal)
             {
-		    	if(GOAgentMesh != null)
+		    	if(GOAgent != null)
 		    	{
-		    		Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
 		    		for(int c = 0; c < agentRenderers.Length; c++)
 		    		{
 		    			agentRenderers[c].material = agentMaterials.thermal;
@@ -424,28 +449,31 @@ public class HackerVisionScript : MonoBehaviour
 
 		    	CameraSettings.cullingMask = (1 << 10) | defaultCameraLayersActive;
             
-		    	    if(GOPhantom != null)
-		    	    {
-		    	    	if(VisiblePhantom[i].thermal > 0)
-		    	    	{
-		    	    		GOPhantom[i].layer = 10;
-		    	    		if(VisiblePhantom[i].thermal == Plasma.SeenBy.Thermal.Visible)
-		    	    		{
-		    	    			GOPhantom[i].GetComponent<Renderer>().material = phantomMaterials.thermal;
-		    	    		}
-		    	    	}
-		    	    	else
-		    	    	{
-		    	    		GOPhantom[i].layer = 12;
-		    	    	}
-		    	    }
-            
+		    	if(GOPhantom != null)
+		    	{
+		    		if(VisiblePhantom.thermal > 0)
+		    		{
+		    			GOPhantom[i].layer = 10;
+		    			if(VisiblePhantom.thermal == Plasma.SeenBy.Thermal.Visible)
+		    			{
+                            Renderer[] phantomRenderers = GOPhantom[i].GetComponentsInChildren<Renderer>();
+                            for (int c = 0; c < phantomRenderers.Length; c++)
+		    	            {
+                                phantomRenderers[c].material = phantomMaterials.thermal;
+		    	            }
+		    			}
+		    		}
+		    		else
+		    		{
+		    			GOPhantom[i].layer = 12;
+		    		}
+		    	}
 		    }
 		    else if (Vision == HackerVisionMode.Sonar)
             {
-		    	if(GOAgentMesh != null)
+		    	if(GOAgent != null)
 		    	{
-		    		Renderer[] agentRenderers = GOAgentMesh.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
 		    		for(int c = 0; c < agentRenderers.Length; c++)
 		    		{
 		    			agentRenderers[c].material = agentMaterials.sonar;
@@ -457,12 +485,16 @@ public class HackerVisionScript : MonoBehaviour
             
 		       if(GOPhantom != null)
 		       {
-		       	    if(VisiblePhantom[i].sonar > 0)
+		       	    if(VisiblePhantom.sonar > 0)
 		       	    {
 		       	    	GOPhantom[i].layer = 11;
-		       	    	if(VisiblePhantom[i].sonar == Plasma.SeenBy.Sonar.Visible)
+		       	    	if(VisiblePhantom.sonar == Plasma.SeenBy.Sonar.Visible)
 		       	    	{
-		       	    		GOPhantom[i].GetComponent<Renderer>().material = phantomMaterials.sonar;
+                            Renderer[] phantomRenderers = GOPhantom[i].GetComponentsInChildren<Renderer>();
+                            for (int c = 0; c < phantomRenderers.Length; c++)
+		    		        {
+                                phantomRenderers[c].material = phantomMaterials.sonar;
+		    		        }
 		       	    	}
 		       	    }
 		       	    else
