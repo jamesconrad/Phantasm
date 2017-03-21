@@ -22,6 +22,11 @@ public class PhantomManager : PhaNetworkingMessager {
 		ListOfPhantomSpawners = GetComponentsInChildren<PhantomSpawnLocation>();
 		phantoms = new Phantom[ListOfPhantomSpawners.Length];
 		PreviousPositions = new Vector3[ListOfPhantomSpawners.Length];
+		for (int i = 0; i < ListOfPhantomSpawners.Length; i++)
+		{
+			phantoms[i] = ListOfPhantomSpawners[i].GetComponent<Phantom>();
+			PreviousPositions[i] = ListOfPhantomSpawners[i].transform.position;
+		}
 		size = ListOfPhantomSpawners.Length;
 	}
 

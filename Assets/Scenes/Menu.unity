@@ -362,9 +362,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlineSceneName: SceneTemplate
-  AgentPrefab: {fileID: 0}
-  RemoteAgentPrefab: {fileID: 0}
-  HackerPrefab: {fileID: 0}
+  AgentPrefab: {fileID: 1000014286740798, guid: cb84adf3a52d4904497b307ade945dd9,
+    type: 2}
+  RemoteAgentPrefab: {fileID: 1421206583815630, guid: 0d6c5bc08c4ad674493d65db06bb47d2,
+    type: 2}
+  HackerPrefab: {fileID: 1000010077982806, guid: 7930d10bb2cafaf4984aa6c0f3b75106,
+    type: 2}
 --- !u!1 &145477331
 GameObject:
   m_ObjectHideFlags: 0
