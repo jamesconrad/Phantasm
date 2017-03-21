@@ -18,10 +18,12 @@ public class GoodDoor : NetworkBehaviour {
     private float baseRot;
 
     public GameObject LockObject;
-    public GameObject LockReference;
+    private GameObject LockReference;
+    public bool locked = false;
     public string code;
 
-    public bool active = true;
+    bool active = false;
+
     //[SyncVar]
     //private Vector3 thisPosition;
     //[SyncVar]
@@ -47,12 +49,12 @@ public class GoodDoor : NetworkBehaviour {
 
     public bool Unlock(string input)
     {
-        if(!active)
+        if(locked)
         {
             Debug.Log(code + " vs. " + input);
             if(input.Contains(code))
             {
-                active = true;
+                locked = false;
                 ElectricBarrier();
                 return true;
             }
@@ -63,12 +65,11 @@ public class GoodDoor : NetworkBehaviour {
     void Activate()
     {
         active = !active;
-        ElectricBarrier();
     }  
     
     void ElectricBarrier()
     {
-        if(!active)
+        if(locked)
         {
             if(LockReference == null)
             {
