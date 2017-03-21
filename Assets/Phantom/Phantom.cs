@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Networking;
 
-public class Phantom : NetworkBehaviour
+public class Phantom : MonoBehaviour
 {
     public float attackDamage;
 
