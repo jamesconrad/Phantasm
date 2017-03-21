@@ -211,8 +211,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
 
-                if(survCameras[i].transform.position.y > CameraPositionMin.y + viewFloor * floorHeight
-                && survCameras[i].transform.position.y < CameraPositionMin.y + (viewFloor + 1) * floorHeight)
+                if(survCameras[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survCameras[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight)
                 {
                     survCameraButtons[i].SetActive(true);
                 }
