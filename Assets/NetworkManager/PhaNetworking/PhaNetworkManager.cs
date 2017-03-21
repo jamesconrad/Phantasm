@@ -26,6 +26,8 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	public GameObject HackerPrefab;
 	PhantomManager phantomManager;
 
+	Vector3 PreviousPlayerPosition;
+
 	private static bool NetworkInitialized = false;
 	/// This function is called when the object becomes enabled and active.
 	void OnEnable()
@@ -67,20 +69,21 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		}	
 		return PhaNetworkingAPI.hostAddress;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (SceneManager.GetActiveScene().name != "Menu")
 		{
 			Debug.Log("target ip address: " + PhaNetworkingAPI.targetIP);
-			if (characterSelection == 0)
+			if (characterSelection == 0 && PreviousPlayerPosition != AgentPrefab.transform.position)
 			{//Sending
 				SendPlayerUpdate(AgentPrefab.transform.position, AgentPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
+				PreviousPlayerPosition = AgentPrefab.transform.position;
 			}
 			
 			MessageType receivedType;
 			//So you know, this is a terrible set up, but it'll be functional.
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < 15; i++)
 			{//Receiving
 				receivedType = (MessageType)ReceiveInGameMessage();
 				Debug.Log("receivedType: " + receivedType);
@@ -113,6 +116,8 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			{
 				AgentPrefab = GameObject.Instantiate(AgentPrefab); //Local player is agent.
 				AgentHealth = AgentPrefab.GetComponent<Health>();
+				PreviousPlayerPosition = new Vector3(AgentPrefab.transform.position.x, AgentPrefab.transform.position.y, AgentPrefab.transform.position.z);
+				
 			}
 			else if (characterSelection == 1)
 			{
