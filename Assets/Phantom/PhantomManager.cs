@@ -26,6 +26,7 @@ public class PhantomManager : PhaNetworkingMessager {
 
 	// Use this for initialization
 	void Awake () {
+		singleton = this;
 		netManager = PhaNetworkManager.Singleton;
 		PhantomSpawnLocation[] tempSpawnLocations = GetComponentsInChildren<PhantomSpawnLocation>();
 		size = tempSpawnLocations.Length;
