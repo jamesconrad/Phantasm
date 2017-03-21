@@ -13,7 +13,7 @@ public class MusicManagerScript : MonoBehaviour
     public GameObject AgentObject;
     public GameObject[] PhantomObject;
 
-    float maxVolume = 0.75f;
+    float maxVolume = 0.25f;
 
     float intensity = 0.3f;
 
