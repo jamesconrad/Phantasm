@@ -19,13 +19,13 @@ public class PhantomManager : PhaNetworkingMessager {
 
 	//Data of the phantoms
 	List<PhantomSpawnLocation> ListOfPhantomSpawners;
-	public List<Phantom> phantoms;
+	List<Phantom> phantoms;
 	List<Vector3> PreviousPositions;
 
 	int size;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		netManager = PhaNetworkManager.Singleton;
 		PhantomSpawnLocation[] tempSpawnLocations = GetComponentsInChildren<PhantomSpawnLocation>();
 		size = tempSpawnLocations.Length;
@@ -36,6 +36,12 @@ public class PhantomManager : PhaNetworkingMessager {
 		{
 			ListOfPhantomSpawners.Add(tempSpawnLocations[i]);
 		}
+	}
+
+	public void AddPhantom(Phantom givenPhantom)
+	{
+		phantoms.Add(givenPhantom);
+		PreviousPositions.Add(givenPhantom.transform.position);
 	}
 
 	public void ParsePhantomUpdate(int id, StringBuilder buffer)
