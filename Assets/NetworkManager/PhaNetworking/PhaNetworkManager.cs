@@ -24,7 +24,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	public GameObject AgentPrefab; Health AgentHealth;
 	public GameObject RemoteAgentPrefab;
 	public GameObject HackerPrefab;
-	public GameObject PhantomPrefab;
+	public GameObject PhantomPrefab; PhantomManager phantomManager;
 	public GameObject remotePhantomPrefab;
 
 	private static bool NetworkInitialized = false;
@@ -78,16 +78,13 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			{//Sending
 				SendPlayerUpdate(AgentPrefab.transform.position, AgentPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
 			}
-			if (Ishost)
-			{
-				SendEnemyUpdate(PhantomPrefab.transform.position, PhantomPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
-			} 
+			
 			MessageType receivedType;
 			//So you know, this is a terrible set up, but it'll be functional.
-			for (int i = 0; i < /*numChecks*/ 3; i++)
+			for (int i = 0; i < 8; i++)
 			{//Receiving
-			receivedType = (MessageType)ReceiveInGameMessage();
-			Debug.Log("receivedType: " + receivedType);
+				receivedType = (MessageType)ReceiveInGameMessage();
+				Debug.Log("receivedType: " + receivedType);
 				switch	(receivedType)
 				{
 					case MessageType.PlayerUpdate:
@@ -95,7 +92,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 					break;
 
 					case MessageType.EnemyUpdate:
-					ParseObjectUpdate(receiveBuffer, PhantomPrefab.transform);
+					phantomManager.ParsePhantomUpdate(int.Parse(receiveBuffer[2].ToString()), receiveBuffer);
 					break;
 
 					case MessageType.HealthUpdate:
@@ -103,7 +100,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 					break;
 
 					default://This may be the first time I've ever had a reachable default statement...
-					break;
+					return; //No more messages, so let's have an early exit.
 				}
 			}
 		}
@@ -134,6 +131,12 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			else
 			{
 				PhantomPrefab = GameObject.Instantiate(remotePhantomPrefab);
+			}
+
+			phantomManager = FindObjectOfType(typeof(PhantomManager)) as PhantomManager;
+			if (phantomManager == null)
+			{
+				Debug.LogError("phantomManager not found. Fuck.");
 			}
 		}
 

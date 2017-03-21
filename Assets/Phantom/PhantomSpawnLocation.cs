@@ -13,6 +13,7 @@ public class PhantomSpawnLocation : MonoBehaviour
     public Patrol patrolPath; //path the ai will idly patrol around
     public BehaviourTree.AI_TYPE type = BehaviourTree.AI_TYPE.Wallhack; //the class of ai
     public bool triggered = true; //for the inactive/whatever bonnyman/jacob wanted
+    public GameObject SpawnedPhantom;
 
     [Space(5)]
 	public Plasma.Visibility visibility;
@@ -35,14 +36,14 @@ public class PhantomSpawnLocation : MonoBehaviour
 
     public void Start()
     {
-        GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform) as GameObject;
+        SpawnedPhantom = Instantiate(Resources.Load("Phantom"), transform) as GameObject;
 
         //GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject;
-        Phantom.GetComponent<Phantom>().visibility = visibility;
-        BehaviourTree bt = Phantom.GetComponent<BehaviourTree>();
+        SpawnedPhantom.GetComponent<Phantom>().visibility = visibility;
+        BehaviourTree bt = SpawnedPhantom.GetComponent<BehaviourTree>();
         BehaviourTree.AISettings s = aiSettings();
         bt.RestartWithoutDefaultSettings(s);
-        NetworkServer.Spawn(Phantom);
+        NetworkServer.Spawn(SpawnedPhantom);
     }
 
 

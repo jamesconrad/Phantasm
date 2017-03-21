@@ -1673,6 +1673,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 53952016}
+  - component: {fileID: 53952017}
   m_Layer: 0
   m_Name: Phantoms
   m_TagString: Untagged
@@ -1706,6 +1707,17 @@ Transform:
   m_Father: {fileID: 2024009012}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &53952017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 53952015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab62ff5e7655f1445a9a5bcbe1f68794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &58024094
 GameObject:
   m_ObjectHideFlags: 0

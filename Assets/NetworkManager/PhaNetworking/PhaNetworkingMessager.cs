@@ -116,11 +116,11 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	}
 
 
-//Have multiple sockets instead of this. This could cause a backlog of issues, but it's fine for now.
-	public int SendEnemyUpdate(Vector3 position, Quaternion orientation, StringBuilder givenAddress)
+	public int SendEnemyUpdate(Vector3 position, Quaternion orientation, int index, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(
 		((int)MessageType.EnemyUpdate).ToString() + " " + 
+		index.ToString() + " " +
 		position.x + " " + position.y + " " + position.z + " " +
 		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
 		recvBufferSize);
@@ -137,14 +137,16 @@ public class PhaNetworkingMessager : MonoBehaviour {
 			Vector3 position;
 			Quaternion orientation;
 
-			position.x = float.Parse(message[1]);
-			position.y = float.Parse(message[2]);
-			position.z = float.Parse(message[3]);
+			int id = int.Parse(message[1]);
 
-			orientation.w = float.Parse(message[4]);
-			orientation.x = float.Parse(message[5]);
-			orientation.y = float.Parse(message[6]);
-			orientation.z = float.Parse(message[7]);
+			position.x = float.Parse(message[2]);
+			position.y = float.Parse(message[3]);
+			position.z = float.Parse(message[4]);
+
+			orientation.w = float.Parse(message[5]);
+			orientation.x = float.Parse(message[6]);
+			orientation.y = float.Parse(message[7]);
+			orientation.z = float.Parse(message[8]);
 
 			playerTransform.position = position;
 			playerTransform.rotation = orientation;
