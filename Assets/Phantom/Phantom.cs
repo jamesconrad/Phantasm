@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Networking;
-using System.Collections;
 
 public class Phantom : NetworkBehaviour
 {
@@ -27,12 +28,11 @@ public class Phantom : NetworkBehaviour
 		//setVisibility();
 
 
-        if (!isLocalPlayer)
-        {
-            //Change to apply the correct shaders when Stephen gets them done.
-            //GetComponent<MeshRenderer>().enabled = false;
-
-        }
+		if (!PhaNetworkManager.Ishost)
+		{
+			GetComponent<BehaviourTree>().enabled = false;
+			GetComponent<NavMeshAgent>().enabled = false;
+		}
 
         if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])
         {

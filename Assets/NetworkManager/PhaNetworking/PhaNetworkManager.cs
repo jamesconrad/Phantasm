@@ -24,8 +24,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	public GameObject AgentPrefab; Health AgentHealth;
 	public GameObject RemoteAgentPrefab;
 	public GameObject HackerPrefab;
-	public GameObject PhantomPrefab; PhantomManager phantomManager;
-	public GameObject remotePhantomPrefab;
+	PhantomManager phantomManager;
 
 	private static bool NetworkInitialized = false;
 	/// This function is called when the object becomes enabled and active.
@@ -122,15 +121,6 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				
 				HackerPrefab = GameObject.Instantiate(HackerPrefab); //Local Player is Hacker. The order of instantiation here is important!
 				//Set to online version of agent.
-			}
-
-			if (Ishost)
-			{
-				PhantomPrefab = GameObject.Instantiate(PhantomPrefab);
-			}
-			else
-			{
-				PhantomPrefab = GameObject.Instantiate(remotePhantomPrefab);
 			}
 
 			phantomManager = FindObjectOfType(typeof(PhantomManager)) as PhantomManager;
