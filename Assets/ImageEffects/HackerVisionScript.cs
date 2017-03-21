@@ -18,7 +18,7 @@ public class HackerVisionScript : MonoBehaviour
 	private Camera CameraSettings;
 
     private Color ambientLightTemp;
-    public Color ambientLight = new Color(0.25f, 0.25f, 0.25f);
+    public Color ambientLight = new Color(0.5f, 0.5f, 0.5f);
 
     private Light[] all_my_damn_lights;
 
@@ -518,6 +518,12 @@ public class HackerVisionScript : MonoBehaviour
             // If night vision is on, turn the ambient light up and store actual ambient light
             ambientLightTemp = RenderSettings.ambientLight;
             RenderSettings.ambientLight = ambientLight;
+        }
+
+        if(Vision == HackerVisionMode.Thermal)
+        {
+            ambientLightTemp = RenderSettings.ambientLight;
+            RenderSettings.ambientLight = new Color(ambientLight.r * 0.15f, ambientLight.g * 0.15f, ambientLight.b * 0.15f);
         }
 
         if (Vision == HackerVisionMode.Normal)
