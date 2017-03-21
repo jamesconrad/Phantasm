@@ -43,7 +43,7 @@ public class PhantomSpawnLocation : MonoBehaviour
         BehaviourTree bt = SpawnedPhantom.GetComponent<BehaviourTree>();
         BehaviourTree.AISettings s = aiSettings();
         bt.RestartWithoutDefaultSettings(s);
-        NetworkServer.Spawn(SpawnedPhantom);
+        //NetworkServer.Spawn(SpawnedPhantom);
     }
 
 
