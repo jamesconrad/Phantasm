@@ -80,7 +80,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			
 			MessageType receivedType;
 			//So you know, this is a terrible set up, but it'll be functional.
-			for (int i = 0; i < 8; i++)
+			for (int i = 0; i < 10; i++)
 			{//Receiving
 				receivedType = (MessageType)ReceiveInGameMessage();
 				Debug.Log("receivedType: " + receivedType);

@@ -28,6 +28,8 @@ public class Agent : MonoBehaviour
     public void Awake()
     {
         PauseUI = Instantiate(PauseUI) as GameObject;
+        PauseUI.SetActive(false);
+        
         AgentUI = Instantiate(AgentUI) as GameObject;
 
         Text[] textReferences;

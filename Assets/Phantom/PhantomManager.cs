@@ -5,29 +5,37 @@ using UnityEngine;
 
 public class PhantomManager : PhaNetworkingMessager {
 
+	private static PhantomManager singleton;
+	public static PhantomManager Singleton 
+	{ 
+		get 
+		{ 
+			return singleton; 
+		} 
+	}
+
 	//Network manager
 	PhaNetworkManager netManager = null;
 
 	//Data of the phantoms
-	PhantomSpawnLocation[] ListOfPhantomSpawners;
-	Phantom[] phantoms;
-	Vector3[] PreviousPositions;
+	List<PhantomSpawnLocation> ListOfPhantomSpawners;
+	public List<Phantom> phantoms;
+	List<Vector3> PreviousPositions;
 
 	int size;
 
 	// Use this for initialization
 	void Start () {
 		netManager = PhaNetworkManager.Singleton;
-
-		ListOfPhantomSpawners = GetComponentsInChildren<PhantomSpawnLocation>();
-		phantoms = new Phantom[ListOfPhantomSpawners.Length];
-		PreviousPositions = new Vector3[ListOfPhantomSpawners.Length];
-		for (int i = 0; i < ListOfPhantomSpawners.Length; i++)
+		PhantomSpawnLocation[] tempSpawnLocations = GetComponentsInChildren<PhantomSpawnLocation>();
+		size = tempSpawnLocations.Length;
+		ListOfPhantomSpawners = new List<PhantomSpawnLocation>(size);
+		phantoms = new List<Phantom>(size);
+		PreviousPositions = new List<Vector3>(size);
+		for (int i = 0; i < size; i++)
 		{
-			phantoms[i] = ListOfPhantomSpawners[i].GetComponent<Phantom>();
-			PreviousPositions[i] = ListOfPhantomSpawners[i].transform.position;
+			ListOfPhantomSpawners.Add(tempSpawnLocations[i]);
 		}
-		size = ListOfPhantomSpawners.Length;
 	}
 
 	public void ParsePhantomUpdate(int id, StringBuilder buffer)
@@ -50,6 +58,7 @@ public class PhantomManager : PhaNetworkingMessager {
 				if (PhaNetworkManager.Ishost)
 				{
 					//Send new position;
+					SendEnemyUpdate(phantoms[i].transform.position, phantoms[i].transform.rotation, i, PhaNetworkingAPI.targetIP);
 				}
 			}
 		}

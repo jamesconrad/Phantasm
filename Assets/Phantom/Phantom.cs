@@ -33,6 +33,7 @@ public class Phantom : NetworkBehaviour
 			GetComponent<BehaviourTree>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
 		}
+		PhantomManager.Singleton.phantoms.Add(this);
 
         if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])
         {
