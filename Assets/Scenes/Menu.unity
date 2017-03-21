@@ -361,12 +361,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5851c90d16d724e8d5100f0b0c66c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnlineSceneName: 
+  OnlineSceneName: SceneTemplate
   AgentPrefab: {fileID: 0}
   RemoteAgentPrefab: {fileID: 0}
   HackerPrefab: {fileID: 0}
-  PhantomPrefab: {fileID: 0}
-  remotePhantomPrefab: {fileID: 0}
 --- !u!1 &145477331
 GameObject:
   m_ObjectHideFlags: 0
