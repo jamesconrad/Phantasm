@@ -86,7 +86,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			for (int i = 0; i < 15; i++)
 			{//Receiving
 				receivedType = (MessageType)ReceiveInGameMessage();
-				Debug.Log("receivedType: " + receivedType);
+//				Debug.Log("receivedType: " + receivedType);
 				switch	(receivedType)
 				{
 					case MessageType.PlayerUpdate:

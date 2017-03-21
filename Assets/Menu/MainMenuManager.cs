@@ -65,6 +65,8 @@ public class MainMenuManager : MonoBehaviour {
 			{//If the ip is a valid ip, set the api's target ip and send the connection message to it.
 				PhaNetworkingAPI.targetIP = new StringBuilder(ipInput.text);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
+				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
+				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 
 				//Settings for splash screen.
 				SelectionUI.SetActive(true); 
@@ -116,6 +118,8 @@ public class MainMenuManager : MonoBehaviour {
 		selectAgentButton.interactable = false;
 		PhaNetworkManager.characterSelection = 0;
 		PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
+		PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
+		PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
 	}
 
 	/// method for Hacker selection button
@@ -123,6 +127,8 @@ public class MainMenuManager : MonoBehaviour {
 	{
 		selectHackerButton.interactable = false;
 		PhaNetworkManager.characterSelection = 1;
+		PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
+		PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
 		PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
 	}
 	
@@ -146,6 +152,8 @@ public class MainMenuManager : MonoBehaviour {
 				PhaNetworkingAPI.targetIP = new StringBuilder(PhaNetworkManager.recvBufferSize);
 				PhaNetworkingAPI.GetRemoteAddress(PhaNetworkingAPI.mainSocket, PhaNetworkingAPI.targetIP, PhaNetworkManager.recvBufferSize);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
+				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
+				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 			}
 			break;
 
@@ -157,6 +165,8 @@ public class MainMenuManager : MonoBehaviour {
 			if (PhaNetworkManager.Singleton.ReceiveConnectionMessage() > 0)
 			{
 				SetMenuState(MainMenuState.CharacterSelect);
+				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
+				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 			}
 			break;
