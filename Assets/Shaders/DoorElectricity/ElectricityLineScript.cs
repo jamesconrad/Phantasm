@@ -18,7 +18,7 @@ public class ElectricityLineScript : MonoBehaviour
 
     float timeSinceJump = 0.0f;
     float maxStillTime = 0.155f;
-    Vector2 minMaxTime = new Vector2 (0.075f, 0.100f);
+    Vector2 minMaxTime = new Vector2 (0.375f, 0.500f);
 
     public float width = 0.1f;
 
@@ -39,6 +39,16 @@ public class ElectricityLineScript : MonoBehaviour
             line.SetPosition(i, new Vector3(size.x * Interp, 0.0f, curveZ.Evaluate(Mathf.Abs(Interp)))); //Mathf.InverseLerp(0.0f, line.numPositions, i))));
         }
 	}
+
+    public void Activate()
+    {
+
+    }
+
+    public void Deactivate()
+    {
+
+    }
 
     private void OnWillRenderObject()
     {

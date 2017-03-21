@@ -18,7 +18,7 @@ public class HackerVisionScript : MonoBehaviour
 	private Camera CameraSettings;
 
     private Color ambientLightTemp;
-    public Color ambientLight = new Color(0.5f, 0.5f, 0.5f);
+    public Color ambientLight = new Color(0.75f, 0.75f, 0.75f);
 
     private Light[] all_my_damn_lights;
 

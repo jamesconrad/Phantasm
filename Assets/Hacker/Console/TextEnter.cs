@@ -17,6 +17,10 @@ public class TextEnter : MonoBehaviour {
 	//We can use this to compare strings (for codes n stuff), hence the 'public'
 	public string enteredText;
 
+    // Reference to all the doors in the level
+    // When text is inputted, check all doors and unlock them if the code is correct
+    private GoodDoor[] Doors;
+
 	public void addToLog(string yourText)
     {
 		logObj.GetComponent<Text> ().text += yourText;
@@ -64,12 +68,43 @@ public class TextEnter : MonoBehaviour {
 
     void checkText()
     {
-        if(enteredText.IndexOf("rm -rf /") >= 0)
+        if(enteredText.CompareTo("rm -rf /") == 0)
         {
             
 			addToLog("\n<color=red>*DON'T DO THAT*</color>");
 				++logLength;
 				++logLength;
+        }
+        else if(enteredText.StartsWith("code",  System.StringComparison.CurrentCultureIgnoreCase))
+        {
+            checkDoors(enteredText);
+        }
+    }
+
+    void checkDoors(string code)
+    {
+        Doors = FindObjectsOfType<GoodDoor>();
+        bool check = false;
+        for(int i = 0; i < Doors.Length; ++i)
+        {
+            if(!Doors[i].isActive())
+            {
+                if(Doors[i].Unlock(code))
+                    check = true;  
+            }
+        }
+
+        if (check)
+        {
+            addToLog("\n<color=green>*DOOR UNLOCKED*</color>");
+				++logLength;
+                ++logLength;
+        }
+        else
+        {
+            addToLog("\n<color=red>*ERROR: INCORRECT CODE*</color>");
+				++logLength;
+                ++logLength;
         }
     }
 }

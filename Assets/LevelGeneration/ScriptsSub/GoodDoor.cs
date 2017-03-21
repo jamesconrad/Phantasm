@@ -17,7 +17,11 @@ public class GoodDoor : NetworkBehaviour {
     private int prevstate;
     private float baseRot;
 
-    bool active = false;
+    public GameObject LockObject;
+    public GameObject LockReference;
+    public string code;
+
+    public bool active = true;
     //[SyncVar]
     //private Vector3 thisPosition;
     //[SyncVar]
@@ -29,16 +33,61 @@ public class GoodDoor : NetworkBehaviour {
     //    thisRotation = this.transform.rotation;
     //
     //}
+
+    public bool isActive()
+    {
+        return active;
+    }
+
     void Start()
     {
+        ElectricBarrier();
         baseRot = transform.localEulerAngles.y;
+    }
+
+    public bool Unlock(string input)
+    {
+        if(!active)
+        {
+            Debug.Log(code + " vs. " + input);
+            if(input.Contains(code))
+            {
+                active = true;
+                ElectricBarrier();
+                return true;
+            }
+        }
+        return false;
     }
 
     void Activate()
     {
         active = !active;
+        ElectricBarrier();
+    }  
+    
+    void ElectricBarrier()
+    {
+        if(!active)
+        {
+            if(LockReference == null)
+            {
+                Debug.Log("Creating Lock");
+                LockReference = Instantiate(LockObject, this.transform.position, this.transform.rotation);
+                LockReference.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            }
+        }
+        else
+        {
+            if(LockReference != null)
+            {
+                Debug.Log("Releasing Lock");
+                LockReference.SetActive(false);
+                Destroy(LockReference);
+            }
+        }
     }
-    	
+
 	// Update is called once per frame
 	void Update ()
     {
