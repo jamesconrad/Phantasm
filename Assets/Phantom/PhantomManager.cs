@@ -19,8 +19,8 @@ public class PhantomManager : PhaNetworkingMessager {
 
 	//Data of the phantoms
 	List<PhantomSpawnLocation> ListOfPhantomSpawners;
-	List<Phantom> phantoms;
-	List<Vector3> PreviousPositions;
+	Phantom[] phantoms;
+	Vector3[] PreviousPositions;
 
 	int size;
 
@@ -31,23 +31,25 @@ public class PhantomManager : PhaNetworkingMessager {
 		PhantomSpawnLocation[] tempSpawnLocations = GetComponentsInChildren<PhantomSpawnLocation>();
 		size = tempSpawnLocations.Length;
 		ListOfPhantomSpawners = new List<PhantomSpawnLocation>(size);
-		phantoms = new List<Phantom>(size);
-		PreviousPositions = new List<Vector3>(size);
+		phantoms = new Phantom[size];
+		PreviousPositions = new Vector3[size];
 		for (int i = 0; i < size; i++)
 		{
 			ListOfPhantomSpawners.Add(tempSpawnLocations[i]);
 		}
+		size = 0;
 	}
 
 	public void AddPhantom(ref GameObject givenPhantom)
 	{
-		phantoms.Add(givenPhantom.GetComponent<Phantom>());
-		PreviousPositions.Add(givenPhantom.transform.position);
+		phantoms[size] = givenPhantom.GetComponent<Phantom>();
+		PreviousPositions[size] = givenPhantom.transform.position;
+		size++;
 	}
 
 	public void ParsePhantomUpdate(int id, StringBuilder buffer)
 	{
-		ParseObjectUpdate(buffer, phantoms[id].transform);
+			ReceiveEnemyUpdate(phantoms[id].transform);
 	}
 
 	/// <summary>

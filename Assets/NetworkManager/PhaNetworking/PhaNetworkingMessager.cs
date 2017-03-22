@@ -129,8 +129,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 
 	public void ReceiveEnemyUpdate(Transform playerTransform)
 	{
-		StringBuilder EnemyReceiveBuffer = new StringBuilder(recvBufferSize);
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, EnemyReceiveBuffer, recvBufferSize);
+		StringBuilder EnemyReceiveBuffer = new StringBuilder(receiveBuffer.ToString(), recvBufferSize);
 		if (EnemyReceiveBuffer.ToString().StartsWith(((int)MessageType.EnemyUpdate).ToString()))
 		{
 			string[] message = EnemyReceiveBuffer.ToString().Split(' ');
