@@ -1672,6 +1672,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 53952016}
+  - component: {fileID: 53952017}
   m_Layer: 0
   m_Name: Phantoms
   m_TagString: Untagged
@@ -1705,6 +1706,20 @@ Transform:
   m_Father: {fileID: 2024009012}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &53952017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 53952015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab62ff5e7655f1445a9a5bcbe1f68794, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListOfPhantomSpawners: []
+  phantoms: []
+  PreviousPositions: []
 --- !u!1 &58024094
 GameObject:
   m_ObjectHideFlags: 0
@@ -8412,6 +8427,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -21211,6 +21230,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
   m_IsPrefabParent: 0
@@ -26401,8 +26424,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1000014286740798, guid: cb84adf3a52d4904497b307ade945dd9,
-    type: 2}
+  m_PlayerPrefab: {fileID: 0}
   m_AutoCreatePlayer: 0
   m_PlayerSpawnMethod: 0
   m_OfflineScene: Menu
@@ -57073,6 +57095,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
   m_IsPrefabParent: 0
@@ -64778,6 +64804,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -79073,6 +79103,10 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
   m_IsPrefabParent: 0
@@ -79529,6 +79563,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -96181,6 +96219,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011692887746, guid: 2d179418f4e808b488aa1f832c97277d, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
