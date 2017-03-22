@@ -49,6 +49,7 @@ public class CameraOverdraw : MonoBehaviour
 			timeSinceCameraUpdate = 0.0f;
 			reference.Render();
 
+            if(agent != null)
 			reference.transform.position = agent.transform.position;
 		}
 
