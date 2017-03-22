@@ -37,7 +37,7 @@ public class PhantomSpawnLocation : MonoBehaviour
     public void Start()
     {
         SpawnedPhantom = Instantiate(Resources.Load("Phantom"), transform) as GameObject;
-
+        PhantomManager.Singleton.AddPhantom(ref SpawnedPhantom);
         //GameObject Phantom = Instantiate(Resources.Load("Phantom"), transform.position, transform.rotation) as GameObject;
         SpawnedPhantom.GetComponent<Phantom>().visibility = visibility;
         BehaviourTree bt = SpawnedPhantom.GetComponent<BehaviourTree>();

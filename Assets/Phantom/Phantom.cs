@@ -32,7 +32,6 @@ public class Phantom : MonoBehaviour
 			GetComponent<BehaviourTree>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
 		}
-		PhantomManager.Singleton.AddPhantom(this);
 
         if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])
         {

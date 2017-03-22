@@ -39,9 +39,9 @@ public class PhantomManager : PhaNetworkingMessager {
 		}
 	}
 
-	public void AddPhantom(Phantom givenPhantom)
+	public void AddPhantom(ref GameObject givenPhantom)
 	{
-		phantoms.Add(givenPhantom);
+		phantoms.Add(givenPhantom.GetComponent<Phantom>());
 		PreviousPositions.Add(givenPhantom.transform.position);
 	}
 
