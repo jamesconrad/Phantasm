@@ -136,8 +136,6 @@ public class PhaNetworkingMessager : MonoBehaviour {
 			Vector3 position;
 			Quaternion orientation;
 
-			int id = int.Parse(message[1]);
-
 			position.x = float.Parse(message[2]);
 			position.y = float.Parse(message[3]);
 			position.z = float.Parse(message[4]);

@@ -19,7 +19,7 @@ public class PhantomManager : PhaNetworkingMessager {
 
 	//Data of the phantoms
 	public List<PhantomSpawnLocation> ListOfPhantomSpawners;
-	public Phantom[] phantoms;
+	public GameObject[] phantoms;
 	public Vector3[] PreviousPositions;
 
 	int size;
@@ -42,14 +42,18 @@ public class PhantomManager : PhaNetworkingMessager {
 
 	public void AddPhantom(ref GameObject givenPhantom)
 	{
-		phantoms[size] = givenPhantom.GetComponent<Phantom>();
+		phantoms[size] = givenPhantom;
 		PreviousPositions[size] = givenPhantom.transform.position;
 		size++;
 	}
 
 	public void ParsePhantomUpdate(int id, StringBuilder buffer)
 	{
-			ReceiveEnemyUpdate(phantoms[id].transform);
+		if (id == 0)
+		{
+			Debug.Log("Received buffer for phantom 0: " + buffer);
+		}
+		ReceiveEnemyUpdate(phantoms[id].transform);
 	}
 
 	/// <summary>
