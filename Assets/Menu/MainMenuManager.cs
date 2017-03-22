@@ -23,6 +23,8 @@ public class MainMenuManager : MonoBehaviour {
 
 	MainMenuState mainMenuState = MainMenuState.Menu;
 
+	public bool DebugForTesting = false;
+
 	// Use this for initialization
 	void Start () {
 		Button[] buttons = SelectionUI.GetComponentsInChildren<Button>();
@@ -104,12 +106,26 @@ public class MainMenuManager : MonoBehaviour {
 	public void CreateMethod()
 	{
 		SetMenuState(MainMenuState.HostWaiting);
+
+		if (DebugForTesting)
+		{
+			PhaNetworkManager.characterSelection = 0;
+			PhaNetworkManager.Ishost = true;
+			SetMenuState(MainMenuState.InGame);
+		}
 	}
 
 	/// method for Join buttton
 	public void JoinMethod()
 	{
 		SetMenuState(MainMenuState.ClientWaiting);
+
+		if (DebugForTesting)
+		{
+			PhaNetworkManager.characterSelection = 1;
+			PhaNetworkManager.Ishost = true;
+			SetMenuState(MainMenuState.InGame);
+		}
 	}
 
 	/// method for Agent selection button

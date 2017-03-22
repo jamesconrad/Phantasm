@@ -74,7 +74,6 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	void Update () {
 		if (SceneManager.GetActiveScene().name != "Menu")
 		{
-			Debug.Log("target ip address: " + PhaNetworkingAPI.targetIP);
 			if (characterSelection == 0 && PreviousPlayerPosition != AgentPrefab.transform.position)
 			{//Sending
 				SendPlayerUpdate(AgentPrefab.transform.position, AgentPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
@@ -123,7 +122,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			{
 				AgentPrefab = GameObject.Instantiate(RemoteAgentPrefab);
 				AgentHealth = AgentPrefab.GetComponent<Health>();
-				
+				AgentPrefab.transform.position = new Vector3(20.30901f, -0.6f, 13.479f);
 				HackerPrefab = GameObject.Instantiate(HackerPrefab); //Local Player is Hacker. The order of instantiation here is important!
 				//Set to online version of agent.
 			}

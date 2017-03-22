@@ -54,7 +54,7 @@ public class GunHandle : MonoBehaviour
             Camera.main.transform.parent = gunReference.transform.parent;
             
             // There's a proper way to do this right? Unity isn't this retarded right?
-            gunLocalPosition = new Vector3(gunReference.transform.localPosition.x, gunReference.transform.localPosition.y, gunReference.transform.localPosition.z);
+            gunReference.transform.localPosition = gunLocalPosition =  new Vector3(0.015f, -0.25f, 0.09f);
         }
     }
 
@@ -163,9 +163,6 @@ public class GunHandle : MonoBehaviour
             {
                 reloading = true;
                 laser.active = !reloading;
-
-
-                
 
                 gunShotReloadSound.pitch = Random.Range(0.90f, 1.10f);
                 gunShotReloadSound.Play();

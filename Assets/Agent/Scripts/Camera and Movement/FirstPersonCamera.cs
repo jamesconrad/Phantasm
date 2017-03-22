@@ -38,6 +38,7 @@ public class FirstPersonCamera : MonoBehaviour
         temp.gunReference.transform.SetParent(playerCamera.transform);
         temp.gunReference.transform.position += new Vector3(0,0.05f,0);
         playerCamera.transform.SetParent(transform);
+        playerCamera.transform.localPosition = new Vector3(0.0f, 1.6f, 0.0f);
 
 
         Transform a4 = transform.GetChild(0);
