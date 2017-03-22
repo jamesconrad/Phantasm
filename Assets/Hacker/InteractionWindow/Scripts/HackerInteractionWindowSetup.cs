@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum CameraRectType
+{
+    Normal,
+    Map,
+    Console,
+    FloorChanger,
+    HeartRate
+}
 public class HackerInteractionWindowSetup : MonoBehaviour
 {
-
+    public Camera cameraMap;
     public CameraPosition cameraPosition;
+    public CameraRectType windowType = CameraRectType.Normal;
 
     public GameObject cameraButtonPrefab;
     private List<Camera> survCameras;
@@ -27,24 +36,30 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
 
-        switch (cameraPosition)
-        {
-            case CameraPosition.BottomLeft:
-                GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
-                break;
-            case CameraPosition.BottomRight:
-                GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, Screen.height / 4.0f);
-                break;
-            case CameraPosition.TopLeft:
-                GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
-                break;
-            case CameraPosition.TopRight:
-                GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
-                break;
-            default:
-                GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
-                break;
-        }
+        cameraMap = GameObject.Find("HackerMapPrefab").GetComponent<Camera>();
+
+        SetWindowSizes();
+        //switch (cameraPosition)
+        //{
+        //    case CameraPosition.BottomLeft:
+        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
+        //        break;
+        //    case CameraPosition.BottomRight:
+        //        GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, Screen.height / 4.0f);
+        //        break;
+        //    case CameraPosition.TopLeft:
+        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
+        //        break;
+        //    case CameraPosition.TopRight:
+        //        GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
+        //        break;
+        //    default:
+        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
+        //        break;
+        //}
+
+
+
         Camera[] tempCameras = FindObjectsOfType<Camera>();
         survCameras = new List<Camera>();
         for (int i = 0; i < tempCameras.Length; i++)
@@ -90,8 +105,23 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             {
                 CameraPositionMin.z = CameraPositionTemp.z - 0.0f;
             }
+
+            
         }
         floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
+
+        if(cameraMap != null)
+        {
+            CameraPositionMin.x = cameraMap.transform.position.x - cameraMap.orthographicSize;
+            CameraPositionMax.x = cameraMap.transform.position.x + cameraMap.orthographicSize;
+            CameraPositionMin.z = cameraMap.transform.position.z - cameraMap.orthographicSize;
+            CameraPositionMax.z = cameraMap.transform.position.z + cameraMap.orthographicSize;
+            Debug.Log("cameraMap bounds set");
+        }
+        else
+        {
+            Debug.Log("cameraMap is null");
+        }
 
         for (int i = 0; i < survCameras.Count; i++)
         {
@@ -192,6 +222,18 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 }
             }
 
+            if(cameraMap != null)
+            {
+                CameraPositionMin.x = cameraMap.transform.position.x - cameraMap.orthographicSize;
+                CameraPositionMax.x = cameraMap.transform.position.x + cameraMap.orthographicSize;
+                CameraPositionMin.z = cameraMap.transform.position.z - cameraMap.orthographicSize;
+                CameraPositionMax.z = cameraMap.transform.position.z + cameraMap.orthographicSize;
+            }
+            else
+            {
+                Debug.Log("cameraMap is null");
+            }
+
             for (int i = 0, count = survCameras.Count; i < count; i++)
             {
                 survCameraButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
@@ -201,18 +243,23 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.y = Mathf.InverseLerp(CameraPositionMin.y, CameraPositionMax.y, survCameras[i].transform.position.y);
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survCameras[i].transform.position.z);
 
+                //survCameraButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                //        0.35f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                //        GetComponent<RectTransform>().rect.width, LerpPosition.x) + 0.11f,
+                //        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                //        GetComponent<RectTransform>().rect.height, LerpPosition.z) - 0.01f);
                 survCameraButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                        0.35f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
-                        GetComponent<RectTransform>().rect.width, LerpPosition.x) + 0.11f,
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
-                        GetComponent<RectTransform>().rect.height, LerpPosition.z) - 0.01f);
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        GetComponent<RectTransform>().rect.width, LerpPosition.x) + 0.0f,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        GetComponent<RectTransform>().rect.height, LerpPosition.z) - 0.0f);
                 survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
 
 
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
 
-                if(survCameras[i].transform.position.y > CameraPositionMin.y + viewFloor * floorHeight
-                && survCameras[i].transform.position.y < CameraPositionMin.y + (viewFloor + 1) * floorHeight)
+                if(survCameras[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survCameras[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight)
                 {
                     survCameraButtons[i].SetActive(true);
                 }
@@ -252,6 +299,26 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             default:
                 GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
                 break;
+        }
+
+        
+        switch(windowType)
+        {
+            case CameraRectType.Normal:
+                break;
+            case CameraRectType.Map:
+                GetComponent<RectTransform>().anchoredPosition += new Vector2((Screen.width / 4.0f * 0.325f / (Screen.height / (float)Screen.width)), Screen.height / 4.0f * 0.25f);
+                //GetComponent<RectTransform>().localScale = new Vector3(0.75f, 0.75f, 1.0f);
+                GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 2.0f * (Screen.height / (float)Screen.width), Screen.height / 2.0f) * 0.75f;
+                //GetComponent<RectTransform>().localScale = Vector3.Scale(GetComponent<RectTransform>().localScale, new Vector3(0.5f, 1.0f, 1.0f));
+                break;
+            case CameraRectType.Console:
+                break;
+            case CameraRectType.FloorChanger:
+                break;
+            case CameraRectType.HeartRate:
+                break;
+                
         }
 
     }

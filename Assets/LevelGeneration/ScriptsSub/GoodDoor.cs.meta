@@ -1,10 +1,14 @@
 fileFormatVersion: 2
 guid: 618a5315dc7c2c14587c88345758f32d
-timeCreated: 1484849869
+timeCreated: 1490073882
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - hinge: {instanceID: 0}
+  - handle: {instanceID: 0}
+  - LockObject: {fileID: 1425446653066246, guid: 3c3e3cffe5e4267458be4e3927de6e47,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -13,7 +13,7 @@ public class MusicManagerScript : MonoBehaviour
     public GameObject AgentObject;
     public GameObject[] PhantomObject;
 
-    float maxVolume = 0.75f;
+    float maxVolume = 0.25f;
 
     float intensity = 0.3f;
 
@@ -36,11 +36,25 @@ public class MusicManagerScript : MonoBehaviour
         //SpookyChip
     }
 
+    const float timeToWaitTillSearch = 10.0f;
+    float timeSinceLastSearch = timeToWaitTillSearch;
+
+    float minDistance = 1.0f;
+    float maxDistance = 25.0f;
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        AgentObject = GameObject.FindGameObjectWithTag("Player");
-        PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
+        //AgentObject = GameObject.FindGameObjectWithTag("Player");
+        //PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
+
+         timeSinceLastSearch += Time.fixedDeltaTime;
+        if(timeSinceLastSearch > timeToWaitTillSearch)
+        {
+            AgentObject = GameObject.FindGameObjectWithTag("Player");
+            PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
+            timeSinceLastSearch = 0.0f;
+        }
 
         if (AgentObject != null)
         {
@@ -57,14 +71,15 @@ public class MusicManagerScript : MonoBehaviour
 
             //intensity = -Mathf.Cos(Time.fixedTime * 0.05f) * 0.5f + 0.5f;
             float intensityOld = intensity;
-            intensity = Mathf.InverseLerp(50.0f, 2.0f, closestPhantom);
+            intensity = Mathf.InverseLerp(maxDistance, minDistance, closestPhantom);
+            intensity *= intensity;
             if (intensity > intensityOld)
             {
                 intensity = Mathf.Lerp(intensityOld, intensity, 0.1f);
             }
             else
             {
-                intensity = Mathf.Lerp(intensityOld, intensity, 0.0025f);
+                intensity = Mathf.Lerp(intensityOld, intensity, 0.0125f);
             }
         }
         else

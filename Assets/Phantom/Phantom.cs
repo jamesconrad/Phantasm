@@ -41,8 +41,6 @@ public class Phantom : MonoBehaviour
         respawnPoints = FindObjectsOfType<PhantomSpawnLocation>();
     }
 
-
-
     // OnCollisionEnter is called when this collider/rigidbody has begun touching another rigidbody/collider
     public void OnCollisionEnter(Collision collision)
     {

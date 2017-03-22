@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4464669196782824}
   - component: {fileID: 198154014286529578}
   - component: {fileID: 199358842946875714}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: BulletCloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 847191950
+  randomSeed: -1012318664
   InitialModule:
     serializedVersion: 3
     enabled: 1

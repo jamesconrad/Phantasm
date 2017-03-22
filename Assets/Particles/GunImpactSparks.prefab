@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4202435140282478}
   - component: {fileID: 198715808557216502}
   - component: {fileID: 199899472770017422}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: BulletCloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 198332734070619732}
   - component: {fileID: 199867011597825908}
   - component: {fileID: 114116318236850450}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: GunImpactSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4327857405077224}
   - component: {fileID: 198094873773105370}
   - component: {fileID: 199397971971715234}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: GunImpactParticleFlyingSparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -645142033
+  randomSeed: 1723051108
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -2675,7 +2675,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1784243204
+  randomSeed: -1909804547
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5180,7 +5180,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1592095785
+  randomSeed: 1858811212
   InitialModule:
     serializedVersion: 3
     enabled: 1

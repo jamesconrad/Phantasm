@@ -172,14 +172,17 @@ public class BehaviourTree : MonoBehaviour {
 
         public bool hasLineOfSight()
         {
-            Vector3 dir = playerGO.transform.position - t.position;
-            RaycastHit hitInfo;
-            bool hit = Physics.Raycast(t.position + new Vector3(0, 0.75f, 0), dir.normalized, out hitInfo, aiS.maxSight);
-            if (playerGO != null && hit && hitInfo.transform.tag == "Player")
+            if(playerGO != null)
             {
-                //Debug.DrawLine(t.position + new Vector3(0, 0.75f, 0), t.position + dir * aiS.maxSight, Color.cyan);
-                lastKnown = hitInfo.point;
-                return true;
+                Vector3 dir = playerGO.transform.position - t.position;
+                RaycastHit hitInfo;
+                bool hit = Physics.Raycast(t.position + new Vector3(0, 0.75f, 0), dir.normalized, out hitInfo, aiS.maxSight);
+                if (playerGO != null && hit && hitInfo.transform.tag == "Player")
+                {
+                    //Debug.DrawLine(t.position + new Vector3(0, 0.75f, 0), t.position + dir * aiS.maxSight, Color.cyan);
+                    lastKnown = hitInfo.point;
+                    return true;
+                }
             }
             return false;
         }
@@ -245,17 +248,20 @@ public class BehaviourTree : MonoBehaviour {
 
         public override void update()
         {
-            //chase last known
-            //Debug.Log(lastKnown);
-            //Debug.Log(playerGO.transform.position);
-            if (hasLineOfSight())
-                haslos = true;
-
-            if (aiS.type == AI_TYPE.Wallhack)
-                lastKnown = playerGO.transform.position;
-
-            if (nav.destination != lastKnown)
-                nav.SetDestination(lastKnown);
+            if(playerGO != null)
+            {
+                //chase last known
+                //Debug.Log(lastKnown);
+                //Debug.Log(playerGO.transform.position);
+                if (hasLineOfSight())
+                    haslos = true;
+                
+                if (aiS.type == AI_TYPE.Wallhack)
+                    lastKnown = playerGO.transform.position;
+                
+                if (nav.destination != lastKnown)
+                    nav.SetDestination(lastKnown);
+            }
         }
         public override AI_STATE nextstate()
         {
