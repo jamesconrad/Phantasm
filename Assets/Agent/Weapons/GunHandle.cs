@@ -262,7 +262,8 @@ public class GunHandle : NetworkBehaviour
 
             if (GunLaserScript.metallicHit < 0.5f)
             {
-                Instantiate(weaponSettings.impactObjects.onDeath, raycastResult.point, Quaternion.LookRotation(raycastResult.normal));
+                //Instantiate(weaponSettings.impactObjects.onDeath, raycastResult.point, Quaternion.LookRotation(raycastResult.normal));
+                Instantiate(weaponSettings.impactObjects.onDeathMetallic, raycastResult.point, Quaternion.LookRotation(raycastResult.normal));
             }
             else
             {

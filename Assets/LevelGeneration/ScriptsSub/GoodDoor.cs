@@ -93,7 +93,7 @@ public class GoodDoor : NetworkBehaviour {
 	void Update ()
     {
         currentState = state.state();
-        if (active && Input.GetKeyDown("e"))
+        if (active && !locked && Input.GetKeyDown("e"))
         {
             if (!inputSpamming)
             {
