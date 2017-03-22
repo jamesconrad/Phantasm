@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198229781287672686}
   - component: {fileID: 199590689106674908}
   - component: {fileID: 114615502508035848}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: PhantomDeathParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1384767297
+  randomSeed: -1849243401
   InitialModule:
     serializedVersion: 3
     enabled: 1

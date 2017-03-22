@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199899472770017422}
   - component: {fileID: 114603767890546262}
   - component: {fileID: 114065529233365058}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: GunImpactColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 198781636691761962}
   - component: {fileID: 199561197561097384}
   - component: {fileID: 114080088677817342}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: GunImpactParticleFlyingColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 4724160024925166}
   - component: {fileID: 198180669071409810}
   - component: {fileID: 199880864829154842}
-  m_Layer: 0
+  m_Layer: 29
   m_Name: BulletCloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 847191950
+  randomSeed: 416792966
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -2705,7 +2705,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 30673478
+  randomSeed: 735606049
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5210,7 +5210,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: -1609812164
+  randomSeed: -912769765
   InitialModule:
     serializedVersion: 3
     enabled: 1

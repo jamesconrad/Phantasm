@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4030283451666520}
   - component: {fileID: 114504405000211848}
   - component: {fileID: 114797067690253672}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: DecalGunShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

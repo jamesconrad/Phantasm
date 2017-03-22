@@ -48,7 +48,7 @@ public class MusicManagerScript : MonoBehaviour
         //AgentObject = GameObject.FindGameObjectWithTag("Player");
         //PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
 
-         timeSinceLastSearch += Time.fixedTime;
+         timeSinceLastSearch += Time.fixedDeltaTime;
         if(timeSinceLastSearch > timeToWaitTillSearch)
         {
             AgentObject = GameObject.FindGameObjectWithTag("Player");
