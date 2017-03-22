@@ -49,11 +49,7 @@ public class PhantomManager : PhaNetworkingMessager {
 
 	public void ParsePhantomUpdate(int id, StringBuilder buffer)
 	{
-		if (id == 0)
-		{
-			Debug.Log("Received buffer for phantom 0: " + buffer);
-		}
-		ReceiveEnemyUpdate(phantoms[id]);
+		ReceiveEnemyUpdate(phantoms[id], ref buffer);
 	}
 
 	/// <summary>

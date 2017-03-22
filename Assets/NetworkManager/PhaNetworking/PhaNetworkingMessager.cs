@@ -127,14 +127,15 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 
-	public void ReceiveEnemyUpdate(GameObject playerTransform)
+	public void ReceiveEnemyUpdate(GameObject playerTransform, ref StringBuilder EnemyReceiveBuffer)
 	{
-		StringBuilder EnemyReceiveBuffer = new StringBuilder(receiveBuffer.ToString(), recvBufferSize);
 		if (EnemyReceiveBuffer.ToString().StartsWith(((int)MessageType.EnemyUpdate).ToString()))
 		{
 			string[] message = EnemyReceiveBuffer.ToString().Split(' ');
 			Vector3 position;
 			Quaternion orientation;
+
+			int id = int.Parse(message[1]);
 
 			position.x = float.Parse(message[2]);
 			position.y = float.Parse(message[3]);
