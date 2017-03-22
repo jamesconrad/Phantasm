@@ -18,9 +18,9 @@ public class PhantomManager : PhaNetworkingMessager {
 	PhaNetworkManager netManager = null;
 
 	//Data of the phantoms
-	List<PhantomSpawnLocation> ListOfPhantomSpawners;
-	Phantom[] phantoms;
-	Vector3[] PreviousPositions;
+	public List<PhantomSpawnLocation> ListOfPhantomSpawners;
+	public Phantom[] phantoms;
+	public Vector3[] PreviousPositions;
 
 	int size;
 
