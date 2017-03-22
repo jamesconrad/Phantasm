@@ -31,7 +31,7 @@ public class PhantomManager : PhaNetworkingMessager {
 		PhantomSpawnLocation[] tempSpawnLocations = GetComponentsInChildren<PhantomSpawnLocation>();
 		size = tempSpawnLocations.Length;
 		ListOfPhantomSpawners = new List<PhantomSpawnLocation>(size);
-		phantoms = new Phantom[size];
+		phantoms = new GameObject[size];
 		PreviousPositions = new Vector3[size];
 		for (int i = 0; i < size; i++)
 		{
@@ -53,7 +53,7 @@ public class PhantomManager : PhaNetworkingMessager {
 		{
 			Debug.Log("Received buffer for phantom 0: " + buffer);
 		}
-		ReceiveEnemyUpdate(phantoms[id].transform);
+		ReceiveEnemyUpdate(phantoms[id]);
 	}
 
 	/// <summary>

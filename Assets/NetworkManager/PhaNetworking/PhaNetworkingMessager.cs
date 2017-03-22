@@ -127,7 +127,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
 	}
 
-	public void ReceiveEnemyUpdate(Transform playerTransform)
+	public void ReceiveEnemyUpdate(GameObject playerTransform)
 	{
 		StringBuilder EnemyReceiveBuffer = new StringBuilder(receiveBuffer.ToString(), recvBufferSize);
 		if (EnemyReceiveBuffer.ToString().StartsWith(((int)MessageType.EnemyUpdate).ToString()))
@@ -145,8 +145,8 @@ public class PhaNetworkingMessager : MonoBehaviour {
 			orientation.y = float.Parse(message[7]);
 			orientation.z = float.Parse(message[8]);
 
-			playerTransform.position = position;
-			playerTransform.rotation = orientation;
+			playerTransform.transform.position = position;
+			playerTransform.transform.rotation = orientation;
 		}
 	}
 
