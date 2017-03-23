@@ -20,7 +20,7 @@ public class GoodDoor : MonoBehaviour {
     public bool locked = false;
     public string code;
 
-    public bool active = false;
+    bool active = false;
 
     //[SyncVar]
     //private Vector3 thisPosition;
@@ -43,6 +43,7 @@ public class GoodDoor : MonoBehaviour {
     {
         ElectricBarrier();
         baseRot = transform.localEulerAngles.y;
+        active = false; //This may be something of a problem. Not sure why this started happening.
     }
 
     public bool Unlock(string input)

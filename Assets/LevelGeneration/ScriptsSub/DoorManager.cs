@@ -41,7 +41,7 @@ public class DoorManager : PhaNetworkingMessager {
 		{
 			for (int i = 0; i < doors.Length; i++)
 			{
-				if (!doors[i].active)
+				if (doors[i].isActive())
 				{
 					SendDoorUpdate(i, doors[i].transform.rotation);
 				}
