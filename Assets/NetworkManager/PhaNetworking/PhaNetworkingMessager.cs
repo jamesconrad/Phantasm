@@ -201,6 +201,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	public int SendDoorUpdate(int id, Quaternion rotation)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.DoorUpdate).ToString() + " " + 
+		id.ToString() + " " +
 		rotation.x.ToString() + " " + rotation.y.ToString() + " " + rotation.z.ToString() + " " + rotation.w.ToString());
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, PhaNetworkingAPI.targetIP);
 	}
