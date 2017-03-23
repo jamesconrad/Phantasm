@@ -16,14 +16,15 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		LoadLevel,
 		PlayerUpdate,
 		EnemyUpdate,
-		HealthUpdate
+		HealthUpdate,
+		ConsoleMessage
 	}
 
 	//Tell the other player that you are online
 	public int SendConnectionMessage(StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.Connection).ToString(), recvBufferSize);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
 	}
 	//Receive information that the other player is online.
 	public int ReceiveConnectionMessage()
@@ -88,7 +89,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		position.x + " " + position.y + " " + position.z + " " +
 		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
 		 recvBufferSize);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
 	}
 
 	public void ReceivePlayerUpdate(Transform playerTransform)
@@ -124,7 +125,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		position.x + " " + position.y + " " + position.z + " " +
 		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
 		recvBufferSize);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
 	}
 
 	public void ReceiveEnemyUpdate(GameObject playerTransform, ref StringBuilder EnemyReceiveBuffer)
@@ -175,7 +176,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	public int SendHealthUpdate(int damageTaken, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.HealthUpdate).ToString() + " " + damageTaken.ToString());
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Capacity, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
 	}
 
 	///returns the value of damage taken.
@@ -189,7 +190,6 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		}
 		return 0;
 	}
-
 	public int ParseHealthUpdate(StringBuilder buffer)
 	{
 		string[] message = buffer.ToString().Split(' ');

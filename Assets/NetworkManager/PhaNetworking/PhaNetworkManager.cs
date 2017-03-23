@@ -23,7 +23,8 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 
 	public GameObject AgentPrefab; Health AgentHealth;
 	public GameObject RemoteAgentPrefab;
-	public GameObject HackerPrefab;
+	public GameObject HackerPrefab; 
+	public GameObject RemoteHackerPrefab;
 	PhantomManager phantomManager;
 
 	Vector3 PreviousPlayerPosition;
@@ -100,6 +101,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 					AgentHealth.takeDamage(ParseHealthUpdate(receiveBuffer));
 					break;
 
+					case MessageType.ConsoleMessage:
+					HackerPrefab.GetComponent<RemoteTextEnter>().ReceiveCode(receiveBuffer);
+					break;
+
 					default://This may be the first time I've ever had a reachable default statement...
 					return; //No more messages, so let's have an early exit.
 				}
@@ -116,7 +121,8 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				AgentPrefab = GameObject.Instantiate(AgentPrefab); //Local player is agent.
 				AgentHealth = AgentPrefab.GetComponent<Health>();
 				PreviousPlayerPosition = new Vector3(AgentPrefab.transform.position.x, AgentPrefab.transform.position.y, AgentPrefab.transform.position.z);
-				
+
+				HackerPrefab = GameObject.Instantiate(RemoteHackerPrefab);				
 			}
 			else if (characterSelection == 1)
 			{
@@ -124,7 +130,6 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				AgentHealth = AgentPrefab.GetComponent<Health>();
 				AgentPrefab.transform.position = new Vector3(20.30901f, -0.6f, 13.479f);
 				HackerPrefab = GameObject.Instantiate(HackerPrefab); //Local Player is Hacker. The order of instantiation here is important!
-				//Set to online version of agent.
 			}
 
 			phantomManager = FindObjectOfType(typeof(PhantomManager)) as PhantomManager;
