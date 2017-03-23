@@ -35,6 +35,7 @@ public class DoorManager : PhaNetworkingMessager {
 		Vector3 newPos = new Vector3(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]));
 		Quaternion newQuat = new Quaternion(float.Parse(values[5]), float.Parse(values[6]), float.Parse(values[7]), float.Parse(values[8]));
 
+		doors[id].transform.position = newPos;
 		doors[id].transform.rotation = newQuat;
 	
 	}
