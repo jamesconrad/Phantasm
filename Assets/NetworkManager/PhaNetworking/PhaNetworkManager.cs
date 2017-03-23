@@ -106,7 +106,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 					break;
 
 					case MessageType.DoorUpdate:
-					DoorManager.Singleton.parseDoorUpdate(receiveBuffer.ToString());
+					DoorManager.Singleton.parseDoorUpdate(ref receiveBuffer);
 					break;
 
 					default://This may be the first time I've ever had a reachable default statement...

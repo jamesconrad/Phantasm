@@ -52,11 +52,11 @@ public class PhantomManager : PhaNetworkingMessager {
 		ReceiveEnemyUpdate(phantoms[id], ref buffer);
 	}
 
+
 	/// <summary>
-	/// LateUpdate is called every frame, if the Behaviour is enabled.
-	/// It is called after all Update functions have been called.
+	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
 	/// </summary>
-	void LateUpdate()
+	void FixedUpdate()
 	{
 		for (int i = 0; i < size; i++)
 		{

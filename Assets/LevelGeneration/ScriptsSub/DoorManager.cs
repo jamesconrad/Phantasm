@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class DoorManager : PhaNetworkingMessager {
@@ -20,11 +21,11 @@ public class DoorManager : PhaNetworkingMessager {
 		doors = GetComponentsInChildren<GoodDoor>();
 	}
 
-	public void parseDoorUpdate(string buffer)
+	public void parseDoorUpdate(ref StringBuilder buffer)
 	{
 		if (PhaNetworkManager.characterSelection == 0)
 		{
-			string[] values = buffer.Split(' ');
+			string[] values = buffer.ToString().Split(' ');
 			int id = int.Parse(values[1]);
 
 			Quaternion newQuat = new Quaternion(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]), float.Parse(values[5]));
