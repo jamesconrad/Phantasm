@@ -17,7 +17,8 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		PlayerUpdate,
 		EnemyUpdate,
 		HealthUpdate,
-		ConsoleMessage
+		ConsoleMessage,
+		DoorUpdate
 	}
 
 	//Tell the other player that you are online
@@ -195,6 +196,13 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		string[] message = buffer.ToString().Split(' ');
 
 		return int.Parse(message[1]);
+	}
+
+	public int SendDoorUpdate(int id, Quaternion rotation)
+	{
+		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.DoorUpdate).ToString() + " " + 
+		rotation.x.ToString() + " " + rotation.y.ToString() + " " + rotation.z.ToString() + " " + rotation.w.ToString());
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, PhaNetworkingAPI.targetIP);
 	}
 
 	public int ReceiveInGameMessage() 

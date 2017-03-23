@@ -105,6 +105,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 					HackerPrefab.GetComponent<RemoteTextEnter>().ReceiveCode(receiveBuffer);
 					break;
 
+					case MessageType.DoorUpdate:
+					DoorManager.Singleton.parseDoorUpdate(receiveBuffer.ToString());
+					break;
+
 					default://This may be the first time I've ever had a reachable default statement...
 					return; //No more messages, so let's have an early exit.
 				}

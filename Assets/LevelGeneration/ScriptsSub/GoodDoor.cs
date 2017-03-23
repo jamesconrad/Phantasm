@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class GoodDoor : NetworkBehaviour {
+public class GoodDoor : MonoBehaviour {
 
     public int swingDir = 1;
     public float swingSpeed = 0.8f;
@@ -11,7 +10,6 @@ public class GoodDoor : NetworkBehaviour {
     public Transform hinge;
     public Transform handle;
     public int currentState;
-    [SyncVar]
     private DoorSwingState state = new Shut();
     private bool inputSpamming = false;
     private int prevstate;
@@ -22,7 +20,7 @@ public class GoodDoor : NetworkBehaviour {
     public bool locked = false;
     public string code;
 
-    bool active = false;
+    public bool active = false;
 
     //[SyncVar]
     //private Vector3 thisPosition;
