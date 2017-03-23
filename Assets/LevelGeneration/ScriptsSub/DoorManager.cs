@@ -23,15 +23,13 @@ public class DoorManager : PhaNetworkingMessager {
 
 	public void parseDoorUpdate(ref StringBuilder buffer)
 	{
-		if (PhaNetworkManager.characterSelection == 0)
-		{
-			string[] values = buffer.ToString().Split(' ');
-			int id = int.Parse(values[1]);
+		string[] values = buffer.ToString().Split(' ');
+		int id = int.Parse(values[1]);
 
-			Quaternion newQuat = new Quaternion(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]), float.Parse(values[5]));
+		Quaternion newQuat = new Quaternion(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]), float.Parse(values[5]));
 
-			doors[id].transform.rotation = newQuat;
-		}
+		doors[id].transform.rotation = newQuat;
+	
 	}
 	
 	/// <summary>
@@ -39,11 +37,14 @@ public class DoorManager : PhaNetworkingMessager {
 	/// </summary>
 	void FixedUpdate()
 	{
-		for (int i = 0; i < doors.Length; i++)
+		if (PhaNetworkManager.characterSelection == 0)
 		{
-			if (doors[i].active)
+			for (int i = 0; i < doors.Length; i++)
 			{
-				SendDoorUpdate(i, doors[i].transform.rotation);
+				if (doors[i].active)
+				{
+					SendDoorUpdate(i, doors[i].transform.rotation);
+				}
 			}
 		}
 	}
