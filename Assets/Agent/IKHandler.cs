@@ -34,25 +34,29 @@ public class IKHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Vector3 worldMoveDir = agent.transform.position - prevFramePos;
-        Vector3 localMoveDir = transform.InverseTransformDirection(worldMoveDir);
-        Vector3 lookDir = agent.transform.forward;
+        if(agent != null)
+        {
+            Vector3 worldMoveDir = agent.transform.position - prevFramePos;
+            Vector3 localMoveDir = transform.InverseTransformDirection(worldMoveDir);
+            Vector3 lookDir = agent.transform.forward;
 
-        float theta = Vector2.Angle(new Vector2(lookDir.x, lookDir.z), new Vector2(0, 1));
-        theta *= (lookDir.x > 0 ? 1.0f : -1.0f);
-
-        Vector3 localVelocity = Quaternion.AngleAxis(theta, new Vector3(0,1,0)) * localMoveDir;
-
-        //print(localVelocity.magnitude + " @ X:" + localVelocity.x + " Z:" + localVelocity.z);
-        localVelocity = localVelocity.magnitude < threshold ? Vector3.zero : localVelocity;
-        anim.SetFloat("movX",localVelocity.x * 10);
-        anim.SetFloat("movY",localVelocity.z * 10 * -1);
-        anim.SetFloat("velocity", localVelocity.magnitude * 125);
-		//print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY") + " 0: " + theta);
-        prevFramePos = agent.transform.position;
-
-		if (shittyFix)
-			transform.localPosition = Vector3.zero;
+            float theta = Vector2.Angle(new Vector2(lookDir.x, lookDir.z), new Vector2(0, 1));
+            theta *= (lookDir.x > 0 ? 1.0f : -1.0f);
+        
+            Vector3 localVelocity = Quaternion.AngleAxis(theta, new Vector3(0,1,0)) * localMoveDir;
+        
+            //print(localVelocity.magnitude + " @ X:" + localVelocity.x + " Z:" + localVelocity.z);
+            localVelocity = localVelocity.magnitude < threshold ? Vector3.zero : localVelocity;
+            anim.SetFloat("movX",localVelocity.x * 10);
+            anim.SetFloat("movY",localVelocity.z * 10 * -1);
+            anim.SetFloat("velocity", localVelocity.magnitude * 125);
+		    //print(anim.GetFloat("velocity") + " @ X:" + anim.GetFloat("movX") + " Y:" + anim.GetFloat("movY") + " 0: " + theta);
+            prevFramePos = agent.transform.position;
+        
+		    if (shittyFix)
+		    	transform.localPosition = Vector3.zero;
+            
+        }
     }
 
     public void LateUpdate()

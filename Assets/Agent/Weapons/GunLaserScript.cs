@@ -76,6 +76,7 @@ public class GunLaserScript : MonoBehaviour
                     line.SetPosition(1, rayHit.point);
                     distance = Vector3.Distance(ray.origin, rayHit.point);
                     material.SetFloat("uDistance", distance);
+                    //material.SetVector("uDisplace", transform.position);
                     Vector2 texcoord = rayHit.textureCoord;
                     //Debug.Log(texcoord);
 
@@ -84,7 +85,7 @@ public class GunLaserScript : MonoBehaviour
 
                     if (rayHit.collider.gameObject.GetComponent<MeshRenderer>() != null)
                     {
-                        Texture2D tex = (Texture2D)rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.GetTexture("_MainTex");
+                        //Texture2D tex = (Texture2D)rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.GetTexture("_MainTex");
                         //rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.
                         if(rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.HasProperty("_Metallic"))
                             metallicHit = rayHit.collider.gameObject.GetComponent<MeshRenderer>().material.GetFloat("_Metallic");

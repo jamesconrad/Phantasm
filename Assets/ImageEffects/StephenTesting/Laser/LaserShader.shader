@@ -31,6 +31,7 @@
 			struct v2f
 			{
 				float2 uv : TEXCOORD0;
+				float4 wPos : TEXCOORD1;
 				UNITY_FOG_COORDS(1)
 				float4 vertex : SV_POSITION;
 			};
@@ -43,6 +44,7 @@
 			{
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.wPos = v.vertex;
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				UNITY_TRANSFER_FOG(o,o.vertex);
 				return o;
@@ -53,7 +55,7 @@
 				fixed4 col = tex2D(_MainTex, i.uv);
 
 				float timeAdjust = -_Time * 1000.0f; 
-				float2 p = i.uv.xy * 5.0f * float2(0.01f * uDistance, 1.0f);
+				float2 p = ((i.wPos.zz + i.wPos.yy + i.wPos.xx) + i.uv.xy) * 5.0f * float2(0.01f * uDistance, 1.0f);
 				for (int i = 1; i < 4; i++)
 				{
 					float2 newp = p;
@@ -62,7 +64,9 @@
 					p = newp;
 				}
 
-				col.a = 0.4f * sin(p.x) + 0.6f;
+				col.a *= 0.4f * sin(p.x) + 0.6f;
+				//col.rgb = uDistance * 0.25f;
+				//col.a = 1.0f;
 				return col;
 			}
 			ENDCG

@@ -51,7 +51,7 @@ public class GoodDoor : NetworkBehaviour {
     {
         if(locked)
         {
-            Debug.Log(code + " vs. " + input);
+            //Debug.Log(code + " vs. " + input);
             if(input.Contains(code))
             {
                 locked = false;

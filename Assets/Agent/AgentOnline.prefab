@@ -373,7 +373,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1107370860302410
 GameObject:
   m_ObjectHideFlags: 1
@@ -4598,7 +4598,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1984759443243006}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children:
   - {fileID: 4056617500078268}
@@ -9307,6 +9307,7 @@ MonoBehaviour:
     camera: {fileID: 2100000, guid: 8b0ba1c06fc67e840a2e519c7c36bd3c, type: 2}
     thermal: {fileID: 2100000, guid: db03c4253306cb947882c84394620907, type: 2}
     sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
+  agentLaserMaterial: {fileID: 0}
   WaveCount: {x: 400, y: 400}
   WaveIntensity: {x: 0.0005, y: 0.0015}
   WaveTimeMult: {x: 100, y: 100}
