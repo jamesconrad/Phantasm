@@ -22,12 +22,15 @@ public class DoorManager : PhaNetworkingMessager {
 
 	public void parseDoorUpdate(string buffer)
 	{
-		string[] values = buffer.Split(' ');
-		int id = int.Parse(values[1]);
+		if (PhaNetworkManager.characterSelection == 0)
+		{
+			string[] values = buffer.Split(' ');
+			int id = int.Parse(values[1]);
 
-		Quaternion newQuat = new Quaternion(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]), float.Parse(values[5]));
+			Quaternion newQuat = new Quaternion(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]), float.Parse(values[5]));
 
-		doors[id].transform.rotation = newQuat;
+			doors[id].transform.rotation = newQuat;
+		}
 	}
 	
 	/// <summary>
