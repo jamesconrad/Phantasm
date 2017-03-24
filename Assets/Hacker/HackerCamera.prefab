@@ -418,15 +418,16 @@ MonoBehaviour:
   SonarMult: 0.05
   Movie: {fileID: 0}
   agentMaterials:
-    normal: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
-    camera: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
+    normal: {fileID: 2100000, guid: ee2edb0cf3549884881b8946a99cdde1, type: 2}
+    camera: {fileID: 2100000, guid: ee2edb0cf3549884881b8946a99cdde1, type: 2}
     thermal: {fileID: 2100000, guid: fa63711559c5b4a4b894918d9f2c367d, type: 2}
-    sonar: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
+    sonar: {fileID: 2100000, guid: ee2edb0cf3549884881b8946a99cdde1, type: 2}
   phantomMaterials:
     normal: {fileID: 2100000, guid: 05a90805b0db07b4c8f6bb77cca6bf82, type: 2}
     camera: {fileID: 2100000, guid: 8b0ba1c06fc67e840a2e519c7c36bd3c, type: 2}
     thermal: {fileID: 2100000, guid: db03c4253306cb947882c84394620907, type: 2}
     sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
+  agentLaserMaterial: {fileID: 2100000, guid: 0161d33feccd00c46912d0cd23511077, type: 2}
   WaveCount: {x: 400, y: 400}
   WaveIntensity: {x: 0.0015, y: 0.0005}
   WaveTimeMult: {x: 100, y: 100}

@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
-public class GoodDoor : NetworkBehaviour {
+public class GoodDoor : MonoBehaviour {
 
     public int swingDir = 1;
     public float swingSpeed = 0.8f;
@@ -11,7 +10,6 @@ public class GoodDoor : NetworkBehaviour {
     public Transform hinge;
     public Transform handle;
     public int currentState;
-    [SyncVar]
     private DoorSwingState state = new Shut();
     private bool inputSpamming = false;
     private int prevstate;
@@ -45,13 +43,14 @@ public class GoodDoor : NetworkBehaviour {
     {
         ElectricBarrier();
         baseRot = transform.localEulerAngles.y;
+        active = false; //This may be something of a problem. Not sure why this started happening.
     }
 
     public bool Unlock(string input)
     {
         if(locked)
         {
-            Debug.Log(code + " vs. " + input);
+            //Debug.Log(code + " vs. " + input);
             if(input.Contains(code))
             {
                 locked = false;

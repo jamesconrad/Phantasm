@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
 using System.Collections;
-using UnityEngine.Networking.Match;
 
-public class GunHandle : NetworkBehaviour
+public class GunHandle : MonoBehaviour
 {
     public GunSettings weaponSettings;
 
@@ -36,21 +34,6 @@ public class GunHandle : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        if (GetComponentInChildren<Gun>())
-        {
-            gunReference = GetComponentInChildren<Gun>().gameObject;
-            weaponSettings = GetComponentInChildren<Gun>().weaponSettings;
-
-            //temp solution. I'd like to get this automated.
-            weaponSettings.currentNumberOfClips = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfClips;
-            weaponSettings.currentNumberOfRounds = GetComponentInChildren<Gun>().weaponSettings.ammoSettings.startingNumberOfRounds;
-
-        }
-    }
-
-    // Called on clients for player objects for the local client (only)
-    public override void OnStartLocalPlayer()
-    {
         playerTransform = GetComponent<Transform>();
 
         weaponSettings.currentNumberOfClips = weaponSettings.ammoSettings.startingNumberOfClips;
@@ -71,7 +54,7 @@ public class GunHandle : NetworkBehaviour
             Camera.main.transform.parent = gunReference.transform.parent;
             
             // There's a proper way to do this right? Unity isn't this retarded right?
-            gunLocalPosition = new Vector3(gunReference.transform.localPosition.x, gunReference.transform.localPosition.y, gunReference.transform.localPosition.z);
+            gunReference.transform.localPosition = gunLocalPosition =  new Vector3(0.015f, -0.25f, 0.09f);
         }
     }
 
@@ -136,24 +119,6 @@ public class GunHandle : NetworkBehaviour
 
         }
 
-
-
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-
-
-        //Physics.Raycast(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.forward, out raycastResult);
-        //if (raycastResult.collider)
-        //{
-        //    Camera.main.transform.rotation = Quaternion.LookRotation((raycastResult.point - Camera.main.transform.position).normalized, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation((raycastResult.point - Camera.main.transform.position).normalized, Vector3.up), Time.deltaTime * 2f);
-        //}
-        //else
-        //{
-        //    Camera.main.transform.rotation = Quaternion.LookRotation(gunReference.transform.forward, Vector3.up);// Quaternion.Slerp(Camera.main.transform.rotation, Quaternion.LookRotation(gunReference.transform.forward, Vector3.up), Time.deltaTime * 2f);
-        //}
-
         if ((Input.GetButton("GamePad Fire") || Input.GetButton("Fire1")) && weaponSettings.bulletPrefab != null)
         {
             if (weaponSettings.currentNumberOfRounds > 0 && timeSinceFired > shootSpeed)
@@ -177,7 +142,7 @@ public class GunHandle : NetworkBehaviour
                 }
                 else
                 {
-                    CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
+                    FireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
                 }
 
                 GameObject smokeTrail = Instantiate(smokeTrailReference);
@@ -199,9 +164,6 @@ public class GunHandle : NetworkBehaviour
                 reloading = true;
                 laser.active = !reloading;
 
-
-                
-
                 gunShotReloadSound.pitch = Random.Range(0.90f, 1.10f);
                 gunShotReloadSound.Play();
                 
@@ -222,13 +184,10 @@ public class GunHandle : NetworkBehaviour
         }
     }
 
-    [Command]
-    public void CmdFireWeapon(Vector3 spawnPosition, Quaternion spawnRotation)
+    public void FireWeapon(Vector3 spawnPosition, Quaternion spawnRotation)
     {
         GameObject tempBullet = (GameObject)Instantiate(weaponSettings.bulletPrefab, spawnPosition, spawnRotation);
         //weaponSettings.currentNumberOfRounds--;
-        NetworkServer.Spawn(tempBullet);
-
     }
 
     // This function is called when the MonoBehaviour will be destroyed

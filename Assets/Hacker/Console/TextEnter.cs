@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +31,7 @@ public class TextEnter : MonoBehaviour {
 	void Start () {
 		logObj = GameObject.Find ("LogText");
 		enteredText = "";
+        Doors = FindObjectsOfType<GoodDoor>();		
 	}
 	
 	// Update is called once per frame
@@ -81,9 +83,20 @@ public class TextEnter : MonoBehaviour {
         }
     }
 
+	public int SendConsoleMessage(string message, StringBuilder givenAddress)
+	{
+		StringBuilder sendBuffer = new StringBuilder(((int)PhaNetworkingMessager.MessageType.ConsoleMessage).ToString() + " " + message);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
+	}
+
+	public void ReceiveCode(StringBuilder message)
+	{
+		checkDoors(message.ToString());
+	}
+
     void checkDoors(string code)
     {
-        Doors = FindObjectsOfType<GoodDoor>();
+        //Doors = FindObjectsOfType<GoodDoor>();
         bool check = false;
         for(int i = 0; i < Doors.Length; ++i)
         {
@@ -96,6 +109,8 @@ public class TextEnter : MonoBehaviour {
 
         if (check)
         {
+			SendConsoleMessage(code, PhaNetworkingAPI.targetIP);
+			
             addToLog("\n<color=green>*DOOR UNLOCKED*</color>");
 				++logLength;
                 ++logLength;

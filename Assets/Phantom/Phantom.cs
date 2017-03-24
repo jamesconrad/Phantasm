@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.Networking;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.AI;
 
-public class Phantom : NetworkBehaviour
+public class Phantom : MonoBehaviour
 {
     public float attackDamage;
 
@@ -27,12 +27,11 @@ public class Phantom : NetworkBehaviour
 		//setVisibility();
 
 
-        if (!isLocalPlayer)
-        {
-            //Change to apply the correct shaders when Stephen gets them done.
-            //GetComponent<MeshRenderer>().enabled = false;
-
-        }
+		if (!PhaNetworkManager.Ishost)
+		{
+			GetComponent<BehaviourTree>().enabled = false;
+			GetComponent<NavMeshAgent>().enabled = false;
+		}
 
         if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])
         {

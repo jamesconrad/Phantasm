@@ -2,7 +2,7 @@
 using UnityEngine.Networking;
 using System.Collections;
 
-public class FirstPersonCamera : NetworkBehaviour
+public class FirstPersonCamera : MonoBehaviour
 {
 
     public Camera playerCamera;
@@ -25,21 +25,6 @@ public class FirstPersonCamera : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-    }
-
-    public void AddCameraRotation(Vector2 vector)
-    {
-        RecoilMovement += vector;
-    }
-
-    public void AddCameraRotation(float x, float y)
-    {
-        AddCameraRotation(new Vector2(x, y));
-    }
-
-    // Called on clients for player objects for the local client (only)
-    public override void OnStartLocalPlayer()
-    {
         MouseMovement = new Vector2(0.0f, 0.0f);
 
         playerCamera = Camera.main;
@@ -53,6 +38,7 @@ public class FirstPersonCamera : NetworkBehaviour
         temp.gunReference.transform.SetParent(playerCamera.transform);
         temp.gunReference.transform.position += new Vector3(0,0.05f,0);
         playerCamera.transform.SetParent(transform);
+        playerCamera.transform.localPosition = new Vector3(0.0f, 1.6f, 0.0f);
 
 
         Transform a4 = transform.GetChild(0);
@@ -63,22 +49,26 @@ public class FirstPersonCamera : NetworkBehaviour
         actualGunTransform = transform.GetChild(1);
     }
 
+    public void AddCameraRotation(Vector2 vector)
+    {
+        RecoilMovement += vector;
+    }
+
+    public void AddCameraRotation(float x, float y)
+    {
+        AddCameraRotation(new Vector2(x, y));
+    }
+
     public void FixedUpdate()
     {
         RecoilMovement *= 0.965f;
     }
-
-
 
     // Update is called once per frame
     void Update()
     {
         //RecoilMovement.y = Mathf.Max(0.0f, RecoilMovement.y - Time.deltaTime * 8.0f);
 
-        if (!isLocalPlayer)
-        {
-            return;
-        }
         //Fetch mouse movement
         MouseMovement.x += Input.GetAxis("Mouse X");
         MouseMovement.y += Input.GetAxis("Mouse Y");

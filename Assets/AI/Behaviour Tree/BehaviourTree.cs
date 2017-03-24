@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
 using System.Collections;
 
-public class BehaviourTree : NetworkBehaviour {
+public class BehaviourTree : MonoBehaviour {
     
     //Implementation Status:
     //Listener : Current Scope Restriction
@@ -118,12 +117,6 @@ public class BehaviourTree : NetworkBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        //BehavTree
-        if (!isServer)
-        {
-            return;
-        }
-
         if (aiSettings.triggered)
         {
             ai.update();

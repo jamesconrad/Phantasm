@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class Agent : NetworkBehaviour
+public class Agent : MonoBehaviour
 {
     public GameObject AgentUI;
     public GameObject PauseUI;
@@ -28,38 +27,9 @@ public class Agent : NetworkBehaviour
     // Awake is called when the script instance is being loaded
     public void Awake()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-        AgentUI = Instantiate(AgentUI) as GameObject;
         PauseUI = Instantiate(PauseUI) as GameObject;
-
-        Text[] textReferences;
-        textReferences = AgentUI.GetComponentsInChildren<Text>();
-        for (int i = 0; i < textReferences.Length; i++)
-        {
-            if (textReferences[i].name == "SubObjectiveCounter")
-            {
-                SubObjectiveCounter = textReferences[i];
-                SetNumberOfObjectivesCompleted(FindObjectOfType<GameState>().numberOfSubObjectives);
-            }
-            else if (textReferences[i].gameObject.name == "AmmoCounter")
-            {
-                AmmoCounter = textReferences[i];
-                SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds, GetComponent<GunHandle>().weaponSettings.currentNumberOfClips);
-            }
-        }
-
-        SplashScreen endGameScreen = AgentUI.GetComponentInChildren<SplashScreen>();
-        endGameScreen.screenOwner = gameObject;
-        endGameScreen.OnTimeReached.AddListener(() => { CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = true; });
-    }
-
-    // Called on clients for player objects for the local client (only)
-    public override void OnStartLocalPlayer()
-    {
-        PauseUI = Instantiate(PauseUI) as GameObject;
+        PauseUI.SetActive(false);
+        
         AgentUI = Instantiate(AgentUI) as GameObject;
 
         Text[] textReferences;
@@ -77,7 +47,6 @@ public class Agent : NetworkBehaviour
                 SetAmmoCount(GetComponent<GunHandle>().weaponSettings.currentNumberOfRounds, GetComponent<GunHandle>().weaponSettings.currentNumberOfClips);
             }
         }
-        CustomNetworkManager.singleton.GetComponent<NetworkManagerHUD>().showGUI = false;
         
         SplashScreen endGameScreen = AgentUI.GetComponentInChildren<SplashScreen>();
         endGameScreen.screenOwner = gameObject;

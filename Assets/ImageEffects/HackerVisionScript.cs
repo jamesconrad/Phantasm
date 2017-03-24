@@ -80,6 +80,7 @@ public class HackerVisionScript : MonoBehaviour
 	[Space(10)]
 	public CameraMaterials agentMaterials;
 	public CameraMaterials phantomMaterials;
+	public Material	agentLaserMaterial;
 	private int cameraModeArray = 1;
 
 	
@@ -358,8 +359,8 @@ public class HackerVisionScript : MonoBehaviour
         
 		if(GOAgent != null)
 		{			
-			EntityAgent = GOAgent.GetComponent<Agent>();
-			VisibleAgent = EntityAgent.visibility;
+			//EntityAgent = GOAgent.GetComponentInChildren<Agent>();
+			//VisibleAgent = EntityAgent.visibility;
 		}
         for (int i = 0; i < GOPhantom.Length; ++i)
         {
@@ -397,10 +398,11 @@ public class HackerVisionScript : MonoBehaviour
 		    	if(GOAgent != null)
 		    	{
 		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
-                
+                    
 		    		for (int c = 0; c < agentRenderers.Length; c++)
 		    		{
-		    			agentRenderers[c].material = agentMaterials.camera;
+                        if(agentRenderers[c].material != agentLaserMaterial)
+		    			    agentRenderers[c].material = agentMaterials.camera;
 		    		}
 		    	}
 
@@ -443,7 +445,8 @@ public class HackerVisionScript : MonoBehaviour
 		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
 		    		for(int c = 0; c < agentRenderers.Length; c++)
 		    		{
-		    			agentRenderers[c].material = agentMaterials.thermal;
+                        if(agentRenderers[c].material != agentLaserMaterial)
+		    			    agentRenderers[c].material = agentMaterials.thermal;
 		    		}
 		    	}
 
@@ -476,7 +479,8 @@ public class HackerVisionScript : MonoBehaviour
 		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
 		    		for(int c = 0; c < agentRenderers.Length; c++)
 		    		{
-		    			agentRenderers[c].material = agentMaterials.sonar;
+                        if(agentRenderers[c].material != agentLaserMaterial)
+		    			    agentRenderers[c].material = agentMaterials.sonar;
 		    		}
 		    	}
 

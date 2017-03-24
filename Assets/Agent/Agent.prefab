@@ -2078,9 +2078,6 @@ GameObject:
   - component: {fileID: 114000012543753510}
   - component: {fileID: 114000011784594182}
   - component: {fileID: 114000013077425356}
-  - component: {fileID: 114000010260173204}
-  - component: {fileID: 114000011937748856}
-  - component: {fileID: 114000011244241914}
   - component: {fileID: 114000011350886908}
   - component: {fileID: 114000010520363438}
   - component: {fileID: 114486842551564596}
@@ -2919,7 +2916,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1388664444397566
 GameObject:
   m_ObjectHideFlags: 1
@@ -8734,7 +8731,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -8813,10 +8810,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0
+  MaxDistance: 2
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -8894,7 +8891,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -8974,7 +8971,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -9119,38 +9116,6 @@ Light:
   m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114000010260173204
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014286740798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 203
-    i1: 132
-    i2: 173
-    i3: 243
-    i4: 165
-    i5: 45
-    i6: 73
-    i7: 4
-    i8: 73
-    i9: 123
-    i10: 48
-    i11: 122
-    i12: 222
-    i13: 148
-    i14: 93
-    i15: 217
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114000010315728762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9196,19 +9161,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   footstepSound: {fileID: 82000011989878082}
   movementSpeed: 3
---- !u!114 &114000011244241914
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014286740798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4400fe75c41ae8044b390219dfcf8503, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  phantomGameObject: {fileID: 1000011964233812, guid: 080f1252b855e2847a1d34e25a30162b,
-    type: 2}
 --- !u!114 &114000011350886908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9263,20 +9215,6 @@ MonoBehaviour:
   gunShotShootSound: {fileID: 82000011765907664}
   gunShotReloadSound: {fileID: 82059740789537780}
   gunShotEmptySound: {fileID: 82102635838964726}
---- !u!114 &114000011937748856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000014286740798}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87dc45f759f4bf843b05d7c8dc86b08f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxDistance: 0.01
-  syncedPosition: {x: 0, y: 0, z: 0}
-  objectIsClient: 1
 --- !u!114 &114000012208308146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9352,7 +9290,7 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   MaxCameraY: 45
   MinCameraY: -45
-  fov: 45
+  fov: 70
   lookRotationBone: {fileID: 0}
   actualGunTransform: {fileID: 0}
   rot: {x: 0, y: 0, z: 0, w: 0}
@@ -9469,6 +9407,7 @@ MonoBehaviour:
     camera: {fileID: 2100000, guid: 8b0ba1c06fc67e840a2e519c7c36bd3c, type: 2}
     thermal: {fileID: 2100000, guid: db03c4253306cb947882c84394620907, type: 2}
     sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
+  agentLaserMaterial: {fileID: 0}
   WaveCount: {x: 400, y: 400}
   WaveIntensity: {x: 0.0005, y: 0.0015}
   WaveTimeMult: {x: 100, y: 100}
