@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum DoorUnlockChain
+public enum DoorUnlockChain
 {
-
+	Null,
+	Tutorial,
+	FirstRoom,
+	SecondRoom,
+	Exit
 }
 
 public class CodeVoice : MonoBehaviour 
@@ -26,10 +30,25 @@ public class CodeVoice : MonoBehaviour
 	char[] codeWords = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 	
 	
-
+	DoorUnlockChain chainPosition = DoorUnlockChain.Null;
 	// Variables controlling playback
 	int currentChar = 0;
+	bool activeSpeaker = false;
 
+	public void setChain(DoorUnlockChain chain)
+	{
+		chainPosition = chain;
+	}
+	public void setActive(bool act)
+	{
+		activeSpeaker = act;
+	}
+
+
+	public string getCode()
+	{
+		return code;
+	}
 
 	// Use this for initialization
 	void Start () 
@@ -40,7 +59,8 @@ public class CodeVoice : MonoBehaviour
 		{
 			Debug.Log("FUCK!\n" + "VOICE COLLECTION IS NULL!");
 		}
-		int codeLength = Random.Range(4, 6);
+		
+		int codeLength = Random.Range(5, 7);
 		codeInt = new int[codeLength];
 		codeVoices = new int[codeLength];
 		for(int i = 0; i < codeLength; ++i)
@@ -51,13 +71,33 @@ public class CodeVoice : MonoBehaviour
 		}
 
 		Debug.Log(code);
-
-
+		audioSus.clip = voiceCollection.beep;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if(activeSpeaker)
+		{
+			if(!audioSus.isPlaying) 
+			{
+				if(currentChar < codeInt.Length)
+				{
+					Debug.Log(	"Code Current: " + currentChar + "\n" +
+								"Code Voice: " + codeVoices[currentChar] + "\n" +
+								"Code Int: " + codeInt[currentChar]);
+					audioSus.clip = voiceCollection.voices[codeVoices[currentChar]].voice[codeInt[currentChar]];
+					audioSus.Play();
+					currentChar++;
+				}
+				else 
+				{
+					audioSus.clip = voiceCollection.beep;
+					audioSus.Play();
+					currentChar = 0;
+				}
+				
+			}
+		}
 	}
 }

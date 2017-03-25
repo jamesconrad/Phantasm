@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f7197cfacaef246b84067c25372f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beep: {fileID: 8300000, guid: b2eef94559544244daa5004a3e426630, type: 3}
   voices:
   - voice:
     - {fileID: 8300000, guid: 39756eb79653af145ae0048e997b510e, type: 3}
@@ -69,3 +70,20 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 39d92665851546a49908e8e55ced9062, type: 3}
     - {fileID: 8300000, guid: 4da9658217aafa0458cbf59e0fc8cf82, type: 3}
     - {fileID: 8300000, guid: 35045cf58f35eec4990517524a85618b, type: 3}
+  - voice:
+    - {fileID: 8300000, guid: dbdd635794c114648a76e3d5b6c3fca1, type: 3}
+    - {fileID: 8300000, guid: 4e36e471723512c429aaf02d3c8c7480, type: 3}
+    - {fileID: 8300000, guid: 897cc7144369bce4297d15c880127123, type: 3}
+    - {fileID: 8300000, guid: e5be5516f8150ef4594e0b5cea8b2161, type: 3}
+    - {fileID: 8300000, guid: 55e4421edd88b18459c5532f22f5d594, type: 3}
+    - {fileID: 8300000, guid: 3ac30ba9f96190c468c67c8dce2dd13b, type: 3}
+    - {fileID: 8300000, guid: 65bfd8a46a2f1ac4da7915bb7b3609d5, type: 3}
+    - {fileID: 8300000, guid: 4fe7456a6c1ee1e4ca4f121628abc125, type: 3}
+    - {fileID: 8300000, guid: 2ddeb7583e2e0034dbc02e029d59ecc1, type: 3}
+    - {fileID: 8300000, guid: c8e63bad6f81ba7419f87fc2dfbc855c, type: 3}
+    - {fileID: 8300000, guid: f38b5c4fc50ef314bbd300c859d89ad2, type: 3}
+    - {fileID: 8300000, guid: b5d6fbbf9a3a67b469982a1cab327ad7, type: 3}
+    - {fileID: 8300000, guid: 05dc86b7ed98e524cbd7482774e716b4, type: 3}
+    - {fileID: 8300000, guid: acf1c7185f66abf4093369d8d2157bfb, type: 3}
+    - {fileID: 8300000, guid: 6294b4b0b77528340b980f155678cef0, type: 3}
+    - {fileID: 8300000, guid: e5c6ffb95c365c54e83935cee9f21310, type: 3}
