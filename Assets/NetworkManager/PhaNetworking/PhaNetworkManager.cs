@@ -115,6 +115,21 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			}
 		}
 	}
+
+	/// <summary>
+	/// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+	/// </summary>
+	void FixedUpdate()
+	{
+		if (SceneManager.GetActiveScene().name != "Menu")
+		{
+			if (characterSelection == 0 && PreviousPlayerPosition != AgentPrefab.transform.position)
+			{//Sending
+				SendPlayerUpdate(AgentPrefab.transform.position, AgentRigidBody.velocity, AgentPrefab.transform.rotation, PhaNetworkingAPI.targetIP);
+				PreviousPlayerPosition = AgentPrefab.transform.position;
+			}
+		}
+	}
 	
 	void SpawnPlayer(Scene _scene1, Scene _scene2)
 	{
