@@ -12,6 +12,7 @@ public class FirstPersonMovement : MonoBehaviour
     public AudioSource footstepSound;
 
     public float movementSpeed;
+    float storedGravity = 0.0f;
     // Use this for initialization
     void Start()
     {
@@ -41,6 +42,6 @@ public class FirstPersonMovement : MonoBehaviour
             footstepSound.Stop();
         }
 
-        playerTransform.Translate(movementDirection * movementSpeed * Time.deltaTime, Space.World);
+        playerRigidBody.AddForce(movementDirection * movementSpeed * Time.deltaTime);
     }
 }
