@@ -19,7 +19,6 @@ public class NetworkedMovement : NetworkedBehaviour
     /// </summary>
     void Start()
     {
-        simulatedPosition = GetComponent<Transform>().position;
     }
 
     /// <summary>
@@ -27,13 +26,13 @@ public class NetworkedMovement : NetworkedBehaviour
     /// </summary>
     void Update()
     {
-        simulatedPosition = receivedPosition + receivedVelocity * (Time.time - ReceiveTime);
+        Debug.Log("new position is:" + receivedPosition + receivedVelocity * (Time.time - ReceiveTime));
+        transform.position = receivedPosition + receivedVelocity * (Time.time - ReceiveTime);
     }
 
     public override void ReceiveBuffer(ref StringBuilder buffer)
     {//TODO: Make sure this works.
-      	Debug.Log("NetworkedMovement receive call being called");
-      string[] message = buffer.ToString().Split(' ');
+        string[] message = buffer.ToString().Split(' ');
 
 		receivedPosition.x = float.Parse(message[1]);
 		receivedPosition.y = float.Parse(message[2]);

@@ -139,7 +139,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			{
 				AgentPrefab = GameObject.Instantiate(AgentPrefab); //Local player is agent.
 				AgentHealth = AgentPrefab.GetComponent<Health>();
-				AgentRigidBody = AgentPrediction.GetComponent<Rigidbody>();
+				AgentRigidBody = AgentPrefab.GetComponent<Rigidbody>();
 				PreviousPlayerPosition = new Vector3(AgentPrefab.transform.position.x, AgentPrefab.transform.position.y, AgentPrefab.transform.position.z);
 
 				HackerPrefab = GameObject.Instantiate(RemoteHackerPrefab);				
