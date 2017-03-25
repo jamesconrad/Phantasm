@@ -18,21 +18,13 @@ public class GoodDoor : MonoBehaviour {
     public GameObject LockObject;
     private GameObject LockReference;
     public bool locked = false;
-    public string code;
+    private string code;
+
+    [Header("Room Number to be used by speakers")]
+    [Tooltip("0 is null\n1 is tutorial room")]
+    public int roomNumber = 0;
 
     bool active = false;
-
-    //[SyncVar]
-    //private Vector3 thisPosition;
-    //[SyncVar]
-    //private Quaternion thisRotation;
-    //
-    //void Start()
-    //{
-    //    thisPosition = this.transform.position;
-    //    thisRotation = this.transform.rotation;
-    //
-    //}
 
     public bool isActive()
     {
