@@ -30,9 +30,10 @@ public class NetworkedMovement : NetworkedBehaviour
         simulatedPosition = receivedPosition + receivedVelocity * (Time.time - ReceiveTime);
     }
 
-    override public void ReceiveBuffer(ref StringBuilder buffer)
+    public override void ReceiveBuffer(ref StringBuilder buffer)
     {//TODO: Make sure this works.
-        string[] message = buffer.ToString().Split(' ');
+      	Debug.Log("NetworkedMovement receive call being called");
+      string[] message = buffer.ToString().Split(' ');
 
 		receivedPosition.x = float.Parse(message[1]);
 		receivedPosition.y = float.Parse(message[2]);
