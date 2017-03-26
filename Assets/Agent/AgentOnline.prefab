@@ -9326,9 +9326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 0
-  receivedPosition: {x: 0, y: 0, z: 0}
-  receivedRotation: {x: 0, y: 0, z: 0, w: 0}
-  receivedVelocity: {x: 0, y: 0, z: 0}
+  isRemote: 1
 --- !u!114 &114836053151396604
 MonoBehaviour:
   m_ObjectHideFlags: 1
