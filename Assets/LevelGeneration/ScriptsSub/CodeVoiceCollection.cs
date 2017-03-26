@@ -12,7 +12,7 @@ public class CodeVoiceCollection : MonoBehaviour
 	private CodeVoice[] Speakers;
 	// These ints represent the "RoomNum" that a room has 
 	private List<int> listOfRooms = new List<int>();
-	private int numOfChains = 1;
+	private int numOfChains = 3;
 	private CodeVoice tutorialSpeaker;
 	private List<GoodDoor> tutorialDoors = new List<GoodDoor>();
 

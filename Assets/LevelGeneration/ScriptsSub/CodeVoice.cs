@@ -20,6 +20,7 @@ public class CodeVoice : MonoBehaviour
 	public int roomNumber = 0;
 	AudioSource audioSus;
 	CodeVoiceCollection voiceCollection;
+	bool codeGenned = false;
 	// Code represented by a string
 	string code = "";	
 	// Code represented by an int
@@ -58,23 +59,27 @@ public class CodeVoice : MonoBehaviour
 	
 	public void genCode()
 	{
-		voiceCollection = FindObjectOfType<CodeVoiceCollection>();
-		if(voiceCollection == null)
+		if(!codeGenned)
 		{
-			Debug.Log("FUCK!\n" + "VOICE COLLECTION IS NULL!");
-		}
-		int codeLength = Random.Range(5, 8);
-		codeInt = new int[codeLength];
-		codeVoices = new int[codeLength];
-		for(int i = 0; i < codeLength; ++i)
-		{
-			codeInt[i] = Random.Range(0, codeWords.Length);
-			codeVoices[i] = Random.Range(0, voiceCollection.voices.Length);
-			code += codeWords[codeInt[i]];
-		}
-		
+			voiceCollection = FindObjectOfType<CodeVoiceCollection>();
+			if(voiceCollection == null)
+			{
+				Debug.Log("FUCK!\n" + "VOICE COLLECTION IS NULL!");
+			}
+			int codeLength = Random.Range(5, 8);
+			codeInt = new int[codeLength];
+			codeVoices = new int[codeLength];
+			for(int i = 0; i < codeLength; ++i)
+			{
+				codeInt[i] = Random.Range(0, codeWords.Length);
+				codeVoices[i] = Random.Range(0, voiceCollection.voices.Length);
+				code += codeWords[codeInt[i]];
+			}
 
-		Debug.Log(code);
+			codeGenned = true;
+			
+			Debug.Log(code);
+		}
 	}
 
 	// Update is called once per frame
