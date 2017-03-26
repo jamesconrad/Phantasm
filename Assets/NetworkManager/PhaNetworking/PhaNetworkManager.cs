@@ -129,7 +129,9 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			{
 				AgentPrefab = GameObject.Instantiate(RemoteAgentPrefab);
 				AgentHealth = AgentPrefab.GetComponent<Health>();
-				AgentPrefab.transform.position = new Vector3(20.30901f, -0.6f, 13.479f);
+				Vector3 startPosition = FindObjectOfType<PlayerStartLocation>().transform.position;
+				AgentPrefab.transform.position = new Vector3(startPosition.x, startPosition.y, startPosition.z);
+				AgentPrefab.GetComponent<NetworkedMovement>().receivedPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
 				AgentRigidBody = AgentPrefab.GetComponent<Rigidbody>();
 				AgentPrediction = AgentPrefab.GetComponent<NetworkedBehaviour>();
 				HackerPrefab = GameObject.Instantiate(HackerPrefab); //Local Player is Hacker. The order of instantiation here is important!

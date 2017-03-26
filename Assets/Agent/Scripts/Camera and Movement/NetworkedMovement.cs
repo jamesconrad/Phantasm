@@ -15,7 +15,7 @@ public class NetworkedMovement : NetworkedBehaviour
     private Quaternion simulatedRotation;
 
     private float ReceiveTime = 0.0f;
-    private Vector3 receivedPosition;
+    public Vector3 receivedPosition;
     private Quaternion receivedRotation;
     private Vector3 receivedVelocity;
 
