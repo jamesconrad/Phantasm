@@ -36,6 +36,7 @@ public class CodeVoice : MonoBehaviour
 	int currentChar = 0;
 	bool activeSpeaker = false;
 
+	// This was gonna a hard codey thingy, but I actually implemented the codes properly, yay me
 	public void setChain(DoorUnlockChain chain)
 	{
 		chainPosition = chain;
@@ -77,7 +78,7 @@ public class CodeVoice : MonoBehaviour
 			}
 
 			codeGenned = true;
-			
+
 			Debug.Log(code);
 		}
 	}

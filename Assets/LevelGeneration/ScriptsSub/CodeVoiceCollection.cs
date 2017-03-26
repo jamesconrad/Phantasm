@@ -9,6 +9,7 @@ public class CodeVoiceCollection : MonoBehaviour
 
 	private GoodDoor[] Doors;
 	private List<GoodDoor> ExitDoors = new List<GoodDoor>();
+	private List<int> listOfExitDoorGroups = new List<int>();
 	private CodeVoice[] Speakers;
 	// These ints represent the "RoomNum" that a room has 
 	private List<int> listOfRooms = new List<int>();
@@ -43,6 +44,24 @@ public class CodeVoiceCollection : MonoBehaviour
 				ExitDoors.Add(Doors[i]);
 			}
 		}
+
+		// Group the exit doors
+		for(int i = 0; i < ExitDoors.Count; ++i)
+		{
+			bool roomFound = false;
+			for(int c = 0; c < listOfExitDoorGroups.Count; ++c)
+			{
+				if(listOfExitDoorGroups[c] == ExitDoors[i].exitNumber)
+					roomFound = true;
+			}
+			if(!roomFound)
+			{
+				listOfExitDoorGroups.Add(ExitDoors[i].exitNumber);
+				//Debug.Log("");
+			}
+		}
+
+
 		for(int i = 0; i < Speakers.Length; ++i)
 		{
 			if(Speakers[i].roomNumber == 1)
@@ -79,18 +98,20 @@ public class CodeVoiceCollection : MonoBehaviour
 
 	void SetRooms()
 	{
-		int firstRoom = Random.Range(0, listOfRooms.Count);
 		
-		Debug.Log("Setting Room " + listOfRooms.Count + "\nFirst Room is " + firstRoom);
-
+		// First Speaker
+		int selectedRoom = Random.Range(0, listOfRooms.Count);
 
 		int counter = 1;
 		while(listOfRooms.Count > 0 && counter <= numOfChains)
 		{
+		
+			Debug.Log("Rooms Left: " + listOfRooms.Count + "\nRoom chain #" + counter + " is in Room #" + listOfRooms[selectedRoom]);
+
 			CodeVoice speaker = null;
 			for(int i = 0; i < Speakers.Length; ++i) 
 			{
-				if (Speakers[i].roomNumber == listOfRooms[firstRoom])
+				if (Speakers[i].roomNumber == listOfRooms[selectedRoom])
 				{
 					speaker = Speakers[i];
 					speaker.genCode();
@@ -108,13 +129,17 @@ public class CodeVoiceCollection : MonoBehaviour
 			}
 			
 			++counter;
-			if(listOfRooms.Count > 0 && counter <= numOfChains)
+			if(listOfRooms.Count > 1 && counter <= numOfChains)
 			{
-				Debug.Log("Chaining the rooms");	
+				Debug.Log("Chaining the rooms " + listOfRooms[selectedRoom]);	
+				
+				// Link to new door
+				listOfRooms.RemoveAt(selectedRoom);
+				selectedRoom = Random.Range(0, listOfRooms.Count);
 				
 				for(int i = 0; i < Doors.Length; ++i) 
 				{
-					if (Doors[i].roomNumber == listOfRooms[firstRoom])
+					if (Doors[i].roomNumber == listOfRooms[selectedRoom])
 					{
 						Doors[i].SetCode(speaker.getCode());
 					}
@@ -122,13 +147,22 @@ public class CodeVoiceCollection : MonoBehaviour
 			}
 			else
 			{
+				counter = numOfChains + 1;
 				Debug.Log("Last Room gots to be chained to the exit");
 
 				//for(int i = 0; i < ExitDoors.Count; ++i) 
-				if(ExitDoors.Count > 0)
+				if(listOfExitDoorGroups.Count > 0)
 				{
-					int randomExit = Random.Range(0, listOfRooms.Count);
-					ExitDoors[randomExit].SetCode(speaker.getCode());
+					Debug.Log("Creating Exit " + listOfExitDoorGroups.Count);
+					int randomExit = Random.Range(0, listOfExitDoorGroups.Count);
+					Debug.Log("Exit #" + randomExit + " has been selected");
+					for(int i = 0; i < ExitDoors.Count; ++i)
+					{
+						if (ExitDoors[i].exitNumber == listOfExitDoorGroups[randomExit])
+						{
+							ExitDoors[i].SetCode(speaker.getCode());
+						}
+					}
 				}
 				else
 				{
