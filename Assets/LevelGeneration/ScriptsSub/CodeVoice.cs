@@ -53,18 +53,17 @@ public class CodeVoice : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		
+		audioSus = GetComponent<AudioSource>();
 	}
 	
 	public void genCode()
 	{
-		audioSus = GetComponent<AudioSource>();
 		voiceCollection = FindObjectOfType<CodeVoiceCollection>();
 		if(voiceCollection == null)
 		{
 			Debug.Log("FUCK!\n" + "VOICE COLLECTION IS NULL!");
 		}
-		int codeLength = Random.Range(5, 7);
+		int codeLength = Random.Range(5, 8);
 		codeInt = new int[codeLength];
 		codeVoices = new int[codeLength];
 		for(int i = 0; i < codeLength; ++i)
@@ -74,7 +73,6 @@ public class CodeVoice : MonoBehaviour
 			code += codeWords[codeInt[i]];
 		}
 		
-		audioSus.clip = voiceCollection.beep;
 
 		Debug.Log(code);
 	}
@@ -82,8 +80,12 @@ public class CodeVoice : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(activeSpeaker)
+		if(activeSpeaker )
 		{
+			if(audioSus == null)
+			{
+				Debug.Log("WHAT THE SHIT");
+			}
 			if(!audioSus.isPlaying) 
 			{
 				if(currentChar < codeInt.Length)

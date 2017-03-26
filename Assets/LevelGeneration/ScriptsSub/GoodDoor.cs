@@ -18,11 +18,15 @@ public class GoodDoor : MonoBehaviour {
     public GameObject LockObject;
     private GameObject LockReference;
     public bool locked = false;
-    private string code;
+    private string code = "CHEATER";
 
     [Header("Room Number to be used by speakers")]
     [Tooltip("0 is null\n1 is tutorial room")]
     public int roomNumber = 0;
+
+    [Header("Exit Door to be used by final speaker")]
+    [Tooltip("0 is null\n")]
+    public int exitNumber = 0;
 
     bool active = false;
 
@@ -33,7 +37,9 @@ public class GoodDoor : MonoBehaviour {
 
     public void SetCode(string input)
     {
+        locked = true;
         code = input;
+        ElectricBarrier();
     }
 
     void Start()

@@ -8,6 +8,7 @@ public class CodeVoiceCollection : MonoBehaviour
 	public Plasma.VoiceCollection[] voices;
 
 	private GoodDoor[] Doors;
+	private List<GoodDoor> ExitDoors = new List<GoodDoor>();
 	private CodeVoice[] Speakers;
 	// These ints represent the "RoomNum" that a room has 
 	private List<int> listOfRooms = new List<int>();
@@ -35,6 +36,11 @@ public class CodeVoiceCollection : MonoBehaviour
 				{
 					listOfRooms.Add(Doors[i].roomNumber);
 				}
+			}
+			else if(Doors[i].roomNumber == 0 && Doors[i].exitNumber > 0)
+			{
+				Debug.Log("Exit Door Added");
+				ExitDoors.Add(Doors[i]);
 			}
 		}
 		for(int i = 0; i < Speakers.Length; ++i)
@@ -65,6 +71,7 @@ public class CodeVoiceCollection : MonoBehaviour
 			if(Speakers[i].roomNumber == 1)
 			{
 				tutorialSpeaker = Speakers[i];
+				tutorialSpeaker.genCode();
 				tutorialSpeaker.setActive(true);
 			}
 		}
@@ -74,10 +81,11 @@ public class CodeVoiceCollection : MonoBehaviour
 	{
 		int firstRoom = Random.Range(0, listOfRooms.Count);
 		
-		Debug.Log("Setting Room " + listOfRooms.Count + "\n" + firstRoom);
+		Debug.Log("Setting Room " + listOfRooms.Count + "\nFirst Room is " + firstRoom);
 
 
-		if(listOfRooms.Count > 1)
+		int counter = 1;
+		while(listOfRooms.Count > 0 && counter <= numOfChains)
 		{
 			CodeVoice speaker = null;
 			for(int i = 0; i < Speakers.Length; ++i) 
@@ -85,10 +93,11 @@ public class CodeVoiceCollection : MonoBehaviour
 				if (Speakers[i].roomNumber == listOfRooms[firstRoom])
 				{
 					speaker = Speakers[i];
-					Speakers[i].genCode();
+					speaker.genCode();
+					speaker.setActive(true);
 				}
 			}
-			
+
 			if(speaker == null)
 			{
 				Debug.Log("Well shit, that didn't turn out so well!");
@@ -97,41 +106,33 @@ public class CodeVoiceCollection : MonoBehaviour
 			{
 				Debug.Log("Cool, speaker isn't null for first room!");
 			}
-
-			for(int i = 0; i < Doors.Length; ++i) 
-			{
-				if (Doors[i].roomNumber == listOfRooms[firstRoom])
-				{
-					Doors[i].SetCode(speaker.getCode());
-				}
-			}
-		}
-		else if(listOfRooms.Count > 0)
-		{
-			CodeVoice speaker = null;
-			for(int i = 0; i < Speakers.Length; ++i) 
-			{
-				if (Speakers[i].roomNumber == listOfRooms[firstRoom])
-				{
-					speaker = Speakers[i];
-					Speakers[i].genCode();
-				}
-			}
 			
-			if(speaker == null)
+			++counter;
+			if(listOfRooms.Count > 0 && counter <= numOfChains)
 			{
-				Debug.Log("Well shit, that didn't turn out so well!");
+				Debug.Log("Chaining the rooms");	
+				
+				for(int i = 0; i < Doors.Length; ++i) 
+				{
+					if (Doors[i].roomNumber == listOfRooms[firstRoom])
+					{
+						Doors[i].SetCode(speaker.getCode());
+					}
+				}
 			}
 			else
 			{
-				Debug.Log("Cool, speaker isn't null for first room!");
-			}
+				Debug.Log("Last Room gots to be chained to the exit");
 
-			for(int i = 0; i < Doors.Length; ++i) 
-			{
-				if (Doors[i].roomNumber == listOfRooms[firstRoom])
+				//for(int i = 0; i < ExitDoors.Count; ++i) 
+				if(ExitDoors.Count > 0)
 				{
-					Doors[i].SetCode(speaker.getCode());
+					int randomExit = Random.Range(0, listOfRooms.Count);
+					ExitDoors[randomExit].SetCode(speaker.getCode());
+				}
+				else
+				{
+					Debug.Log("ERROR: NO EXIT EXISTS");
 				}
 			}
 		}
