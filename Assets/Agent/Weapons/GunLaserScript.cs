@@ -22,12 +22,12 @@ public class GunLaserScript : MonoBehaviour
     {        
         line = gameObject.GetComponent<LineRenderer>();
         line.enabled = true;
-        light = line.GetComponentInChildren<Light>();
-        if(light == null)
-        {
-            Debug.Log("Light is null!");
-            light = new Light();
-        }
+        //light = line.GetComponentInChildren<Light>();
+        //if(light == null && light.isActiveAndEnabled)
+        //{
+        //    Debug.Log("Light is null!");
+        //    light = new Light();
+        //}
         hitTriggers = QueryTriggerInteraction.Ignore;
     }
 
@@ -112,10 +112,10 @@ public class GunLaserScript : MonoBehaviour
                 }
 
                 laserDirection = Vector3.Normalize(line.GetPosition(1) - line.GetPosition(0));
-                if(light != null)
+                if(light != null && light.isActiveAndEnabled)
                     light.transform.position = line.GetPosition(1) + laserDirection * 0.05f;
-                else
-                    Debug.Log("Light is null!");
+                //else
+                //    Debug.Log("Light is null!");
             }
 
             yield return null;

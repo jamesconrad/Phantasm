@@ -9,10 +9,11 @@ public class CodeVoiceCollection : MonoBehaviour
 
 	private GoodDoor[] Doors;
 	private CodeVoice[] Speakers;
+	// These ints represent the "RoomNum" that a room has 
 	private List<int> listOfRooms = new List<int>();
+	private int numOfChains = 1;
 	private CodeVoice tutorialSpeaker;
 	private List<GoodDoor> tutorialDoors = new List<GoodDoor>();
-	private int numOfRooms = 0;
 
 	// Use this for initialization
 	void Start () 
@@ -33,7 +34,6 @@ public class CodeVoiceCollection : MonoBehaviour
 				if(!roomFound)
 				{
 					listOfRooms.Add(Doors[i].roomNumber);
-					//numOfRooms = Doors[i].roomNumber;
 				}
 			}
 		}
@@ -66,18 +66,77 @@ public class CodeVoiceCollection : MonoBehaviour
 			{
 				tutorialSpeaker = Speakers[i];
 				tutorialSpeaker.setActive(true);
-				break;
 			}
 		}
 	}
 
 	void SetRooms()
 	{
-		int firstRoom = Random.Range(0, numOfRooms);
-		//for(int i = 0; i < Speakers.Length; ++i)
-		//{
-		//	
-		//}
+		int firstRoom = Random.Range(0, listOfRooms.Count);
+		
+		Debug.Log("Setting Room " + listOfRooms.Count + "\n" + firstRoom);
+
+
+		if(listOfRooms.Count > 1)
+		{
+			CodeVoice speaker = null;
+			for(int i = 0; i < Speakers.Length; ++i) 
+			{
+				if (Speakers[i].roomNumber == listOfRooms[firstRoom])
+				{
+					speaker = Speakers[i];
+					Speakers[i].genCode();
+				}
+			}
+			
+			if(speaker == null)
+			{
+				Debug.Log("Well shit, that didn't turn out so well!");
+			}
+			else
+			{
+				Debug.Log("Cool, speaker isn't null for first room!");
+			}
+
+			for(int i = 0; i < Doors.Length; ++i) 
+			{
+				if (Doors[i].roomNumber == listOfRooms[firstRoom])
+				{
+					Doors[i].SetCode(speaker.getCode());
+				}
+			}
+		}
+		else if(listOfRooms.Count > 0)
+		{
+			CodeVoice speaker = null;
+			for(int i = 0; i < Speakers.Length; ++i) 
+			{
+				if (Speakers[i].roomNumber == listOfRooms[firstRoom])
+				{
+					speaker = Speakers[i];
+					Speakers[i].genCode();
+				}
+			}
+			
+			if(speaker == null)
+			{
+				Debug.Log("Well shit, that didn't turn out so well!");
+			}
+			else
+			{
+				Debug.Log("Cool, speaker isn't null for first room!");
+			}
+
+			for(int i = 0; i < Doors.Length; ++i) 
+			{
+				if (Doors[i].roomNumber == listOfRooms[firstRoom])
+				{
+					Doors[i].SetCode(speaker.getCode());
+				}
+			}
+		}
+
+		
 	}
 
 	// Update is called once per frame

@@ -53,13 +53,17 @@ public class CodeVoice : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+		
+	}
+	
+	public void genCode()
+	{
 		audioSus = GetComponent<AudioSource>();
 		voiceCollection = FindObjectOfType<CodeVoiceCollection>();
 		if(voiceCollection == null)
 		{
 			Debug.Log("FUCK!\n" + "VOICE COLLECTION IS NULL!");
 		}
-		
 		int codeLength = Random.Range(5, 7);
 		codeInt = new int[codeLength];
 		codeVoices = new int[codeLength];
@@ -69,11 +73,12 @@ public class CodeVoice : MonoBehaviour
 			codeVoices[i] = Random.Range(0, voiceCollection.voices.Length);
 			code += codeWords[codeInt[i]];
 		}
+		
+		audioSus.clip = voiceCollection.beep;
 
 		Debug.Log(code);
-		audioSus.clip = voiceCollection.beep;
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
@@ -83,9 +88,9 @@ public class CodeVoice : MonoBehaviour
 			{
 				if(currentChar < codeInt.Length)
 				{
-					Debug.Log(	"Code Current: " + currentChar + "\n" +
-								"Code Voice: " + codeVoices[currentChar] + "\n" +
-								"Code Int: " + codeInt[currentChar]);
+					//Debug.Log(	"Code Current: " + currentChar + "\n" +
+					//			"Code Voice: " + codeVoices[currentChar] + "\n" +
+					//			"Code Int: " + codeInt[currentChar]);
 					audioSus.clip = voiceCollection.voices[codeVoices[currentChar]].voice[codeInt[currentChar]];
 					audioSus.Play();
 					currentChar++;

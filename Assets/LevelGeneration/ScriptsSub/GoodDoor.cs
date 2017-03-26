@@ -31,6 +31,11 @@ public class GoodDoor : MonoBehaviour {
         return active;
     }
 
+    public void SetCode(string input)
+    {
+        code = input;
+    }
+
     void Start()
     {
         ElectricBarrier();

@@ -25360,6 +25360,11 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114452229096749982, guid: f0cc70714187a284da25ef2f278912df,
+        type: 2}
+      propertyPath: roomNumber
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f0cc70714187a284da25ef2f278912df, type: 2}
   m_IsPrefabParent: 0
@@ -77473,6 +77478,48 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1118296153}
   m_Mesh: {fileID: 4300024, guid: 65cd5cd784ba7c347846ad220ff00be3, type: 3}
+--- !u!1001 &1121822114
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1353518401}
+    m_Modifications:
+    - target: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 96.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 93.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b97bb76f14817484ea80418265f2cc2d, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1125438614
 Prefab:
   m_ObjectHideFlags: 0
@@ -91842,128 +91889,11 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1497140843}
   m_Mesh: {fileID: 4300362, guid: 65cd5cd784ba7c347846ad220ff00be3, type: 3}
---- !u!1 &1497348080
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1497348081}
-  - component: {fileID: 1497348082}
-  - component: {fileID: 1497348083}
-  m_Layer: 0
-  m_Name: 1st Code
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1497348081
+--- !u!4 &1497348081 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1497348080}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 96.3, y: 2.17, z: 93.83}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1353518401}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1497348082
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1497348080}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fb0966d9302e1ca4cb55df3ca16b053d, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 0.25
-  MaxDistance: 1
-  Pan2D: 0
-  rolloffMode: 1
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0.9770833
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: -1.4285713
-      outSlope: -1.4285713
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
---- !u!114 &1497348083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1497348080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d763071672f3a49a499bb8348cd68b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomNumber: 1
+  m_PrefabParentObject: {fileID: 4347005706558234, guid: b97bb76f14817484ea80418265f2cc2d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1121822114}
 --- !u!1 &1498114701
 GameObject:
   m_ObjectHideFlags: 0
@@ -92960,6 +92890,11 @@ Prefab:
     - target: {fileID: 1138845102851214, guid: f0cc70714187a284da25ef2f278912df, type: 2}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114452229096749982, guid: f0cc70714187a284da25ef2f278912df,
+        type: 2}
+      propertyPath: roomNumber
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f0cc70714187a284da25ef2f278912df, type: 2}
