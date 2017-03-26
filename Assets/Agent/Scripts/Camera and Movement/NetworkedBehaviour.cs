@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class NetworkedBehaviour : MonoBehaviour {
+public class NetworkedBehaviour : PhaNetworkingMessager {
 	public virtual void ReceiveBuffer(ref StringBuilder buffer)
 	{
 	}
