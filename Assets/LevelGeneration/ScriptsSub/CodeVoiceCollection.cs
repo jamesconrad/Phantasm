@@ -20,6 +20,10 @@ public class CodeVoiceCollection : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{		
+		if (!(PhaNetworkManager.characterSelection == 0))
+		{
+			return;
+		}
 		Doors = FindObjectsOfType<GoodDoor>();	
 		Speakers = FindObjectsOfType<CodeVoice>();	
 
@@ -73,6 +77,7 @@ public class CodeVoiceCollection : MonoBehaviour
 		
 		SetTutorialRoom();
 		SetRooms();
+		DoorManager.Singleton.SendDoorMessages();
 	}
 	
 	void SetTutorialRoom()

@@ -31,13 +31,33 @@ public class DoorManager : PhaNetworkingMessager {
 	{
 		string[] values = buffer.ToString().Split(' ');
 		int id = int.Parse(values[1]);
+		if (id != -1)
+		{		
+			Vector3 newPos = new Vector3(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]));
+			Quaternion newQuat = new Quaternion(float.Parse(values[5]), float.Parse(values[6]), float.Parse(values[7]), float.Parse(values[8]));
 
-		Vector3 newPos = new Vector3(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]));
-		Quaternion newQuat = new Quaternion(float.Parse(values[5]), float.Parse(values[6]), float.Parse(values[7]), float.Parse(values[8]));
+			doors[id].transform.position = newPos;
+			doors[id].transform.rotation = newQuat;
+		}
+		else
+		{
+			GameObject.Find(values[2]).GetComponent<GoodDoor>().SetCode(values[3]);
+		}
+	}
 
-		doors[id].transform.position = newPos;
-		doors[id].transform.rotation = newQuat;
-	
+	public IEnumerator SendDoorMessages()
+	{
+		for (int i = 0, length = doors.Length; i < length; i++)
+		{
+			SendDoorCodeUpdate(doors[i]);
+		}
+		yield return new WaitForSeconds(4.0f);
+	}
+
+	void SendDoorCodeUpdate(GoodDoor givenDoor)
+	{
+		StringBuilder doorCode = new StringBuilder(((int)MessageType.DoorUpdate).ToString() + " " + -1 + " " + givenDoor.transform.parent.name + " " + givenDoor.GetCode());
+		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, doorCode, doorCode.Length, PhaNetworkingAPI.targetIP);
 	}
 	
 	/// <summary>
