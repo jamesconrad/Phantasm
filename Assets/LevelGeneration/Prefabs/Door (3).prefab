@@ -128,7 +128,7 @@ Transform:
   m_GameObject: {fileID: 1238956868916554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalScale: {x: 9.903427, y: 9.903428, z: 9.903428}
   m_Children: []
   m_Father: {fileID: 4257997707998004}
   m_RootOrder: 0
@@ -213,8 +213,8 @@ MonoBehaviour:
   handle: {fileID: 0}
   currentState: 0
   LockObject: {fileID: 1425446653066246, guid: 3c3e3cffe5e4267458be4e3927de6e47, type: 2}
-  code: 
-  active: 1
+  locked: 1
+  code: 4ABF721
 --- !u!114 &114502878199444888
 MonoBehaviour:
   m_ObjectHideFlags: 1
