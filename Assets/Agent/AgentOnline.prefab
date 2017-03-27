@@ -4376,6 +4376,7 @@ GameObject:
   - component: {fileID: 54600343790106068}
   - component: {fileID: 136291410491858418}
   - component: {fileID: 114185354999224520}
+  - component: {fileID: 114820974051688750}
   m_Layer: 30
   m_Name: AgentOnline
   m_TagString: Player
@@ -4847,7 +4848,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1727347840525404}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.107, z: 0.419}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4017771465786176}
@@ -8595,7 +8596,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.15
   far clip plane: 400
   field of view: 60
   orthographic: 0
@@ -9313,6 +9314,20 @@ MonoBehaviour:
   WaveTimeMult: {x: 100, y: 100}
   CA_Dispersal: 1
   CA_Offset: 0.03
+--- !u!114 &114820974051688750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984759443243006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87dc45f759f4bf843b05d7c8dc86b08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 0
+  isRemote: 1
+  receivedPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114836053151396604
 MonoBehaviour:
   m_ObjectHideFlags: 1

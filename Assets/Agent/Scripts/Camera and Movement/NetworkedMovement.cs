@@ -1,142 +1,95 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.Networking;
+﻿using System.Collections;
+using System.Text;
+using UnityEngine;
 
-public class NetworkedMovement : NetworkBehaviour
+public class NetworkedMovement : NetworkedBehaviour
 {
     public float maxDistance;
+    public bool isRemote = false;
 
+    private Transform objectTransform;
+    private Rigidbody objectRigidBody;
+    private Transform simulatedTransform;
     private Vector3 simulatedPosition;
+    private Vector3 simulatedVelocity;
+    private Quaternion simulatedRotation;
 
-    [SyncVar]
-    private double sendTime;
-    [SyncVar]
-    private double startTime = 0.0;
-    [SyncVar]
-    public Vector3 syncedPosition;
-    [SyncVar]
-    private Quaternion syncedRotation;
-    [SyncVar]
-    private Vector3 syncedVelocity;
-
-    public bool objectIsClient = true;
-
-    double timeDifference;
+    private float ReceiveTime = 0.0f;
+    public Vector3 receivedPosition;
+    private Quaternion receivedRotation;
+    private Vector3 receivedVelocity;
 
 
-    public class TransformMessage : MessageBase
-    {
-        public double sendTimeFromClient;
-    }
-
-    //private Rigidbody playerRigidBody;
-
-
-
-    // Use this for initialization
+    /// <summary>
+    /// Start is called on the frame when a script is enabled just before
+    /// any of the Update methods is called the first time.
+    /// </summary>
     void Start()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        float deltaTime = 0.0f;
-        //TODO: find out some way to set delta time correctly. THere seems to be several ways in the deprecated networking, but like, none in the new one.
-        simulatedPosition = syncedPosition + syncedVelocity * deltaTime;;
-        if (objectIsClient)
+        objectTransform = transform;
+        objectRigidBody = GetComponent<Rigidbody>();  
+        if (isRemote)
         {
-            if (!isLocalPlayer)
-            {
-                transform.position = Vector3.Lerp(transform.position, simulatedPosition, 0.25f);
-                transform.rotation = syncedRotation;
-            }
-            else if (isLocalPlayer)
-            {
-
-                //SetDirtyBit(netId.Value);
-                CmdSyncRotation(transform.rotation);
-                if ((simulatedPosition - transform.position).magnitude >= maxDistance)
-                {
-                    CmdSyncMovement(transform.position, GetComponentInParent<Rigidbody>().velocity, transform.rotation, Network.time);
-                }
-            }
+            simulatedPosition = transform.position;        
+            simulatedVelocity = objectRigidBody.velocity;
         }
         else
         {
-            if (!isServer)
-            {
-                transform.position = Vector3.Lerp(transform.position, simulatedPosition, 0.25f);
-                transform.rotation = syncedRotation;
-            }
-            else if (isServer)
-            {
-                ServerSyncRotation(transform.rotation);
-                if ((simulatedPosition - transform.position).magnitude >= maxDistance)
-                {
-                    ServerSyncMovement(transform.position, GetComponentInParent<Rigidbody>().velocity, transform.rotation, Network.time);
-                }
-            }
-        }
-
-        if (isServer)
-        {
-            startTime = Network.time;
+            simulatedPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            simulatedPosition = new Vector3(objectRigidBody.velocity.x, objectRigidBody.velocity.y, objectRigidBody.velocity.z);
+            simulatedRotation = new Quaternion(objectRigidBody.rotation.x, objectRigidBody.rotation.y, objectRigidBody.rotation.z, objectRigidBody.rotation.w);
         }
     }
 
-
-    //public override bool OnSerialize(NetworkWriter writer, bool initialState)
-    //{
-    //    base.OnSerialize(writer, initialState);
-    //    writer.Write(syncedPosition);
-    //    writer.Write(syncedVelocity);
-    //    writer.Write(syncedRotation);
-    //    writer.Write(Network.time);
-    //    writer.Write(startTime);
-    //    return true;
-    //}
-
-    //// Called to apply state to objects on clients
-    //public override void OnDeserialize(NetworkReader reader, bool initialState)
-    //{
-    //    base.OnDeserialize(reader, initialState);
-    //    syncedPosition = reader.ReadVector3();
-    //    syncedVelocity = reader.ReadVector3();
-    //    syncedRotation = reader.ReadQuaternion();
-    //    sendTime = reader.ReadDouble();
-    //    startTime = reader.ReadDouble();
-    //    timeDifference = sendTime - Network.time;
-    //}
-
-
-    [Command]
-    private void CmdSyncRotation(Quaternion _rotation)
+    /// <summary>
+    /// Update is called every frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void Update()
     {
-        syncedRotation = _rotation;
+        if (isRemote)
+        {//Actually update the object
+            objectTransform.position = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.3f);
+        }
+        else
+        {//Just simulate the updating.
+            simulatedPosition = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.3f);
+        }
     }
 
-    [Command]
-    private void CmdSyncMovement(Vector3 _position, Vector3 _velocity, Quaternion _rotation, double _time)
+    /// <summary>
+    /// This function is called every fixed framerate frame, if the MonoBehaviour is enabled.
+    /// </summary>
+    void FixedUpdate()
     {
-        syncedPosition = _position;
-        syncedVelocity = _velocity;
-        //syncedRotation = _rotation;
-        sendTime = _time;
+        if (!isRemote && ((simulatedVelocity != objectRigidBody.velocity || simulatedRotation != objectTransform.rotation) || Vector3.Distance(objectTransform.position, simulatedPosition) > maxDistance))
+        {//Sending
+            SendPlayerUpdate(objectTransform.transform.position, objectRigidBody.velocity, objectTransform.transform.rotation, PhaNetworkingAPI.targetIP);
+            simulatedVelocity = objectRigidBody.velocity;
+            simulatedRotation = objectTransform.rotation;
+        }
     }
 
-    [Server]
-    private void ServerSyncRotation(Quaternion _rotation)
+    public override void ReceiveBuffer(ref StringBuilder buffer)
     {
-        syncedRotation = _rotation;
-    }
+        string[] message = buffer.ToString().Split(' ');
 
-    [Server]
-    private void ServerSyncMovement(Vector3 _position, Vector3 _velocity, Quaternion _rotation, double _time)
-    {
-        syncedPosition = _position;
-        syncedVelocity = _velocity;
-        //syncedRotation = _rotation;
-        sendTime = _time;
+		receivedPosition.x = float.Parse(message[1]);
+		receivedPosition.y = float.Parse(message[2]);
+		receivedPosition.z = float.Parse(message[3]);
+
+		receivedVelocity.x = float.Parse(message[4]);
+		receivedVelocity.y = float.Parse(message[5]);
+		receivedVelocity.z = float.Parse(message[6]);
+
+		receivedRotation.w = float.Parse(message[7]);
+		receivedRotation.x = float.Parse(message[8]);
+		receivedRotation.y = float.Parse(message[9]);
+		receivedRotation.z = float.Parse(message[10]);
+
+        simulatedRotation = objectTransform.rotation = receivedRotation;
+
+        ReceiveTime = Time.time;
+
+		return;
     }
 }

@@ -83,11 +83,12 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		return 0;
 	}
 
-	public int SendPlayerUpdate(Vector3 position, Quaternion orientation, StringBuilder givenAddress)
+	public int SendPlayerUpdate(Vector3 position, Vector3 velocity, Quaternion orientation, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(
 		((int)MessageType.PlayerUpdate).ToString() + " " + 
 		position.x + " " + position.y + " " + position.z + " " +
+		velocity.x + " " + velocity.y + " " + velocity.z + " " +
 		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
 		 recvBufferSize);
 		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
