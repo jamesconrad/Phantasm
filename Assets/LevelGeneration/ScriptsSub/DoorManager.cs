@@ -31,6 +31,7 @@ public class DoorManager : PhaNetworkingMessager {
 	{
 		string[] values = buffer.ToString().Split(' ');
 		int id = int.Parse(values[1]);
+		Debug.Log(buffer);
 		if (id != -1)
 		{		
 			Vector3 newPos = new Vector3(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]));
@@ -58,6 +59,7 @@ public class DoorManager : PhaNetworkingMessager {
 	{
 		StringBuilder doorCode = new StringBuilder(((int)MessageType.DoorUpdate).ToString() + " " + -1 + " " + givenDoor.transform.parent.name + " " + givenDoor.GetCode());
 		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, doorCode, doorCode.Length, PhaNetworkingAPI.targetIP);
+		Debug.Log(doorCode);
 	}
 	
 	/// <summary>

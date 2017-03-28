@@ -18,7 +18,7 @@ public class GoodDoor : MonoBehaviour {
     public GameObject LockObject;
     private GameObject LockReference;
     public bool locked = false;
-    private string code = "CHEATER";
+    public string code = "CHEATER";
 
     [Header("Room Number to be used by speakers")]
     [Tooltip("0 is null\n1 is tutorial room")]
