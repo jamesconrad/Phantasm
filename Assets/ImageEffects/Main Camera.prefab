@@ -1006,9 +1006,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010018685854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84990fc637a0807419160a482a4b182e, type: 3}
+  m_Script: {fileID: 11500000, guid: 641a8ee262808ef4b90dc8acdc120120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TemporalAAMaterial: {fileID: 2100000, guid: 5e664c43216dedf4daa7be157f8aa9f2, type: 2}
+  settings:
+    offsetSettings:
+      offsetType: 1
+      offsetSize: 0.5
+      numberOfSamples: 8
+    blendSettings:
+      stationaryBlend: 0.87
+      movingBlend: 0.3
+      motionAmplification: 60
 --- !u!114 &114000011522883828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1094,8 +1104,8 @@ MonoBehaviour:
   VerticalBlurMaterial: {fileID: 2100000, guid: fbbdc59c251389c4b886aee8b5bf993f,
     type: 2}
   CompositeMaterial: {fileID: 2100000, guid: b7c47a484fccdce4ca09eb21fa8025c8, type: 2}
-  Intensity: 1
-  Threshold: 0.65
+  Intensity: 2
+  Threshold: 0.7
   HorizontalStretch: 1
   VerticalStretch: 1
 --- !u!124 &124000013821477226
