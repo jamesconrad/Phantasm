@@ -77,7 +77,6 @@ public class CodeVoiceCollection : MonoBehaviour
 		
 		SetTutorialRoom();
 		SetRooms();
-		DoorManager.Singleton.SendDoorMessages();
 	}
 	
 	void SetTutorialRoom()
@@ -179,10 +178,15 @@ public class CodeVoiceCollection : MonoBehaviour
 		
 	}
 
+bool hasInformedOtherPlayer = false;
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if (!hasInformedOtherPlayer)
+		{
+			DoorManager.Singleton.SendDoorMessages();
+			hasInformedOtherPlayer = true;			
+		}
 	}
 }
 
