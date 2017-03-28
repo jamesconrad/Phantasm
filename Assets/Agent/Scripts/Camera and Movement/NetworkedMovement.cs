@@ -7,6 +7,10 @@ public class NetworkedMovement : NetworkedBehaviour
     public float maxDistance;
     public bool isRemote = false;
 
+    [Range(0.0f, 2.0f)]
+    public float SendInterval = 0.5f;
+    private float TimeSinceSent = 0.0f;
+
     private Transform objectTransform;
     private Rigidbody objectRigidBody;
     private Transform simulatedTransform;
@@ -53,6 +57,14 @@ public class NetworkedMovement : NetworkedBehaviour
         else
         {//Just simulate the updating.
             simulatedPosition = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.3f);
+            if (Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                TimeSinceSent += 0.1f;
+            }
+            if (Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                TimeSinceSent -= 0.1f;
+            }
         }
     }
 
@@ -61,11 +73,13 @@ public class NetworkedMovement : NetworkedBehaviour
     /// </summary>
     void FixedUpdate()
     {
-        if (!isRemote && ((simulatedVelocity != objectRigidBody.velocity || simulatedRotation != objectTransform.rotation) || Vector3.Distance(objectTransform.position, simulatedPosition) > maxDistance))
+        TimeSinceSent += Time.fixedDeltaTime;
+        if (!isRemote && ((simulatedVelocity != objectRigidBody.velocity || simulatedRotation != objectTransform.rotation) || Vector3.Distance(objectTransform.position, simulatedPosition) > maxDistance) && TimeSinceSent >= SendInterval)
         {//Sending
             SendPlayerUpdate(objectTransform.transform.position, objectRigidBody.velocity, objectTransform.transform.rotation, PhaNetworkingAPI.targetIP);
             simulatedVelocity = objectRigidBody.velocity;
             simulatedRotation = objectTransform.rotation;
+            TimeSinceSent = 0.0f;
         }
     }
 
