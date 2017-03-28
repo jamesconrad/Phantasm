@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Text;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetworkedMovement : NetworkedBehaviour
 {
@@ -23,6 +24,8 @@ public class NetworkedMovement : NetworkedBehaviour
     private Quaternion receivedRotation;
     private Vector3 receivedVelocity;
 
+    public GameObject sendTimeUI; Text uiText;
+
 
     /// <summary>
     /// Start is called on the frame when a script is enabled just before
@@ -42,6 +45,8 @@ public class NetworkedMovement : NetworkedBehaviour
             simulatedPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             simulatedPosition = new Vector3(objectRigidBody.velocity.x, objectRigidBody.velocity.y, objectRigidBody.velocity.z);
             simulatedRotation = new Quaternion(objectRigidBody.rotation.x, objectRigidBody.rotation.y, objectRigidBody.rotation.z, objectRigidBody.rotation.w);
+            sendTimeUI = GameObject.Instantiate(sendTimeUI);
+            uiText = sendTimeUI.GetComponentInChildren<Text>();
         }
     }
 
@@ -59,12 +64,13 @@ public class NetworkedMovement : NetworkedBehaviour
             simulatedPosition = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.3f);
             if (Input.GetKeyDown(KeyCode.Keypad1))
             {
-                TimeSinceSent += 0.1f;
+                SendInterval += Time.fixedDeltaTime;
             }
             if (Input.GetKeyDown(KeyCode.Keypad2))
             {
-                TimeSinceSent -= 0.1f;
+                SendInterval -= Time.fixedDeltaTime;
             }
+            uiText.text = "Send interval: " + SendInterval;
         }
     }
 
