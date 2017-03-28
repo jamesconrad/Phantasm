@@ -42,7 +42,7 @@ public class DoorManager : PhaNetworkingMessager {
 		}
 		else
 		{
-			GameObject.Find(values[2]).GetComponent<GoodDoor>().SetCode(values[3]);
+			GameObject.Find(values[2] + " " + values[3]).GetComponentInChildren<GoodDoor>().SetCode(values[4]);
 		}
 	}
 
@@ -50,7 +50,10 @@ public class DoorManager : PhaNetworkingMessager {
 	{
 		for (int i = 0, length = doors.Length; i < length; i++)
 		{
-			SendDoorCodeUpdate(doors[i]);
+			if (doors[i].GetCode() != "")
+			{
+				SendDoorCodeUpdate(doors[i]);
+			}
 		}
 		//yield return new WaitForSeconds(4.0f);
 	}
@@ -59,7 +62,7 @@ public class DoorManager : PhaNetworkingMessager {
 	{
 		StringBuilder doorCode = new StringBuilder(((int)MessageType.DoorUpdate).ToString() + " " + -1 + " " + givenDoor.transform.parent.name + " " + givenDoor.GetCode());
 		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, doorCode, doorCode.Length, PhaNetworkingAPI.targetIP);
-		Debug.Log(doorCode);
+		Debug.Log("Sent door code: " + doorCode);
 	}
 	
 	/// <summary>
