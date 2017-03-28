@@ -98,6 +98,11 @@ public class CodeVoiceCollection : MonoBehaviour
 				tutorialSpeaker.setActive(true);
 			}
 		}
+		
+		for(int i = 0; i < tutorialDoors.Count; ++i)
+		{
+			tutorialDoors[i].SetCode(tutorialSpeaker.getCode());
+		}
 	}
 
 	void SetRooms()

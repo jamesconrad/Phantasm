@@ -2846,51 +2846,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 4257997707998004, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1.635186
-      objectReference: {fileID: 0}
-    - target: {fileID: 4257997707998004, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1.8084372
-      objectReference: {fileID: 0}
-    - target: {fileID: 4257997707998004, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1.890186
-      objectReference: {fileID: 0}
     - target: {fileID: 1357108461249724, guid: f0cc70714187a284da25ef2f278912df, type: 2}
       propertyPath: m_Name
       value: Door (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4257997707998004, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 89.09901
-      objectReference: {fileID: 0}
-    - target: {fileID: 1238956868916554, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1607976137852320, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1138845102851214, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1357108461249724, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114452229096749982, guid: f0cc70714187a284da25ef2f278912df,
-        type: 2}
-      propertyPath: code
-      value: 4ABF721
-      objectReference: {fileID: 0}
-    - target: {fileID: 114452229096749982, guid: f0cc70714187a284da25ef2f278912df,
-        type: 2}
-      propertyPath: locked
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114452229096749982, guid: f0cc70714187a284da25ef2f278912df,
         type: 2}
@@ -7424,32 +7382,6 @@ Prefab:
     - target: {fileID: 4257997707998004, guid: f0cc70714187a284da25ef2f278912df, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1607976137852320, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1357108461249724, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1138845102851214, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1238956868916554, guid: f0cc70714187a284da25ef2f278912df, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114452229096749982, guid: f0cc70714187a284da25ef2f278912df,
-        type: 2}
-      propertyPath: locked
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114452229096749982, guid: f0cc70714187a284da25ef2f278912df,
-        type: 2}
-      propertyPath: code
-      value: 4ABF721
       objectReference: {fileID: 0}
     - target: {fileID: 114452229096749982, guid: f0cc70714187a284da25ef2f278912df,
         type: 2}
