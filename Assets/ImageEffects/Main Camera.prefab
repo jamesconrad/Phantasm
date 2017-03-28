@@ -1104,7 +1104,7 @@ MonoBehaviour:
   VerticalBlurMaterial: {fileID: 2100000, guid: fbbdc59c251389c4b886aee8b5bf993f,
     type: 2}
   CompositeMaterial: {fileID: 2100000, guid: b7c47a484fccdce4ca09eb21fa8025c8, type: 2}
-  Intensity: 2
+  Intensity: 3
   Threshold: 0.7
   HorizontalStretch: 1
   VerticalStretch: 1

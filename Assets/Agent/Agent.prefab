@@ -9482,6 +9482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxDistance: 0.5
   isRemote: 0
+  receivedPosition: {x: 0, y: 0, z: 0}
 --- !u!120 &120000013785742176
 LineRenderer:
   m_ObjectHideFlags: 1
