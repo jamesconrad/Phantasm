@@ -46,13 +46,13 @@ public class DoorManager : PhaNetworkingMessager {
 		}
 	}
 
-	public IEnumerator SendDoorMessages()
+	public void SendDoorMessages()
 	{
 		for (int i = 0, length = doors.Length; i < length; i++)
 		{
 			SendDoorCodeUpdate(doors[i]);
 		}
-		yield return new WaitForSeconds(4.0f);
+		//yield return new WaitForSeconds(4.0f);
 	}
 
 	void SendDoorCodeUpdate(GoodDoor givenDoor)
