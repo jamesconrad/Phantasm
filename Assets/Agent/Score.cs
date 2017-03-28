@@ -19,8 +19,13 @@ public class Score : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		
+        startTimer();
 	}
+
+    public void OnKill()
+    {
+        numberOfPhantomsKilled++;
+    }
 
 	public void startTimer()
 	{
@@ -43,6 +48,16 @@ public class Score : MonoBehaviour
 	{
 		Debug.Log("Score: " + (int)score);
 	}
+
+    public void saveScore()
+    {
+        System.IO.File.WriteAllText("c:\\temp\\Phantasm.score", score.ToString());
+    }
+
+    public void getLastScore()
+    {
+
+    }
 	
 	// Update is called once per frame
 	void Update () 

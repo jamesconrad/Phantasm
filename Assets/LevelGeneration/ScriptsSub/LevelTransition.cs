@@ -37,6 +37,9 @@ public class LevelTransition : MonoBehaviour {
 
     public IEnumerator Transition()
     {
+        Score scoreSystem = FindObjectOfType<Score>();
+        scoreSystem.endTimer();
+        scoreSystem.saveScore();
         float fadeTime = BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
         SceneManager.LoadScene(destinationLevel);
