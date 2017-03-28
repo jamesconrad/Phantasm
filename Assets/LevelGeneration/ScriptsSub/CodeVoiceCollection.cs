@@ -182,7 +182,7 @@ bool hasInformedOtherPlayer = false;
 	// Update is called once per frame
 	void Update () 
 	{
-		if (!hasInformedOtherPlayer)
+		if (!hasInformedOtherPlayer && PhaNetworkManager.characterSelection == 0)
 		{
 			DoorManager.Singleton.SendDoorMessages();
 			hasInformedOtherPlayer = true;			
