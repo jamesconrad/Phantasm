@@ -44,16 +44,31 @@
 			float GammaA;
 			float GammaY;
 
+			float uThreshold;
+			//float uIntensity;
+
+			//half4 frag (v2f i) : SV_Target
+			//{
+			//	half4 col;
+			//	//col.rgb = 2.0 * tex2D(_MainTex, i.uv).rgb - 1.0;
+			//	col.rgb = tex2D(_MainTex, i.uv).rgb;
+			//	half l = (col.r + col.g + col.b) / 3.0;
+			//	l = GammaA * pow(l, GammaY);
+			//	col.rgb = (half3(l, l, l)/* * 2 - 1) * 2 - 1*/) * col.rgb;
+			//	col.a = 1;
+			//	return saturate(col);
+			//}
+
 			half4 frag (v2f i) : SV_Target
 			{
 				half4 col;
-				//col.rgb = 2.0 * tex2D(_MainTex, i.uv).rgb - 1.0;
-				col.rgb = tex2D(_MainTex, i.uv).rgb;
-				half l = (col.r + col.g + col.b) / 3.0;
-				l = GammaA * pow(l, GammaY);
-				col.rgb = (half3(l, l, l)/* * 2 - 1) * 2 - 1*/) * col.rgb;
+				half3 scene = tex2D(_MainTex,  i.uv).rgb;			
+				float luminance = dot((scene.rgb), half3(0.299, 0.587, 0.114));	
+				luminance = 1.0f;		
+				col.rgb = max(half3(0,0,0), scene * luminance - uThreshold);		
+				//col.rgb = max(half3(0,0,0), scene * luminance * 2.0f - 1.0f );
 				col.a = 1;
-				return saturate(col);
+				return col;
 			}
 			ENDCG
 		}

@@ -44,19 +44,26 @@
 			sampler2D Blur4Tex;
 			sampler2D _CameraDepthTexture;
 			sampler2D_half _CameraMotionVectorsTexture;
+			half uIntensity;
 
 
 			half4 frag (v2f i) : SV_Target
 			{
-				half4 mainFrag = tex2D(_MainTex, i.uv);
-				half4 blurFrag1 = tex2D(Blur1Tex, i.uv); ///*tex2D(Blur1Tex, i.uv) + tex2D(Blur2Tex, i.uv) + tex2D(Blur3Tex, i.uv) +*/
-				half4 blurFrag2 = tex2D(Blur2Tex, i.uv);
-				half4 blurFrag3 = tex2D(Blur3Tex, i.uv);
-				half4 blurFrag4 = tex2D(Blur4Tex, i.uv);
-				half4 col = 1 - (1 - mainFrag) * (1 - blurFrag1);// 1 - ((1 - tex2D(_MainTex, i.uv)) *  (1 - (blurFrag)));
-				col = 1 - (1 - col) * (1 - blurFrag2);
-				col = 1 - (1 - col) * (1 - blurFrag3);
-				col = 1 - (1 - col) * (1 - blurFrag4);
+				half4 mainFrag =  tex2D(_MainTex, i.uv);
+				half4 blurFrag1 = tex2D(Blur1Tex, i.uv) * uIntensity; ///*tex2D(Blur1Tex, i.uv) + tex2D(Blur2Tex, i.uv) + tex2D(Blur3Tex, i.uv) +*/
+				half4 blurFrag2 = tex2D(Blur2Tex, i.uv) * uIntensity; // * 0.75;
+				half4 blurFrag3 = tex2D(Blur3Tex, i.uv) * uIntensity; // * 0.50;
+				half4 blurFrag4 = tex2D(Blur4Tex, i.uv) * uIntensity; // * 0.25;
+				//half4 col = 1 - (1 - mainFrag) * (1 - blurFrag1);// 1 - ((1 - tex2D(_MainTex, i.uv)) *  (1 - (blurFrag)));
+				//col = 1 - (1 - col) * (1 - blurFrag2);
+				//col = 1 - (1 - col) * (1 - blurFrag3);
+				//col = 1 - (1 - col) * (1 - blurFrag4);
+
+				half4 col = mainFrag + blurFrag1;// 1 - ((1 - tex2D(_MainTex, i.uv)) *  (1 - (blurFrag)));
+				col = col + blurFrag2;
+				col = col + blurFrag3;
+				col = col + blurFrag4;
+
 				//col.a = 1;
 				/*col = tex2D(_CameraDepthTexture, i.uv);
 				col.r = DECODE_EYEDEPTH(col.r) / _ProjectionParams.z;

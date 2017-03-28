@@ -48,7 +48,7 @@
 				col.rgb += tex2D(_MainTex, float2(i.uv.x - 3.0 * uPixelSize, i.uv.y)).rgb * 0.09;
 				col.rgb += tex2D(_MainTex, float2(i.uv.x - 2.0 * uPixelSize, i.uv.y)).rgb * 0.12;
 				col.rgb += tex2D(_MainTex, float2(i.uv.x - 		 uPixelSize, i.uv.y)).rgb * 0.15;
-				col.rgb += tex2D(_MainTex, float2(i.uv.x,					i.uv.y)).rgb * 0.16;
+				col.rgb += tex2D(_MainTex, float2(i.uv.x,			  		 i.uv.y)).rgb * 0.16;
 				col.rgb += tex2D(_MainTex, float2(i.uv.x +		 uPixelSize, i.uv.y)).rgb * 0.15;
 				col.rgb += tex2D(_MainTex, float2(i.uv.x + 2.0 * uPixelSize, i.uv.y)).rgb * 0.12;
 				col.rgb += tex2D(_MainTex, float2(i.uv.x + 3.0 * uPixelSize, i.uv.y)).rgb * 0.09;

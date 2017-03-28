@@ -12,8 +12,11 @@ public class Bloom : MonoBehaviour
     public Material VerticalBlurMaterial;
     public Material CompositeMaterial;
 
-    public float Gamma;
-    public float Contrast;
+    //public float Gamma;
+    //public float Contrast;
+
+    public float Intensity = 0.5f;
+    public float Threshold = 0.5f;
 
     //[Range(1, 4)]
     //int NumberOfBlurSamples;
@@ -54,11 +57,16 @@ public class Bloom : MonoBehaviour
     // OnRenderImage is called after all rendering is complete to render image
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        ToneMapMaterial.SetFloat("GammaA", Gamma);
-        ToneMapMaterial.SetFloat("GammaY", Contrast);
+        //ToneMapMaterial.SetFloat("GammaA", Gamma);
+        //ToneMapMaterial.SetFloat("GammaY", Contrast);
+        ToneMapMaterial.SetFloat("uThreshold", Threshold);
+        CompositeMaterial.SetFloat("uIntensity", Intensity);
+        //ToneMapMaterial.SetFloat("uIntensity", Intensity);
+        
         Graphics.Blit(source, blurTextureX2, ToneMapMaterial);
         Graphics.Blit(blurTextureX2, blurTextureX4, PassThroughMaterial);
         Graphics.Blit(blurTextureX4, blurTextureX8, PassThroughMaterial);
+        Graphics.Blit(blurTextureX8, blurTextureX16, PassThroughMaterial);
 
         HorizontalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.width) * HorizontalStretch * 2.0f);
         VerticalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.height) * VerticalStretch * 2.0f);
@@ -94,6 +102,9 @@ public class Bloom : MonoBehaviour
         //Graphics.Blit(blurTextureX2, blurTextureY2, VerticalBlurMaterial);
 
         //CompositeMaterial.SetTexture("Blur4Tex", blurTextureY2);
+        
+        
         Graphics.Blit(source, destination, CompositeMaterial);
+        //Graphics.Blit(blurTextureX8, destination, PassThroughMaterial);
     }
 }
