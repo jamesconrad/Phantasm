@@ -85,6 +85,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				switch	(receivedType)
 				{
 					case MessageType.PlayerUpdate:
+					if(AgentPrediction != null)
 					AgentPrediction.ReceiveBuffer(ref receiveBuffer);
 					break;
 
