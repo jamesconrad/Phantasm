@@ -42,7 +42,7 @@ public class DoorManager : PhaNetworkingMessager {
 		}
 		else
 		{
-			GameObject.Find(values[2] + " " + values[3]).GetComponentInChildren<GoodDoor>().SetCode(values[4]);
+			transform.Find(values[2] + " " + values[3]).GetComponentInChildren<GoodDoor>().SetCode(values[4]);
 		}
 	}
 
