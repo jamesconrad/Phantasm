@@ -65,6 +65,9 @@ public class Agent : MonoBehaviour
     // This function is called when the behaviour becomes disabled or inactive
     public void OnDisable()
     {
+        Score scoreSystem = FindObjectOfType<Score>();
+        scoreSystem.endTimer();
+        scoreSystem.saveScore();
         AgentUI.GetComponentInChildren<SplashScreen>().createSplashScreen(0);
         GetComponent<GunHandle>().gunReference.gameObject.SetActive(false);
     }
