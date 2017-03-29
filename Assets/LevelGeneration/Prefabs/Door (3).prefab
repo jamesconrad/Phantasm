@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1357108461249724}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.4, y: 2.56, z: 346.7}
+  m_LocalPosition: {x: 56.8, y: 2.47, z: 92.44}
   m_LocalScale: {x: 1.6352168, y: 1.8084029, z: 1.890208}
   m_Children:
   - {fileID: 4911540246340596}
@@ -214,7 +214,7 @@ MonoBehaviour:
   currentState: 0
   LockObject: {fileID: 1425446653066246, guid: 3c3e3cffe5e4267458be4e3927de6e47, type: 2}
   locked: 0
-  code: 1911
+  code: 
   roomNumber: 0
   exitNumber: 0
 --- !u!114 &114502878199444888

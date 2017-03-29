@@ -64,8 +64,8 @@
 					p = newp;
 				}
 
-				col.a *= 0.2f * sin(p.x) + 1.0f;
-				col.rgb *= 4.0f;
+				col.a *= 0.5f * sin(p.x) + 1.0f;
+				col.rgb *= 0.25f;
 				//col.rgb = uDistance * 0.25f;
 				//col.a = 1.0f;
 				return col;

@@ -72,6 +72,7 @@ public class Bloom : MonoBehaviour
         Graphics.Blit(blurTextureX2, blurTextureX4, PassThroughMaterial);
         Graphics.Blit(blurTextureX4, blurTextureX8, PassThroughMaterial);
         Graphics.Blit(blurTextureX8, blurTextureX16, PassThroughMaterial);
+        Graphics.Blit(blurTextureX16, blurTextureX32, PassThroughMaterial);
 
         HorizontalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.width) * HorizontalStretch * 2.0f);
         VerticalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.height) * VerticalStretch * 2.0f);        
