@@ -63,7 +63,10 @@ public class IKHandler : MonoBehaviour {
     {
         //override the animations spine
         FirstPersonCamera fpc = transform.parent.GetComponent<FirstPersonCamera>();
+        if(fpc != null)
         fpc.lookRotationBone.rotation = fpc.rotclamp;
+        else
+        Debug.Log("FirstPersonCamera not found!");
     }
 
     void OnAnimatorIK()

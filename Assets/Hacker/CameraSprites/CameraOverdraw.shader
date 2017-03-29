@@ -9,6 +9,7 @@
 		Tags { "RenderType"="Opaque" }
 		LOD 100
 		Blend One One 
+		Cull Off
 
 		Pass
 		{

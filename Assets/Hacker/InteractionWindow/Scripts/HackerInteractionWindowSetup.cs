@@ -18,8 +18,13 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     public CameraRectType windowType = CameraRectType.Normal;
 
     public GameObject cameraButtonPrefab;
+    public GameObject doorButtonPrefab;
     private List<Camera> survCameras;
     private List<GameObject> survCameraButtons;
+
+    // List of Doors for drawing    
+    private List<GoodDoor> survDoors;
+    private List<GameObject> survDoorButtons;
 
     public bool WindowIsInteractive = true;
 
@@ -72,6 +77,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
         survCameraButtons = new List<GameObject>();
 
+        
+
+        survDoorButtons = new List<GameObject>();
 
         Vector3 CameraPositionMax = survCameras[0].transform.position;
         Vector3 CameraPositionMin = survCameras[0].transform.position;
@@ -140,22 +148,40 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
-            //tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-            //    UnityEngine.Random.Range(
-            //        GetComponent<RectTransform>().rect.width / 2.0f,
-            //        -GetComponent<RectTransform>().rect.width / 2.0f),
-            //
-            //    UnityEngine.Random.Range(
-            //        GetComponent<RectTransform>().rect.height / 2.0f,
-            //        -GetComponent<RectTransform>().rect.height / 2.0f));
-
-            //tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-            //    UnityEngine.Random.Range(-GetComponent<RectTransform>().rect.width / 2.0f + tempButton.GetComponent<RectTransform>().rect.width, GetComponent<RectTransform>().rect.width / 2.0f - tempButton.GetComponent<RectTransform>().rect.width),
-            //    UnityEngine.Random.Range(-GetComponent<RectTransform>().rect.height / 2.0f + tempButton.GetComponent<RectTransform>().rect.height, GetComponent<RectTransform>().rect.height / 2.0f - +tempButton.GetComponent<RectTransform>().rect.height));
-
-
             survCameraButtons.Add(tempButton);
             survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
+        }
+
+        // Code to put the doors as buttons
+
+        GoodDoor[] tempDoors = FindObjectsOfType<GoodDoor>();
+        survDoors = new List<GoodDoor>();
+        for (int i = 0; i < tempDoors.Length; i++)
+        {
+            if (tempDoors[i].locked)
+            {
+                survDoors.Add(tempDoors[i]);
+            }
+        }
+
+        for (int i = 0; i < survDoors.Count; i++)
+        {
+            GameObject tempButton = Instantiate(doorButtonPrefab);
+            tempButton.GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
+
+            Vector3 LerpPosition = survDoors[i].transform.position;
+            LerpPosition.x = Mathf.InverseLerp(CameraPositionMin.x, CameraPositionMax.x, survDoors[i].transform.position.x);
+            LerpPosition.y = Mathf.InverseLerp(CameraPositionMin.y, CameraPositionMax.y, survDoors[i].transform.position.y);
+            LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survDoors[i].transform.position.z);
+
+            tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    GetComponent<RectTransform>().rect.width, LerpPosition.x),
+
+                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    GetComponent<RectTransform>().rect.height, LerpPosition.z));
+
+            survDoorButtons.Add(tempButton);
         }
 
     }
@@ -243,11 +269,6 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.y = Mathf.InverseLerp(CameraPositionMin.y, CameraPositionMax.y, survCameras[i].transform.position.y);
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survCameras[i].transform.position.z);
 
-                //survCameraButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                //        0.35f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
-                //        GetComponent<RectTransform>().rect.width, LerpPosition.x) + 0.11f,
-                //        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
-                //        GetComponent<RectTransform>().rect.height, LerpPosition.z) - 0.01f);
                 survCameraButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
                         0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                         GetComponent<RectTransform>().rect.width, LerpPosition.x) + 0.0f,
@@ -269,6 +290,41 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 }
 
                 
+            }
+
+            for (int i = 0; i < survDoors.Count; i++)
+            {
+                if(survDoors[i].locked)
+                {
+                    survDoorButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
+
+                    Vector3 LerpPosition = survDoors[i].transform.position;
+                    LerpPosition.x = Mathf.InverseLerp(CameraPositionMin.x, CameraPositionMax.x, survDoors[i].transform.position.x);
+                    LerpPosition.y = Mathf.InverseLerp(CameraPositionMin.y, CameraPositionMax.y, survDoors[i].transform.position.y);
+                    LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survDoors[i].transform.position.z);
+
+                    survDoorButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                            0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                            GetComponent<RectTransform>().rect.width, LerpPosition.x),
+
+                            0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                            GetComponent<RectTransform>().rect.height, LerpPosition.z));
+                        
+                    if(survDoors[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                    && survDoors[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight)
+                    {
+                        survDoorButtons[i].SetActive(true);
+                    }
+                    else
+                    {
+                        survDoorButtons[i].SetActive(false);
+                    }
+                }
+                else
+                {
+                    Destroy(survDoorButtons[i]);
+                    survDoorButtons.RemoveAt(i);
+                }
             }
         }
     }

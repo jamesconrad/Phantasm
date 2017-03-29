@@ -8,6 +8,8 @@ public class CameraOverdraw : MonoBehaviour
 	public Color color;
 	Camera reference;
 
+	Vector2 cameraSkew = new Vector2(-0.02f, -0.02f);
+
 	GameObject agent;
 	// Use this for initialization
 	void Start () 
@@ -16,11 +18,20 @@ public class CameraOverdraw : MonoBehaviour
 		reference.SetReplacementShader(shader, null);
 		Shader.SetGlobalColor("uColor", color);
 
-		SetObliqueness(-0.02f, 0.02f);
+		SetObliqueness(cameraSkew);
 		agent = GameObject.FindGameObjectWithTag("Player");
 	}
 	
-	void SetObliqueness(float horizObl, float vertObl) {
+	void SetObliqueness(Vector2 skew) 
+	{
+        Matrix4x4 mat  = reference.projectionMatrix;
+        mat[0, 2] = skew.x;
+        mat[1, 2] = skew.y;
+        reference.projectionMatrix = mat;
+    }
+
+	void SetObliqueness(float horizObl, float vertObl) 
+	{
         Matrix4x4 mat  = reference.projectionMatrix;
         mat[0, 2] = horizObl;
         mat[1, 2] = vertObl;
@@ -42,6 +53,23 @@ public class CameraOverdraw : MonoBehaviour
 			agent = GameObject.FindGameObjectWithTag("Player");
 		}
 
+		if(Input.mouseScrollDelta.y > 0)
+		{
+			reference.orthographicSize *= 0.9f;
+			reference.ResetProjectionMatrix();
+			SetObliqueness(cameraSkew);
+			
+			//timeSinceCameraUpdate = maxTimeToCameraUpdate;
+			reference.Render();
+		}
+		if(Input.mouseScrollDelta.y < 0)
+		{
+			reference.orthographicSize /= 0.9f;
+			reference.ResetProjectionMatrix();
+			SetObliqueness(cameraSkew);
+			//timeSinceCameraUpdate = maxTimeToCameraUpdate;
+			reference.Render();
+		}
 
         timeSinceCameraUpdate += Time.deltaTime;
 		if(timeSinceCameraUpdate > maxTimeToCameraUpdate)

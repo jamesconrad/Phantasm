@@ -399,11 +399,11 @@ public class HackerVisionScript : MonoBehaviour
 		    	{
 		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
                     
-		    		for (int c = 0; c < agentRenderers.Length; c++)
-		    		{
-                        if(agentRenderers[c].material != agentLaserMaterial)
-		    			    agentRenderers[c].material = agentMaterials.camera;
-		    		}
+		    		//for (int c = 0; c < agentRenderers.Length; c++)
+		    		//{
+                    //    if(agentRenderers[c].material != agentLaserMaterial)
+		    		//	    agentRenderers[c].material = agentMaterials.camera;
+		    		//}
 		    	}
 
 		    	CameraSettings.cullingMask = (1 << 9) | defaultCameraLayersActive;
@@ -442,12 +442,12 @@ public class HackerVisionScript : MonoBehaviour
             {
 		    	if(GOAgent != null)
 		    	{
-		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
-		    		for(int c = 0; c < agentRenderers.Length; c++)
-		    		{
-                        if(agentRenderers[c].material != agentLaserMaterial)
-		    			    agentRenderers[c].material = agentMaterials.thermal;
-		    		}
+		    		//Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+		    		//for(int c = 0; c < agentRenderers.Length; c++)
+		    		//{
+                    //    if(agentRenderers[c].material != agentLaserMaterial)
+		    		//	    agentRenderers[c].material = agentMaterials.thermal;
+		    		//}
 		    	}
 
 		    	CameraSettings.cullingMask = (1 << 10) | defaultCameraLayersActive;
@@ -476,12 +476,12 @@ public class HackerVisionScript : MonoBehaviour
             {
 		    	if(GOAgent != null)
 		    	{
-		    		Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
-		    		for(int c = 0; c < agentRenderers.Length; c++)
-		    		{
-                        if(agentRenderers[c].material != agentLaserMaterial)
-		    			    agentRenderers[c].material = agentMaterials.sonar;
-		    		}
+		    		//Renderer[] agentRenderers = GOAgent.GetComponentsInChildren<Renderer>();//.material = agentMaterials.camera;
+		    		//for(int c = 0; c < agentRenderers.Length; c++)
+		    		//{
+                    //    if(agentRenderers[c].material != agentLaserMaterial)
+		    		//	    agentRenderers[c].material = agentMaterials.sonar;
+		    		//}
 		    	}
 
 		    	CameraSettings.cullingMask = (1 << 11) | defaultCameraLayersActive;
@@ -527,7 +527,7 @@ public class HackerVisionScript : MonoBehaviour
         if(Vision == HackerVisionMode.Thermal)
         {
             ambientLightTemp = RenderSettings.ambientLight;
-            RenderSettings.ambientLight = new Color(ambientLight.r * 0.15f, ambientLight.g * 0.15f, ambientLight.b * 0.15f);
+            RenderSettings.ambientLight = new Color(ambientLight.r * 0.835f, ambientLight.g * 0.835f, ambientLight.b * 0.835f);
         }
 
         if (Vision == HackerVisionMode.Normal)
