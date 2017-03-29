@@ -30,6 +30,8 @@ public class Bloom : MonoBehaviour
     private RenderTexture blurTextureY8;
     private RenderTexture blurTextureX16;
     private RenderTexture blurTextureY16;
+    private RenderTexture blurTextureX32;
+    private RenderTexture blurTextureY32;
 
     [Range(0.1f, 5.0f)]
     public float HorizontalStretch = 1.0f;
@@ -48,10 +50,13 @@ public class Bloom : MonoBehaviour
         blurTextureY8 = new RenderTexture(Screen.width / 8, Screen.height / 8, 0, RenderTextureFormat.ARGBHalf);
         blurTextureX16 = new RenderTexture(Screen.width / 16, Screen.height / 16, 0, RenderTextureFormat.ARGBHalf);
         blurTextureY16 = new RenderTexture(Screen.width / 16, Screen.height / 16, 0, RenderTextureFormat.ARGBHalf);
+        blurTextureX32 = new RenderTexture(Screen.width / 32, Screen.height / 32, 0, RenderTextureFormat.ARGBHalf);
+        blurTextureY32 = new RenderTexture(Screen.width / 32, Screen.height / 32, 0, RenderTextureFormat.ARGBHalf);
         CompositeMaterial.SetTexture("Blur1Tex", blurTextureX2);
         CompositeMaterial.SetTexture("Blur2Tex", blurTextureX4);
         CompositeMaterial.SetTexture("Blur3Tex", blurTextureX8);
         CompositeMaterial.SetTexture("Blur4Tex", blurTextureX16);
+        CompositeMaterial.SetTexture("Blur5Tex", blurTextureX32);
     }
 
     // OnRenderImage is called after all rendering is complete to render image
@@ -69,8 +74,9 @@ public class Bloom : MonoBehaviour
         Graphics.Blit(blurTextureX8, blurTextureX16, PassThroughMaterial);
 
         HorizontalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.width) * HorizontalStretch * 2.0f);
-        VerticalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.height) * VerticalStretch * 2.0f);
-        
+        VerticalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.height) * VerticalStretch * 2.0f);        
+        Graphics.Blit(blurTextureX2, blurTextureY2, HorizontalBlurMaterial);
+        Graphics.Blit(blurTextureY2, blurTextureX2, VerticalBlurMaterial);
         Graphics.Blit(blurTextureX2, blurTextureY2, HorizontalBlurMaterial);
         Graphics.Blit(blurTextureY2, blurTextureX2, VerticalBlurMaterial);
 
@@ -78,9 +84,13 @@ public class Bloom : MonoBehaviour
         VerticalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.height) * VerticalStretch * 4.0f);
         Graphics.Blit(blurTextureX4, blurTextureY4, HorizontalBlurMaterial);
         Graphics.Blit(blurTextureY4, blurTextureX4, VerticalBlurMaterial);
+        Graphics.Blit(blurTextureX4, blurTextureY4, HorizontalBlurMaterial);
+        Graphics.Blit(blurTextureY4, blurTextureX4, VerticalBlurMaterial);
 
         HorizontalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.width) * HorizontalStretch * 8.0f);
         VerticalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.height) * VerticalStretch * 8.0f);
+        Graphics.Blit(blurTextureX8, blurTextureY8, HorizontalBlurMaterial);
+        Graphics.Blit(blurTextureY8, blurTextureX8, VerticalBlurMaterial);
         Graphics.Blit(blurTextureX8, blurTextureY8, HorizontalBlurMaterial);
         Graphics.Blit(blurTextureY8, blurTextureX8, VerticalBlurMaterial);
 
@@ -88,6 +98,15 @@ public class Bloom : MonoBehaviour
         VerticalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.height) * VerticalStretch * 16.0f);
         Graphics.Blit(blurTextureX16, blurTextureY16, HorizontalBlurMaterial);
         Graphics.Blit(blurTextureY16, blurTextureX16, VerticalBlurMaterial);
+        Graphics.Blit(blurTextureX16, blurTextureY16, HorizontalBlurMaterial);
+        Graphics.Blit(blurTextureY16, blurTextureX16, VerticalBlurMaterial);
+
+        HorizontalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.width) * HorizontalStretch * 32.0f);
+        VerticalBlurMaterial.SetFloat("uPixelSize", (1.0f / Screen.height) * VerticalStretch * 32.0f);
+        Graphics.Blit(blurTextureX32, blurTextureY32, HorizontalBlurMaterial);
+        Graphics.Blit(blurTextureY32, blurTextureX32, VerticalBlurMaterial);
+        Graphics.Blit(blurTextureX32, blurTextureY32, HorizontalBlurMaterial);
+        Graphics.Blit(blurTextureY32, blurTextureX32, VerticalBlurMaterial);
 
         //Graphics.Blit(toneMapTexture, blurTextureX2, HorizontalBlurMaterial);
 //

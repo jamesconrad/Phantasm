@@ -65,7 +65,8 @@
 				half3 scene = tex2D(_MainTex,  i.uv).rgb;			
 				float luminance = dot((scene.rgb), half3(0.299, 0.587, 0.114));	
 				luminance = 1.0f;		
-				col.rgb = max(half3(0,0,0), scene * luminance - uThreshold);		
+				//col.rgb = max(half3(0,0,0), scene * luminance - uThreshold);	
+				col.rgb = max(half3(0,0,0), scene * luminance - uThreshold) / (1.0f - uThreshold);	
 				//col.rgb = max(half3(0,0,0), scene * luminance * 2.0f - 1.0f );
 				col.a = 1;
 				return col;
