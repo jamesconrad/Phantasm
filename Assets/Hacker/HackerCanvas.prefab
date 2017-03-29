@@ -346,9 +346,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b02709b0917e84599def7c11519301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraMap: {fileID: 0}
   cameraPosition: 0
   windowType: 1
   cameraButtonPrefab: {fileID: 1000012139292072, guid: da0dead1fc60e804e8fbea56116bdedb,
+    type: 2}
+  doorButtonPrefab: {fileID: 1000012139292072, guid: 6f0079bd642724d4399ac4ab7239216a,
     type: 2}
   WindowIsInteractive: 1
   numOfFloors: 3

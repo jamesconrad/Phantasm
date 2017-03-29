@@ -213,8 +213,10 @@ MonoBehaviour:
   handle: {fileID: 0}
   currentState: 0
   LockObject: {fileID: 1425446653066246, guid: 3c3e3cffe5e4267458be4e3927de6e47, type: 2}
-  locked: 1
-  code: 4ABF721
+  locked: 0
+  code: 
+  roomNumber: 0
+  exitNumber: 0
 --- !u!114 &114502878199444888
 MonoBehaviour:
   m_ObjectHideFlags: 1

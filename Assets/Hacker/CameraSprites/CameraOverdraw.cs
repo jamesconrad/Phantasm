@@ -8,7 +8,7 @@ public class CameraOverdraw : MonoBehaviour
 	public Color color;
 	Camera reference;
 
-	Vector2 cameraSkew = new Vector2(-0.02f, -0.02f);
+	Vector2 cameraSkew = new Vector2(-0.01f, -0.01f);
 
 	GameObject agent;
 	// Use this for initialization
@@ -38,7 +38,7 @@ public class CameraOverdraw : MonoBehaviour
         reference.projectionMatrix = mat;
     }
 
-	const float maxTimeToCameraUpdate = 1.0f; 
+	const float maxTimeToCameraUpdate = 0.10f; 
 	float timeSinceCameraUpdate = maxTimeToCameraUpdate;
 	const float maxTimeToUpdate = 1.0f; 
 	float timeSinceUpdate = maxTimeToUpdate;

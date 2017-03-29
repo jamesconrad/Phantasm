@@ -16,11 +16,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 224000011173849712}
-  - 222: {fileID: 222000010116675162}
-  - 114: {fileID: 114000010741219538}
+  - component: {fileID: 224000011173849712}
+  - component: {fileID: 222000010116675162}
+  - component: {fileID: 114000010741219538}
   m_Layer: 5
   m_Name: HackerInteractionWindow
   m_TagString: Untagged
@@ -39,9 +39,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4b02709b0917e84599def7c11519301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraMap: {fileID: 0}
   cameraPosition: 3
+  windowType: 0
   cameraButtonPrefab: {fileID: 1000012139292072, guid: da0dead1fc60e804e8fbea56116bdedb,
     type: 2}
+  doorButtonPrefab: {fileID: 1000012139292072, guid: 6f0079bd642724d4399ac4ab7239216a,
+    type: 2}
+  WindowIsInteractive: 1
+  numOfFloors: 3
+  viewFloor: 0
 --- !u!222 &222000010116675162
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -57,10 +64,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -241, y: 0}

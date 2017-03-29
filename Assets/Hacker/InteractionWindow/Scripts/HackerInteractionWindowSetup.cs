@@ -74,11 +74,18 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 survCameras.Add(tempCameras[i]);
             }
         }
-
         survCameraButtons = new List<GameObject>();
 
         
-
+        GoodDoor[] tempDoors = FindObjectsOfType<GoodDoor>();
+        survDoors = new List<GoodDoor>();
+        for (int i = 0; i < tempDoors.Length; i++)
+        {
+            if (tempDoors[i].locked)
+            {
+                survDoors.Add(tempDoors[i]);
+            }
+        }
         survDoorButtons = new List<GameObject>();
 
         Vector3 CameraPositionMax = survCameras[0].transform.position;
@@ -113,9 +120,39 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             {
                 CameraPositionMin.z = CameraPositionTemp.z - 0.0f;
             }
-
-            
         }
+        for (int i = 0; i < survDoors.Count; i++)
+        {
+            Vector3 DoorPositionTemp = survDoors[i].transform.position;
+
+            if(CameraPositionMax.x < DoorPositionTemp.x)
+            {
+                CameraPositionMax.x = DoorPositionTemp.x + 0.0f;
+            }
+            if (CameraPositionMax.y < DoorPositionTemp.y)
+            {
+                CameraPositionMax.y = DoorPositionTemp.y + 0.0f;
+            }
+            if (CameraPositionMax.z < DoorPositionTemp.z)
+            {
+                CameraPositionMax.z = DoorPositionTemp.z + 0.0f;
+            }
+            
+            if (CameraPositionMin.x > DoorPositionTemp.x)
+            {
+                CameraPositionMin.x = DoorPositionTemp.x - 0.0f;
+            }
+            if (CameraPositionMin.y > DoorPositionTemp.y)
+            {
+                CameraPositionMin.y = DoorPositionTemp.y - 0.0f;
+            }
+            if (CameraPositionMin.z > DoorPositionTemp.z)
+            {
+                CameraPositionMin.z = DoorPositionTemp.z - 0.0f;
+            }
+        }
+
+
         floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
         if(cameraMap != null)
@@ -154,15 +191,6 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
         // Code to put the doors as buttons
 
-        GoodDoor[] tempDoors = FindObjectsOfType<GoodDoor>();
-        survDoors = new List<GoodDoor>();
-        for (int i = 0; i < tempDoors.Length; i++)
-        {
-            if (tempDoors[i].locked)
-            {
-                survDoors.Add(tempDoors[i]);
-            }
-        }
 
         for (int i = 0; i < survDoors.Count; i++)
         {
@@ -280,7 +308,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
 
                 if(survCameras[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
-                && survCameras[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight)
+                && survCameras[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
+                && survCameras[i].transform.position.x <= CameraPositionMax.x
+                && survCameras[i].transform.position.x >= CameraPositionMin.x
+                && survCameras[i].transform.position.z <= CameraPositionMax.z
+                && survCameras[i].transform.position.z >= CameraPositionMin.z)
                 {
                     survCameraButtons[i].SetActive(true);
                 }
@@ -310,8 +342,12 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                             0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                             GetComponent<RectTransform>().rect.height, LerpPosition.z));
                         
-                    if(survDoors[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
-                    && survDoors[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight)
+                    if(survCameras[i].transform.position.y >= cameraMap.nearClipPlane + cameraMap.transform.position.y
+                    && survCameras[i].transform.position.y <= cameraMap.farClipPlane + cameraMap.transform.position.y
+                    && survDoors[i].transform.position.x <= CameraPositionMax.x
+                    && survDoors[i].transform.position.x >= CameraPositionMin.x
+                    && survDoors[i].transform.position.z <= CameraPositionMax.z
+                    && survDoors[i].transform.position.z >= CameraPositionMin.z)
                     {
                         survDoorButtons[i].SetActive(true);
                     }
