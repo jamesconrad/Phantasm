@@ -48,7 +48,7 @@
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				
-				o.viewDir = normalize(WorldSpaceViewDir(v.vertex));
+				o.viewDir = ObjSpaceViewDir(v.vertex);
 				//o.viewDirection = WorldSpaceViewDir(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				//UNITY_TRANSFER_FOG(o,o.vertex);

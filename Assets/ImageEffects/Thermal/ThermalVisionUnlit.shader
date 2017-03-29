@@ -21,7 +21,8 @@
 		
 			struct v2f {
 				// we'll output world space normal as one of regular ("texcoord") interpolators
-				half3 worldNormal : TEXCOORD0;
+				half3 normal : TEXCOORD0;
+				half3 viewDir : TEXCOORD1;
 				float4 pos : SV_POSITION;
 			};
 		
@@ -30,11 +31,8 @@
 			{
 				v2f o;
 				o.pos = UnityObjectToClipPos(vertex);
-				// UnityCG.cginc file contains function to transform
-				// normal from object to world space, use that
-				//o.worldNormal = UnityObjectToWorldDir(normal);
-				float3 viewN = normalize(mul(UNITY_MATRIX_IT_MV, normal.xyzz).xyz);
-				o.worldNormal = viewN;
+				o.viewDir = ObjSpaceViewDir(vertex);
+				o.normal = normal;
 				return o;
 			}		
 
@@ -46,10 +44,14 @@
 				fixed4 c = 0;
 				//UNITY_MATRIX_IT_MV[2].xyz 
 				//-normalize(-_WorldSpaceCameraPos + mul(i.pos.xyz, _Object2World))
-				float dotProduct = (dot(float3(0.0f, 0.0f, 1.0f), i.worldNormal) * _Temperature); //
+
+				float3 normalDirection = normalize(i.normal);
+				float3 viewDirection = normalize(i.viewDir);
+
+				float dotProduct = saturate(dot(normalDirection, viewDirection)) * _Temperature; //
 				float4 thermalRamp = tex2D(_ThermalRamp, float2(max(dotProduct, 0.05f) * 0.925f, 0.0f));
 
-				//c.rgb = i.worldNormal*0.5 + 0.5;
+				//c.rgb = i.normal*0.5 + 0.5;
 				c = thermalRamp;
 				//c.r = dotProduct;
 				//c.g = dotProduct;

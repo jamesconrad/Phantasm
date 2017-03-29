@@ -18,6 +18,7 @@ Shader "Decal/DecalEmissiveShader"
 			Fog { Mode Off } // no fog in g-buffers pass
 			ZWrite Off
 			Blend SrcAlpha OneMinusSrcAlpha
+			//Blend SrcAlpha One
 
 			CGPROGRAM
 			#pragma target 3.0
