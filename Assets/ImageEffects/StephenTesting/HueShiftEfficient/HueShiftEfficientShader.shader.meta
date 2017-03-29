@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 6511d56943ac11e458659782f7ad42e6
+timeCreated: 1490798944
+licenseType: Free
+ShaderImporter:
+  defaultTextures:
+  - _MainTex: {instanceID: 0}
+  - uMapTex: {fileID: 2800000, guid: 502bec3891f04924cb0e073fc98b11c4, type: 3}
+  - uLookupTex: {fileID: 2800000, guid: 3042c0e86f4dbb241bddfd125d1e5cef, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
