@@ -6,7 +6,7 @@
 		timeMult ("timeMult", Float) = 1000.0
 		alphaAmount("Alpha", Float) = 0.4
 		alphaAdd("Alpha Add", Float) = 0.4
-		ColorMult( "Color", Color) = (1.0, 1.0, 1.0, 1.0)
+		ColorMult( "Color", Color) = (0.5, 0.5, 0.5, 0.5)
 	}
 	SubShader
 	{
@@ -72,7 +72,7 @@
 				}
 
 				col.a *= alphaAmount * sin(p.x) + 0.8f + alphaAdd;
-				return col * ColorMult;
+				return col * (ColorMult * 2.0f);
 			}
 			ENDCG
 		}
