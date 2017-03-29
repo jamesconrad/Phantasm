@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Demo - (PROD).unity
   - enabled: 1
     path: Assets/Scenes/SceneTemplate.unity
+  - enabled: 1
+    path: Assets/Scenes/SceneTemplate - Copy.unity
