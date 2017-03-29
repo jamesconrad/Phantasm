@@ -73,10 +73,10 @@ public class SpecialDeferredLightManagerScript : MonoBehaviour
 		DrawLights();
 	}
 
-	public void OnWillRenderObject()
-	{
-		DrawLights();
-	}
+	//public void OnWillRenderObject()
+	//{
+	//	DrawLights();
+	//}
 
 	public void DrawLights()
 	{
