@@ -25,6 +25,7 @@
 		struct Input 
 		{
 			float2 uv_MainTex;
+          	float3 viewDir;
 		};
 
 		half _Glossiness;
@@ -38,7 +39,7 @@
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
-			o.Emission = _Temperature;
+			o.Emission = _Temperature * saturate(dot(normalize(IN.viewDir), o.Normal));
 			o.Alpha = c.a;
 		}
 		ENDCG
