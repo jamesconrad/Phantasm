@@ -39,6 +39,8 @@ public class MainMenuManager : MonoBehaviour {
 		enemyPlayerSelection = -1;
 	}
 	
+	//TODO: add in the calls to send the score updates.
+	
 	//Handle various changes for each state
 	//Try to manage all menu changes from here.
 	public void SetMenuState(MainMenuState state)
