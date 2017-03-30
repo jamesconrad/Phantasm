@@ -5,13 +5,15 @@ using UnityEngine;
 
 public class PhanSkipeManager : MonoBehaviour {
 
-	const int AudioBufferSize = 8000 * 2 * 2 / 4;
+	const int AudioBufferSize = 8000;
 
 	int currentBufferSize = AudioBufferSize;
 
 	bool micStarted = false;
 	System.IntPtr MicPtr;
 	StringBuilder audioBuffer = new StringBuilder(AudioBufferSize);
+	StringBuilder sendBuffer = new StringBuilder(AudioBufferSize + 10);
+	
 
 	/// <summary>
 	/// Start is called on the frame when a script is enabled just before
@@ -51,7 +53,21 @@ public class PhanSkipeManager : MonoBehaviour {
 		if (micStarted)
 		{
 			currentBufferSize = PhanSkipeAPI.GetAudioBuffer(MicPtr, audioBuffer);
-			PhanSkipeAPI.SetAudioBuffer(MicPtr, audioBuffer, currentBufferSize);
+
+			//PhanSkipeAPI.SetAudioBuffer(MicPtr, audioBuffer, currentBufferSize);
+			SendAudioBuffer();
 		}
+	}
+
+	void SendAudioBuffer()
+	{
+		sendBuffer = new StringBuilder(((int)PhaNetworkingMessager.MessageType.AudioUpdate).ToString() + " " + audioBuffer);
+		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, PhaNetworkingAPI.targetIP);
+	}
+
+	public void ReceiveBuffer(ref StringBuilder buffer)
+	{
+		buffer.Remove(0, 2);
+		PhanSkipeAPI.SetAudioBuffer(MicPtr, buffer, buffer.Length);
 	}
 }

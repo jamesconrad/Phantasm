@@ -30,6 +30,8 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	Vector3 previousPlayerVelocity;
 	Quaternion previousPlayerRotation;
 
+	public PhanSkipeManager skipeManager;
+
 	private static bool NetworkInitialized = false;
 	/// This function is called when the object becomes enabled and active.
 	void OnEnable()
@@ -107,6 +109,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 
 					case MessageType.ScoreUpdate:
 					//TODO: Call the function for adding the new score data and saving it.
+					break;
+
+					case MessageType.AudioUpdate:
+					skipeManager.ReceiveBuffer(ref receiveBuffer);
 					break;
 
 					default://This may be the first time I've ever had a reachable default statement...

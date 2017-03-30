@@ -19,7 +19,8 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		HealthUpdate,
 		ConsoleMessage,
 		DoorUpdate,
-		ScoreUpdate
+		ScoreUpdate,
+		AudioUpdate
 	}
 
 	//Tell the other player that you are online
@@ -211,8 +212,8 @@ public class PhaNetworkingMessager : MonoBehaviour {
 
 	public int ReceiveInGameMessage() 
 	{
-		receiveBuffer = new StringBuilder(recvBufferSize);
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
+		receiveBuffer = new StringBuilder(8010);
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, 8010);
 		if (receiveBuffer.Length > 0)
 		{
 			return int.Parse(receiveBuffer.ToString().Split(' ')[0]);
