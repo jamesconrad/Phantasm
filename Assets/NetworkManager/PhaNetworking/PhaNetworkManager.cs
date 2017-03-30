@@ -105,6 +105,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 					DoorManager.Singleton.parseDoorUpdate(ref receiveBuffer);
 					break;
 
+					case MessageType.ScoreUpdate:
+					//TODO: Call the function for adding the new score data and saving it.
+					break;
+
 					default://This may be the first time I've ever had a reachable default statement...
 					return; //No more messages, so let's have an early exit.
 				}

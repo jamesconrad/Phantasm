@@ -21,6 +21,8 @@ public class MainMenuManager : MonoBehaviour {
 	public Button JoinGameButton;
 	public InputField ipInput;
 
+	public ScoreFetch ScoreManager;
+
 	MainMenuState mainMenuState = MainMenuState.Menu;
 
 	public bool DebugForTesting = false;

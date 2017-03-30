@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Score : MonoBehaviour 
 {
-	int score;
+	static int score;
 	float timeStart;
 	float timeEnd;
 	[TooltipAttribute("Maximum amount of points you get for the time")]
@@ -51,17 +51,10 @@ public class Score : MonoBehaviour
 
     public void saveScore()
     {
-        System.IO.File.WriteAllText("c:\\temp\\Phantasm.score", score.ToString());
     }
 
-    public void getLastScore()
+    public static int getLastScore()
     {
-
+		return score;
     }
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
 }

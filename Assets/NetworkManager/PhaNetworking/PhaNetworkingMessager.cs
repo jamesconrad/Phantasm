@@ -18,7 +18,8 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		EnemyUpdate,
 		HealthUpdate,
 		ConsoleMessage,
-		DoorUpdate
+		DoorUpdate,
+		ScoreUpdate
 	}
 
 	//Tell the other player that you are online
