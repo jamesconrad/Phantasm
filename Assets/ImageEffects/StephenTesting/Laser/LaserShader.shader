@@ -3,6 +3,7 @@
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
+		_Color ("Color", Color) = (1, 1, 1, 1)
 	}
 	SubShader
 	{
@@ -38,6 +39,7 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
+			float4 _Color;
 			float uDistance;
 			
 			v2f vert (appdata v)
@@ -65,7 +67,8 @@
 				}
 
 				col.a *= 0.5f * sin(p.x) + 1.0f;
-				col.rgb *= 0.25f;
+				col.rgb *= 0.55f;
+				col *= _Color;
 				//col.rgb = uDistance * 0.25f;
 				//col.a = 1.0f;
 				return col;

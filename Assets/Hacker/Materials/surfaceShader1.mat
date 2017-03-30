@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: surfaceShader1
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 00b071b411bd70f4186be7ac34ff6f4e, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -41,6 +41,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     - first:
         name: _EmissionMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _EmissionTex
       second:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -83,6 +89,9 @@ Material:
         name: _DstBlend
       second: 0
     - first:
+        name: _EmissiveMult
+      second: 4
+    - first:
         name: _GlossMapScale
       second: 1
     - first:
@@ -121,7 +130,10 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.5, g: 0, b: 0, a: 1}
+      second: {r: 0, g: 0, b: 0, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 2, g: 0, b: 0, a: 1}
+    - first:
+        name: _EmissiveCol
+      second: {r: 1, g: 0, b: 0, a: 0}
