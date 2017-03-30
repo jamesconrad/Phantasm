@@ -23,6 +23,7 @@ public class ScoreFetch : MonoBehaviour {
                 string newScores = LatestScore.ToString() + " " + PhaNetworkingAPI.hostAddress.ToString() + " " + PhaNetworkingAPI.targetIP.ToString() + "\n";
                 newScores += scores;
                 scores = newScores;
+                Debug.Log("Seomthing added to scores");
             }
             LatestScore = -1;
         }
@@ -37,10 +38,10 @@ public class ScoreFetch : MonoBehaviour {
         SceneManager.activeSceneChanged += AddScene;
     }
 	
-	/// <summary>
-    /// This function is called when the behaviour becomes disabled or inactive.
+    /// <summary>
+    /// This function is called when the MonoBehaviour will be destroyed.
     /// </summary>
-    void OnDisable()
+    void OnDestroy()
     {
         SaveScores();
     }
@@ -74,11 +75,13 @@ public class ScoreFetch : MonoBehaviour {
     private void SaveScores()
     {
         string[] splitScores = scores.Split(' ');
+        Debug.Log(scores);
         string SaveData = "";
         for (int i = 0, length = splitScores.Length; i < length || i >= 15; i+=3)
         {
-            SaveData += splitScores[i] + " " + splitScores[i + 1] + " " + splitScores[i + 2] + "\n";
+            SaveData += splitScores[i] + " " + splitScores[i + 1] + " " + splitScores[i + 2];
         }
-        System.IO.File.WriteAllText(Application.dataPath + "\\Resources\\Phantasm.score", scores.ToString() + " " +  PhaNetworkingAPI.hostAddress.ToString() + " " + PhaNetworkingAPI.targetIP.ToString());
+        Debug.Log(SaveData);
+        System.IO.File.WriteAllText(Application.dataPath + "\\Resources\\Phantasm.score", SaveData);
     }
 }

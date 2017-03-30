@@ -10,7 +10,7 @@ public class PhaNetworkingAPI : MonoBehaviour {
 
 	public static System.IntPtr mainSocket;
 	const int mainPort = 8889;
-	public static IPAddress hostAddress;
+	public static IPAddress hostAddress = new IPAddress(000);
 	public static StringBuilder targetIP = new StringBuilder("127.0.0.1");
 
 	/// <summary>
