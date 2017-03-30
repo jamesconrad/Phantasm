@@ -310,7 +310,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -404,7 +404,7 @@ MonoBehaviour:
     GlitchTexture: {fileID: 2800000, guid: 9836b695b2e96f847b8d624e0dc506d2, type: 3}
     FaceTexture: {fileID: 2800000, guid: 6ffca5bf713cbe84b8ff03ecb98998b4, type: 3}
     nightVisionAmount: 0.15
-    normalAmount: 0.025
+    normalAmount: 0
   jitterAmount: {x: 3, y: 3}
   jitterBias: 1
   filmGrainJitterActive: 1

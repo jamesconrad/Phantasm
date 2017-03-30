@@ -66,8 +66,15 @@ public class Agent : MonoBehaviour
     public void OnDisable()
     {
         Score scoreSystem = FindObjectOfType<Score>();
+        if(scoreSystem != null)
+        {
         scoreSystem.endTimer();
         scoreSystem.saveScore();
+        }
+        else
+        {
+            Debug.LogWarning("Could not save score!");
+        }
         AgentUI.GetComponentInChildren<SplashScreen>().createSplashScreen(0);
         GetComponent<GunHandle>().gunReference.gameObject.SetActive(false);
     }
