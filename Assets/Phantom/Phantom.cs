@@ -93,7 +93,12 @@ public class Phantom : MonoBehaviour
     public void die()
     {
         Score scoreSystem = FindObjectOfType<Score>();
-        scoreSystem.OnKill();
+		if(scoreSystem != null)
+		{
+        	scoreSystem.OnKill();
+		}
+		else
+			Debug.LogWarning("Score error");
         Instantiate(vanishParticleEffect, transform.position, vanishParticleEffect.transform.rotation);
 
         if (audioObject.GetComponent<AudioSource>() != null)

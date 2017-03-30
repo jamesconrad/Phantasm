@@ -63,7 +63,7 @@ public class MusicManagerScript : MonoBehaviour
 
             musicDeathSource.volume = deathAmount;
 
-            float closestPhantom = Vector3.Distance(AgentObject.transform.position, PhantomObject[0].transform.position);
+            float closestPhantom = 100000.0f;// = Vector3.Distance(AgentObject.transform.position, PhantomObject[0].transform.position);
             for (int i = 1; i < PhantomObject.Length; ++i)
             {
                 closestPhantom = Mathf.Min(closestPhantom, Vector3.Distance(AgentObject.transform.position, PhantomObject[i].transform.position));
