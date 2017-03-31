@@ -23,6 +23,9 @@ public class MainMenuManager : MonoBehaviour {
 
 	MainMenuState mainMenuState = MainMenuState.Menu;
 
+	public InputField localPortInput;
+	public InputField targetPortInput;
+
 	public bool DebugForTesting = false;
 
 	// Use this for initialization
@@ -35,6 +38,41 @@ public class MainMenuManager : MonoBehaviour {
 
 		PhaNetworkManager.characterSelection = -1;
 		enemyPlayerSelection = -1;
+	}
+
+	bool networkingInit = false;
+	public void SetNetworking()
+	{
+		if (networkingInit == false)
+		{
+			int PortNumber = 0;
+			if( int.TryParse(localPortInput.text, out PortNumber))
+			{
+				localPortInput.text = "Invalid port";
+				return; //TODO: close the page if it's wrong, open the options page.
+			}
+			else
+			{
+				PhaNetworkingAPI.mainPort = PortNumber;
+				PhaNetworkingAPI.mainSocket = PhaNetworkingAPI.InitializeNetworking(PhaNetworkingAPI.mainPort);
+			}
+			if (int.TryParse(targetPortInput.text, out PortNumber))
+			{
+				targetPortInput.text = "Invalid Port";
+				return;
+			}
+			else
+			{
+				PhaNetworkingAPI.targetPort = PortNumber;
+				PhaNetworkManager.Singleton.SendConnectionMessage(new StringBuilder("0.0.0.1"));
+			}
+			networkingInit = true;
+		}
+		else
+		{
+			PhaNetworkingAPI.ShutDownNetwork(PhaNetworkingAPI.mainSocket);
+			networkingInit = false;
+		}
 	}
 	
 	//Handle various changes for each state
