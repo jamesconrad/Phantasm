@@ -18,10 +18,10 @@ public class PhaNetworkingAPI : MonoBehaviour {
 	///Returns a socket pointer. Should be assigned to the mainSocket variable.>
 	/// </summary>
 	[DllImport("PhaNetworking", EntryPoint="Initialize", CallingConvention = CallingConvention.Cdecl)]
-	public static extern System.IntPtr InitializeNetworking(int port = 8889);
+	public static extern System.IntPtr InitializeNetworking(int port);
 
 	[DllImport("PhaNetworking", EntryPoint="Send", CallingConvention = CallingConvention.Cdecl)]
-	public static extern int SendTo(System.IntPtr givenSocket, StringBuilder buffer, int bufferLength, StringBuilder givenAddress, int givenPort = 8889);
+	public static extern int SendTo(System.IntPtr givenSocket, StringBuilder buffer, int bufferLength, StringBuilder givenAddress, int givenPort);
 	
 	[DllImport("PhaNetworking", EntryPoint="Receive", CallingConvention = CallingConvention.Cdecl)]
 	public static extern int ReceiveFrom(System.IntPtr givenSocket, StringBuilder receiveBuffer, int bufferLength);

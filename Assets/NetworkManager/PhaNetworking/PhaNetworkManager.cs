@@ -39,7 +39,6 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 			singleton = this;
 			//PhaNetworkingAPI.mainSocket = PhaNetworkingAPI.InitializeNetworking();
 			//PhaNetworkManager.singleton.SendConnectionMessage(new StringBuilder("0.0.0.1"));
-			Debug.Log("Networking initialized");
 
 			SceneManager.activeSceneChanged += SpawnPlayer;
 			NetworkInitialized = true;

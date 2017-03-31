@@ -34,7 +34,7 @@ public class MainMenuManager : MonoBehaviour {
 		selectAgentButton = buttons[0];
 		selectHackerButton = buttons[1];
 		UIText = SelectionUI.GetComponentInChildren<Text>();
-		ipInput = GetComponentInChildren<InputField>();
+		//ipInput = GetComponentInChildren<InputField>();
 
 		PhaNetworkManager.characterSelection = -1;
 		enemyPlayerSelection = -1;
@@ -46,25 +46,25 @@ public class MainMenuManager : MonoBehaviour {
 		if (networkingInit == false)
 		{
 			int PortNumber = 0;
-			if( int.TryParse(localPortInput.text, out PortNumber))
+			if(int.TryParse(localPortInput.text, out PortNumber) == false)
 			{
 				localPortInput.text = "Invalid port";
-				return; //TODO: close the page if it's wrong, open the options page.
+				//TODO: close the page if it's wrong, open the options page.
 			}
 			else
 			{
 				PhaNetworkingAPI.mainPort = PortNumber;
+				localPortInput.text = "valid port";				
 				PhaNetworkingAPI.mainSocket = PhaNetworkingAPI.InitializeNetworking(PhaNetworkingAPI.mainPort);
 			}
-			if (int.TryParse(targetPortInput.text, out PortNumber))
+			if (int.TryParse(targetPortInput.text, out PortNumber) == false)
 			{
 				targetPortInput.text = "Invalid Port";
-				return;
 			}
 			else
 			{
 				PhaNetworkingAPI.targetPort = PortNumber;
-				PhaNetworkManager.Singleton.SendConnectionMessage(new StringBuilder("0.0.0.1"));
+				PhaNetworkManager.Singleton.SendConnectionMessage(new StringBuilder("0.0.0.0"));
 			}
 			networkingInit = true;
 		}

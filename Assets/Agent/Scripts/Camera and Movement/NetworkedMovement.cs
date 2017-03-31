@@ -62,11 +62,11 @@ public class NetworkedMovement : NetworkedBehaviour
         else
         {//Just simulate the updating.
             simulatedPosition = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.3f);
-            if (Input.GetKeyDown(KeyCode.Keypad1))
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 SendInterval += Time.fixedDeltaTime;
             }
-            if (Input.GetKeyDown(KeyCode.Keypad2))
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 SendInterval -= Time.fixedDeltaTime;
             }
