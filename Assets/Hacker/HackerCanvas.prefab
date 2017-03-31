@@ -353,6 +353,8 @@ MonoBehaviour:
     type: 2}
   doorButtonPrefab: {fileID: 1000012139292072, guid: 6f0079bd642724d4399ac4ab7239216a,
     type: 2}
+  speakerButtonPrefab: {fileID: 1000012139292072, guid: 0888dec885d4d3c4483605c0bc5b7cd5,
+    type: 2}
   WindowIsInteractive: 1
   numOfFloors: 3
   viewFloor: 0

@@ -20,7 +20,7 @@ public class CodeVoice : MonoBehaviour
 	public int roomNumber = 0;
 	AudioSource audioSus;
 	CodeVoiceCollection voiceCollection;
-	bool codeGenned = false;
+	public bool codeGenned = false;
 	// Code represented by a string
 	string code = "";	
 	// Code represented by an int
