@@ -2430,7 +2430,7 @@ MonoBehaviour:
   createGameButton: {fileID: 0}
   JoinGameButton: {fileID: 0}
   ipInput: {fileID: 11368235}
-  DebugForTesting: 0
+  DebugForTesting: 1
 --- !u!114 &1138116453
 MonoBehaviour:
   m_ObjectHideFlags: 0
