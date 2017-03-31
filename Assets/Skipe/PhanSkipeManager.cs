@@ -65,12 +65,12 @@ public class PhanSkipeManager : MonoBehaviour {
 	void SendAudioBuffer()
 	{
 		sendBuffer = new StringBuilder(((int)PhaNetworkingMessager.MessageType.AudioUpdate).ToString() + " " + audioBuffer);
-		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, currentBufferSize, PhaNetworkingAPI.targetIP);
+		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, currentBufferSize + 2, PhaNetworkingAPI.targetIP);
 	}
 
 	public void ReceiveBuffer(ref StringBuilder buffer)
 	{
 		buffer.Remove(0, 2);
-		PhanSkipeAPI.SetAudioBuffer(MicPtr, buffer, buffer.Length);
+		PhanSkipeAPI.SetAudioBuffer(MicPtr, buffer, AudioBufferSize);
 	}
 }

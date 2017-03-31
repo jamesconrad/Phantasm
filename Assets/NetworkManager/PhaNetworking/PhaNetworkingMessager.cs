@@ -210,11 +210,11 @@ public class PhaNetworkingMessager : MonoBehaviour {
 
 	public int ReceiveInGameMessage() 
 	{
-		receiveBuffer = new StringBuilder(8010);
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, 8010);
+		receiveBuffer = new StringBuilder(8002);
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, 8002);
 		if (receiveBuffer.Length > 0)
 		{
-			return int.Parse(receiveBuffer.ToString().Split(' ')[0]);
+			return (int)char.GetNumericValue(receiveBuffer[0]);
 		}
 		return -1;
 	}
