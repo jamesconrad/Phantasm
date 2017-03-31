@@ -22,7 +22,7 @@ public class PhanSkipeManager : MonoBehaviour {
 	void Start()
 	{
 		DontDestroyOnLoad(this);
-		startSkipe();
+		//startSkipe();
 	}
 
 	/// <summary>
@@ -41,8 +41,11 @@ public class PhanSkipeManager : MonoBehaviour {
 
 	public void closeSkipe()
 	{
-		PhanSkipeAPI.ShutdownMic(MicPtr);
-		micStarted = false;
+		if (micStarted != false)
+		{
+			PhanSkipeAPI.ShutdownMic(MicPtr);
+			micStarted = false;
+		}
 	}
 
 	/// <summary>
@@ -62,7 +65,7 @@ public class PhanSkipeManager : MonoBehaviour {
 	void SendAudioBuffer()
 	{
 		sendBuffer = new StringBuilder(((int)PhaNetworkingMessager.MessageType.AudioUpdate).ToString() + " " + audioBuffer);
-		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, PhaNetworkingAPI.targetIP);
+		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, currentBufferSize, PhaNetworkingAPI.targetIP);
 	}
 
 	public void ReceiveBuffer(ref StringBuilder buffer)

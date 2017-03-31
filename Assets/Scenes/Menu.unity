@@ -1428,6 +1428,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &713460993 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114564970852564720, guid: f75d709b17fd0c44eb6c3a19b44f6741,
+    type: 2}
+  m_PrefabInternal: {fileID: 1311043964}
+  m_Script: {fileID: 11500000, guid: 3ebf2eaf608bfce48bde722f9bec716f, type: 3}
 --- !u!1 &860738225
 GameObject:
   m_ObjectHideFlags: 0
@@ -3373,6 +3379,11 @@ Prefab:
       propertyPath: OnlineSceneName
       value: SceneTemplate - Copy
       objectReference: {fileID: 0}
+    - target: {fileID: 114846062782611420, guid: b5b5f78b9307a6e45ba41f5aa36387d9,
+        type: 2}
+      propertyPath: skipeManager
+      value: 
+      objectReference: {fileID: 713460993}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5b5f78b9307a6e45ba41f5aa36387d9, type: 2}
   m_IsPrefabParent: 0

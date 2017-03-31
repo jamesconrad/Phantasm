@@ -44,16 +44,14 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	//Send a message informing the other player what character you have chosen.
 	public int SendCharacterLockMessage(int choice, StringBuilder givenAddress)
 	{
-		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.CharacterLock).ToString() + " " + choice.ToString(), recvBufferSize);
-		Debug.Log("Send buffer contents: " + sendBuffer.ToString());
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.CharacterLock).ToString() + " " + choice.ToString());
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
 	}
 	//Receive a message that tells you what character the other player has chosen.
 	public int ReceiveCharacterLockMessage()
 	{
 		StringBuilder characterLockMessage = new StringBuilder(recvBufferSize);
-		Debug.Log("bytes received: " + PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, characterLockMessage, recvBufferSize));
-		Debug.Log("receive from receive character lock " +  characterLockMessage.ToString());
+		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, characterLockMessage, recvBufferSize);
 		if (characterLockMessage.ToString().StartsWith(((int)MessageType.CharacterLock).ToString()))
 		{
 			string[] message = characterLockMessage.ToString().Split(' ');
@@ -71,8 +69,8 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	//Send a message to inform the other player to begin loading the level.
 	public int SendLoadLevelMessage(StringBuilder givenAddress)
 	{
-		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.LoadLevel).ToString(), recvBufferSize);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.LoadLevel).ToString());
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
 	}
 	public int ReceiveLoadLevelMessage()
 	{
