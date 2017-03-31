@@ -60,7 +60,7 @@ public class DoorManager : PhaNetworkingMessager {
 	void SendDoorCodeUpdate(GoodDoor givenDoor)
 	{
 		StringBuilder doorCode = new StringBuilder(((int)MessageType.DoorUpdate).ToString() + " " + -1 + " " + givenDoor.transform.parent.name + " " + givenDoor.GetCode());
-		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, doorCode, doorCode.Length, PhaNetworkingAPI.targetIP);
+		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, doorCode, doorCode.Length, PhaNetworkingAPI.targetIP, PhaNetworkingAPI.targetPort);
 	}
 	
 	/// <summary>

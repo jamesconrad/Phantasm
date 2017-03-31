@@ -86,7 +86,7 @@ public class TextEnter : MonoBehaviour {
 	public int SendConsoleMessage(string message, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)PhaNetworkingMessager.MessageType.ConsoleMessage).ToString() + " " + message);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress, PhaNetworkingAPI.targetPort);
 	}
 
 	public void ReceiveCode(StringBuilder message)

@@ -25,7 +25,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	public int SendConnectionMessage(StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.Connection).ToString(), recvBufferSize);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress, PhaNetworkingAPI.targetPort);
 	}
 	//Receive information that the other player is online.
 	public int ReceiveConnectionMessage()
@@ -44,7 +44,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.CharacterLock).ToString() + " " + choice.ToString(), recvBufferSize);
 		Debug.Log("Send buffer contents: " + sendBuffer.ToString());
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress, PhaNetworkingAPI.targetPort);
 	}
 	//Receive a message that tells you what character the other player has chosen.
 	public int ReceiveCharacterLockMessage()
@@ -70,7 +70,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	public int SendLoadLevelMessage(StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.LoadLevel).ToString(), recvBufferSize);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, recvBufferSize, givenAddress, PhaNetworkingAPI.targetPort);
 	}
 	public int ReceiveLoadLevelMessage()
 	{
@@ -91,7 +91,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		velocity.x + " " + velocity.y + " " + velocity.z + " " +
 		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
 		 recvBufferSize);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress, PhaNetworkingAPI.targetPort);
 	}
 
 	public void ReceivePlayerUpdate(Transform playerTransform)
@@ -127,7 +127,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		position.x + " " + position.y + " " + position.z + " " +
 		orientation.w + " " + orientation.x + " " + orientation.y + " " + orientation.z,
 		recvBufferSize);
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress, PhaNetworkingAPI.targetPort);
 	}
 
 	public void ReceiveEnemyUpdate(GameObject playerTransform, ref StringBuilder EnemyReceiveBuffer)
@@ -178,7 +178,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	public int SendHealthUpdate(int damageTaken, StringBuilder givenAddress)
 	{
 		StringBuilder sendBuffer = new StringBuilder(((int)MessageType.HealthUpdate).ToString() + " " + damageTaken.ToString());
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, givenAddress, PhaNetworkingAPI.targetPort);
 	}
 
 	///returns the value of damage taken.
@@ -205,7 +205,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		id.ToString() + " " +
 		position.x.ToString() + " " + position.y.ToString() + " " + position.z.ToString() + " " +
 		rotation.x.ToString() + " " + rotation.y.ToString() + " " + rotation.z.ToString() + " " + rotation.w.ToString());
-		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, PhaNetworkingAPI.targetIP);
+		return PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, sendBuffer, sendBuffer.Length, PhaNetworkingAPI.targetIP, PhaNetworkingAPI.targetPort);
 	}
 
 	public int ReceiveInGameMessage() 
