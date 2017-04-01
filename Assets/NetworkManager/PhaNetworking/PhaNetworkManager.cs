@@ -21,9 +21,9 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	//0 for agent, 1 for hacker.
 	public static int characterSelection = 0;
 
-	public GameObject AgentPrefab; Health AgentHealth; Rigidbody AgentRigidBody; NetworkedBehaviour AgentPrediction;
+	public GameObject AgentPrefab; GameObject AgentSpawned; Health AgentHealth; Rigidbody AgentRigidBody; NetworkedBehaviour AgentPrediction;
 	public GameObject RemoteAgentPrefab;
-	public GameObject HackerPrefab; 
+	public GameObject HackerPrefab; GameObject SpawnedHacker; 
 	public GameObject RemoteHackerPrefab;
 	PhantomManager phantomManager;
 
@@ -100,7 +100,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 					break;
 
 					case MessageType.ConsoleMessage:
-					HackerPrefab.GetComponent<RemoteTextEnter>().ReceiveCode(receiveBuffer);
+					SpawnedHacker.GetComponent<RemoteTextEnter>().ReceiveCode(receiveBuffer);
 					break;
 
 					case MessageType.DoorUpdate:
@@ -128,24 +128,24 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		{		
 			if (characterSelection == 0)
 			{
-				AgentPrefab = GameObject.Instantiate(AgentPrefab); //Local player is agent.
-				AgentHealth = AgentPrefab.GetComponent<Health>();
-				AgentRigidBody = AgentPrefab.GetComponent<Rigidbody>();
+				AgentSpawned = GameObject.Instantiate(AgentPrefab); //Local player is agent.
+				AgentHealth = AgentSpawned.GetComponent<Health>();
+				AgentRigidBody = AgentSpawned.GetComponent<Rigidbody>();
 				previousPlayerVelocity = new Vector3(AgentRigidBody.velocity.x, AgentRigidBody.velocity.y, AgentRigidBody.velocity.z);
-				previousPlayerRotation = new Quaternion(AgentPrefab.transform.rotation.x, AgentPrefab.transform.rotation.y, AgentPrefab.transform.rotation.z, AgentPrefab.transform.rotation.w);
+				previousPlayerRotation = new Quaternion(AgentSpawned.transform.rotation.x, AgentSpawned.transform.rotation.y, AgentSpawned.transform.rotation.z, AgentSpawned.transform.rotation.w);
 
-				HackerPrefab = GameObject.Instantiate(RemoteHackerPrefab);				
+				SpawnedHacker = GameObject.Instantiate(RemoteHackerPrefab);				
 			}
 			else if (characterSelection == 1)
 			{
-				AgentPrefab = GameObject.Instantiate(RemoteAgentPrefab);
-				AgentHealth = AgentPrefab.GetComponent<Health>();
+				AgentSpawned = GameObject.Instantiate(RemoteAgentPrefab);
+				AgentHealth = AgentSpawned.GetComponent<Health>();
 				Vector3 startPosition = FindObjectOfType<PlayerStartLocation>().transform.position;
-				AgentPrefab.transform.position = new Vector3(startPosition.x, startPosition.y, startPosition.z);
-				AgentPrefab.GetComponent<NetworkedMovement>().receivedPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
-				AgentRigidBody = AgentPrefab.GetComponent<Rigidbody>();
-				AgentPrediction = AgentPrefab.GetComponent<NetworkedBehaviour>();
-				HackerPrefab = GameObject.Instantiate(HackerPrefab); //Local Player is Hacker. The order of instantiation here is important!
+				AgentSpawned.transform.position = new Vector3(startPosition.x, startPosition.y, startPosition.z);
+				AgentSpawned.GetComponent<NetworkedMovement>().receivedPosition = new Vector3(startPosition.x, startPosition.y, startPosition.z);
+				AgentRigidBody = AgentSpawned.GetComponent<Rigidbody>();
+				AgentPrediction = AgentSpawned.GetComponent<NetworkedBehaviour>();
+				SpawnedHacker = GameObject.Instantiate(HackerPrefab); //Local Player is Hacker. The order of instantiation here is important!
 			}
 
 			phantomManager = FindObjectOfType(typeof(PhantomManager)) as PhantomManager;
