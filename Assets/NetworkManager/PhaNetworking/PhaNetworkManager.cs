@@ -37,7 +37,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	/// This function is called when the object becomes enabled and active.
 	void OnEnable()
 	{
-		if (!NetworkInitialized)
+		if (!NetworkInitialized && singleton == null)
 		{
 			singleton = this;
 			PhaNetworkingAPI.mainSocket = PhaNetworkingAPI.InitializeNetworking();
