@@ -34,13 +34,6 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 
 	private static bool NetworkInitialized = false;
 
-	/// <summary>
-	/// Awake is called when the script instance is being loaded.
-	/// </summary>
-	void Awake()
-	{
-		
-	}
 	/// This function is called when the object becomes enabled and active.
 	void OnEnable()
 	{
@@ -57,7 +50,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		}
 		else
 		{
-			Destroy(this);
+			Destroy(gameObject);
 		}
 	}
 
