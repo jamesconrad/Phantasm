@@ -4377,6 +4377,7 @@ GameObject:
   - component: {fileID: 136291410491858418}
   - component: {fileID: 114185354999224520}
   - component: {fileID: 114820974051688750}
+  - component: {fileID: 114030319019304474}
   m_Layer: 30
   m_Name: AgentOnline
   m_TagString: Player
@@ -9110,6 +9111,17 @@ Light:
   m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114030319019304474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984759443243006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2a690835ff13374db6553620d92d076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114037413336102312
 MonoBehaviour:
   m_ObjectHideFlags: 1
