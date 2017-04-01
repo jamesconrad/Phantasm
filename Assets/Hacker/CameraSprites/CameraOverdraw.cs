@@ -46,6 +46,8 @@ public class CameraOverdraw : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{		
+		if(PhaNetworkManager.characterSelection == 1)
+		{
 		timeSinceUpdate += Time.deltaTime;
 		if(timeSinceUpdate > maxTimeToUpdate)
 		{
@@ -81,7 +83,7 @@ public class CameraOverdraw : MonoBehaviour
 			reference.transform.position = agent.transform.position;
 		}
 
-		
+		}
 		
 	}
 }
