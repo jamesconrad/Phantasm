@@ -33,11 +33,6 @@ public class Phantom : MonoBehaviour
 			GetComponent<NavMeshAgent>().enabled = false;
 		}
 
-        if (CustomNetworkManager.singleton.playerPrefab == CustomNetworkManager.singleton.spawnPrefabs[1])
-        {
-            GetComponent<Collider>().enabled = false;
-        }
-
         respawnPoints = FindObjectsOfType<PhantomSpawnLocation>();
     }
 

@@ -1,10 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.Networking.Match;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
-using System.Collections;
 
-public class GameState : NetworkBehaviour
+public class GameState : MonoBehaviour
 {
 
     public int numberOfSubObjectives;
@@ -51,15 +49,11 @@ public class GameState : NetworkBehaviour
 
     public void EndGame()
     {
-        CustomNetworkManager.singleton.StopHost();
-        NetworkServer.Shutdown();
         Cursor.lockState = CursorLockMode.None;
     }
 
     public static void StaticEndGame()
     {
-        CustomNetworkManager.singleton.StopHost();
-        //NetworkServer.Shutdown();
         Cursor.lockState = CursorLockMode.None;
     }
 

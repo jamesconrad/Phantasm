@@ -59,7 +59,6 @@ public class SplashScreen : MonoBehaviour
         splashImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
 
         
-        OnTimeReached.AddListener(() => { (CustomNetworkManager.singleton as CustomNetworkManager).endGame(); } );
         isCreated = true;
         screenOwner.GetComponent<FirstPersonCamera>().removeCamera();
         screenOwner.SetActive(false);
