@@ -154,11 +154,11 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 				Debug.LogError("phantomManager not found. Fuck.");
 			}
 
-			skipeManager.startSkipe();
+			//skipeManager.startSkipe();
 		}
 		else
 		{
-			skipeManager.closeSkipe();
+			//skipeManager.closeSkipe();
 		}
 
 	}
