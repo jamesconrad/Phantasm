@@ -35,17 +35,17 @@ public class PhanSkipeManager : MonoBehaviour {
 
 	public void startSkipe()
 	{
-		MicPtr = PhanSkipeAPI.StartupMic(audioBuffer);
-		micStarted = true;
+		//MicPtr = PhanSkipeAPI.StartupMic(audioBuffer);
+		//micStarted = true;
 	}
 
 	public void closeSkipe()
 	{
-		if (micStarted != false)
-		{
-			PhanSkipeAPI.ShutdownMic(MicPtr);
-			micStarted = false;
-		}
+		//if (micStarted != false)
+		//{
+		//	PhanSkipeAPI.ShutdownMic(MicPtr);
+		//	micStarted = false;
+		//}
 	}
 
 	/// <summary>
@@ -53,13 +53,13 @@ public class PhanSkipeManager : MonoBehaviour {
 	/// </summary>
 	void FixedUpdate()
 	{
-		if (micStarted)
-		{
-			currentBufferSize = PhanSkipeAPI.GetAudioBuffer(MicPtr, audioBuffer);
-
-			//PhanSkipeAPI.SetAudioBuffer(MicPtr, audioBuffer, currentBufferSize);
-			SendAudioBuffer();
-		}
+		//if (micStarted)
+		//{
+		//	currentBufferSize = PhanSkipeAPI.GetAudioBuffer(MicPtr, audioBuffer);
+//
+		//	//PhanSkipeAPI.SetAudioBuffer(MicPtr, audioBuffer, currentBufferSize);
+		//	SendAudioBuffer();
+		//}
 	}
 
 	void SendAudioBuffer()
