@@ -20,6 +20,7 @@ public class LevelTransition : MonoBehaviour {
 
         GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, alpha);
         GUI.depth = drawDepth;
+        if(fadeTexture!=null)
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), fadeTexture);
     }
 

@@ -4,18 +4,18 @@ using UnityEngine.Audio;
 
 public class MusicManagerScript : MonoBehaviour
 {
-    public AudioMixerSnapshot lowIntensity;
-    public AudioMixerSnapshot HighIntensity;
     public AudioClip[] musicChannels;
     public AudioSource[] musicSource;
     public AudioClip musicDeathChannel;
     public AudioSource musicDeathSource;
-    public GameObject AgentObject;
-    public GameObject[] PhantomObject;
+    GameObject AgentObject;
+    GameObject[] PhantomObject;
 
     float maxVolume = 0.25f;
 
     float intensity = 0.3f;
+
+    PhantomDistance distanceManager;
 
     // Use this for initialization
     void Start()
@@ -34,6 +34,16 @@ public class MusicManagerScript : MonoBehaviour
         musicDeathSource.loop = true;
         musicDeathSource.volume = 0.0f;
         //SpookyChip
+        distanceManager = FindObjectOfType<PhantomDistance>();
+        if(distanceManager != null)
+        {
+            AgentObject = distanceManager.AgentReference();
+            PhantomObject = distanceManager.PhantomReference();
+        }
+        else
+        {
+            Debug.LogWarning("Could not find Distance Manager!");
+        }
     }
 
     const float timeToWaitTillSearch = 10.0f;
@@ -45,16 +55,6 @@ public class MusicManagerScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //AgentObject = GameObject.FindGameObjectWithTag("Player");
-        //PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
-
-         timeSinceLastSearch += Time.fixedDeltaTime;
-        if(timeSinceLastSearch > timeToWaitTillSearch)
-        {
-            AgentObject = GameObject.FindGameObjectWithTag("Player");
-            PhantomObject = GameObject.FindGameObjectsWithTag("Enemy");
-            timeSinceLastSearch = 0.0f;
-        }
 
         if (AgentObject != null)
         {
@@ -64,9 +64,10 @@ public class MusicManagerScript : MonoBehaviour
             musicDeathSource.volume = deathAmount;
 
             float closestPhantom = 100000.0f;// = Vector3.Distance(AgentObject.transform.position, PhantomObject[0].transform.position);
-            for (int i = 1; i < PhantomObject.Length; ++i)
+            for (int i = 0; i < PhantomObject.Length; ++i)
             {
-                closestPhantom = Mathf.Min(closestPhantom, Vector3.Distance(AgentObject.transform.position, PhantomObject[i].transform.position));
+                if(PhantomObject[i].activeSelf)
+                    closestPhantom = Mathf.Min(closestPhantom, Vector3.Distance(AgentObject.transform.position, PhantomObject[i].transform.position));
             }
 
             //intensity = -Mathf.Cos(Time.fixedTime * 0.05f) * 0.5f + 0.5f;
@@ -85,6 +86,9 @@ public class MusicManagerScript : MonoBehaviour
         else
         {
             intensity = 0.0f;
+            Debug.Log("Agent not found!");
+            AgentObject = distanceManager.AgentReference();
+            PhantomObject = distanceManager.PhantomReference();
         }
         
        
@@ -97,7 +101,6 @@ public class MusicManagerScript : MonoBehaviour
             
             musicSource[i].volume = intensityAdjustClamp * maxVolume;
         }
-
 
     }
 }

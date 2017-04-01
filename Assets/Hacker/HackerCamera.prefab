@@ -163,7 +163,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010183414722}
   m_LocalRotation: {x: -0, y: 0.82597727, z: -0, w: 0.5637035}
-  m_LocalPosition: {x: 58.424515, y: 8.069686, z: 103.76228}
+  m_LocalPosition: {x: -5.46, y: 6.71, z: -6.68}
   m_LocalScale: {x: 71.160034, y: 71.16003, z: 71.160034}
   m_Children:
   - {fileID: 4443280654707018}
@@ -298,7 +298,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 60
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -404,7 +404,7 @@ MonoBehaviour:
     GlitchTexture: {fileID: 2800000, guid: 9836b695b2e96f847b8d624e0dc506d2, type: 3}
     FaceTexture: {fileID: 2800000, guid: 6ffca5bf713cbe84b8ff03ecb98998b4, type: 3}
     nightVisionAmount: 0.15
-    normalAmount: 0
+    normalAmount: 0.01
   jitterAmount: {x: 3, y: 3}
   jitterBias: 1
   filmGrainJitterActive: 1
@@ -533,8 +533,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 4545782740350172}
   m_AABB:
-    m_Center: {x: -0.04473973, y: -0.013080623, z: 0}
-    m_Extent: {x: 0.003298875, y: 0.00054865796, z: 0.0032982873}
+    m_Center: {x: -0.04473973, y: 0.0031112237, z: 0}
+    m_Extent: {x: 0.003298875, y: 0.01674052, z: 0.0032982873}
   m_DirtyAABB: 0
 --- !u!137 &137746465622439040
 SkinnedMeshRenderer:

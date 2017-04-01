@@ -2,7 +2,9 @@
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
-		_EmissionTex("Emissive (RGB)", 2D) = "black" {}
+		_EmissionTex("Emissive (RGB)", 2D) = "white" {}
+		_EmissiveCol ("Emissive Color", Color) = (0.0, 0.0, 0.0, 0.0)
+		_EmissiveMult ("Emissive Mult", Range(0,99)) = 0.0
 		//_EmissionVisionMult("Emissive Mult", Range(0,10)) = 0.0
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
 		_Metallic ("Metallic", Range(0,1)) = 0.0
@@ -28,6 +30,8 @@
 		half _Glossiness;
 		half _Metallic;
 		float _EmissionVisionMult = 0.0f;
+		float3 _EmissiveCol;
+		float _EmissiveMult;
 		fixed4 _Color;
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
@@ -37,7 +41,7 @@
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
-			float3 Emissive = tex2D(_EmissionTex, IN.uv_MainTex);// *_EmissionMult;
+			float3 Emissive = tex2D(_EmissionTex, IN.uv_MainTex) * _EmissiveCol * _EmissiveMult.rrr;// *_EmissionMult;
 			o.Emission = Emissive + (float(Emissive.r + Emissive.g + Emissive.b).rrr * 0.333333333 * _EmissionVisionMult);
 			//o.Emission = 
 			o.Alpha = c.a;

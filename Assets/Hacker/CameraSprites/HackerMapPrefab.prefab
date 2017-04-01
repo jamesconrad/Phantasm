@@ -87,4 +87,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: a7bce2d385318ec4980edd6c2458fe33, type: 3}
-  color: {r: 0.25098038, g: 0.0627451, b: 0.03137255, a: 1}
+  color: {r: 0.008682356, g: 0.047058824, b: 0.005882353, a: 1}

@@ -70,17 +70,32 @@ public class TextEnter : MonoBehaviour {
 
     void checkText()
     {
-        if(enteredText.CompareTo("rm -rf /") == 0)
+        if(enteredText.CompareTo("help") == 0 || enteredText.CompareTo("/help") == 0)
+		{
+			addToLog("\n<color=yellow>/help</color> Displays list of commands");
+			++logLength;
+			++logLength;
+			addToLog("\n<color=yellow>/code </color><color=red>[password]</color> Enters a code to unlock doors");
+			++logLength;
+			++logLength;
+		}
+		else if(enteredText.CompareTo("rm -rf /") == 0)
         {
             
 			addToLog("\n<color=red>*DON'T DO THAT*</color>");
 				++logLength;
 				++logLength;
         }
-        else if(enteredText.StartsWith("code",  System.StringComparison.CurrentCultureIgnoreCase))
+		else if(enteredText.StartsWith("/code",  System.StringComparison.CurrentCultureIgnoreCase))
         {
             checkDoors(enteredText);
         }
+		else
+		{
+			addToLog("\n<color=red>I don't know what you were expecting...</color>");
+			++logLength;
+			++logLength;
+		}
     }
 
 	public int SendConsoleMessage(string message, StringBuilder givenAddress)
