@@ -66,7 +66,7 @@ public class Heartbeat : MonoBehaviour {
 	}
 
 
-	void Update () {
+	void FixedUpdate () {
 		//the "vTest" should stop it from updating always
 		//	(since waiting is part of a coroutine and such)
 		//and, of course, it wont do a gosh dern thing if beat active is off.

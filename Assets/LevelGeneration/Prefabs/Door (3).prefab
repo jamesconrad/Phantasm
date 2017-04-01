@@ -208,7 +208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swingDir: 1
   swingSpeed: 45
-  openLimit: 90
+  openLimit: 150
   hinge: {fileID: 4103156687066656}
   handle: {fileID: 0}
   currentState: 0

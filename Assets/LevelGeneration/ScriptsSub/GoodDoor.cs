@@ -100,7 +100,7 @@ public class GoodDoor : MonoBehaviour {
 	void Update ()
     {
         currentState = state.state();
-        if (active && !locked && Input.GetKeyDown("e"))
+        if (active && !locked && (Input.GetButton("Interact")))
         {
             if (!inputSpamming)
             {
