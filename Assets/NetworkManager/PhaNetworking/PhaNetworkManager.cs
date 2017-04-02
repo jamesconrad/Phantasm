@@ -97,7 +97,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 					break;
 
 					case MessageType.EnemyUpdate:
-					phantomManager.ParsePhantomUpdate(int.Parse(receiveBuffer[2].ToString()), receiveBuffer);
+					phantomManager.ParsePhantomUpdate(int.Parse(receiveBuffer.ToString().Split(' ')[1]), receiveBuffer);
 					break;
 
 					case MessageType.HealthUpdate:
