@@ -4378,7 +4378,7 @@ GameObject:
   - component: {fileID: 114185354999224520}
   - component: {fileID: 114820974051688750}
   - component: {fileID: 114030319019304474}
-  - component: {fileID: 114339927153744998}
+  - component: {fileID: 114989536051776180}
   m_Layer: 30
   m_Name: AgentOnline
   m_TagString: Player
@@ -9172,15 +9172,15 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114339927153744998}
-        m_MethodName: Click
-        m_Mode: 1
+      - m_Target: {fileID: 114989536051776180}
+        m_MethodName: SendMessage
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Transition
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
@@ -9199,17 +9199,6 @@ MonoBehaviour:
   tSpeed: 0.1
   rotationBegin: {x: 0, y: 10, z: 0}
   rotationEnd: {x: 0, y: -10, z: 0}
---- !u!114 &114339927153744998
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1984759443243006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a34b73aa68855f547b25c083ef72554b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114398868276412256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9359,6 +9348,21 @@ MonoBehaviour:
   maxInput: 1
   minOutput: 0
   maxOutput: 1
+--- !u!114 &114989536051776180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984759443243006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 631ed7ef5bfea794fa448e797efaa7e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitNum: 0
+  destinationLevel: Menu
+  fadeTexture: {fileID: 2800000, guid: 56e41fe0983ed874f8a4a0b112d1ae60, type: 3}
+  fadeSpeed: 0.8
 --- !u!120 &120755845043339614
 LineRenderer:
   m_ObjectHideFlags: 1
