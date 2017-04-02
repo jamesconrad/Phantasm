@@ -46,6 +46,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     public int numOfFloors = 2;
     public int viewFloor = 0;
     private float floorHeight;
+    private int agentFloor = 0;
 
     // Use this for initialization
     void Start()
@@ -370,6 +371,26 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         }
     }
 
+    //used for translating map up a floor
+    public void FloorUp()
+    {
+        if (viewFloor < numOfFloors)
+            viewFloor++;
+    }
+
+    //used for translating map down a floor
+    public void FloorDown()
+    {
+        if (viewFloor > 0)
+            viewFloor--;
+    }
+
+    //used for translating map to agents floor
+    public void FloorAgent()
+    {
+        viewFloor = agentFloor;
+    }
+
     public void Update()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
@@ -459,7 +480,22 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
 
-                if(survCameras[i].transform.position.x <= CameraPositionMax.x
+                if (survCameras[i].GetComponentInParent<Agent>() != null)
+                {
+                    float curY = survCameras[i].transform.position.y;
+                    for (int f = 0; f < numOfFloors; f++)
+                    {
+                        if (curY >= CameraPositionMin.y + f * floorHeight && curY <= CameraPositionMin.y + (f + 1) * floorHeight)
+                        {
+                            agentFloor = f;
+                            break;
+                        }
+                    }
+                }
+
+                if(survCameras[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survCameras[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
+                && survCameras[i].transform.position.x <= CameraPositionMax.x
                 && survCameras[i].transform.position.x >= CameraPositionMin.x
                 && survCameras[i].transform.position.z <= CameraPositionMax.z
                 && survCameras[i].transform.position.z >= CameraPositionMin.z)
@@ -490,8 +526,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                         0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
                     
-                if(survCameras[i].transform.position.y >= cameraMap.nearClipPlane + cameraMap.transform.position.y
-                && survCameras[i].transform.position.y <= cameraMap.farClipPlane + cameraMap.transform.position.y
+                if(survDoors[i].transform.position.y >= cameraMap.nearClipPlane + cameraMap.transform.position.y
+                && survDoors[i].transform.position.y <= cameraMap.farClipPlane + cameraMap.transform.position.y
                 && survDoors[i].transform.position.x <= CameraPositionMax.x
                 && survDoors[i].transform.position.x >= CameraPositionMin.x
                 && survDoors[i].transform.position.z <= CameraPositionMax.z
