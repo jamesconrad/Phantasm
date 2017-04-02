@@ -9484,7 +9484,7 @@ MonoBehaviour:
   exitNum: 0
   destinationLevel: Menu
   fadeTexture: {fileID: 2800000, guid: 56e41fe0983ed874f8a4a0b112d1ae60, type: 3}
-  fadeSpeed: 0.8
+  fadeSpeed: 2
 --- !u!114 &114357951332665812
 MonoBehaviour:
   m_ObjectHideFlags: 1

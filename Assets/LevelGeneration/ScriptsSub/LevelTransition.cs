@@ -12,7 +12,7 @@ public class LevelTransition : MonoBehaviour
     public float fadeSpeed = 0.8f;
 
     private int drawDepth = -1000;//make sure overlay is overlayed
-    private float alpha = 1.0f;
+    private float alpha = 0.0f;
     private int fadeDir = -1;   //fade direction, fade in -1, fade out 1;
 
 	void OnGUI()
