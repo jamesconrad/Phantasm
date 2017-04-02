@@ -21,7 +21,7 @@ public class MainMenuManager : MonoBehaviour {
 
 	public ScoreFetch ScoreManager;
 
-	MainMenuState mainMenuState = MainMenuState.Menu;
+	public MainMenuState mainMenuState = MainMenuState.Menu;
 
 	public bool DebugForTesting = false;
 
@@ -183,6 +183,7 @@ public class MainMenuManager : MonoBehaviour {
 			}
 			if (PhaNetworkManager.Singleton.ReceiveConnectionMessage() > 0)
 			{
+				Debug.Log("Received connection message");
 				SetMenuState(MainMenuState.CharacterSelect);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
