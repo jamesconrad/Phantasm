@@ -9367,8 +9367,7 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114989536051776180, guid: 96955b63fb04de44ebc9171fb64bbee6,
-          type: 2}
+      - m_Target: {fileID: 114328903315737484}
         m_MethodName: SendMessage
         m_Mode: 5
         m_Arguments:
