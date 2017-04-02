@@ -2087,6 +2087,7 @@ GameObject:
   - component: {fileID: 114568591295786864}
   - component: {fileID: 114197911242536434}
   - component: {fileID: 114328903315737484}
+  - component: {fileID: 114551176335271464}
   m_Layer: 30
   m_Name: Agent
   m_TagString: Player
@@ -9523,6 +9524,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunHandle: {fileID: 114000011784594182}
   healthHandle: {fileID: 114000013077425356}
+--- !u!114 &114551176335271464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014286740798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ecb0230a6558a4c94c0e6076d5b8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreTime: 10000
+  timeBonusEnd: 600
+  phantomKilledMult: 100
 --- !u!114 &114568591295786864
 MonoBehaviour:
   m_ObjectHideFlags: 1
