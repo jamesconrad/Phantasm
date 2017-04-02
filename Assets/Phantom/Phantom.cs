@@ -50,19 +50,10 @@ public class Phantom : MonoBehaviour
         }
     }
 
-    public void Respawn()
+    IEnumerator Respawn(float respawnTime)
     {
-		Debug.Log("Phantoms Killed " + numKilled);
-
 		//setVisibility();
-		numKilled += 100;
-        if (audioObject.GetComponent<AudioSource>() != null)
-        {
-            GameObject temp = Instantiate(audioObject, transform.position, Quaternion.identity);
-            temp.GetComponent<PlayThenDelete>().Play();
-        }
 
-        Destroy(Instantiate(vanishParticleEffect, transform.position, vanishParticleEffect.transform.rotation), vanishParticleEffect.GetComponent<ParticleSystem>().duration);
         PhantomSpawnLocation spawnLoc = previousSpawnLocation;
         do
         {
@@ -76,16 +67,13 @@ public class Phantom : MonoBehaviour
 
         previousSpawnLocation = spawnLoc;
 
+		gameObject.GetComponent<Rigidbody>().useGravity = true;
         GetComponent<Health>().currentHealth = GetComponent<Health>().health;
+
+		yield return new WaitForSeconds(respawnTime);
     }
 
-    // This function is called when the MonoBehaviour will be destroyed
-    public void OnDestroy()
-    {
-        //GameState.StaticEndGame();
-    }
-
-    public void die()
+    public void die(float respawnTime = 1.0f)
     {
         Score scoreSystem = FindObjectOfType<Score>();
 		if(scoreSystem != null)
@@ -101,6 +89,12 @@ public class Phantom : MonoBehaviour
             GameObject temp = Instantiate(audioObject, transform.position, Quaternion.identity);
             temp.GetComponent<PlayThenDelete>().Play();
         }
+
+		gameObject.GetComponent<Rigidbody>().useGravity = false;
+		gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		transform.Translate(0.0f, -900000.0f, 0.0f);
+		
+		StartCoroutine(Respawn(respawnTime));
     }
 
 	public void setVisibility()
