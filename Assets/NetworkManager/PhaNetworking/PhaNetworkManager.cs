@@ -80,7 +80,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		if (SceneManager.GetActiveScene().name != "Menu")
 		{			
 			MessageType receivedType;
@@ -133,16 +133,18 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		{		
 			if (characterSelection == 0)
 			{
+				Ishost = true;			
 				AgentSpawned = GameObject.Instantiate(AgentPrefab); //Local player is agent.
 				AgentHealth = AgentSpawned.GetComponent<Health>();
 				AgentRigidBody = AgentSpawned.GetComponent<Rigidbody>();
 				previousPlayerVelocity = new Vector3(AgentRigidBody.velocity.x, AgentRigidBody.velocity.y, AgentRigidBody.velocity.z);
 				previousPlayerRotation = new Quaternion(AgentSpawned.transform.rotation.x, AgentSpawned.transform.rotation.y, AgentSpawned.transform.rotation.z, AgentSpawned.transform.rotation.w);
 
-				SpawnedHacker = GameObject.Instantiate(RemoteHackerPrefab);				
+				SpawnedHacker = GameObject.Instantiate(RemoteHackerPrefab);	
 			}
 			else if (characterSelection == 1)
 			{
+				Ishost = false;			
 				AgentSpawned = GameObject.Instantiate(RemoteAgentPrefab);
 				AgentHealth = AgentSpawned.GetComponent<Health>();
 				Vector3 startPosition = FindObjectOfType<PlayerStartLocation>().transform.position;
