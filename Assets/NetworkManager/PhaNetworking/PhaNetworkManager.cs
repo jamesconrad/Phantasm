@@ -59,6 +59,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	{
 		if (NetworkInitialized && singleton == this)
 		{
+			Debug.Log("Network is being shutdown");
 			PhaNetworkingAPI.ShutDownNetwork(PhaNetworkingAPI.mainSocket);
 			NetworkInitialized = false;
 		}
