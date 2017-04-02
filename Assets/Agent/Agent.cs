@@ -75,7 +75,6 @@ public class Agent : MonoBehaviour
         {
             Debug.LogWarning("Could not save score!");
         }
-        AgentUI.GetComponentInChildren<SplashScreen>().createSplashScreen(0);
         GetComponent<GunHandle>().gunReference.gameObject.SetActive(false);
     }
 

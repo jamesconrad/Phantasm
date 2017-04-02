@@ -17,8 +17,6 @@ public class MainMenuManager : MonoBehaviour {
 
 	public GameObject SelectionUI; Button selectAgentButton; Button selectHackerButton;
 	public  Text UIText;
-	public Button createGameButton;
-	public Button JoinGameButton;
 	public InputField ipInput;
 
 	public ScoreFetch ScoreManager;
@@ -171,6 +169,7 @@ public class MainMenuManager : MonoBehaviour {
 				SetMenuState(MainMenuState.CharacterSelect);
 				PhaNetworkingAPI.targetIP = new StringBuilder(PhaNetworkManager.recvBufferSize);
 				PhaNetworkingAPI.GetRemoteAddress(PhaNetworkingAPI.mainSocket, PhaNetworkingAPI.targetIP, PhaNetworkManager.recvBufferSize);
+				Debug.Log(PhaNetworkingAPI.targetIP);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
