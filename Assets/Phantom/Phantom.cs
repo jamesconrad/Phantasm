@@ -53,24 +53,25 @@ public class Phantom : MonoBehaviour
     IEnumerator Respawn(float respawnTime = 1.0f)
     {
 		//setVisibility();
+		yield return new WaitForSeconds(respawnTime);
 
         PhantomSpawnLocation spawnLoc = previousSpawnLocation;
         do
         {
-            spawnLoc = respawnPoints[Random.Range(0, respawnPoints.Length)];
-            transform.position = spawnLoc.transform.position;
             if (respawnPoints.Length == 1)
             {
                 break;
             }
+            spawnLoc = respawnPoints[Random.Range(0, respawnPoints.Length)];
         } while (spawnLoc == previousSpawnLocation);
 
         previousSpawnLocation = spawnLoc;
+        transform.position = spawnLoc.transform.position;
 
 		gameObject.GetComponent<Rigidbody>().useGravity = true;
         GetComponent<Health>().currentHealth = GetComponent<Health>().health;
-
-		yield return new WaitForSeconds(respawnTime);
+		GetComponent<BehaviourTree>().enabled = true;
+		GetComponent<NavMeshAgent>().enabled = true;
     }
 
     public void die(float respawnTime = 1.0f)
@@ -92,8 +93,10 @@ public class Phantom : MonoBehaviour
 
 		gameObject.GetComponent<Rigidbody>().useGravity = false;
 		gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-		transform.Translate(0.0f, -900000.0f, 0.0f);
-		
+		transform.position = new Vector3(0.0f, -900000.0f, 0.0f);
+		GetComponent<BehaviourTree>().enabled = false;
+		GetComponent<NavMeshAgent>().enabled = false;
+
 		StartCoroutine(Respawn(respawnTime));
     }
 

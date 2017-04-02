@@ -9239,8 +9239,8 @@ MonoBehaviour:
       startingNumberOfRounds: 0
       maxClips: 0
       startingNumberOfClips: 0
-    currentNumberOfRounds: 0
-    currentNumberOfClips: 0
+    currentNumberOfRounds: 20
+    currentNumberOfClips: 5
   gunReference: {fileID: 1000010272846346}
   laser: {fileID: 114000014016322976}
   smokeTrailReference: {fileID: 1957275954028906, guid: 2e40cf3fec49260479bb8740f051a0c4,

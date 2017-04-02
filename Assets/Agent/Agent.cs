@@ -86,6 +86,7 @@ public class Agent : MonoBehaviour
         {
             GetComponent<FirstPersonMovement>().enabled = !GetComponent<FirstPersonMovement>().enabled;
             GetComponent<FirstPersonCamera>().enabled = !GetComponent<FirstPersonCamera>().enabled;
+            GetComponent<GunHandle>().enabled = !GetComponent<GunHandle>().enabled;
             PauseUI.SetActive(!PauseUI.activeSelf);
         }
     }
