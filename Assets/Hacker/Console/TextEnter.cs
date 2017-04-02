@@ -81,19 +81,10 @@ public class TextEnter : MonoBehaviour {
 			addToLog("\n<color=red>*DON'T DO THAT*</color>");
 				++logLength;
         }
-		else if(enteredText.StartsWith("/code",  System.StringComparison.CurrentCultureIgnoreCase))
-        {
-            checkDoors(enteredText);
-        }
-		else if(enteredText.StartsWith("code",  System.StringComparison.CurrentCultureIgnoreCase))
-        {
-            checkDoors(enteredText);
-        }
-		else
+		else 
 		{
-			addToLog("\n<color=red>I don't know what you were expecting...</color>");
-			++logLength;
-		}
+            checkDoors(enteredText);
+        }
     }
 
 	public int SendConsoleMessage(string message, StringBuilder givenAddress)
@@ -130,7 +121,7 @@ public class TextEnter : MonoBehaviour {
         }
         else
         {
-            addToLog("\n<color=red>*ERROR: INCORRECT CODE*</color>");
+            addToLog("\n<color=red>*ERROR: UNKNOWN COMMAND*</color>");
 				++logLength;
                 ++logLength;
         }
