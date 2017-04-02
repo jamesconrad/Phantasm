@@ -166,10 +166,12 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		}
 		else
 		{
-			while (PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize) != 10035)
+			int bytesreceived = 0;
+			do
 			{
-				continue;
-			}
+				bytesreceived = PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize)
+				Debug.Log("Continuing to flush the fucking buffer, bytes: " + bytesreceived);
+			} while (bytesreceived != 10035);
 			//skipeManager.closeSkipe();
 		}
 
