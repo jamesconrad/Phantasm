@@ -36,24 +36,24 @@ public class Heartbeat : MonoBehaviour {
 		yield return new WaitForSeconds (beatSpeed);
 
 		//low beat
-		float timer = 0.3f;
+		float timer = 0.4f;
 		while (timer >= 0) {
 			GamePad.SetVibration (PlayerIndex.One, 1.0f, 1.0f);
-			timer -= Time.deltaTime;
+			timer -= Time.fixedDeltaTime;
 		}
-		GamePad.SetVibration (PlayerIndex.One, 0.0f, 0.0f);
+		GamePad.SetVibration (PlayerIndex.One, 0.25f, 0.25f);
 
 		//Time between low/high beat
 		yield return new WaitForSeconds (0.2f);
 
 		//high beat
 		//print ("3");
-		timer = 0.4f;
+		timer = 0.5f;
 		while (timer >= 0) {
 			GamePad.SetVibration (PlayerIndex.One, 1.0f, 1.0f);
-			timer -= Time.deltaTime;
+			timer -= Time.fixedDeltaTime;
 		}
-		GamePad.SetVibration (PlayerIndex.One, 0.0f, 0.0f);
+		GamePad.SetVibration (PlayerIndex.One, 0.1f, 0.1f);
 
 		//Again, vTest is set back to true,
 		//	meaning it is now time to do this thing again
@@ -72,6 +72,10 @@ public class Heartbeat : MonoBehaviour {
 		//and, of course, it wont do a gosh dern thing if beat active is off.
 		if (vTest && beatActive){
 			StartCoroutine (Beat ());
+		}
+		if(beatActive)
+		{
+			GamePad.SetVibration (PlayerIndex.One, 0.0f, 0.0f);
 		}
 	}
 }

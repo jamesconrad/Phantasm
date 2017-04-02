@@ -152,6 +152,10 @@ public class HackerVisionScript : MonoBehaviour
     // Awake is called when the script instance is being loaded
     public void Awake()
     {
+        ambientLight.r = ambientLight.r * 1.0f;
+        ambientLight.g = ambientLight.g * 1.0f;
+        ambientLight.b = ambientLight.b * 1.0f;
+
         barrelDistortAmount.normal = 1.00f;
         barrelDistortAmount.night = 1.15f;
         barrelDistortAmount.thermal = 1.50f;

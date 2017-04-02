@@ -128,6 +128,130 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
         floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
+        for (int i = 0; i < survCameras.Count; i++)
+        {
+            Vector3 CameraPositionTemp = survCameras[i].transform.position;
+
+            if(CameraPositionMax.x < CameraPositionTemp.x)
+            {
+                CameraPositionMax.x = CameraPositionTemp.x + 0.0f;
+            }
+            if (CameraPositionMax.y < CameraPositionTemp.y)
+            {
+                CameraPositionMax.y = CameraPositionTemp.y + 0.0f;
+            }
+            if (CameraPositionMax.z < CameraPositionTemp.z)
+            {
+                CameraPositionMax.z = CameraPositionTemp.z + 0.0f;
+            }
+            
+            if (CameraPositionMin.x > CameraPositionTemp.x)
+            {
+                CameraPositionMin.x = CameraPositionTemp.x - 0.0f;
+            }
+            if (CameraPositionMin.y > CameraPositionTemp.y)
+            {
+                CameraPositionMin.y = CameraPositionTemp.y - 0.0f;
+            }
+            if (CameraPositionMin.z > CameraPositionTemp.z)
+            {
+                CameraPositionMin.z = CameraPositionTemp.z - 0.0f;
+            }
+        }
+        
+        for (int i = 0; i < survDoors.Count; i++)
+        {
+            Vector3 DoorPositionTemp = survDoors[i].transform.position;
+
+            if(CameraPositionMax.x < DoorPositionTemp.x)
+            {
+                CameraPositionMax.x = DoorPositionTemp.x + 0.0f;
+            }
+            if (CameraPositionMax.y < DoorPositionTemp.y)
+            {
+                CameraPositionMax.y = DoorPositionTemp.y + 0.0f;
+            }
+            if (CameraPositionMax.z < DoorPositionTemp.z)
+            {
+                CameraPositionMax.z = DoorPositionTemp.z + 0.0f;
+            }
+            
+            if (CameraPositionMin.x > DoorPositionTemp.x)
+            {
+                CameraPositionMin.x = DoorPositionTemp.x - 0.0f;
+            }
+            if (CameraPositionMin.y > DoorPositionTemp.y)
+            {
+                CameraPositionMin.y = DoorPositionTemp.y - 0.0f;
+            }
+            if (CameraPositionMin.z > DoorPositionTemp.z)
+            {
+                CameraPositionMin.z = DoorPositionTemp.z - 0.0f;
+            }
+        }
+
+        for (int i = 0; i < survSpeakers.Count; i++)
+        {
+            Vector3 SpeakerPositionTemp = survSpeakers[i].transform.position;
+
+            if(CameraPositionMax.x < SpeakerPositionTemp.x)
+            {
+                CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
+            }
+            if (CameraPositionMax.y < SpeakerPositionTemp.y)
+            {
+                CameraPositionMax.y = SpeakerPositionTemp.y + 0.0f;
+            }
+            if (CameraPositionMax.z < SpeakerPositionTemp.z)
+            {
+                CameraPositionMax.z = SpeakerPositionTemp.z + 0.0f;
+            }
+            
+            if (CameraPositionMin.x > SpeakerPositionTemp.x)
+            {
+                CameraPositionMin.x = SpeakerPositionTemp.x - 0.0f;
+            }
+            if (CameraPositionMin.y > SpeakerPositionTemp.y)
+            {
+                CameraPositionMin.y = SpeakerPositionTemp.y - 0.0f;
+            }
+            if (CameraPositionMin.z > SpeakerPositionTemp.z)
+            {
+                CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
+            }
+        }
+
+        for (int i = 0; i < survPickups.Count; i++)
+        {
+            Vector3 SpeakerPositionTemp = survPickups[i].transform.position;
+
+            if(CameraPositionMax.x < SpeakerPositionTemp.x)
+            {
+                CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
+            }
+            if (CameraPositionMax.y < SpeakerPositionTemp.y)
+            {
+                CameraPositionMax.y = SpeakerPositionTemp.y + 0.0f;
+            }
+            if (CameraPositionMax.z < SpeakerPositionTemp.z)
+            {
+                CameraPositionMax.z = SpeakerPositionTemp.z + 0.0f;
+            }
+            
+            if (CameraPositionMin.x > SpeakerPositionTemp.x)
+            {
+                CameraPositionMin.x = SpeakerPositionTemp.x - 0.0f;
+            }
+            if (CameraPositionMin.y > SpeakerPositionTemp.y)
+            {
+                CameraPositionMin.y = SpeakerPositionTemp.y - 0.0f;
+            }
+            if (CameraPositionMin.z > SpeakerPositionTemp.z)
+            {
+                CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
+            }
+        }
+
         if(cameraMap != null)
         {
             CameraPositionMin.x = cameraMap.transform.position.x - cameraMap.orthographicSize;
@@ -335,9 +459,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
 
-                if(survCameras[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
-                && survCameras[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
-                && survCameras[i].transform.position.x <= CameraPositionMax.x
+                if(survCameras[i].transform.position.x <= CameraPositionMax.x
                 && survCameras[i].transform.position.x >= CameraPositionMin.x
                 && survCameras[i].transform.position.z <= CameraPositionMax.z
                 && survCameras[i].transform.position.z >= CameraPositionMin.z)

@@ -9,9 +9,9 @@ public class AgentHeartbeatScript : MonoBehaviour
     PhantomDistance distanceManager;
 	Heartbeat heartbeat;
 
-	public float minDistance = 1.0f;
-    public float maxDistance = 10.0f;
-	public Vector3 distanceBias = new Vector3(1.0f, 5.0f, 1.0f);
+	public float minDistance = 4.0f;
+    public float maxDistance = 8.0f;
+	public Vector3 distanceBias = new Vector3(1.0f, 1.0f, 1.0f);
 	// Use this for initialization
 	void Start () 
 	{
@@ -37,7 +37,6 @@ public class AgentHeartbeatScript : MonoBehaviour
     	    if(PhantomObject[i].activeSelf)
     	        closestPhantom = Mathf.Min(closestPhantom, Vector3.Distance(AgentObject.transform.position, Vector3.Scale(PhantomObject[i].transform.position, distanceBias)));
     	}
-		
 		float interp = Mathf.InverseLerp(minDistance, maxDistance, closestPhantom);
 		heartbeat.beatIntensity = 1.0f - Mathf.Clamp(interp, 0.0f, 1.0f);
 		heartbeat.beatActive = (closestPhantom < maxDistance);
