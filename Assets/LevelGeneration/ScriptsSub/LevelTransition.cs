@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelTransition : MonoBehaviour {
+public class LevelTransition : MonoBehaviour 
+{
+    public int exitNum = 0;
 
     public string destinationLevel;
     public Texture2D fadeTexture; //overlay texture, probally will be the loading image
