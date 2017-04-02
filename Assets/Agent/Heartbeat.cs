@@ -41,7 +41,7 @@ public class Heartbeat : MonoBehaviour {
 			GamePad.SetVibration (PlayerIndex.One, 1.0f, 1.0f);
 			timer -= Time.fixedDeltaTime;
 		}
-		GamePad.SetVibration (PlayerIndex.One, 0.25f, 0.25f);
+		GamePad.SetVibration (PlayerIndex.One, 0.0f, 0.0f);
 
 		//Time between low/high beat
 		yield return new WaitForSeconds (0.2f);
@@ -53,7 +53,7 @@ public class Heartbeat : MonoBehaviour {
 			GamePad.SetVibration (PlayerIndex.One, 1.0f, 1.0f);
 			timer -= Time.fixedDeltaTime;
 		}
-		GamePad.SetVibration (PlayerIndex.One, 0.1f, 0.1f);
+		GamePad.SetVibration (PlayerIndex.One, 0.0f, 0.0f);
 
 		//Again, vTest is set back to true,
 		//	meaning it is now time to do this thing again
