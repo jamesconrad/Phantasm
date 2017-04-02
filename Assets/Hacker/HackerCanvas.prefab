@@ -480,7 +480,7 @@ MonoBehaviour:
   healthTexture: {fileID: 2800000, guid: 38671ffe6ab1dca4c8a44ddab9a12577, type: 3}
   ammoTexture: {fileID: 2800000, guid: 2eb2286ca8df9db4daae0e7a3207a54d, type: 3}
   WindowIsInteractive: 1
-  numOfFloors: 3
+  numOfFloors: 2
   viewFloor: 0
 --- !u!114 &114000010427793060
 MonoBehaviour:
@@ -1970,7 +1970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -479, y: -154}
+  m_AnchoredPosition: {x: -430, y: -200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224646509350886218

@@ -127,7 +127,6 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         Vector3 CameraPositionMax = survCameras[0].transform.position;
         Vector3 CameraPositionMin = survCameras[0].transform.position;
 
-        floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
         for (int i = 0; i < survCameras.Count; i++)
         {
@@ -253,6 +252,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             }
         }
 
+        
+        floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
+
         if(cameraMap != null)
         {
             CameraPositionMin.x = cameraMap.transform.position.x - cameraMap.orthographicSize;
@@ -374,7 +376,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     //used for translating map up a floor
     public void FloorUp()
     {
-        if (viewFloor < numOfFloors)
+        if (viewFloor < numOfFloors - 1)
             viewFloor++;
     }
 
