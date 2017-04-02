@@ -24,7 +24,7 @@ public class Health : PhaNetworkingMessager {
     public void takeDamage(float damage)
     {
         currentHealth -= damage;
-        if (PhaNetworkManager.characterSelection == 0)
+        if (PhaNetworkManager.characterSelection == 0 && gameObject.CompareTag("Player"))
         {
             SendHealthUpdate((int)damage, PhaNetworkingAPI.targetIP);
         }
