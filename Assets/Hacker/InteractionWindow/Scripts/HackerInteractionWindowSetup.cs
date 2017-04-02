@@ -20,6 +20,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     public GameObject cameraButtonPrefab;
     public GameObject doorButtonPrefab;
     public GameObject speakerButtonPrefab;
+    public GameObject pickupButtonPrefab;
+    public Texture healthTexture;
+    public Texture ammoTexture;
     private List<Camera> survCameras;
     private List<GameObject> survCameraButtons;
 
@@ -30,7 +33,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     // List of Speakers for drawing    
     private List<CodeVoice> survSpeakers;
     private List<GameObject> survSpeakerButtons;
+    
 
+    // List of Pickups for drawing    
+    private List<PickupScript> survPickups;
+    private List<GameObject> survPickupButtons;
 
     public bool WindowIsInteractive = true;
 
@@ -98,7 +105,6 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         survSpeakers = new List<CodeVoice>();
         for (int i = 0; i < tempSpeakers.Length; i++)
         {
-            Debug.Log("");
             if (tempSpeakers[i].codeGenned)
             {
                 survSpeakers.Add(tempSpeakers[i]);
@@ -106,102 +112,19 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         }
         survSpeakerButtons = new List<GameObject>();
 
+        PickupScript[] tempPickups = FindObjectsOfType<PickupScript>();
+        survPickups = new List<PickupScript>();
+        for (int i = 0; i < tempPickups.Length; i++)
+        {
+            if (tempPickups[i].isActiveAndEnabled)
+            {
+                survPickups.Add(tempPickups[i]);
+            }
+        }
+        survPickupButtons = new List<GameObject>();
+
         Vector3 CameraPositionMax = survCameras[0].transform.position;
         Vector3 CameraPositionMin = survCameras[0].transform.position;
-
-        for (int i = 0; i < survCameras.Count; i++)
-        {
-            Vector3 CameraPositionTemp = survCameras[i].transform.position;
-
-            if(CameraPositionMax.x < CameraPositionTemp.x)
-            {
-                CameraPositionMax.x = CameraPositionTemp.x + 0.0f;
-            }
-            if (CameraPositionMax.y < CameraPositionTemp.y)
-            {
-                CameraPositionMax.y = CameraPositionTemp.y + 0.0f;
-            }
-            if (CameraPositionMax.z < CameraPositionTemp.z)
-            {
-                CameraPositionMax.z = CameraPositionTemp.z + 0.0f;
-            }
-            
-            if (CameraPositionMin.x > CameraPositionTemp.x)
-            {
-                CameraPositionMin.x = CameraPositionTemp.x - 0.0f;
-            }
-            if (CameraPositionMin.y > CameraPositionTemp.y)
-            {
-                CameraPositionMin.y = CameraPositionTemp.y - 0.0f;
-            }
-            if (CameraPositionMin.z > CameraPositionTemp.z)
-            {
-                CameraPositionMin.z = CameraPositionTemp.z - 0.0f;
-            }
-        }
-        
-        for (int i = 0; i < survDoors.Count; i++)
-        {
-            Vector3 DoorPositionTemp = survDoors[i].transform.position;
-
-            if(CameraPositionMax.x < DoorPositionTemp.x)
-            {
-                CameraPositionMax.x = DoorPositionTemp.x + 0.0f;
-            }
-            if (CameraPositionMax.y < DoorPositionTemp.y)
-            {
-                CameraPositionMax.y = DoorPositionTemp.y + 0.0f;
-            }
-            if (CameraPositionMax.z < DoorPositionTemp.z)
-            {
-                CameraPositionMax.z = DoorPositionTemp.z + 0.0f;
-            }
-            
-            if (CameraPositionMin.x > DoorPositionTemp.x)
-            {
-                CameraPositionMin.x = DoorPositionTemp.x - 0.0f;
-            }
-            if (CameraPositionMin.y > DoorPositionTemp.y)
-            {
-                CameraPositionMin.y = DoorPositionTemp.y - 0.0f;
-            }
-            if (CameraPositionMin.z > DoorPositionTemp.z)
-            {
-                CameraPositionMin.z = DoorPositionTemp.z - 0.0f;
-            }
-        }
-
-        for (int i = 0; i < survSpeakers.Count; i++)
-        {
-            Vector3 SpeakerPositionTemp = survSpeakers[i].transform.position;
-
-            if(CameraPositionMax.x < SpeakerPositionTemp.x)
-            {
-                CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
-            }
-            if (CameraPositionMax.y < SpeakerPositionTemp.y)
-            {
-                CameraPositionMax.y = SpeakerPositionTemp.y + 0.0f;
-            }
-            if (CameraPositionMax.z < SpeakerPositionTemp.z)
-            {
-                CameraPositionMax.z = SpeakerPositionTemp.z + 0.0f;
-            }
-            
-            if (CameraPositionMin.x > SpeakerPositionTemp.x)
-            {
-                CameraPositionMin.x = SpeakerPositionTemp.x - 0.0f;
-            }
-            if (CameraPositionMin.y > SpeakerPositionTemp.y)
-            {
-                CameraPositionMin.y = SpeakerPositionTemp.y - 0.0f;
-            }
-            if (CameraPositionMin.z > SpeakerPositionTemp.z)
-            {
-                CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
-            }
-        }
-
 
         floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
@@ -296,6 +219,31 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             survSpeakerButtons.Add(tempButton);
         }
 
+        for (int i = 0; i < survPickups.Count; i++)
+        {
+            GameObject tempButton = Instantiate(pickupButtonPrefab);
+            tempButton.GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
+
+            Vector3 LerpPosition = survPickups[i].transform.position;
+            LerpPosition.x = Mathf.InverseLerp(CameraPositionMin.x, CameraPositionMax.x, survPickups[i].transform.position.x);
+            LerpPosition.y = Mathf.InverseLerp(CameraPositionMin.y, CameraPositionMax.y, survPickups[i].transform.position.y);
+            LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survPickups[i].transform.position.z);
+
+            tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    GetComponent<RectTransform>().rect.width, LerpPosition.x),
+
+                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    GetComponent<RectTransform>().rect.height, LerpPosition.z));
+
+            RawImage image = tempButton.GetComponent<RawImage>();
+            if(survPickups[i].itemType == PickupType.Ammo)
+                image.texture = ammoTexture;
+            if(survPickups[i].itemType == PickupType.Health)
+                image.texture = healthTexture;
+
+            survPickupButtons.Add(tempButton);
+        }
     }
 
     public void Update()
@@ -441,8 +389,6 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 else
                 {
                     survDoorButtons[i].GetComponent<Button>().interactable = false;
-                    //Destroy(survDoorButtons[i]);
-                    //survDoorButtons.RemoveAt(i);
                 }
             }
 
@@ -478,14 +424,35 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 /// TODO 
                 // remove speakers from the map when their code is entered
                 
-                //if(survSpeakers[i].genCode)
-                //{
-                //    
-                //}
-                //else
-                //{
-                //    survDoorButtons[i].GetComponent<Button>().interactable = false;
-                //}
+            }
+
+            for (int i = 0; i < survPickups.Count; i++)
+            {
+                survPickupButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
+
+                Vector3 LerpPosition = survPickups[i].transform.position;
+                LerpPosition.x = Mathf.InverseLerp(CameraPositionMin.x, CameraPositionMax.x, survPickups[i].transform.position.x);
+                LerpPosition.y = Mathf.InverseLerp(CameraPositionMin.y, CameraPositionMax.y, survPickups[i].transform.position.y);
+                LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survPickups[i].transform.position.z);
+
+                survPickupButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
+                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        GetComponent<RectTransform>().rect.width, LerpPosition.x),
+
+                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        GetComponent<RectTransform>().rect.height, LerpPosition.z));
+
+                if(survPickups[i].transform.position.x <= CameraPositionMax.x
+                && survPickups[i].transform.position.x >= CameraPositionMin.x
+                && survPickups[i].transform.position.z <= CameraPositionMax.z
+                && survPickups[i].transform.position.z >= CameraPositionMin.z)
+                {
+                    survPickupButtons[i].SetActive(true);
+                }
+                else
+                {
+                    survPickupButtons[i].SetActive(false);
+                }
             }
         }
     }
