@@ -2,7 +2,9 @@
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}
+		_MainTex ("The Bump Texture", 2D) = "white" {}
+		_HeartRateTex ("The Ramp Texture", 2D) = "white" {}
+		_GridTex ("The Grid Texture", 2D) = "black" {}
 	}
 	SubShader
 	{

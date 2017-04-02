@@ -46,7 +46,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _GridTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _HeartRate
+      second:
+        m_Texture: {fileID: 2800000, guid: 5a03087b1263cd84b9e98f02ab2eadc0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _HeartRateTex
       second:
         m_Texture: {fileID: 2800000, guid: 5a03087b1263cd84b9e98f02ab2eadc0, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -55,7 +67,7 @@ Material:
         name: _MainTex
       second:
         m_Texture: {fileID: 2800000, guid: 00f8c337d7079f74ca2ef01dbe1d6c67, type: 3}
-        m_Scale: {x: 4, y: 4}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
