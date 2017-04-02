@@ -50,7 +50,7 @@ public class Phantom : MonoBehaviour
         }
     }
 
-    IEnumerator Respawn(float respawnTime)
+    IEnumerator Respawn(float respawnTime = 1.0f)
     {
 		//setVisibility();
 
