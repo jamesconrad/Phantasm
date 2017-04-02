@@ -64,7 +64,6 @@ public class TextEnter : MonoBehaviour {
 				//addToLog ("\n*Thank You for testing the Hacker Console!*");
 			addToLog("\n<color=yellow>*This is an example of tutorial stuff you can add with \"addToLog(string)\"*</color>");
 				++logLength;
-				++logLength;
 		}
 	}
 
@@ -74,26 +73,25 @@ public class TextEnter : MonoBehaviour {
 		{
 			addToLog("\n<color=yellow>/help</color> Displays list of commands");
 			++logLength;
-			++logLength;
 			addToLog("\n<color=yellow>/code </color><color=red>[password]</color> Enters a code to unlock doors");
-			++logLength;
 			++logLength;
 		}
 		else if(enteredText.CompareTo("rm -rf /") == 0)
         {
-            
 			addToLog("\n<color=red>*DON'T DO THAT*</color>");
-				++logLength;
 				++logLength;
         }
 		else if(enteredText.StartsWith("/code",  System.StringComparison.CurrentCultureIgnoreCase))
         {
             checkDoors(enteredText);
         }
+		else if(enteredText.StartsWith("code",  System.StringComparison.CurrentCultureIgnoreCase))
+        {
+            checkDoors(enteredText);
+        }
 		else
 		{
 			addToLog("\n<color=red>I don't know what you were expecting...</color>");
-			++logLength;
 			++logLength;
 		}
     }

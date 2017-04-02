@@ -59,7 +59,7 @@ public class GoodDoor : MonoBehaviour {
         if(locked)
         {
             //Debug.Log(code + " vs. " + input);
-            if(input.Contains(code))
+            if(input.Contains(code.ToUpper()))
             {
                 locked = false;
                 ElectricBarrier();
