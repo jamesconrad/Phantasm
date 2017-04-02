@@ -48,6 +48,10 @@ MonoBehaviour:
     type: 2}
   speakerButtonPrefab: {fileID: 1000012139292072, guid: 0888dec885d4d3c4483605c0bc5b7cd5,
     type: 2}
+  pickupButtonPrefab: {fileID: 1000012139292072, guid: 489e2d501084ba844b3549b05d8521b5,
+    type: 2}
+  healthTexture: {fileID: 2800000, guid: 38671ffe6ab1dca4c8a44ddab9a12577, type: 3}
+  ammoTexture: {fileID: 2800000, guid: 2eb2286ca8df9db4daae0e7a3207a54d, type: 3}
   WindowIsInteractive: 1
   numOfFloors: 2
   viewFloor: 0

@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: phong15SG
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  m_Name: OpenDoorTutorial
+  m_Shader: {fileID: 4800000, guid: 5988bb688664b27479ccb65317ec638e, type: 3}
+  m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -18,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: 86ef7ff9bb485944b87673928a951c23, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -48,7 +48,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 3ceaf3bbcc1072042a744b126ff4fae0, type: 3}
+        m_Texture: {fileID: 2800000, guid: f41f81161998f4c4f8388b912229716c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -84,7 +84,7 @@ Material:
       second: 0
     - first:
         name: _GlossMapScale
-      second: 0.8
+      second: 1
     - first:
         name: _Glossiness
       second: 0.5
@@ -105,7 +105,7 @@ Material:
       second: 0.02
     - first:
         name: _SmoothnessTextureChannel
-      second: 1
+      second: 0
     - first:
         name: _SpecularHighlights
       second: 1

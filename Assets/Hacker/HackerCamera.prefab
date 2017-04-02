@@ -397,7 +397,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b4f2416993c511c4486e9f26ec99d878, type: 2}
   - {fileID: 2100000, guid: 0b178672114bed748b8c170fcbddf64d, type: 2}
   - {fileID: 2100000, guid: 0d355e403b4fdd54d9b4823cf859b4b6, type: 2}
-  ambientLight: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
+  ambientLight: {r: 1, g: 1, b: 1, a: 1}
   filmGrain:
     ScrollingTexture: {fileID: 2800000, guid: 78df00b6c05950d49a2718aa7f68f092, type: 3}
     MultTexture: {fileID: 2800000, guid: d1a860762aba40e4b9f1e5d905048341, type: 3}
