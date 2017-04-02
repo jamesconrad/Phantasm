@@ -166,6 +166,10 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		}
 		else
 		{
+			while (PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize) != 10035)
+			{
+				continue;
+			}
 			//skipeManager.closeSkipe();
 		}
 
