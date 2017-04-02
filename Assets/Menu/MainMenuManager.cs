@@ -170,9 +170,9 @@ public class MainMenuManager : MonoBehaviour {
 				PhaNetworkingAPI.targetIP = new StringBuilder(PhaNetworkManager.recvBufferSize);
 				PhaNetworkingAPI.GetRemoteAddress(PhaNetworkingAPI.mainSocket, PhaNetworkingAPI.targetIP, PhaNetworkManager.recvBufferSize);
 				Debug.Log(PhaNetworkingAPI.targetIP);
-				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
-				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
-				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
+				Debug.Log("Bytes sent for connection message: " + PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP));
+				Debug.Log("Bytes sent for connection message: " + PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP));
+				Debug.Log("Bytes sent for connection message: " + PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP));
 			}
 			break;
 
@@ -200,6 +200,10 @@ public class MainMenuManager : MonoBehaviour {
 				{//Select players properly, disable the other 
 					selectAgentButton.interactable = false;
 					selectAgentButton.targetGraphic.color = Color.black;
+
+					//PhaNetworkManager.characterSelection = 1;
+					//selectAgentButton.interactable = false;
+					//PhaNetworkManager.Singleton.SendCharacterLockMessage(1, PhaNetworkingAPI.targetIP);
 				}
 				if (enemyPlayerSelection == 1)
 				{
