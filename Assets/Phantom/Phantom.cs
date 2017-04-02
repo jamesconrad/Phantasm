@@ -53,6 +53,11 @@ public class Phantom : MonoBehaviour
     IEnumerator Respawn(float respawnTime = 1.0f)
     {
 		//setVisibility();
+		gameObject.GetComponent<Rigidbody>().useGravity = false;
+		gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		transform.position = new Vector3(0.0f, -900000.0f, 0.0f);
+		GetComponent<BehaviourTree>().enabled = false;
+		GetComponent<NavMeshAgent>().enabled = false;
 		yield return new WaitForSeconds(respawnTime);
 
         PhantomSpawnLocation spawnLoc = previousSpawnLocation;
@@ -91,11 +96,7 @@ public class Phantom : MonoBehaviour
             temp.GetComponent<PlayThenDelete>().Play();
         }
 
-		gameObject.GetComponent<Rigidbody>().useGravity = false;
-		gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-		transform.position = new Vector3(0.0f, -900000.0f, 0.0f);
-		GetComponent<BehaviourTree>().enabled = false;
-		GetComponent<NavMeshAgent>().enabled = false;
+		
 
 		StartCoroutine(Respawn(respawnTime));
     }
