@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5851c90d16d724e8d5100f0b0c66c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnlineSceneName: SceneTemplate
+  OnlineSceneName: SceneTemplate - Copy
   AgentPrefab: {fileID: 1000014286740798, guid: cb84adf3a52d4904497b307ade945dd9,
     type: 2}
   RemoteAgentPrefab: {fileID: 1984759443243006, guid: 96955b63fb04de44ebc9171fb64bbee6,
@@ -60,3 +60,4 @@ MonoBehaviour:
     type: 2}
   RemoteHackerPrefab: {fileID: 1122685342469312, guid: 980f657bbda3e1c4fa99d0dabd75c30e,
     type: 2}
+  skipeManager: {fileID: 0}
