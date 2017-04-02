@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine.Audio;
 
 public class MusicManagerScript : MonoBehaviour
@@ -11,7 +12,9 @@ public class MusicManagerScript : MonoBehaviour
     GameObject AgentObject;
     GameObject[] PhantomObject;
 
-    float maxVolume = 0.25f;
+    public float maxVolume = 0.25f;
+
+
 
     float intensity = 0.3f;
 
