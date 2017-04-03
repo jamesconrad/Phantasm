@@ -96,7 +96,7 @@ public class MainMenuManager : MonoBehaviour {
 			
 			case MainMenuState.InGame:
 			//Load the scene if both players have decided on their choice.
-			SceneManager.LoadScene(PhaNetworkManager.Singleton.OnlineSceneName);
+			SceneManager.LoadSceneAsync(PhaNetworkManager.Singleton.OnlineSceneName);
 			break;
 
 			default:

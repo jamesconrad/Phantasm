@@ -32,6 +32,7 @@ public class Phantom : MonoBehaviour
 			GetComponent<BehaviourTree>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
 			GetComponent<Collider>().enabled = false;
+			GetComponent<Rigidbody>().useGravity = false;
 		}
 
         respawnPoints = FindObjectsOfType<PhantomSpawnLocation>();
@@ -46,7 +47,7 @@ public class Phantom : MonoBehaviour
             collision.rigidbody.AddForce((collision.transform.position - transform.position).normalized * 25.0f, ForceMode.Impulse);
 			
 			numKilled = Mathf.Max(numKilled - 2, 0);
-            Respawn(0.0f);
+            StartCoroutine(Respawn(0.0f));
 			
         }
     }

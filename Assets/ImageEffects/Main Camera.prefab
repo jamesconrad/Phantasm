@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 124000013821477226}
   - component: {fileID: 114000011884230810}
   - component: {fileID: 114000011522883828}
-  - component: {fileID: 114000010556309686}
-  - component: {fileID: 81000012478703328}
   - component: {fileID: 114391673689964544}
+  - component: {fileID: 114000010556309686}
+  - component: {fileID: 114622037972053032}
+  - component: {fileID: 81000012478703328}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1052,8 +1053,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5b78278234f614aabc66686d7538a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowIntensity: {fileID: 0}
-  HighIntensity: {fileID: 0}
   musicChannels:
   - {fileID: 8300000, guid: 5ba9f0e861a22bc42979003360c3a453, type: 3}
   - {fileID: 8300000, guid: 34c0ea0003b9a3b4691b4fcaaffc52bf, type: 3}
@@ -1070,9 +1069,7 @@ MonoBehaviour:
   - {fileID: 82000013580040194}
   musicDeathChannel: {fileID: 8300000, guid: 4aeb549210da9014e9fda2a7ba70fd27, type: 3}
   musicDeathSource: {fileID: 82000013636726162}
-  AgentObject: {fileID: 0}
-  PhantomObject:
-  - {fileID: 0}
+  maxVolume: 0.25
 --- !u!114 &114000012511862822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1108,6 +1105,18 @@ MonoBehaviour:
   Threshold: 1
   HorizontalStretch: 1
   VerticalStretch: 1
+--- !u!114 &114622037972053032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010018685854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7354d32415a63384e97282c63875ad11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectMaterial: {fileID: 2100000, guid: 01c3adbc0ddda5d42a426928600ea25e, type: 2}
 --- !u!124 &124000013821477226
 Behaviour:
   m_ObjectHideFlags: 1
