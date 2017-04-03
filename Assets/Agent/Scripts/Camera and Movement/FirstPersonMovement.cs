@@ -29,6 +29,7 @@ public class FirstPersonMovement : MonoBehaviour
     {
         movementDirection = (/*Camera.main.transform.forward*/ playerTransform.forward * Input.GetAxis("Vertical") + /*Camera.main.transform.right*/ playerTransform.right * Input.GetAxis("Horizontal"));
         movementDirection.y = 0.0f;
+        movementDirection.Normalize();
 
         if(Vector3.Distance(Vector3.zero, movementDirection) > 0.5f)
         {
