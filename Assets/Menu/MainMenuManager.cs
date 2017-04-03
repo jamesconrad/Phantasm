@@ -35,6 +35,10 @@ public class MainMenuManager : MonoBehaviour {
 
 		PhaNetworkManager.characterSelection = -1;
 		enemyPlayerSelection = -1;
+		if (PhaNetworkingAPI.targetIP.ToString() != "0.0.0.1")
+		{
+			ipInput.text = PhaNetworkingAPI.targetIP.ToString();
+		}
 	}
 	
 	//TODO: add in the calls to send the score updates.
