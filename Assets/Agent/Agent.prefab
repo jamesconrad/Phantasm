@@ -9468,7 +9468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistance: 1
-  maxDistance: 10
+  maxDistance: 8
   distanceBias: {x: 1, y: 1, z: 1}
 --- !u!114 &114328903315737484
 MonoBehaviour:
