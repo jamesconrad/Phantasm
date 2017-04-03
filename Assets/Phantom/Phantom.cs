@@ -31,6 +31,7 @@ public class Phantom : MonoBehaviour
 		{
 			GetComponent<BehaviourTree>().enabled = false;
 			GetComponent<NavMeshAgent>().enabled = false;
+			GetComponent<Collider>().enabled = false;
 		}
 
         respawnPoints = FindObjectsOfType<PhantomSpawnLocation>();
