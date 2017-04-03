@@ -139,7 +139,7 @@
 					col.a = 1.0f;
 					//col.rgb += _RimColor.rgb * i.randomRim.rgb * rimAmount;
 
-					col.rgb = min(col - pow(min(depth * 0.015f, 1.0f), 0.75f), lerp(1.0f, 0.5f, depth * 0.01f));
+					col.rgb = min(col - pow(min(depth * 0.00015f, 1.0f), 0.75f), lerp(1.0f, 0.5f, depth * 0.0001f));
 
 					//col.rgb = float3(i.uvGrab.x / _GrabTexture_TexelSize.x, i.uvGrab.y / _GrabTexture_TexelSize.y, 0.0f);
 					//col.rgb = 0.0f;
