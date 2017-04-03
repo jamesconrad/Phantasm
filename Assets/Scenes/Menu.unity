@@ -2430,7 +2430,7 @@ MonoBehaviour:
   ipInput: {fileID: 11368235}
   ScoreManager: {fileID: 0}
   mainMenuState: 0
-  DebugForTesting: 1
+  DebugForTesting: 0
 --- !u!114 &1138116453
 MonoBehaviour:
   m_ObjectHideFlags: 0

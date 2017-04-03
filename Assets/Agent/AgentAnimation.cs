@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class AgentAnimation : MonoBehaviour {
 
-	Animator animator;
+	public Animator animator;
 
 	Vector3 previousPosition;
+	Vector3 differenceVector;
+
+	public float speedMultiplied = 10.0f;
 
 	// Use this for initialization
 	void Start () {
-		previousPosition = new Vector3(0.0f, 0.0f, 0.0f);
-		previousPosition = transform.position;
+		differenceVector = new Vector3();
+		differenceVector.y = 0.0f;
+		previousPosition = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+		previousPosition = transform.worldToLocalMatrix * previousPosition;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		animator.SetFloat("movX", previousPosition.x - transform.position.x);
-		animator.SetFloat("movY", previousPosition.y - transform.position.y);
+		differenceVector.x = transform.position.x - previousPosition.x;
+		differenceVector.y = 0.0f;
+		differenceVector.z = transform.position.z - previousPosition.z;
+		differenceVector = transform.worldToLocalMatrix * differenceVector;
+		animator.SetFloat("movX", differenceVector.z);
+		animator.SetFloat("movY", differenceVector.x);
+		animator.SetFloat("velocity", Mathf.Max(Mathf.Abs(differenceVector.x), Mathf.Abs(differenceVector.z)) * speedMultiplied);
+
+		previousPosition.x = transform.position.x;
+		previousPosition.y = transform.position.y;
+		previousPosition.z = transform.position.z;		
 	}
 }
