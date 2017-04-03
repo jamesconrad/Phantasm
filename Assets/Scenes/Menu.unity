@@ -502,7 +502,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 219dfbc283410974d8f149b4624249e3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: 219dfbc283410974d8f149b4624249e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2431,7 +2431,7 @@ MonoBehaviour:
   JoinGameButton: {fileID: 0}
   ipInput: {fileID: 11368235}
   ScoreManager: {fileID: 0}
-  DebugForTesting: 1
+  DebugForTesting: 0
 --- !u!114 &1138116453
 MonoBehaviour:
   m_ObjectHideFlags: 0
