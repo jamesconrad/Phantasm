@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 54026682726641882}
   - component: {fileID: 114812703810499870}
   - component: {fileID: 114443846200809722}
+  - component: {fileID: 114170450065655028}
   m_Layer: 8
   m_Name: Phantom
   m_TagString: Enemy
@@ -2557,6 +2558,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114170450065655028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1279744093588210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ccb1671773f786489af635be84b1450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 95057685740183624}
 --- !u!114 &114443846200809722
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2643,6 +2656,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ccb1671773f786489af635be84b1450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!136 &136077915579664000
 CapsuleCollider:
   m_ObjectHideFlags: 1
