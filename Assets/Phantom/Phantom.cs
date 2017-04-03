@@ -46,7 +46,7 @@ public class Phantom : MonoBehaviour
             collision.rigidbody.AddForce((collision.transform.position - transform.position).normalized * 25.0f, ForceMode.Impulse);
 			
 			numKilled = Mathf.Max(numKilled - 2, 0);
-            Respawn();
+            Respawn(0.0f);
 			
         }
     }
