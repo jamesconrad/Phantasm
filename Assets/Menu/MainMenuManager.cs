@@ -201,14 +201,18 @@ public class MainMenuManager : MonoBehaviour {
 					selectAgentButton.interactable = false;
 					selectAgentButton.targetGraphic.color = Color.black;
 
-					//PhaNetworkManager.characterSelection = 1;
-					//selectAgentButton.interactable = false;
-					//PhaNetworkManager.Singleton.SendCharacterLockMessage(1, PhaNetworkingAPI.targetIP);
+					PhaNetworkManager.characterSelection = 1;
+					selectHackerButton.interactable = false;
+					PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
 				}
 				if (enemyPlayerSelection == 1)
 				{
 					selectHackerButton.interactable = false;
 					selectHackerButton.targetGraphic.color = Color.black;
+
+					selectAgentButton.interactable = false;
+					PhaNetworkManager.characterSelection = 0;
+					PhaNetworkManager.Singleton.SendCharacterLockMessage(PhaNetworkManager.characterSelection, PhaNetworkingAPI.targetIP);
 				}
 			}
 
