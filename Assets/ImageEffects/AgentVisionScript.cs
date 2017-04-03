@@ -53,16 +53,28 @@ public class AgentVisionScript : MonoBehaviour
 				GOPhantom[i].layer = 8;
 				if(VisiblePhantom.agent == Plasma.SeenBy.Agent.Translucent)
 				{
-					GOPhantom[i].GetComponent<Renderer>().material = phantomMaterials.normal;
+					Renderer[] fuck = GOPhantom[i].GetComponentsInChildren<Renderer>();
+					for(int k = 0; k < fuck.Length; ++k)
+					{
+						fuck[i].material = phantomMaterials.normal;
+					}
 				}
 				else
 				{
-					GOPhantom[i].GetComponent<Renderer>().material = phantomMaterials.camera;
+					Renderer[] fuck = GOPhantom[i].GetComponentsInChildren<Renderer>();
+					for(int k = 0; k < fuck.Length; ++k)
+					{
+						fuck[i].material = phantomMaterials.camera;
+					}
 				}
 			}
 			else
-			{			
-				GOPhantom[i].layer = 9;
+			{		
+				for(int k = 0; k < GOPhantom[i].transform.childCount; ++k )
+				{
+					GOPhantom[i].transform.GetChild(k).gameObject.layer = 9;
+					GOPhantom[i].layer = 9;
+				}
 			}
 		}
 	}

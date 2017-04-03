@@ -117,7 +117,7 @@ Material:
       second: 0
     - first:
         name: _RimAlpha
-      second: 1
+      second: 0.05
     - first:
         name: _RimPower
       second: 1
