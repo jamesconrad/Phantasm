@@ -62,8 +62,8 @@ public class TextEnter : MonoBehaviour {
 		if (logLength == 5) {
 
 				//addToLog ("\n*Thank You for testing the Hacker Console!*");
-			addToLog("\n<color=yellow>*This is an example of tutorial stuff you can add with \"addToLog(string)\"*</color>");
-				++logLength;
+			//addToLog("\n<color=yellow>*This is an example of tutorial stuff you can add with \"addToLog(string)\"*</color>");
+				//++logLength;
 		}
 	}
 
