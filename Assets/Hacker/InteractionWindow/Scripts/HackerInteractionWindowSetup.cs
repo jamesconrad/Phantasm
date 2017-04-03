@@ -395,15 +395,6 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            viewFloor = 0;
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            viewFloor = 1;
-        }
-
         if (WindowSize.x != Screen.width || WindowSize.y != Screen.height)
         {
             SetWindowSizes();
@@ -478,7 +469,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                         0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z) - 0.0f);
                 survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
-
+                survCameraButtons[i].GetComponent<CameraButtonManipulation>().DelayedStart();
 
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
 

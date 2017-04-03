@@ -9,6 +9,10 @@ TagManager:
   - MainMenu
   - Door
   - Laser
+  - HackerCamera1
+  - HackerCamera2
+  - HackerCamera3
+  - HackerCameraGlow
   layers:
   - Default
   - TransparentFX

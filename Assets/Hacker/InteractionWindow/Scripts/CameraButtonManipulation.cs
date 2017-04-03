@@ -1,16 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using System;
 
 public class CameraButtonManipulation : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Camera associatedCamera;
     public Vector2 startPosition;
+    public HotkeyCameraSwap hotkeySwap;
 
     bool isOverInteractionWindow = true;
     // Use this for initialization
     void Start()
+    {
+        hotkeySwap = GameObject.FindGameObjectWithTag("HackerCameraGlow").GetComponent<HotkeyCameraSwap>();
+    }
+
+    public void DelayedStart()
     {
 
     }
@@ -18,7 +25,13 @@ public class CameraButtonManipulation : MonoBehaviour, IBeginDragHandler, IDragH
     // Update is called once per frame
     void Update()
     {
-
+        
+    }
+    
+    //calls HotkeyCameraSwap to swap cameras
+    public void SwapCamera()
+    {
+        hotkeySwap.SwapCamera(associatedCamera);
     }
 
     // OnMouseDrag is called when the user has clicked on a GUIElement or Collider and is still holding down the mouse
