@@ -13,7 +13,6 @@ public class PhantomAnimParam : MonoBehaviour {
         void Start () {
                 anim = GetComponentInChildren<Animator>();
                 last = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-                anim = GetComponent<Animator>();
         }
 
         // Update is called once per frame
