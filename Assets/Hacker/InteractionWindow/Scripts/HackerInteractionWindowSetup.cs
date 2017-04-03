@@ -95,7 +95,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         survDoors = new List<GoodDoor>();
         for (int i = 0; i < tempDoors.Length; i++)
         {
-            if (true || tempDoors[i].code.Length > 0)
+            if (tempDoors[i].roomNumber != 0 && (true || tempDoors[i].code.Length > 0))
             {
                 survDoors.Add(tempDoors[i]);
                 tempDoors[i].locked = true;
