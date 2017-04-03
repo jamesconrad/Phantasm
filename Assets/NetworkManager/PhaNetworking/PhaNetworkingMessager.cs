@@ -38,7 +38,7 @@ public class PhaNetworkingMessager : MonoBehaviour {
 		{
 			return 1;
 		}
-		Debug.Log("buffer received: " + recBuffer);
+		//Debug.Log("buffer received: " + recBuffer);
 		return 0;
 	}	
 

@@ -119,7 +119,7 @@ public class GunHandle : MonoBehaviour
 
         }
 
-        if ((Input.GetButton("GamePad Fire") || Input.GetButton("Fire1")) && weaponSettings.bulletPrefab != null)
+        if ((Input.GetButton("GamePad Fire") || Input.GetButton("Fire1")) || Input.GetAxis("Shoot") < 0.0f && weaponSettings.bulletPrefab != null)
         {
             if (weaponSettings.currentNumberOfRounds > 0 && timeSinceFired > shootSpeed)
             {

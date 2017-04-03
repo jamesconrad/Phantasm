@@ -2427,10 +2427,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectionUI: {fileID: 1126278695}
   UIText: {fileID: 0}
-  createGameButton: {fileID: 0}
-  JoinGameButton: {fileID: 0}
   ipInput: {fileID: 11368235}
   ScoreManager: {fileID: 0}
+  mainMenuState: 0
   DebugForTesting: 0
 --- !u!114 &1138116453
 MonoBehaviour:
@@ -3169,7 +3168,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1422042734}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 778cd57ca3acb2d499e21f81a6d307dc, type: 3}
   m_Name: 
