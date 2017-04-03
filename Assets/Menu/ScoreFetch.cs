@@ -51,7 +51,9 @@ public class ScoreFetch : MonoBehaviour {
         if (_sceneB.name == "Menu")
         {
             LatestScore = Score.getLastScore();
+            scores += PhaNetworkingAPI.hostAddress.ToString() + " scored " + LatestScore + " with the help of " + PhaNetworkingAPI.targetIP.ToString() + "\n";
         }
+        LatestScore = -1;
     }
 
     public void ReceiveBuffer(ref StringBuilder buffer)
@@ -62,10 +64,10 @@ public class ScoreFetch : MonoBehaviour {
             string newScores = splitScores[0] + " " + splitScores[1] + " " + splitScores[2] + "\n";
             newScores += scores;
             scores = newScores;
-        }       
+        }
     }
 
-    public void SendTopScore()
+    public void SendTopScore(string score)
     {
         string[] splitScores = scores.Split(' ');
         StringBuilder sendBuffer = new StringBuilder(((int)PhaNetworkingMessager.MessageType.ScoreUpdate).ToString() + " " + splitScores[0] + " " + splitScores[1] + " " + splitScores[2]);
@@ -76,7 +78,7 @@ public class ScoreFetch : MonoBehaviour {
     {
         string[] splitScores = scores.Split(' ');
         string SaveData = "";
-        for (int i = 0, length = splitScores.Length; i < length || i >= 15; i+=3)
+        for (int i = 0, length = splitScores.Length; i < length || i >= 5; i+=3)
         {
             SaveData += splitScores[i] + " " + splitScores[i + 1] + " " + splitScores[i + 2];
         }

@@ -42,7 +42,7 @@ public class LevelTransition : MonoBehaviour
     {
         Score scoreSystem = FindObjectOfType<Score>();
         scoreSystem.endTimer();
-        scoreSystem.saveScore();
+        scoreSystem.calculateScore();
         float fadeTime = BeginFade(1);
         yield return new WaitForSeconds(fadeTime);
         SceneManager.LoadScene(destinationLevel);
