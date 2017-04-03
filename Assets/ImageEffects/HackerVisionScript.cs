@@ -45,10 +45,10 @@ public class HackerVisionScript : MonoBehaviour
 
    
 
-    private CameraModeFloat barrelDistortAmount;
-    private CameraModeFloat barrelDistortZoomAmount;
-    private float filmGrainBarrel;
-    private float filmGrainBarrelZoom;
+    public CameraModeFloat barrelDistortAmount;
+    public CameraModeFloat barrelDistortZoomAmount;
+    public float filmGrainBarrel;
+    public float filmGrainBarrelZoom;
     
 	
 	[Space(10)]
@@ -63,8 +63,8 @@ public class HackerVisionScript : MonoBehaviour
     private float MovieAmount = 1.0f;
     private float filmGrainFaceAmount = 0.0f;
 
-    enum HackerVisionMode { Normal = 0, Night = 1, Thermal = 2, Sonar = 3, Last = 4};
-    HackerVisionMode Vision = HackerVisionMode.Normal;
+    public enum HackerVisionMode { Normal = 0, Night = 1, Thermal = 2, Sonar = 3, Last = 4};
+    public HackerVisionMode Vision = HackerVisionMode.Normal;
 
 
 	
@@ -81,7 +81,7 @@ public class HackerVisionScript : MonoBehaviour
 	public CameraMaterials agentMaterials;
 	public CameraMaterials phantomMaterials;
 	public Material	agentLaserMaterial;
-	private int cameraModeArray = 1;
+	public int cameraModeArray = 1;
 
 	
 	[Header("Camera Wave Amount")]
@@ -111,7 +111,7 @@ public class HackerVisionScript : MonoBehaviour
     float timeOffsetRange = 0.05f;
     Vector2 timeOffsetValue;
 
-    float timeSinceSwap = 1.0f;
+    public float timeSinceSwap = 1.0f;
 
     [System.Serializable]
     public struct CameraModeFloat
@@ -303,46 +303,6 @@ public class HackerVisionScript : MonoBehaviour
 
         timeSinceOffset += Time.deltaTime;
         timeSinceSwap += Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            timeSinceSwap = 0.0f;
-
-            Vision++;
-            if (Vision == HackerVisionMode.Last)
-                Vision = HackerVisionMode.Normal;
-            // Loop back to beginning
-
-			if (Vision == HackerVisionMode.Normal)
-            {
-				cameraModeArray = 1;
-                filmGrainBarrel     = barrelDistortAmount.normal;
-                filmGrainBarrelZoom = barrelDistortZoomAmount.normal;
-            }
-            else if (Vision == HackerVisionMode.Night)
-            {
-				cameraModeArray = 1;
-                filmGrainBarrel     = barrelDistortAmount.night;
-                filmGrainBarrelZoom = barrelDistortZoomAmount.night;
-            }
-			else if (Vision == HackerVisionMode.Thermal)
-            {
-				cameraModeArray = 2;
-                filmGrainBarrel     = barrelDistortAmount.thermal;
-                filmGrainBarrelZoom = barrelDistortZoomAmount.thermal;
-            }
-			else if (Vision == HackerVisionMode.Sonar)
-            {
-				cameraModeArray = 3;
-                filmGrainBarrel     = barrelDistortAmount.sonar;
-                filmGrainBarrelZoom = barrelDistortZoomAmount.sonar;
-            }
-            
-            
-        }
-
-
-
     }
 
     const float timeToWaitTillSearch = 10.0f;
