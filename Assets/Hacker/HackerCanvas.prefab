@@ -1073,11 +1073,16 @@ MonoBehaviour:
 
     *Guide your partner to the EXIT*
 
-    *Drag CAM icons from MAP to adjacent QUADs*
+    *Drag CAM icons from MAP to adjacent windows*
 
     *OR*
 
     *Hold <1>,<2>,<3> and click CAM icons*
+
+
+    *Use buttons to swap camera filters*
+
+    !!! ENEMIES ONLY VISIBLE THRU INFARED/SONAR !!!
 
     </color>'
 --- !u!114 &114120609184888076
