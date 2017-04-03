@@ -32,11 +32,13 @@ public class PhaNetworkingMessager : MonoBehaviour {
 	//Receive information that the other player is online.
 	public int ReceiveConnectionMessage()
 	{
-		PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
-		if (receiveBuffer.ToString().StartsWith(((int)MessageType.Connection).ToString()))
+		StringBuilder recBuffer = new StringBuilder(recvBufferSize);
+		int bytesReceived = PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, recBuffer, recvBufferSize);
+		if (recBuffer.ToString().StartsWith(((int)MessageType.Connection).ToString()))
 		{
 			return 1;
 		}
+		Debug.Log("buffer received: " + recBuffer);
 		return 0;
 	}	
 

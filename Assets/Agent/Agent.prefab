@@ -2087,6 +2087,7 @@ GameObject:
   - component: {fileID: 114568591295786864}
   - component: {fileID: 114197911242536434}
   - component: {fileID: 114328903315737484}
+  - component: {fileID: 114551176335271464}
   m_Layer: 30
   m_Name: Agent
   m_TagString: Player
@@ -9367,8 +9368,7 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114989536051776180, guid: 96955b63fb04de44ebc9171fb64bbee6,
-          type: 2}
+      - m_Target: {fileID: 114328903315737484}
         m_MethodName: SendMessage
         m_Mode: 5
         m_Arguments:
@@ -9484,7 +9484,7 @@ MonoBehaviour:
   exitNum: 0
   destinationLevel: Menu
   fadeTexture: {fileID: 2800000, guid: 56e41fe0983ed874f8a4a0b112d1ae60, type: 3}
-  fadeSpeed: 0.8
+  fadeSpeed: 2
 --- !u!114 &114357951332665812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9524,6 +9524,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunHandle: {fileID: 114000011784594182}
   healthHandle: {fileID: 114000013077425356}
+--- !u!114 &114551176335271464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014286740798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ecb0230a6558a4c94c0e6076d5b8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreTime: 10000
+  timeBonusEnd: 600
+  phantomKilledMult: 100
 --- !u!114 &114568591295786864
 MonoBehaviour:
   m_ObjectHideFlags: 1

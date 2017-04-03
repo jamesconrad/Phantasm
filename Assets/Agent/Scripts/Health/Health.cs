@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 using System.Collections;
 
-public class Health : MonoBehaviour {
+public class Health : PhaNetworkingMessager {
 
     [Tooltip("Amount of health for the object")]
     public float health;
@@ -24,6 +24,10 @@ public class Health : MonoBehaviour {
     public void takeDamage(float damage)
     {
         currentHealth -= damage;
+        if (PhaNetworkManager.characterSelection == 0 && gameObject.CompareTag("Player"))
+        {
+            SendHealthUpdate((int)damage, PhaNetworkingAPI.targetIP);
+        }
         if (currentHealth <= 0.0f && disableOnDeath)
         {
             gameObject.SetActive(false);

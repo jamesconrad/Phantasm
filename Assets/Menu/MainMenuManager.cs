@@ -17,13 +17,11 @@ public class MainMenuManager : MonoBehaviour {
 
 	public GameObject SelectionUI; Button selectAgentButton; Button selectHackerButton;
 	public  Text UIText;
-	public Button createGameButton;
-	public Button JoinGameButton;
 	public InputField ipInput;
 
 	public ScoreFetch ScoreManager;
 
-	MainMenuState mainMenuState = MainMenuState.Menu;
+	public MainMenuState mainMenuState = MainMenuState.Menu;
 
 	public bool DebugForTesting = false;
 
@@ -171,9 +169,10 @@ public class MainMenuManager : MonoBehaviour {
 				SetMenuState(MainMenuState.CharacterSelect);
 				PhaNetworkingAPI.targetIP = new StringBuilder(PhaNetworkManager.recvBufferSize);
 				PhaNetworkingAPI.GetRemoteAddress(PhaNetworkingAPI.mainSocket, PhaNetworkingAPI.targetIP, PhaNetworkManager.recvBufferSize);
-				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
-				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
-				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
+				Debug.Log(PhaNetworkingAPI.targetIP);
+				Debug.Log("Bytes sent for connection message: " + PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP));
+				Debug.Log("Bytes sent for connection message: " + PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP));
+				Debug.Log("Bytes sent for connection message: " + PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP));
 			}
 			break;
 
@@ -184,6 +183,7 @@ public class MainMenuManager : MonoBehaviour {
 			}
 			if (PhaNetworkManager.Singleton.ReceiveConnectionMessage() > 0)
 			{
+				Debug.Log("Received connection message");
 				SetMenuState(MainMenuState.CharacterSelect);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
 				PhaNetworkManager.Singleton.SendConnectionMessage(PhaNetworkingAPI.targetIP);
@@ -200,6 +200,10 @@ public class MainMenuManager : MonoBehaviour {
 				{//Select players properly, disable the other 
 					selectAgentButton.interactable = false;
 					selectAgentButton.targetGraphic.color = Color.black;
+
+					//PhaNetworkManager.characterSelection = 1;
+					//selectAgentButton.interactable = false;
+					//PhaNetworkManager.Singleton.SendCharacterLockMessage(1, PhaNetworkingAPI.targetIP);
 				}
 				if (enemyPlayerSelection == 1)
 				{

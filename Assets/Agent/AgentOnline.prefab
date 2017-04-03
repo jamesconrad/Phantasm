@@ -4379,6 +4379,7 @@ GameObject:
   - component: {fileID: 114820974051688750}
   - component: {fileID: 114030319019304474}
   - component: {fileID: 114989536051776180}
+  - component: {fileID: 114778206067830850}
   m_Layer: 30
   m_Name: AgentOnline
   m_TagString: Player
@@ -9183,17 +9184,6 @@ MonoBehaviour:
           m_StringArgument: Transition
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1984759443243006}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &114320391933576414
@@ -9326,6 +9316,20 @@ MonoBehaviour:
   WaveTimeMult: {x: 100, y: 100}
   CA_Dispersal: 1
   CA_Offset: 0.03
+--- !u!114 &114778206067830850
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984759443243006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ecb0230a6558a4c94c0e6076d5b8a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreTime: 10000
+  timeBonusEnd: 600
+  phantomKilledMult: 100
 --- !u!114 &114820974051688750
 MonoBehaviour:
   m_ObjectHideFlags: 1

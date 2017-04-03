@@ -59,6 +59,7 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 	{
 		if (NetworkInitialized && singleton == this)
 		{
+			Debug.Log("Network is being shutdown");
 			PhaNetworkingAPI.ShutDownNetwork(PhaNetworkingAPI.mainSocket);
 			NetworkInitialized = false;
 		}
@@ -165,6 +166,12 @@ public class PhaNetworkManager : PhaNetworkingMessager {
 		}
 		else
 		{
+			int bytesreceived = 0;
+			do
+			{
+				bytesreceived = PhaNetworkingAPI.ReceiveFrom(PhaNetworkingAPI.mainSocket, receiveBuffer, recvBufferSize);
+				Debug.Log("Continuing to flush the fucking buffer, bytes: " + bytesreceived);
+			} while (bytesreceived != 10035);
 			//skipeManager.closeSkipe();
 		}
 
