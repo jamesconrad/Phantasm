@@ -4380,6 +4380,7 @@ GameObject:
   - component: {fileID: 114030319019304474}
   - component: {fileID: 114989536051776180}
   - component: {fileID: 114778206067830850}
+  - component: {fileID: 114641848690722582}
   m_Layer: 30
   m_Name: AgentOnline
   m_TagString: Player
@@ -9258,6 +9259,17 @@ MonoBehaviour:
       startingNumberOfClips: 5
     currentNumberOfRounds: 20
     currentNumberOfClips: 5
+--- !u!114 &114641848690722582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1984759443243006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe9fd936b5b3414f9d2974f9c4a1758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114741092265060596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9295,11 +9307,24 @@ MonoBehaviour:
   filmGrainScrollingActive: 1
   filmGrainMultActive: 1
   filmGrainMovieActive: 0
+  barrelDistortAmount:
+    normal: 0
+    night: 0
+    thermal: 0
+    sonar: 0
+  barrelDistortZoomAmount:
+    normal: 0
+    night: 0
+    thermal: 0
+    sonar: 0
+  filmGrainBarrel: 0
+  filmGrainBarrelZoom: 0
   SonarColor: {r: 0.5, g: 0.5, b: 1, a: 1}
   SonarDiffusePass: 0
   SonarTimeMult: 1
   SonarMult: 0.05
   Movie: {fileID: 0}
+  Vision: 0
   agentMaterials:
     normal: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
     camera: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
@@ -9311,11 +9336,13 @@ MonoBehaviour:
     thermal: {fileID: 2100000, guid: db03c4253306cb947882c84394620907, type: 2}
     sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
   agentLaserMaterial: {fileID: 0}
+  cameraModeArray: 1
   WaveCount: {x: 400, y: 400}
   WaveIntensity: {x: 0.0005, y: 0.0015}
   WaveTimeMult: {x: 100, y: 100}
   CA_Dispersal: 1
   CA_Offset: 0.03
+  timeSinceSwap: 1
 --- !u!114 &114778206067830850
 MonoBehaviour:
   m_ObjectHideFlags: 1
