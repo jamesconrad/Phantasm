@@ -8632,7 +8632,7 @@ Camera:
   m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -9418,11 +9418,24 @@ MonoBehaviour:
   filmGrainScrollingActive: 1
   filmGrainMultActive: 1
   filmGrainMovieActive: 0
+  barrelDistortAmount:
+    normal: 0
+    night: 0
+    thermal: 0
+    sonar: 0
+  barrelDistortZoomAmount:
+    normal: 0
+    night: 0
+    thermal: 0
+    sonar: 0
+  filmGrainBarrel: 0
+  filmGrainBarrelZoom: 0
   SonarColor: {r: 0.5, g: 0.5, b: 1, a: 1}
   SonarDiffusePass: 0
   SonarTimeMult: 1
   SonarMult: 0.05
   Movie: {fileID: 0}
+  Vision: 0
   agentMaterials:
     normal: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
     camera: {fileID: 2100000, guid: 0a67a0a0c819fed4a8077ff81b93631b, type: 2}
@@ -9434,11 +9447,13 @@ MonoBehaviour:
     thermal: {fileID: 2100000, guid: db03c4253306cb947882c84394620907, type: 2}
     sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
   agentLaserMaterial: {fileID: 0}
+  cameraModeArray: 1
   WaveCount: {x: 400, y: 400}
   WaveIntensity: {x: 0.0005, y: 0.0015}
   WaveTimeMult: {x: 100, y: 100}
   CA_Dispersal: 1
   CA_Offset: 0.03
+  timeSinceSwap: 1
 --- !u!114 &114000014016322976
 MonoBehaviour:
   m_ObjectHideFlags: 1
