@@ -16,7 +16,7 @@ public class HeartRateScript : MonoBehaviour
 	public class HeartRateArray
 	{
 		public Color color;
-		public Vector2 uvMult;
+		public Vector4 uvMult;
 	}
 
 	public HeartRateArray[] healthArray;
@@ -32,7 +32,8 @@ public class HeartRateScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		int arrayChoice = (int)(healthArray.Length * Mathf.InverseLerp(0.0f, agentHealth.health, agentHealth.currentHealth));
+		int arrayChoice = -1 + (int)(healthArray.Length * Mathf.InverseLerp(0.0f, agentHealth.health, agentHealth.currentHealth));
+		print(arrayChoice);
 		material.SetColor("_Color", healthArray[arrayChoice].color);
 		material.SetVector("_UVMult", healthArray[arrayChoice].uvMult);
 	}

@@ -43,15 +43,16 @@
 			sampler2D _HeartRateTex;
 			sampler2D _GridTex;
 			fixed4 _Color;
-			float2 _UVMult;
+			float4 _UVMult;
 
 			fixed4 frag (v2f i) : SV_Target
 			{
-				fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-				fixed4 scrollHeart = tex2D(_HeartRateTex, (i.uv * _UVMult) - (_Time * 10.0f).rr);
+				fixed4 col = tex2D(_MainTex, i.uv * _UVMult) * _Color;
+				fixed4 scrollHeart = tex2D(_HeartRateTex, (i.uv) - (_Time.rr * 15.0f));
 				col = col * scrollHeart;
-				scrollHeart =  tex2D(_GridTex, i.uv);
+				scrollHeart =  tex2D(_GridTex, i.uv) * _Color * 0.5f;
 				col.rgb += scrollHeart.rgb;
+				col.a = 1.0f;
 				return col;
 			}
 			ENDCG
