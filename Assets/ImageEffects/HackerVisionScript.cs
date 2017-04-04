@@ -265,20 +265,20 @@ public class HackerVisionScript : MonoBehaviour
 
 
 
-        if (Vision != HackerVisionMode.Sonar)
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                lightStatus[i] = all_my_damn_lights[i].enabled;
-            }
-        }
-        if (Vision != HackerVisionMode.Night)
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                lightBrightness[i] = all_my_damn_lights[i].intensity;
-            }
-        }
+        //if (Vision != HackerVisionMode.Sonar)
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        lightStatus[i] = all_my_damn_lights[i].enabled;
+        //    }
+        //}
+        //if (Vision != HackerVisionMode.Night)
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        lightBrightness[i] = all_my_damn_lights[i].intensity;
+        //    }
+        //}
 
         // Film Grain transition between vision modes
         if (timeSinceOffset > timeOffsetLength * 5.0f && Time.timeSinceLevelLoad > 5.0f)
@@ -503,39 +503,39 @@ public class HackerVisionScript : MonoBehaviour
             Shader.SetGlobalFloat("_EmissionVisionMult", 10.0f);
         }
 
-        if (Vision == HackerVisionMode.Sonar)
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                all_my_damn_lights[i].enabled = false;
-            }
-            //_Light.enabled = false;
-        }
-        else
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                all_my_damn_lights[i].enabled = lightStatus[i];
-            }
+        //if (Vision == HackerVisionMode.Sonar)
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        all_my_damn_lights[i].enabled = false;
+        //    }
+        //    //_Light.enabled = false;
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        all_my_damn_lights[i].enabled = lightStatus[i];
+        //    }
+//
+        //}
 
-        }
-
-        if (Vision == HackerVisionMode.Night)
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                all_my_damn_lights[i].intensity = lightBrightness[i] * 4.0f;
-            }
-            //_Light.enabled = false;
-        }
-        else
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                all_my_damn_lights[i].intensity = lightBrightness[i];
-            }
-
-        }
+        //if (Vision == HackerVisionMode.Night)
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        all_my_damn_lights[i].intensity = lightBrightness[i] * 4.0f;
+        //    }
+        //    //_Light.enabled = false;
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        all_my_damn_lights[i].intensity = lightBrightness[i];
+        //    }
+//
+        //}
 
 
 		

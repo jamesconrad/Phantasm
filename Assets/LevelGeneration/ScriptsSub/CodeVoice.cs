@@ -67,7 +67,7 @@ public class CodeVoice : MonoBehaviour
 			{
 				Debug.Log("FUCK!\n" + "VOICE COLLECTION IS NULL!");
 			}
-			int codeLength = Random.Range(5, 8);
+			int codeLength = Random.Range(3, 5);
 			codeInt = new int[codeLength];
 			codeVoices = new int[codeLength];
 			for(int i = 0; i < codeLength; ++i)
