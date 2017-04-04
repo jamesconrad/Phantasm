@@ -131,7 +131,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1226517580232698}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 20, z: 1}
   m_Children: []
   m_Father: {fileID: 4680615991924516}
@@ -240,7 +240,7 @@ MonoBehaviour:
   exitNum: 0
   destinationLevel: Menu
   fadeTexture: {fileID: 2800000, guid: 49cad0bf252514349a0f671801c28f16, type: 3}
-  fadeSpeed: 0.8
+  fadeSpeed: 2
 --- !u!114 &114994541577504686
 MonoBehaviour:
   m_ObjectHideFlags: 1
