@@ -59,7 +59,7 @@
 				sum += tex2D(texmap, float2(texcoord.x + pixelSize2.x, texcoord.y - pixelSize2.y)).r * 2.0f;
 				sum += tex2D(texmap, float2(texcoord.x + pixelSize3.x, texcoord.y - pixelSize3.y)).r;
 							
-				return abs(sum) * 1.5;
+				return abs(sum) * 15.5;
 				//if(abs(sum) < edgeThresholdDepth)
 				//{
 				//	return 1.0;

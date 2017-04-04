@@ -48,6 +48,7 @@ public class BehaviourTree : MonoBehaviour {
 
     //static GameObject playerGO;
 
+
     public enum AI_STATE
     {
         Attack = 0,
@@ -170,6 +171,9 @@ public class BehaviourTree : MonoBehaviour {
         public virtual void update() { }
         public virtual AI_STATE nextstate() { return AI_STATE.Wait; }
 
+        
+        private float seenByTimer = 0.0f;
+
         public bool hasLineOfSight()
         {
             if(playerGO != null)
@@ -178,6 +182,15 @@ public class BehaviourTree : MonoBehaviour {
                 RaycastHit hitInfo;
                 bool hit = Physics.Raycast(t.position + new Vector3(0, 0.75f, 0), dir.normalized, out hitInfo, aiS.maxSight);
                 if (playerGO != null && hit && hitInfo.transform.tag == "Player")
+                {
+                    seenByTimer += Time.deltaTime;
+                }
+                else
+                {
+                    seenByTimer = 0.0f;
+                }
+
+                if(seenByTimer > 0.5f)
                 {
                     //Debug.DrawLine(t.position + new Vector3(0, 0.75f, 0), t.position + dir * aiS.maxSight, Color.cyan);
                     lastKnown = hitInfo.point;

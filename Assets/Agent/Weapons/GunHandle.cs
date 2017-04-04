@@ -159,7 +159,7 @@ public class GunHandle : MonoBehaviour
         }
         if (Input.GetButtonDown("Reload") || Input.GetButtonDown("GamePad Reload"))
         {
-            if (weaponSettings.currentNumberOfClips > 0 && timeSinceFired > shootSpeed)
+            if (weaponSettings.currentNumberOfClips > 0 && timeSinceFired > shootSpeed && weaponSettings.currentNumberOfRounds < weaponSettings.ammoSettings.maxClipSize)
             {
                 reloading = true;
                 laser.active = !reloading;

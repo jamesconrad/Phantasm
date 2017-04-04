@@ -34,7 +34,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4166675488742236}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4337032297279248}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4072520397175488}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:barrelInside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4404189441631860}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:handleMain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4797969055756120}
   - component: {fileID: 108550249430321970}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: LaserLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4695889414364634}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4380574735107992}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +519,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4679590172619460}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4155581756208890}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +746,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4279178917727884}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -821,7 +821,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4418086632886728}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:gunBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -836,7 +836,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4944921553528334}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -868,7 +868,7 @@ GameObject:
   - component: {fileID: 4717618302012506}
   - component: {fileID: 33429161052672610}
   - component: {fileID: 23663723442382740}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1020,7 +1020,7 @@ GameObject:
   - component: {fileID: 4734822083426184}
   - component: {fileID: 120755845043339614}
   - component: {fileID: 114398868276412256}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: LaserPointer
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -1051,7 +1051,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4868296281976508}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1201,7 +1201,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4457946106722562}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1246,7 +1246,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4755978992880910}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1306,7 +1306,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4453753946037720}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1456,7 +1456,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4521786650577094}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1471,7 +1471,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4727189520928290}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1486,7 +1486,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4799540082068378}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1681,7 +1681,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4730561560881488}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1756,7 +1756,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4754291844583154}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:barrelMiddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1801,7 +1801,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4252241556820238}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform13
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1861,7 +1861,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4945238917678418}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:_UNKNOWN_REF_NODE_fosterParent1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1876,7 +1876,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4388389363042742}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:gunTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1891,7 +1891,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4394931865103584}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1921,7 +1921,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4672290036624682}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1966,7 +1966,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4228825847555712}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:barrelFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2161,7 +2161,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4740848011359472}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2251,7 +2251,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4042693384775194}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:barrelBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2266,7 +2266,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4745995854920614}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2311,7 +2311,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4821649179443448}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2372,7 +2372,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4617154970464764}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:safetySwitch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2523,7 +2523,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4991570334225214}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2643,7 +2643,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4291771363428786}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:lockOnFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2734,7 +2734,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4928137206449628}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2871,7 +2871,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4046894562815594}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3051,7 +3051,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4106843817186602}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:barrelBottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3081,7 +3081,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4525678240212578}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:boltThing1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3161,7 +3161,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4223574057370792}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3236,7 +3236,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4321841701179436}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3281,7 +3281,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4839958347679314}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3376,7 +3376,7 @@ GameObject:
   - component: {fileID: 82098367918381330}
   - component: {fileID: 82690237878186292}
   - component: {fileID: 82573318377799538}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: FiveSevenFBX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3422,7 +3422,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4693634982891054}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3437,7 +3437,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4117442072003906}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3467,7 +3467,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4051515244995812}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3544,7 +3544,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4134916777229330}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3590,7 +3590,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4119538203000914}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: transform7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3605,7 +3605,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4159718712070696}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:lockOnBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3665,7 +3665,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4077645559142562}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3891,7 +3891,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4503526998936022}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:boltThing2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3936,7 +3936,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4457955372189958}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4101,7 +4101,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4349746911664390}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4116,7 +4116,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4992830115760898}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:transform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4161,7 +4161,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4458481352600396}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: polySurface7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4311,7 +4311,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4473010498023836}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: fmFiveSeven_TEX:barrelBack 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9253,12 +9253,12 @@ MonoBehaviour:
     barrelOffset: {x: 0, y: 0.054, z: 0.2}
     Hitscan: 1
     ammoSettings:
-      maxClipSize: 20
-      startingNumberOfRounds: 20
-      maxClips: 5
-      startingNumberOfClips: 5
-    currentNumberOfRounds: 20
-    currentNumberOfClips: 5
+      maxClipSize: 7
+      startingNumberOfRounds: 7
+      maxClips: 20
+      startingNumberOfClips: 10
+    currentNumberOfRounds: 7
+    currentNumberOfClips: 10
 --- !u!114 &114641848690722582
 MonoBehaviour:
   m_ObjectHideFlags: 1

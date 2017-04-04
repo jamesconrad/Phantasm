@@ -99,7 +99,10 @@ public class CodeVoice : MonoBehaviour
 					//Debug.Log(	"Code Current: " + currentChar + "\n" +
 					//			"Code Voice: " + codeVoices[currentChar] + "\n" +
 					//			"Code Int: " + codeInt[currentChar]);
-					audioSus.clip = voiceCollection.voices[codeVoices[currentChar]].voice[codeInt[currentChar]];
+					//audioSus.clip = voiceCollection.voices[codeVoices[currentChar]].voice[codeInt[currentChar]];
+					audioSus.clip = voiceCollection.voices[Random.Range(0, voiceCollection.voices.Length)].voice[codeInt[currentChar]];
+
+					
 					audioSus.Play();
 					currentChar++;
 				}
