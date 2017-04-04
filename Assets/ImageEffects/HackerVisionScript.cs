@@ -491,7 +491,7 @@ public class HackerVisionScript : MonoBehaviour
         if(Vision == HackerVisionMode.Thermal)
         {
             ambientLightTemp = RenderSettings.ambientLight;
-            RenderSettings.ambientLight = new Color(ambientLight.r * 0.835f, ambientLight.g * 0.835f, ambientLight.b * 0.835f);
+            RenderSettings.ambientLight = new Color(ambientLight.r * 0.135f, ambientLight.g * 0.135f, ambientLight.b * 0.135f);
         }
 
         if (Vision == HackerVisionMode.Normal)
