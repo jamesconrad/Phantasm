@@ -95,9 +95,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         survDoors = new List<GoodDoor>();
         for (int i = 0; i < tempDoors.Length; i++)
         {
-            if (tempDoors[i].locked)
+            if (tempDoors[i].roomNumber != 0 && (true || tempDoors[i].code.Length > 0))
             {
                 survDoors.Add(tempDoors[i]);
+                tempDoors[i].locked = true;
             }
         }
         survDoorButtons = new List<GameObject>();
@@ -505,6 +506,12 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             for (int i = 0; i < survDoors.Count; i++)
             {
+                if (survDoors[i].code.Length > 0 && !survDoors[i].unlocked)
+                {
+                    survDoors[i].locked = true;
+                }
+
+
                 survDoorButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
 
                 Vector3 LerpPosition = survDoors[i].transform.position;
@@ -533,13 +540,13 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     survDoorButtons[i].SetActive(false);
                 }
 
-                if(survDoors[i].locked)
-                {
-                    
+                if(survDoors[i].unlocked)
+                {                    
+                    survDoorButtons[i].GetComponent<Button>().interactable = false;
                 }
                 else
                 {
-                    survDoorButtons[i].GetComponent<Button>().interactable = false;
+
                 }
             }
 

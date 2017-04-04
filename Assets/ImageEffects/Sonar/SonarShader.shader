@@ -166,7 +166,7 @@
 				}
 				else
 				{
-					
+					col.rgb = 0.0f;
 				}
 				col.a = 1.0f;
 
