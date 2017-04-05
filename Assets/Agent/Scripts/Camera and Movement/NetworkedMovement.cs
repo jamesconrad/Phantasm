@@ -48,11 +48,11 @@ public class NetworkedMovement : NetworkedBehaviour
     {
         if (isRemote)
         {//Actually update the object
-            objectTransform.position = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.3f);
+            objectTransform.position = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.67f);
         }
         else
         {//Just simulate the updating.
-            simulatedPosition = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.3f);
+            simulatedPosition = Vector3.Lerp(objectTransform.position, receivedPosition + receivedVelocity * (Time.time - ReceiveTime), 0.67f);
         }
     }
 
