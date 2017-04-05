@@ -1576,7 +1576,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224349632464746356}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0
+  m_Size: 0.68974394
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1688,7 +1688,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.07352942, g: 0.07352942, b: 0.07352942, a: 1}
+    m_NormalColor: {r: 0, g: 0.46323532, b: 0.0031947005, a: 1}
     m_HighlightedColor: {r: 0, g: 1, b: 0.12941177, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -2021,7 +2021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.14705884, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

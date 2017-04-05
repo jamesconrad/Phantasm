@@ -57,7 +57,7 @@ public class GoodDoor : MonoBehaviour {
 
     public bool Unlock(string input)
     {
-        if(locked)
+        if(locked && !unlocked)
         {
             //Debug.Log(code + " vs. " + input);
             if(input.ToUpper().Contains(code.ToUpper()))

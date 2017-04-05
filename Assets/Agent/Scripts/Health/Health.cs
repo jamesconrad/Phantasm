@@ -46,4 +46,13 @@ public class Health : PhaNetworkingMessager {
         OnDeath.Invoke();
         Destroy(gameObject, delay);
     }
+
+    
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.Alpha0) && Input.GetKey(KeyCode.KeypadPlus))
+        {
+            takeDamage(1000.0f);
+        }
+    }
 }
