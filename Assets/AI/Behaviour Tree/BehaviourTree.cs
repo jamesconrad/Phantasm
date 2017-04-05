@@ -190,7 +190,7 @@ public class BehaviourTree : MonoBehaviour {
                     seenByTimer = 0.0f;
                 }
 
-                if(seenByTimer > 0.5f)
+                if(seenByTimer > 1.5f)
                 {
                     //Debug.DrawLine(t.position + new Vector3(0, 0.75f, 0), t.position + dir * aiS.maxSight, Color.cyan);
                     lastKnown = hitInfo.point;

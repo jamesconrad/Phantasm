@@ -8757,7 +8757,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a030ce4d7da84de4bbde23da7dfc38dc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 224d6c68fd8c19a4c8340e8205e959d4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8917,7 +8917,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ee9248e5612b03941bf8d6018ea8fd50, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 529254cf30d5d294bb2a3fcb6b476d1a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -9274,12 +9274,12 @@ MonoBehaviour:
     barrelOffset: {x: 0, y: 0.054, z: 0.2}
     Hitscan: 1
     ammoSettings:
-      maxClipSize: 20
-      startingNumberOfRounds: 20
-      maxClips: 5
-      startingNumberOfClips: 5
-    currentNumberOfRounds: 20
-    currentNumberOfClips: 5
+      maxClipSize: 7
+      startingNumberOfRounds: 7
+      maxClips: 30
+      startingNumberOfClips: 15
+    currentNumberOfRounds: 7
+    currentNumberOfClips: 15
 --- !u!114 &114000012239770456
 MonoBehaviour:
   m_ObjectHideFlags: 1

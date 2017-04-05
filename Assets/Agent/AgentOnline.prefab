@@ -9255,10 +9255,10 @@ MonoBehaviour:
     ammoSettings:
       maxClipSize: 7
       startingNumberOfRounds: 7
-      maxClips: 20
-      startingNumberOfClips: 10
+      maxClips: 30
+      startingNumberOfClips: 15
     currentNumberOfRounds: 7
-    currentNumberOfClips: 10
+    currentNumberOfClips: 15
 --- !u!114 &114641848690722582
 MonoBehaviour:
   m_ObjectHideFlags: 1
