@@ -508,6 +508,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 {
                     survDoors[i].locked = true;
                 }
+                else if(survDoors[i].code.Length == 0)
+                {
+                    survDoors[i].unlocked = true;
+                }
 
 
                 survDoorButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
