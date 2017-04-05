@@ -59,7 +59,7 @@ public class Agent : MonoBehaviour
 
     public void SetAmmoCount(int _ammo, int _mags)
     {
-        AmmoCounter.text = _ammo.ToString("07") + "/" + _mags.ToString("15");
+        AmmoCounter.text = _ammo.ToString("00") + "/" + _mags.ToString("00");
     }
 
     // This function is called when the behaviour becomes disabled or inactive

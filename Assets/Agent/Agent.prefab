@@ -9237,12 +9237,12 @@ MonoBehaviour:
     barrelOffset: {x: 0, y: 0, z: 0}
     Hitscan: 1
     ammoSettings:
-      maxClipSize: 0
-      startingNumberOfRounds: 0
-      maxClips: 0
-      startingNumberOfClips: 0
-    currentNumberOfRounds: 20
-    currentNumberOfClips: 5
+      maxClipSize: 7
+      startingNumberOfRounds: 7
+      maxClips: 30
+      startingNumberOfClips: 15
+    currentNumberOfRounds: 7
+    currentNumberOfClips: 15
   gunReference: {fileID: 1000010272846346}
   laser: {fileID: 114000014016322976}
   smokeTrailReference: {fileID: 1957275954028906, guid: 2e40cf3fec49260479bb8740f051a0c4,
