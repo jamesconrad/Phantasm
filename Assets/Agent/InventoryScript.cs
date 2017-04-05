@@ -13,15 +13,15 @@ public class InventoryScript : MonoBehaviour
         if ((tempPickup = collision.gameObject.GetComponent<PickupScript>()) != null)
         {
             
-            if (tempPickup.itemType == PickupType.Ammo)
+            if (tempPickup.itemType == PickupType.Ammo && gunHandle != null)
             {
                 gunHandle.weaponSettings.currentNumberOfClips = Mathf.Min(10, (int)tempPickup.amount + gunHandle.weaponSettings.currentNumberOfClips);
             }
-            else if (tempPickup.itemType == PickupType.Health)
+            else if (tempPickup.itemType == PickupType.Health && healthHandle != null)
             {
-                healthHandle.currentHealth = Mathf.Min(healthHandle.health, healthHandle.currentHealth + tempPickup.amount);
+                healthHandle.takeDamage(-tempPickup.amount);
             }
-
+            
             DestroyObject(collision.gameObject);
         }
     }
@@ -30,7 +30,8 @@ public class InventoryScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        healthHandle = GetComponent<Health>();
+        gunHandle = GetComponent<GunHandle>();
     }
 
     // Update is called once per frame
