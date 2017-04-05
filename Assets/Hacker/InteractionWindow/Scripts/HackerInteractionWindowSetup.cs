@@ -619,7 +619,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 if(survPickups[i].transform.position.x <= CameraPositionMax.x
                 && survPickups[i].transform.position.x >= CameraPositionMin.x
                 && survPickups[i].transform.position.z <= CameraPositionMax.z
-                && survPickups[i].transform.position.z >= CameraPositionMin.z)
+                && survPickups[i].transform.position.z >= CameraPositionMin.z
+                && survPickups[i] != null)
                 {
                     survPickupButtons[i].SetActive(true);
                 }
