@@ -107,10 +107,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         survSpeakers = new List<CodeVoice>();
         for (int i = 0; i < tempSpeakers.Length; i++)
         {
-            if (tempSpeakers[i].codeGenned)
-            {
-                survSpeakers.Add(tempSpeakers[i]);
-            }
+            
+            survSpeakers.Add(tempSpeakers[i]);
         }
         survSpeakerButtons = new List<GameObject>();
 
@@ -339,9 +337,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             RawImage image = tempButton.GetComponent<RawImage>();
             int doorNum = survSpeakers[i].roomNumber - 1;
-            float doorNumBrightness = (doorNum / 8) * 0.25f;
-            doorNum = doorNum % 8;
-            Color color = Color.HSVToRGB(doorNum / 8.0f, 1.0f - doorNumBrightness, 1.0f);
+            float doorNumBrightness = (doorNum / 10) * 0.5f;
+            doorNum = doorNum % 10;
+            Color color = Color.HSVToRGB(doorNum / 10.0f, 1.0f - doorNumBrightness, 1.0f);
             image.color = color;
 
             survSpeakerButtons.Add(tempButton);
@@ -506,7 +504,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             for (int i = 0; i < survDoors.Count; i++)
             {
-                if (survDoors[i].code.Length > 0 && !survDoors[i].unlocked)
+                if (survDoors[i].code.Length > 0 && survDoors[i].code != "CHEATER" && !survDoors[i].unlocked)
                 {
                     survDoors[i].locked = true;
                 }
@@ -553,6 +551,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             for (int i = 0; i < survSpeakers.Count; i++)
             {
+                if (survSpeakers[i].getCode().Length > 0 && survSpeakers[i].getCode() != "CHEATER")
+                {
+                    survSpeakers[i].codeGenned = true;
+                }
+
                 survSpeakerButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
 
                 Vector3 LerpPosition = survSpeakers[i].transform.position;
@@ -577,6 +580,15 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 else
                 {
                     survSpeakerButtons[i].SetActive(false);
+                }
+
+                if(survSpeakers[i].codeGenned)
+                {                    
+                    survSpeakerButtons[i].GetComponent<Button>().interactable = true;
+                }
+                else
+                {
+                    survSpeakerButtons[i].GetComponent<Button>().interactable = false;
                 }
 
                 /// TODO 

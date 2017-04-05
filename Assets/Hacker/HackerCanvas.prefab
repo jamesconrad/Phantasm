@@ -1575,8 +1575,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114753994201325856}
   m_HandleRect: {fileID: 224349632464746356}
   m_Direction: 2
-  m_Value: 0.00000018458664
-  m_Size: 0.6897439
+  m_Value: 0
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1688,7 +1688,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 0.07352942, g: 0.07352942, b: 0.07352942, a: 1}
     m_HighlightedColor: {r: 0, g: 1, b: 0.12941177, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1902,7 +1902,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '>>'
+  m_Text: '>> Enter Code Here <<'
 --- !u!114 &114635751798998202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2021,7 +2021,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.07352942, g: 0.07352942, b: 0.07352942, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2820,7 +2820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 133.21999}
+  m_AnchoredPosition: {x: 0, y: 133.22002}
   m_SizeDelta: {x: 1, y: 266.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224243674970824730
