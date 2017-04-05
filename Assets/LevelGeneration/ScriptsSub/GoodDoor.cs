@@ -78,7 +78,7 @@ public class GoodDoor : MonoBehaviour {
     
     void ElectricBarrier()
     {
-        if(locked)
+        if(locked && code != "cheater")
         {
             if(LockReference == null)
             {

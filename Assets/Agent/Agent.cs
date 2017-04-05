@@ -87,6 +87,14 @@ public class Agent : MonoBehaviour
             GetComponent<FirstPersonCamera>().enabled = !GetComponent<FirstPersonCamera>().enabled;
             GetComponent<GunHandle>().enabled = !GetComponent<GunHandle>().enabled;
             PauseUI.SetActive(!PauseUI.activeSelf);
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
+            else if (Cursor.lockState == CursorLockMode.None)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
         }
     }
 
