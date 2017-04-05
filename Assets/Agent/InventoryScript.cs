@@ -10,7 +10,7 @@ public class InventoryScript : MonoBehaviour
     public void OnCollisionEnter(Collision collision)
     {
         PickupScript tempPickup;
-        if ((tempPickup = collision.gameObject.GetComponent<PickupScript>()) != null)
+        if (PhaNetworkManager.characterSelection == 0 && (tempPickup = collision.gameObject.GetComponent<PickupScript>()) != null)
         {
             
             if (tempPickup.itemType == PickupType.Ammo && gunHandle != null)
@@ -21,7 +21,7 @@ public class InventoryScript : MonoBehaviour
             {
                 healthHandle.takeDamage(-tempPickup.amount);
             }
-            
+
             DestroyObject(collision.gameObject);
         }
     }
