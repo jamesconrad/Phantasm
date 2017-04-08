@@ -126,7 +126,7 @@
 					float4 GrabUV = i.uvGrab;
 
 					float depth = LinearEyeDepth(tex2Dproj(_CameraDepthTexture, i.ref).r) - i.ref.w;
-					float shortDepth = min(depth * 0.5f, 10.0f);
+					float shortDepth = min(depth * 0.5f, 1000.0f);
 					GrabUV.xy += shortDepth * (offset * i.uvGrab.z);
 					float newDepth = LinearEyeDepth(tex2Dproj(_CameraDepthTexture, GrabUV).r) - i.ref.w;
 					if (newDepth > 0.0f)
@@ -139,7 +139,7 @@
 					col.a = 1.0f;
 					//col.rgb += _RimColor.rgb * i.randomRim.rgb * rimAmount;
 
-					col.rgb = min(col - pow(min(depth * 0.015f, 1.0f), 0.75f), lerp(1.0f, 0.5f, depth * 0.01f));
+					col.rgb = min(col - pow(min(depth * 0.000015f, 1.0f), 0.75f), lerp(1.0f, 0.5f, depth * 0.01f));
 
 					//col.rgb = float3(i.uvGrab.x / _GrabTexture_TexelSize.x, i.uvGrab.y / _GrabTexture_TexelSize.y, 0.0f);
 					//col.rgb = 0.0f;

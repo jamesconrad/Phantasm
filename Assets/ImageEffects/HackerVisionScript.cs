@@ -54,9 +54,9 @@ public class HackerVisionScript : MonoBehaviour
 	[Space(10)]
     public Color SonarColor = new Color(0.5f, 0.5f, 1.0f);
     [Range(0.0f, 1.0f)]
-    public float SonarDiffusePass = 1.0f;
-    public float SonarTimeMult = 1.0f;
-    public float SonarMult = 0.02f;
+    private float SonarDiffusePass = 0.0f;
+    private float SonarTimeMult = 0.25f;
+    private float SonarMult = 0.005f;
 	
 	[Space(10)]
     public MovieTexture Movie;

@@ -9396,6 +9396,8 @@ MonoBehaviour:
   thermalMaterial: {fileID: 2100000, guid: 74347cd67be138f4d84a50394250491f, type: 2}
   sonarMaterial: {fileID: 2100000, guid: a53d83d391ac3554a9a897583c8a387f, type: 2}
   filmGrainMaterial: {fileID: 2100000, guid: 9100fdb806c971e478c08ae6892d497c, type: 2}
+  sonarPassthroughGeometry: {fileID: 4800000, guid: 04f2b8d1699041644a26d48abf252f78,
+    type: 3}
   waveMaterial: {fileID: 2100000, guid: 7610a8c3d89734049af8965e6c85d6e2, type: 2}
   thermalRamp: {fileID: 2800000, guid: 8b47637aadcc43246b6cd5344411d5da, type: 3}
   ChromaticAberrationMaterial:
@@ -9431,9 +9433,6 @@ MonoBehaviour:
   filmGrainBarrel: 0
   filmGrainBarrelZoom: 0
   SonarColor: {r: 0.5, g: 0.5, b: 1, a: 1}
-  SonarDiffusePass: 0
-  SonarTimeMult: 1
-  SonarMult: 0.05
   Movie: {fileID: 0}
   Vision: 0
   agentMaterials:

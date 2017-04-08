@@ -59,7 +59,7 @@
 				sum += tex2D(texmap, float2(texcoord.x + pixelSize2.x, texcoord.y - pixelSize2.y)).r * 2.0f;
 				sum += tex2D(texmap, float2(texcoord.x + pixelSize3.x, texcoord.y - pixelSize3.y)).r;
 							
-				return abs(sum) * 15.5;
+				return abs(sum) * 4.5;
 				//if(abs(sum) < edgeThresholdDepth)
 				//{
 				//	return 1.0;
@@ -125,14 +125,14 @@
 					float fraction = frac(fragDistance - uColorAdd.a + (rand(uvRound + uColorAdd.aa) * 0.5f + 0.5f) * 0.05f);
 					float powFraction;
 
-					if (fraction < 0.05f)
+					if (fraction < 0.01f)
 					{
-						fraction = lerp(1.0f, 0.05f, InverseLerp(fraction, 0.0f, 0.05f));
+						fraction = lerp(1.0f, 0.01f, InverseLerp(fraction, 0.0f, 0.01f));
 						powFraction = fraction;
 					}
 					else
 					{
-						powFraction = pow(fraction, 2.0f);
+						powFraction = pow(fraction, 32.0f);
 					}
 
 					float depthSobel = Sobel_Depth_NWSE_thicc(_CameraDepthTexture, i.uv, 1.0f / _ScreenParams.xy);
@@ -140,7 +140,7 @@
 
 					float3 addition = uColorAdd.rgb * powFraction * (rand(uvRound + uColorAdd.aa) * 0.3f + 0.7f) + depthSobel.xxx * uColorAdd.rgb;
 
-					if (int(i.uv.y * _ScreenParams.y * 0.5f) % 2 == 0)
+					if (uint(i.uv.y * _ScreenParams.y * 0.5f) % 2 == 0)
 					{
 						addition *= 0.25;
 					}
@@ -152,7 +152,7 @@
 					//fixed4 col = tex2D(_MainTex, i.uv);
 					col = col * uParameter.y;
 					float result = lerp(fraction, 1.0f, uParameter.a);
-
+					result *= result;
 					
 
 					col.rgb = (col.rgb + addition) * (result.xxx);// * (1.0 - pow(depth, 8.0));
