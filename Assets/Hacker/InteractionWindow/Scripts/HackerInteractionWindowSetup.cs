@@ -548,8 +548,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                         0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
                     
-                if(survDoors[i].transform.position.y >= cameraMap.nearClipPlane + cameraMap.transform.position.y
-                && survDoors[i].transform.position.y <= cameraMap.farClipPlane + cameraMap.transform.position.y
+                if(survDoors[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survDoors[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
                 && survDoors[i].transform.position.x <= CameraPositionMax.x
                 && survDoors[i].transform.position.x >= CameraPositionMin.x
                 && survDoors[i].transform.position.z <= CameraPositionMax.z
@@ -594,7 +594,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                         0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
                     
-                if(survSpeakers[i].transform.position.x <= CameraPositionMax.x
+                if(survSpeakers[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survSpeakers[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
+                && survSpeakers[i].transform.position.x <= CameraPositionMax.x
                 && survSpeakers[i].transform.position.x >= CameraPositionMin.x
                 && survSpeakers[i].transform.position.z <= CameraPositionMax.z
                 && survSpeakers[i].transform.position.z >= CameraPositionMin.z)
@@ -636,7 +638,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                         0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
-                if(survPickups[i].transform.position.x <= CameraPositionMax.x
+                if(survPickups[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survPickups[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
+                && survPickups[i].transform.position.x <= CameraPositionMax.x
                 && survPickups[i].transform.position.x >= CameraPositionMin.x
                 && survPickups[i].transform.position.z <= CameraPositionMax.z
                 && survPickups[i].transform.position.z >= CameraPositionMin.z

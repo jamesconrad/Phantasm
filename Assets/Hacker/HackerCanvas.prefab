@@ -716,6 +716,8 @@ MonoBehaviour:
   windowType: 1
   cameraButtonPrefab: {fileID: 1000012139292072, guid: da0dead1fc60e804e8fbea56116bdedb,
     type: 2}
+  agentButtonPrefab: {fileID: 1000012139292072, guid: d9767e74b9fb90e4ebba563063967353,
+    type: 2}
   doorButtonPrefab: {fileID: 1000012139292072, guid: 6f0079bd642724d4399ac4ab7239216a,
     type: 2}
   speakerButtonPrefab: {fileID: 1000012139292072, guid: 0888dec885d4d3c4483605c0bc5b7cd5,

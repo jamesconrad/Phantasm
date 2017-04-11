@@ -38,7 +38,7 @@ public class CameraOverdraw : MonoBehaviour
         reference.projectionMatrix = mat;
     }
 
-	const float maxTimeToCameraUpdate = 0.10f; 
+	const float maxTimeToCameraUpdate = 1.00f; 
 	float timeSinceCameraUpdate = maxTimeToCameraUpdate;
 	const float maxTimeToUpdate = 1.0f; 
 	float timeSinceUpdate = maxTimeToUpdate;
