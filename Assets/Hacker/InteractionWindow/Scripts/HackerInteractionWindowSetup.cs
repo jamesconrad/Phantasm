@@ -276,6 +276,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             if (survCameras[i].transform.parent.CompareTag("Player"))
             {
                 tempButton = Instantiate(agentButtonPrefab);
+                tempButton.GetComponent<RectTransform>().position -= new Vector3(0.0f, 0.0f, 1.0f);
             }
             else
             {
@@ -300,6 +301,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             survCameraButtons.Add(tempButton);
             survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
+            
+            if (!survCameras[i].transform.parent.CompareTag("Player"))
+            {
+                survCameraButtons[i].GetComponent<RectTransform>().SetSiblingIndex(0);
+            }
         }
 
         // Code to put the doors as buttons
