@@ -9127,7 +9127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunHandle: {fileID: 0}
-  healthHandle: {fileID: 0}
+  healthHandle: {fileID: 114185354999224520}
 --- !u!114 &114030319019304474
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9301,8 +9301,6 @@ MonoBehaviour:
   thermalMaterial: {fileID: 2100000, guid: 74347cd67be138f4d84a50394250491f, type: 2}
   sonarMaterial: {fileID: 2100000, guid: a53d83d391ac3554a9a897583c8a387f, type: 2}
   filmGrainMaterial: {fileID: 2100000, guid: 9100fdb806c971e478c08ae6892d497c, type: 2}
-  sonarPassthroughGeometry: {fileID: 4800000, guid: 04f2b8d1699041644a26d48abf252f78,
-    type: 3}
   waveMaterial: {fileID: 2100000, guid: 7610a8c3d89734049af8965e6c85d6e2, type: 2}
   thermalRamp: {fileID: 2800000, guid: 5cd5a7d2555edb340b2dd986e65e6fb6, type: 3}
   ChromaticAberrationMaterial:
