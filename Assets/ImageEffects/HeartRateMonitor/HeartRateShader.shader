@@ -42,7 +42,7 @@
 			sampler2D _MainTex;
 			sampler2D _HeartRateTex;
 			sampler2D _GridTex;
-			fixed4 _Color;
+			float4 _Color;
 			float4 _UVMult;
 
 			fixed4 frag (v2f i) : SV_Target

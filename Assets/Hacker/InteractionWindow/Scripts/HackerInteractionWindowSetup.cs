@@ -11,6 +11,7 @@ public enum CameraRectType
     FloorChanger,
     HeartRate
 }
+
 public class HackerInteractionWindowSetup : MonoBehaviour
 {
     public Camera cameraMap;
@@ -18,6 +19,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     public CameraRectType windowType = CameraRectType.Normal;
 
     public GameObject cameraButtonPrefab;
+    public GameObject agentButtonPrefab;
     public GameObject doorButtonPrefab;
     public GameObject speakerButtonPrefab;
     public GameObject pickupButtonPrefab;
@@ -269,7 +271,17 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
         for (int i = 0; i < survCameras.Count; i++)
         {
-            GameObject tempButton = Instantiate(cameraButtonPrefab);
+            GameObject tempButton;
+            
+            if (survCameras[i].transform.parent.CompareTag("Player"))
+            {
+                tempButton = Instantiate(agentButtonPrefab);
+            }
+            else
+            {
+                tempButton = Instantiate(cameraButtonPrefab);
+            }
+            
             tempButton.GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
 
             Vector3 LerpPosition = survCameras[i].transform.position;
@@ -283,6 +295,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                     0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
+
+           
 
             survCameraButtons.Add(tempButton);
             survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
@@ -472,18 +486,18 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
 
-                if (survCameras[i].GetComponentInParent<Agent>() != null)
-                {
-                    float curY = survCameras[i].transform.position.y;
-                    for (int f = 0; f < numOfFloors; f++)
-                    {
-                        if (curY >= CameraPositionMin.y + f * floorHeight && curY <= CameraPositionMin.y + (f + 1) * floorHeight)
-                        {
-                            agentFloor = f;
-                            break;
-                        }
-                    }
-                }
+                //if (survCameras[i].transform.parent.CompareTag("Player"))
+                //{
+                //    float curY = survCameras[i].transform.position.y;
+                //    for (int f = 0; f < numOfFloors; f++)
+                //    {
+                //        if (curY >= CameraPositionMin.y + f * floorHeight && curY <= CameraPositionMin.y + (f + 1) * floorHeight)
+                //        {
+                //            agentFloor = f;
+                //            break;
+                //        }
+                //    }
+                //}
 
                 if(survCameras[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
                 && survCameras[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight

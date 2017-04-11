@@ -79,7 +79,7 @@
 			o.Albedo = c.rgb;
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
-			o.Emission = 0.25f * _Temperature * saturate(dot(normalize(IN.viewDir), o.Normal));
+			o.Emission = 0.05f * _Temperature * saturate(dot(normalize(IN.viewDir), o.Normal));
 			o.Alpha = c.a;
 		}
 		ENDCG
