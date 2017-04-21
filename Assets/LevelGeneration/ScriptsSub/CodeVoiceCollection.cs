@@ -193,6 +193,12 @@ bool hasInformedOtherPlayer = false;
 			hasInformedOtherPlayer = true;			
 		}
 	}
+
+public CodeVoice[] GetCodeVoices()
+{
+	return Speakers;
+}
+
 }
 
 namespace Plasma

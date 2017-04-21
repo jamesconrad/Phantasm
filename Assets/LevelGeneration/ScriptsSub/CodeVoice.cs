@@ -52,6 +52,11 @@ public class CodeVoice : MonoBehaviour
 		return code;
 	}
 
+	public void setCode(string newCode)
+	{
+		code = newCode;
+	}
+
 	// Use this for initialization
 	void Start () 
 	{
