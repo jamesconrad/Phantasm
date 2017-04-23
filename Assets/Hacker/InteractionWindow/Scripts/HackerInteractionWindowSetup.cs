@@ -42,7 +42,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     private List<GameObject> survPickupButtons;
 
 
-    private List<List<GameObject>> roomChainList = new List<List<GameObject>>();
+    List<List<GameObject>> roomChainList = new List<List<GameObject>>();
 
     public bool WindowIsInteractive = true;
 
@@ -57,7 +57,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     bool setup = false;
     IEnumerator Setup()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(10);
 
         Vector3 CameraPositionMax = survCameras[0].transform.position;
         Vector3 CameraPositionMin = survCameras[0].transform.position;
@@ -315,14 +315,15 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
         for (int i = 0; i < survSpeakers.Count; i++)
         {
-            if(survSpeakers[i].getCode().Length > 0 && survSpeakers[i].getCode() != "CHEATER")
+            if(survSpeakers[i].getCode().Length > 0)
             {
                 roomChainList.Add(new List<GameObject>());
                 roomChainList[roomChainList.Count - 1].Add(survSpeakerButtons[i]);
 
                 for (int k = 0; k < survDoors.Count; k++)
                 {
-                    if(survSpeakers[i].getCode().CompareTo(survDoors[k].GetCode()) == 0)
+                    Debug.Log(survSpeakers[i].getCode() + " Vs. " + survDoors[k].GetCode());
+                    if(survSpeakers[i].getCode().ToUpper().CompareTo(survDoors[k].GetCode().ToUpper()) == 0)
                     {
                         roomChainList[roomChainList.Count - 1].Add(survDoorButtons[i]);
                     }
@@ -332,8 +333,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
         for (int i = 0; i < roomChainList.Count; i++)
         {
+            Debug.Log(i + " ");
+
             for (int k = 0; k < roomChainList[i].Count; k++)
             {
+                Debug.Log(roomChainList[i][k]);
                 RawImage image = roomChainList[i][k].GetComponent<RawImage>();
                 int doorNum = i;
                 float doorNumBrightness = (doorNum / 10) * 0.5f;
@@ -341,6 +345,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 Color color = Color.HSVToRGB(doorNum / 10.0f, 1.0f - doorNumBrightness, 1.0f);
                 image.color = color;
             }
+            
         }
 
         setup = true;
@@ -459,7 +464,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             for (int i = 0; i < survDoors.Count; i++)
             {
-                if (survDoors[i].code.Length > 0 && survDoors[i].code != "CHEATER" && !survDoors[i].unlocked)
+                if (survDoors[i].code.Length > 0 && survDoors[i].code != "cheater" && !survDoors[i].unlocked)
                 {
                     survDoors[i].locked = true;
                 }
@@ -510,7 +515,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             for (int i = 0; i < survSpeakers.Count; i++)
             {
-                if (survSpeakers[i].getCode().Length > 0 && survSpeakers[i].getCode() != "CHEATER")
+                if (survSpeakers[i].getCode().Length > 0 && survSpeakers[i].getCode() != "cheater")
                 {
                     survSpeakers[i].codeGenned = true;
                 }

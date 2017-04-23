@@ -22,7 +22,7 @@ public class CodeVoice : MonoBehaviour
 	CodeVoiceCollection voiceCollection;
 	public bool codeGenned = false;
 	// Code represented by a string
-	string code = "";	
+	public string code = "";	
 	// Code represented by an int
 	int[] codeInt;
 	// This is an array of voices to use when the code is spoken, 0 -> first voice, 1 -> second voice and so on
