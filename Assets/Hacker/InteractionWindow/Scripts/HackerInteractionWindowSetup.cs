@@ -41,6 +41,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     private List<PickupScript> survPickups;
     private List<GameObject> survPickupButtons;
 
+
+    private List<List<GameObject>> roomChainList = new List<List<GameObject>>();
+
     public bool WindowIsInteractive = true;
 
     private Vector2 WindowSize;
@@ -50,89 +53,20 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     private float floorHeight;
     private int agentFloor = 0;
 
-    // Use this for initialization
-    void Start()
+
+    bool setup = false;
+    IEnumerator Setup()
     {
-        WindowSize = new Vector2(Screen.width, Screen.height);
-
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
-
-        cameraMap = GameObject.Find("HackerMapPrefab").GetComponent<Camera>();
-
-        SetWindowSizes();
-        //switch (cameraPosition)
-        //{
-        //    case CameraPosition.BottomLeft:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
-        //        break;
-        //    case CameraPosition.BottomRight:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, Screen.height / 4.0f);
-        //        break;
-        //    case CameraPosition.TopLeft:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
-        //        break;
-        //    case CameraPosition.TopRight:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
-        //        break;
-        //    default:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
-        //        break;
-        //}
-
-
-
-        Camera[] tempCameras = FindObjectsOfType<Camera>();
-        survCameras = new List<Camera>();
-        for (int i = 0; i < tempCameras.Length; i++)
-        {
-            if (tempCameras[i].CompareTag("HackerCamera"))
-            {
-                survCameras.Add(tempCameras[i]);
-            }
-        }
-        survCameraButtons = new List<GameObject>();
-
-        
-        GoodDoor[] tempDoors = FindObjectsOfType<GoodDoor>();
-        survDoors = new List<GoodDoor>();
-        for (int i = 0; i < tempDoors.Length; i++)
-        {
-            if (tempDoors[i].roomNumber != 0 && (true || tempDoors[i].code.Length > 0))
-            {
-                survDoors.Add(tempDoors[i]);
-                tempDoors[i].locked = true;
-            }
-        }
-        survDoorButtons = new List<GameObject>();
-
-        CodeVoice[] tempSpeakers = FindObjectsOfType<CodeVoice>();
-        survSpeakers = new List<CodeVoice>();
-        for (int i = 0; i < tempSpeakers.Length; i++)
-        {
-            
-            survSpeakers.Add(tempSpeakers[i]);
-        }
-        survSpeakerButtons = new List<GameObject>();
-
-        PickupScript[] tempPickups = FindObjectsOfType<PickupScript>();
-        survPickups = new List<PickupScript>();
-        for (int i = 0; i < tempPickups.Length; i++)
-        {
-            if (tempPickups[i].isActiveAndEnabled)
-            {
-                survPickups.Add(tempPickups[i]);
-            }
-        }
-        survPickupButtons = new List<GameObject>();
+        yield return new WaitForSeconds(1);
 
         Vector3 CameraPositionMax = survCameras[0].transform.position;
         Vector3 CameraPositionMin = survCameras[0].transform.position;
 
-
+    
         for (int i = 0; i < survCameras.Count; i++)
         {
             Vector3 CameraPositionTemp = survCameras[i].transform.position;
-
+        
             if(CameraPositionMax.x < CameraPositionTemp.x)
             {
                 CameraPositionMax.x = CameraPositionTemp.x + 0.0f;
@@ -163,7 +97,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         for (int i = 0; i < survDoors.Count; i++)
         {
             Vector3 DoorPositionTemp = survDoors[i].transform.position;
-
+        
             if(CameraPositionMax.x < DoorPositionTemp.x)
             {
                 CameraPositionMax.x = DoorPositionTemp.x + 0.0f;
@@ -190,11 +124,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 CameraPositionMin.z = DoorPositionTemp.z - 0.0f;
             }
         }
-
+        
         for (int i = 0; i < survSpeakers.Count; i++)
         {
             Vector3 SpeakerPositionTemp = survSpeakers[i].transform.position;
-
+        
             if(CameraPositionMax.x < SpeakerPositionTemp.x)
             {
                 CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
@@ -221,11 +155,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
             }
         }
-
+        
         for (int i = 0; i < survPickups.Count; i++)
         {
             Vector3 SpeakerPositionTemp = survPickups[i].transform.position;
-
+        
             if(CameraPositionMax.x < SpeakerPositionTemp.x)
             {
                 CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
@@ -252,6 +186,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
             }
         }
+    
 
         
         floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
@@ -268,6 +203,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         {
             Debug.Log("cameraMap is null");
         }
+
 
         for (int i = 0; i < survCameras.Count; i++)
         {
@@ -296,8 +232,6 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                     0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
-
-           
 
             survCameraButtons.Add(tempButton);
             survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
@@ -328,13 +262,6 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
-            RawImage image = tempButton.GetComponent<RawImage>();
-            int doorNum = survDoors[i].roomNumber - 1;
-            float doorNumBrightness = (doorNum / 8) * 0.25f;
-            doorNum = doorNum % 8;
-            Color color = Color.HSVToRGB(doorNum / 8.0f, 1.0f - doorNumBrightness, 1.0f);
-            image.color = color;
-
             survDoorButtons.Add(tempButton);
         }
 
@@ -355,12 +282,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
-            RawImage image = tempButton.GetComponent<RawImage>();
-            int doorNum = survSpeakers[i].roomNumber - 1;
-            float doorNumBrightness = (doorNum / 10) * 0.5f;
-            doorNum = doorNum % 10;
-            Color color = Color.HSVToRGB(doorNum / 10.0f, 1.0f - doorNumBrightness, 1.0f);
-            image.color = color;
+            
 
             survSpeakerButtons.Add(tempButton);
         }
@@ -390,29 +312,42 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             survPickupButtons.Add(tempButton);
         }
+
+        for (int i = 0; i < survSpeakers.Count; i++)
+        {
+            if(survSpeakers[i].getCode().Length > 0 && survSpeakers[i].getCode() != "CHEATER")
+            {
+                roomChainList.Add(new List<GameObject>());
+                roomChainList[roomChainList.Count - 1].Add(survSpeakerButtons[i]);
+
+                for (int k = 0; k < survDoors.Count; k++)
+                {
+                    if(survSpeakers[i].getCode().CompareTo(survDoors[k].GetCode()) == 0)
+                    {
+                        roomChainList[roomChainList.Count - 1].Add(survDoorButtons[i]);
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < roomChainList.Count; i++)
+        {
+            for (int k = 0; k < roomChainList[i].Count; k++)
+            {
+                RawImage image = roomChainList[i][k].GetComponent<RawImage>();
+                int doorNum = i;
+                float doorNumBrightness = (doorNum / 10) * 0.5f;
+                doorNum = doorNum % 10;
+                Color color = Color.HSVToRGB(doorNum / 10.0f, 1.0f - doorNumBrightness, 1.0f);
+                image.color = color;
+            }
+        }
+
+        setup = true;
+
     }
 
-    //used for translating map up a floor
-    public void FloorUp()
-    {
-        if (viewFloor < numOfFloors - 1)
-            viewFloor++;
-    }
-
-    //used for translating map down a floor
-    public void FloorDown()
-    {
-        if (viewFloor > 0)
-            viewFloor--;
-    }
-
-    //used for translating map to agents floor
-    public void FloorAgent()
-    {
-        viewFloor = agentFloor;
-    }
-
-    public void Update()
+    void UpdateMap()
     {
         if (WindowSize.x != Screen.width || WindowSize.y != Screen.height)
         {
@@ -653,6 +588,94 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     survPickupButtons[i].SetActive(false);
                 }
             }
+        }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        WindowSize = new Vector2(Screen.width, Screen.height);
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
+
+        cameraMap = GameObject.Find("HackerMapPrefab").GetComponent<Camera>();
+
+        SetWindowSizes();
+
+
+        Camera[] tempCameras = FindObjectsOfType<Camera>();
+        survCameras = new List<Camera>();
+        for (int i = 0; i < tempCameras.Length; i++)
+        {
+            if (tempCameras[i].CompareTag("HackerCamera"))
+            {
+                survCameras.Add(tempCameras[i]);
+            }
+        }
+        survCameraButtons = new List<GameObject>();
+
+        
+        GoodDoor[] tempDoors = FindObjectsOfType<GoodDoor>();
+        survDoors = new List<GoodDoor>();
+        for (int i = 0; i < tempDoors.Length; i++)
+        {
+            if (tempDoors[i].roomNumber != 0 && (true || tempDoors[i].code.Length > 0))
+            {
+                survDoors.Add(tempDoors[i]);
+                tempDoors[i].locked = true;
+            }
+        }
+        survDoorButtons = new List<GameObject>();
+
+        CodeVoice[] tempSpeakers = FindObjectsOfType<CodeVoice>();
+        survSpeakers = new List<CodeVoice>();
+        for (int i = 0; i < tempSpeakers.Length; i++)
+        {
+            
+            survSpeakers.Add(tempSpeakers[i]);
+        }
+        survSpeakerButtons = new List<GameObject>();
+
+        PickupScript[] tempPickups = FindObjectsOfType<PickupScript>();
+        survPickups = new List<PickupScript>();
+        for (int i = 0; i < tempPickups.Length; i++)
+        {
+            if (tempPickups[i].isActiveAndEnabled)
+            {
+                survPickups.Add(tempPickups[i]);
+            }
+        }
+        survPickupButtons = new List<GameObject>();
+
+        StartCoroutine(Setup());
+    }
+    
+
+    //used for translating map up a floor
+    public void FloorUp()
+    {
+        if (viewFloor < numOfFloors - 1)
+            viewFloor++;
+    }
+
+    //used for translating map down a floor
+    public void FloorDown()
+    {
+        if (viewFloor > 0)
+            viewFloor--;
+    }
+
+    //used for translating map to agents floor
+    public void FloorAgent()
+    {
+        viewFloor = agentFloor;
+    }
+
+    public void Update()
+    {
+        if(setup)
+        {
+            UpdateMap();
         }
     }
 
