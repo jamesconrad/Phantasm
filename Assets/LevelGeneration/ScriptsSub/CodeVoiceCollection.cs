@@ -65,14 +65,6 @@ public class CodeVoiceCollection : MonoBehaviour
 			}
 		}
 
-
-		for(int i = 0; i < Speakers.Length; ++i)
-		{
-			if(Speakers[i].roomNumber == 1)
-			{
-				Speakers[i].setChain(DoorUnlockChain.Tutorial);
-			}
-		}
 		Debug.Log("Number of Rooms: " + listOfRooms.Count);
 		
 		SetTutorialRoom();

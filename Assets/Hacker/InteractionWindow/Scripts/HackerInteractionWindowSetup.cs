@@ -59,6 +59,49 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
 
+        Camera[] tempCameras = FindObjectsOfType<Camera>();
+        survCameras = new List<Camera>();
+        for (int i = 0; i < tempCameras.Length; i++)
+        {
+            if (tempCameras[i].CompareTag("HackerCamera"))
+            {
+                survCameras.Add(tempCameras[i]);
+            }
+        }
+        survCameraButtons = new List<GameObject>();
+
+        
+        GoodDoor[] tempDoors = FindObjectsOfType<GoodDoor>();
+        survDoors = new List<GoodDoor>();
+        for (int i = 0; i < tempDoors.Length; i++)
+        {
+            
+                survDoors.Add(tempDoors[i]);
+                tempDoors[i].locked = true;
+            
+        }
+        survDoorButtons = new List<GameObject>();
+
+        CodeVoice[] tempSpeakers = FindObjectsOfType<CodeVoice>();
+        survSpeakers = new List<CodeVoice>();
+        for (int i = 0; i < tempSpeakers.Length; i++)
+        {
+            
+            survSpeakers.Add(tempSpeakers[i]);
+        }
+        survSpeakerButtons = new List<GameObject>();
+
+        PickupScript[] tempPickups = FindObjectsOfType<PickupScript>();
+        survPickups = new List<PickupScript>();
+        for (int i = 0; i < tempPickups.Length; i++)
+        {
+            if (tempPickups[i].isActiveAndEnabled)
+            {
+                survPickups.Add(tempPickups[i]);
+            }
+        }
+        survPickupButtons = new List<GameObject>();
+
         Vector3 CameraPositionMax = survCameras[0].transform.position;
         Vector3 CameraPositionMin = survCameras[0].transform.position;
 
@@ -263,6 +306,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
             survDoorButtons.Add(tempButton);
+
+            if (survDoors[i].roomNumber == 0 || survDoors[i].code.Length == 0 || survDoors[i].code == "cheater")
+            {
+                survDoorButtons[i].SetActive(false);
+            }
         }
 
         for (int i = 0; i < survSpeakers.Count; i++)
@@ -322,10 +370,13 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                 for (int k = 0; k < survDoors.Count; k++)
                 {
-                    Debug.Log(survSpeakers[i].getCode() + " Vs. " + survDoors[k].GetCode());
-                    if(survSpeakers[i].getCode().ToUpper().CompareTo(survDoors[k].GetCode().ToUpper()) == 0)
+                    if(survDoors[k].GetCode() != "cheater")
                     {
-                        roomChainList[roomChainList.Count - 1].Add(survDoorButtons[i]);
+                        Debug.Log(survSpeakers[i].getCode() + " Vs. " + survDoors[k].GetCode());
+                        if(survSpeakers[i].getCode().ToUpper().CompareTo(survDoors[k].GetCode().ToUpper()) == 0)
+                        {
+                            roomChainList[roomChainList.Count - 1].Add(survDoorButtons[k]);
+                        }
                     }
                 }
             }
@@ -369,12 +420,13 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         {
             Vector3 CameraPositionMax = survCameras[0].transform.position;
             Vector3 CameraPositionMin = survCameras[0].transform.position;
-
-            for (int i = 0, count = survCameras.Count; i < count; i++)
+        
+        
+            for (int i = 0; i < survCameras.Count; i++)
             {
                 Vector3 CameraPositionTemp = survCameras[i].transform.position;
-
-                if (CameraPositionMax.x < CameraPositionTemp.x)
+            
+                if(CameraPositionMax.x < CameraPositionTemp.x)
                 {
                     CameraPositionMax.x = CameraPositionTemp.x + 0.0f;
                 }
@@ -386,7 +438,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 {
                     CameraPositionMax.z = CameraPositionTemp.z + 0.0f;
                 }
-
+                
                 if (CameraPositionMin.x > CameraPositionTemp.x)
                 {
                     CameraPositionMin.x = CameraPositionTemp.x - 0.0f;
@@ -400,6 +452,103 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     CameraPositionMin.z = CameraPositionTemp.z - 0.0f;
                 }
             }
+            
+            for (int i = 0; i < survDoors.Count; i++)
+            {
+                Vector3 DoorPositionTemp = survDoors[i].transform.position;
+            
+                if(CameraPositionMax.x < DoorPositionTemp.x)
+                {
+                    CameraPositionMax.x = DoorPositionTemp.x + 0.0f;
+                }
+                if (CameraPositionMax.y < DoorPositionTemp.y)
+                {
+                    CameraPositionMax.y = DoorPositionTemp.y + 0.0f;
+                }
+                if (CameraPositionMax.z < DoorPositionTemp.z)
+                {
+                    CameraPositionMax.z = DoorPositionTemp.z + 0.0f;
+                }
+                
+                if (CameraPositionMin.x > DoorPositionTemp.x)
+                {
+                    CameraPositionMin.x = DoorPositionTemp.x - 0.0f;
+                }
+                if (CameraPositionMin.y > DoorPositionTemp.y)
+                {
+                    CameraPositionMin.y = DoorPositionTemp.y - 0.0f;
+                }
+                if (CameraPositionMin.z > DoorPositionTemp.z)
+                {
+                    CameraPositionMin.z = DoorPositionTemp.z - 0.0f;
+                }
+            }
+            
+            for (int i = 0; i < survSpeakers.Count; i++)
+            {
+                Vector3 SpeakerPositionTemp = survSpeakers[i].transform.position;
+            
+                if(CameraPositionMax.x < SpeakerPositionTemp.x)
+                {
+                    CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
+                }
+                if (CameraPositionMax.y < SpeakerPositionTemp.y)
+                {
+                    CameraPositionMax.y = SpeakerPositionTemp.y + 0.0f;
+                }
+                if (CameraPositionMax.z < SpeakerPositionTemp.z)
+                {
+                    CameraPositionMax.z = SpeakerPositionTemp.z + 0.0f;
+                }
+                
+                if (CameraPositionMin.x > SpeakerPositionTemp.x)
+                {
+                    CameraPositionMin.x = SpeakerPositionTemp.x - 0.0f;
+                }
+                if (CameraPositionMin.y > SpeakerPositionTemp.y)
+                {
+                    CameraPositionMin.y = SpeakerPositionTemp.y - 0.0f;
+                }
+                if (CameraPositionMin.z > SpeakerPositionTemp.z)
+                {
+                    CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
+                }
+            }
+            
+            for (int i = 0; i < survPickups.Count; i++)
+            {
+                Vector3 SpeakerPositionTemp = survPickups[i].transform.position;
+            
+                if(CameraPositionMax.x < SpeakerPositionTemp.x)
+                {
+                    CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
+                }
+                if (CameraPositionMax.y < SpeakerPositionTemp.y)
+                {
+                    CameraPositionMax.y = SpeakerPositionTemp.y + 0.0f;
+                }
+                if (CameraPositionMax.z < SpeakerPositionTemp.z)
+                {
+                    CameraPositionMax.z = SpeakerPositionTemp.z + 0.0f;
+                }
+                
+                if (CameraPositionMin.x > SpeakerPositionTemp.x)
+                {
+                    CameraPositionMin.x = SpeakerPositionTemp.x - 0.0f;
+                }
+                if (CameraPositionMin.y > SpeakerPositionTemp.y)
+                {
+                    CameraPositionMin.y = SpeakerPositionTemp.y - 0.0f;
+                }
+                if (CameraPositionMin.z > SpeakerPositionTemp.z)
+                {
+                    CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
+                }
+            }
+        
+        
+            
+            floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
             if(cameraMap != null)
             {
@@ -515,7 +664,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             for (int i = 0; i < survSpeakers.Count; i++)
             {
-                if (survSpeakers[i].getCode().Length > 0 && survSpeakers[i].getCode() != "cheater")
+                if (survSpeakers[i].getCode().Length > 0)
                 {
                     survSpeakers[i].codeGenned = true;
                 }
@@ -608,49 +757,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         SetWindowSizes();
 
 
-        Camera[] tempCameras = FindObjectsOfType<Camera>();
-        survCameras = new List<Camera>();
-        for (int i = 0; i < tempCameras.Length; i++)
-        {
-            if (tempCameras[i].CompareTag("HackerCamera"))
-            {
-                survCameras.Add(tempCameras[i]);
-            }
-        }
-        survCameraButtons = new List<GameObject>();
-
         
-        GoodDoor[] tempDoors = FindObjectsOfType<GoodDoor>();
-        survDoors = new List<GoodDoor>();
-        for (int i = 0; i < tempDoors.Length; i++)
-        {
-            if (tempDoors[i].roomNumber != 0 && (true || tempDoors[i].code.Length > 0))
-            {
-                survDoors.Add(tempDoors[i]);
-                tempDoors[i].locked = true;
-            }
-        }
-        survDoorButtons = new List<GameObject>();
-
-        CodeVoice[] tempSpeakers = FindObjectsOfType<CodeVoice>();
-        survSpeakers = new List<CodeVoice>();
-        for (int i = 0; i < tempSpeakers.Length; i++)
-        {
-            
-            survSpeakers.Add(tempSpeakers[i]);
-        }
-        survSpeakerButtons = new List<GameObject>();
-
-        PickupScript[] tempPickups = FindObjectsOfType<PickupScript>();
-        survPickups = new List<PickupScript>();
-        for (int i = 0; i < tempPickups.Length; i++)
-        {
-            if (tempPickups[i].isActiveAndEnabled)
-            {
-                survPickups.Add(tempPickups[i]);
-            }
-        }
-        survPickupButtons = new List<GameObject>();
 
         StartCoroutine(Setup());
     }

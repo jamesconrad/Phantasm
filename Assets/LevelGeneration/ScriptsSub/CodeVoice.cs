@@ -2,14 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DoorUnlockChain
-{
-	Null,
-	Tutorial,
-	FirstRoom,
-	SecondRoom,
-	Exit
-}
 
 public class CodeVoice : MonoBehaviour 
 {
@@ -31,16 +23,12 @@ public class CodeVoice : MonoBehaviour
 	char[] codeWords = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 	
 	
-	DoorUnlockChain chainPosition = DoorUnlockChain.Null;
 	// Variables controlling playback
 	int currentChar = 0;
 	bool activeSpeaker = false;
 
 	// This was gonna a hard codey thingy, but I actually implemented the codes properly, yay me
-	public void setChain(DoorUnlockChain chain)
-	{
-		chainPosition = chain;
-	}
+	
 	public void setActive(bool act)
 	{
 		activeSpeaker = act;
