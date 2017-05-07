@@ -75,10 +75,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         survDoors = new List<GoodDoor>();
         for (int i = 0; i < tempDoors.Length; i++)
         {
-            
-                survDoors.Add(tempDoors[i]);
+            if(tempDoors[i].roomNumber != 0 && tempDoors[i].code.Length > 0 && tempDoors[i].code.CompareTo("cheater") != 0)
+            {
+                survDoors.Add(tempDoors[i]);                
                 tempDoors[i].locked = true;
-            
+            }
         }
         survDoorButtons = new List<GameObject>();
 
@@ -270,10 +271,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survCameras[i].transform.position.z);
 
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                     GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
             survCameraButtons.Add(tempButton);
@@ -299,15 +300,15 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survDoors[i].transform.position.z);
 
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                     GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
             survDoorButtons.Add(tempButton);
 
-            if (survDoors[i].roomNumber == 0 || survDoors[i].code.Length == 0 || survDoors[i].code == "cheater")
+            if (survDoors[i].roomNumber == 0 || survDoors[i].code.Length == 0 || survDoors[i].code.CompareTo("cheater") == 0)
             {
                 survDoorButtons[i].SetActive(false);
             }
@@ -324,10 +325,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survSpeakers[i].transform.position.z);
 
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                     GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
             
@@ -346,10 +347,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survPickups[i].transform.position.z);
 
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                     GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
             RawImage image = tempButton.GetComponent<RawImage>();
@@ -631,10 +632,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survDoors[i].transform.position.z);
 
                 survDoorButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                         GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
                     
                 if(survDoors[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
@@ -677,10 +678,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survSpeakers[i].transform.position.z);
 
                 survSpeakerButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                         GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
                     
                 if(survSpeakers[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
@@ -721,10 +722,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survPickups[i].transform.position.z);
 
                 survPickupButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                         GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
                 if(survPickups[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
