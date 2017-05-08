@@ -231,7 +231,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             }
         }
     
-
+        CameraPositionMax.y += 1.5f;    
+        CameraPositionMin.y -= 1.5f;
         
         floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
@@ -548,7 +549,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             }
         
         
-            
+            CameraPositionMax.y += 1.5f;    
+            CameraPositionMin.y -= 3.5f;    
             floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
             if(cameraMap != null)
