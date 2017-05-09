@@ -151,7 +151,7 @@ public class HackerCameraView : MonoBehaviour, IDropHandler
         style.font = _Font;
         style.fontSize = h * 6 / 100;
         style.normal.textColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-        float timer = Time.time + randomTimeAdd;
+        float timer = Time.timeSinceLevelLoad + randomTimeAdd;
         float msec = Mathf.Floor((timer * 100) % 100); // * 1000.0f;
         float seconds = Mathf.Floor(timer % 60);
         float minutes = Mathf.Floor((timer / 60) % 60);
