@@ -15,7 +15,7 @@ public class InventoryScript : MonoBehaviour
             
             if (tempPickup.itemType == PickupType.Ammo && gunHandle != null)
             {
-                gunHandle.weaponSettings.currentNumberOfClips = Mathf.Min(10, (int)tempPickup.amount + gunHandle.weaponSettings.currentNumberOfClips);
+                gunHandle.weaponSettings.currentNumberOfClips = Mathf.Min(30, (int)tempPickup.amount + gunHandle.weaponSettings.currentNumberOfClips);
             }
             else if (tempPickup.itemType == PickupType.Health && healthHandle != null)
             {
