@@ -2463,7 +2463,7 @@ MonoBehaviour:
   ipInput: {fileID: 11368235}
   ScoreManager: {fileID: 0}
   mainMenuState: 0
-  DebugForTesting: 1
+  DebugForTesting: 0
 --- !u!114 &1138116453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3510,7 +3510,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Case
+  m_Text: 'Play
 
 '
 --- !u!222 &1726532262

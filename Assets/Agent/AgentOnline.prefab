@@ -8601,7 +8601,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.16
+  near clip plane: 0.2
   far clip plane: 400
   field of view: 60
   orthographic: 0
@@ -9314,8 +9314,8 @@ MonoBehaviour:
     MultTexture: {fileID: 2800000, guid: d1a860762aba40e4b9f1e5d905048341, type: 3}
     GlitchTexture: {fileID: 2800000, guid: 9836b695b2e96f847b8d624e0dc506d2, type: 3}
     FaceTexture: {fileID: 2800000, guid: 6ffca5bf713cbe84b8ff03ecb98998b4, type: 3}
-    nightVisionAmount: 0.05
-    normalAmount: 0.015
+    nightVisionAmount: 0.015
+    normalAmount: 0.0075
   jitterAmount: {x: 3, y: 3}
   jitterBias: 1
   filmGrainJitterActive: 1
@@ -9324,17 +9324,17 @@ MonoBehaviour:
   filmGrainMultActive: 1
   filmGrainMovieActive: 0
   barrelDistortAmount:
-    normal: 0
-    night: 0
-    thermal: 0
-    sonar: 0
+    normal: 1
+    night: 1.15
+    thermal: 1.5
+    sonar: 1
   barrelDistortZoomAmount:
-    normal: 0
-    night: 0
-    thermal: 0
-    sonar: 0
-  filmGrainBarrel: 0
-  filmGrainBarrelZoom: 0
+    normal: 1
+    night: 1
+    thermal: 1
+    sonar: 1
+  filmGrainBarrel: 1
+  filmGrainBarrelZoom: 1
   SonarColor: {r: 0.5, g: 0.5, b: 1, a: 1}
   Movie: {fileID: 0}
   Vision: 0
@@ -9355,7 +9355,7 @@ MonoBehaviour:
   WaveTimeMult: {x: 100, y: 100}
   CA_Dispersal: 1
   CA_Offset: 0.03
-  timeSinceSwap: 1
+  timeSinceSwap: 3.4950712
 --- !u!114 &114778206067830850
 MonoBehaviour:
   m_ObjectHideFlags: 1
