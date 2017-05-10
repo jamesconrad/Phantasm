@@ -64,7 +64,7 @@ public class MusicManagerScript : MonoBehaviour
             Health playerScript = AgentObject.GetComponent<Health>();
             float deathAmount = Mathf.InverseLerp(100.0f, 0.0f, playerScript.currentHealth);
 
-            musicDeathSource.volume = deathAmount;
+            musicDeathSource.volume = deathAmount * maxVolume;
 
             float closestPhantom = 100000.0f;// = Vector3.Distance(AgentObject.transform.position, PhantomObject[0].transform.position);
             for (int i = 0; i < PhantomObject.Length; ++i)
