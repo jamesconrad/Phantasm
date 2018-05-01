@@ -16,6 +16,8 @@ public class DoorManager : PhaNetworkingMessager {
 
 	GoodDoor[] doors;
 	Vector3[] previousPositions;
+	CodeVoice[] speakers;
+
 	// Use this for initialization
 	void Start () {
 		singleton = this;
@@ -25,13 +27,14 @@ public class DoorManager : PhaNetworkingMessager {
 		{
 			previousPositions[i] = doors[i].transform.position;
 		}
+		speakers = FindObjectsOfType<CodeVoice>();
 	}
 
 	public void parseDoorUpdate(ref StringBuilder buffer)
 	{
 		string[] values = buffer.ToString().Split(' ');
 		int id = int.Parse(values[1]);
-		if (id != -1)
+		if (id > -1)
 		{		
 			Vector3 newPos = new Vector3(float.Parse(values[2]), float.Parse(values[3]), float.Parse(values[4]));
 			Quaternion newQuat = new Quaternion(float.Parse(values[5]), float.Parse(values[6]), float.Parse(values[7]), float.Parse(values[8]));
@@ -39,9 +42,13 @@ public class DoorManager : PhaNetworkingMessager {
 			doors[id].transform.position = newPos;
 			doors[id].transform.rotation = newQuat;
 		}
-		else
+		else if (id == -1)
 		{
 			transform.Find(values[2] + " " + values[3]).GetComponentInChildren<GoodDoor>().SetCode(values[4]);
+		}
+		else if (id == -2)
+		{
+			speakers[int.Parse(values[2])].setCode(values[3]);
 		}
 	}
 
@@ -51,15 +58,24 @@ public class DoorManager : PhaNetworkingMessager {
 		{
 			if (doors[i].GetCode() != "")
 			{
-				SendDoorCodeUpdate(doors[i]);
+				SendDoorCodeUpdate(ref doors[i]);
 			}
 		}
-		//yield return new WaitForSeconds(4.0f);
+		for (int i = 0, count = speakers.Length; i < count; i++)
+		{
+			SendVoiceCodeUpdate(ref speakers[i], i);
+		}
 	}
 
-	void SendDoorCodeUpdate(GoodDoor givenDoor)
+	void SendDoorCodeUpdate(ref GoodDoor givenDoor)
 	{
 		StringBuilder doorCode = new StringBuilder(((int)MessageType.DoorUpdate).ToString() + " " + -1 + " " + givenDoor.transform.parent.name + " " + givenDoor.GetCode());
+		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, doorCode, doorCode.Length, PhaNetworkingAPI.targetIP);
+	}
+
+	void SendVoiceCodeUpdate(ref CodeVoice speaker, int index)
+	{
+		StringBuilder doorCode = new StringBuilder(((int)MessageType.DoorUpdate).ToString() + " " + -2 + " " + index + " " + speaker.getCode());
 		PhaNetworkingAPI.SendTo(PhaNetworkingAPI.mainSocket, doorCode, doorCode.Length, PhaNetworkingAPI.targetIP);
 	}
 	

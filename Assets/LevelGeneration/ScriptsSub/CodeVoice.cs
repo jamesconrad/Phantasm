@@ -2,14 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum DoorUnlockChain
-{
-	Null,
-	Tutorial,
-	FirstRoom,
-	SecondRoom,
-	Exit
-}
 
 public class CodeVoice : MonoBehaviour 
 {
@@ -22,7 +14,7 @@ public class CodeVoice : MonoBehaviour
 	CodeVoiceCollection voiceCollection;
 	public bool codeGenned = false;
 	// Code represented by a string
-	string code = "";	
+	public string code = "";	
 	// Code represented by an int
 	int[] codeInt;
 	// This is an array of voices to use when the code is spoken, 0 -> first voice, 1 -> second voice and so on
@@ -31,16 +23,12 @@ public class CodeVoice : MonoBehaviour
 	char[] codeWords = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 	
 	
-	DoorUnlockChain chainPosition = DoorUnlockChain.Null;
 	// Variables controlling playback
 	int currentChar = 0;
 	bool activeSpeaker = false;
 
 	// This was gonna a hard codey thingy, but I actually implemented the codes properly, yay me
-	public void setChain(DoorUnlockChain chain)
-	{
-		chainPosition = chain;
-	}
+	
 	public void setActive(bool act)
 	{
 		activeSpeaker = act;
@@ -50,6 +38,11 @@ public class CodeVoice : MonoBehaviour
 	public string getCode()
 	{
 		return code;
+	}
+
+	public void setCode(string newCode)
+	{
+		code = newCode;
 	}
 
 	// Use this for initialization
@@ -67,7 +60,7 @@ public class CodeVoice : MonoBehaviour
 			{
 				Debug.Log("FUCK!\n" + "VOICE COLLECTION IS NULL!");
 			}
-			int codeLength = Random.Range(5, 8);
+			int codeLength = Random.Range(3, 5);
 			codeInt = new int[codeLength];
 			codeVoices = new int[codeLength];
 			for(int i = 0; i < codeLength; ++i)
@@ -99,7 +92,10 @@ public class CodeVoice : MonoBehaviour
 					//Debug.Log(	"Code Current: " + currentChar + "\n" +
 					//			"Code Voice: " + codeVoices[currentChar] + "\n" +
 					//			"Code Int: " + codeInt[currentChar]);
-					audioSus.clip = voiceCollection.voices[codeVoices[currentChar]].voice[codeInt[currentChar]];
+					//audioSus.clip = voiceCollection.voices[codeVoices[currentChar]].voice[codeInt[currentChar]];
+					audioSus.clip = voiceCollection.voices[Random.Range(0, voiceCollection.voices.Length)].voice[codeInt[currentChar]];
+
+					
 					audioSus.Play();
 					currentChar++;
 				}

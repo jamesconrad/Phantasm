@@ -8757,7 +8757,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a030ce4d7da84de4bbde23da7dfc38dc, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 224d6c68fd8c19a4c8340e8205e959d4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8917,7 +8917,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: ee9248e5612b03941bf8d6018ea8fd50, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 529254cf30d5d294bb2a3fcb6b476d1a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -9237,12 +9237,12 @@ MonoBehaviour:
     barrelOffset: {x: 0, y: 0, z: 0}
     Hitscan: 1
     ammoSettings:
-      maxClipSize: 0
-      startingNumberOfRounds: 0
-      maxClips: 0
-      startingNumberOfClips: 0
-    currentNumberOfRounds: 20
-    currentNumberOfClips: 5
+      maxClipSize: 7
+      startingNumberOfRounds: 7
+      maxClips: 30
+      startingNumberOfClips: 15
+    currentNumberOfRounds: 7
+    currentNumberOfClips: 15
   gunReference: {fileID: 1000010272846346}
   laser: {fileID: 114000014016322976}
   smokeTrailReference: {fileID: 1957275954028906, guid: 2e40cf3fec49260479bb8740f051a0c4,
@@ -9274,12 +9274,12 @@ MonoBehaviour:
     barrelOffset: {x: 0, y: 0.054, z: 0.2}
     Hitscan: 1
     ammoSettings:
-      maxClipSize: 20
-      startingNumberOfRounds: 20
-      maxClips: 5
-      startingNumberOfClips: 5
-    currentNumberOfRounds: 20
-    currentNumberOfClips: 5
+      maxClipSize: 7
+      startingNumberOfRounds: 7
+      maxClips: 30
+      startingNumberOfClips: 15
+    currentNumberOfRounds: 7
+    currentNumberOfClips: 15
 --- !u!114 &114000012239770456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9396,6 +9396,8 @@ MonoBehaviour:
   thermalMaterial: {fileID: 2100000, guid: 74347cd67be138f4d84a50394250491f, type: 2}
   sonarMaterial: {fileID: 2100000, guid: a53d83d391ac3554a9a897583c8a387f, type: 2}
   filmGrainMaterial: {fileID: 2100000, guid: 9100fdb806c971e478c08ae6892d497c, type: 2}
+  sonarPassthroughGeometry: {fileID: 4800000, guid: 04f2b8d1699041644a26d48abf252f78,
+    type: 3}
   waveMaterial: {fileID: 2100000, guid: 7610a8c3d89734049af8965e6c85d6e2, type: 2}
   thermalRamp: {fileID: 2800000, guid: 8b47637aadcc43246b6cd5344411d5da, type: 3}
   ChromaticAberrationMaterial:
@@ -9431,9 +9433,6 @@ MonoBehaviour:
   filmGrainBarrel: 0
   filmGrainBarrelZoom: 0
   SonarColor: {r: 0.5, g: 0.5, b: 1, a: 1}
-  SonarDiffusePass: 0
-  SonarTimeMult: 1
-  SonarMult: 0.05
   Movie: {fileID: 0}
   Vision: 0
   agentMaterials:
@@ -9483,7 +9482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistance: 1
-  maxDistance: 8
+  maxDistance: 6
   distanceBias: {x: 1, y: 1, z: 1}
 --- !u!114 &114328903315737484
 MonoBehaviour:

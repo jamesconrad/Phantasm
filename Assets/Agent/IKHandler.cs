@@ -25,7 +25,7 @@ public class IKHandler : MonoBehaviour {
     void Start () {
         anim = GetComponent<Animator>();
         me = GetComponent<Transform>();
-        gun = GetComponentInParent<GunHandle>().gunReference.transform;
+        //gun = GetComponentInParent<GunHandle>().gunReference.transform;
         
         player = transform.parent.gameObject;
         agent = GetComponentInParent<Rigidbody>();

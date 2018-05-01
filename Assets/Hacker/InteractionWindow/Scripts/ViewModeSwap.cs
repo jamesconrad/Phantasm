@@ -20,6 +20,7 @@ public class ViewModeSwap : MonoBehaviour {
         {
             hvs[i].Vision = buttonMaterial;
             hvs[i].timeSinceSwap = 0.0f;
+            //hvs[i].GetComponent<Camera>().ResetReplacementShader();
 
             if (buttonMaterial == HackerVisionScript.HackerVisionMode.Normal)
 
@@ -36,6 +37,7 @@ public class ViewModeSwap : MonoBehaviour {
             }
             else if (buttonMaterial == HackerVisionScript.HackerVisionMode.Sonar)
             {
+                //hvs[i].GetComponent<Camera>().SetReplacementShader(hvs[i].sonarPassthroughGeometry, null);
                 hvs[i].cameraModeArray = 3;
                 hvs[i].filmGrainBarrel = hvs[i].barrelDistortAmount.sonar;
                 hvs[i].filmGrainBarrelZoom = hvs[i].barrelDistortZoomAmount.sonar;

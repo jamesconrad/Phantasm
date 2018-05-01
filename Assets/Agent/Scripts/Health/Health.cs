@@ -24,6 +24,7 @@ public class Health : PhaNetworkingMessager {
     public void takeDamage(float damage)
     {
         currentHealth -= damage;
+        currentHealth = Mathf.Min(currentHealth, health);
         if (PhaNetworkManager.characterSelection == 0 && gameObject.CompareTag("Player"))
         {
             SendHealthUpdate((int)damage, PhaNetworkingAPI.targetIP);
@@ -44,5 +45,14 @@ public class Health : PhaNetworkingMessager {
     {
         OnDeath.Invoke();
         Destroy(gameObject, delay);
+    }
+
+    
+    void Update()
+    {
+        if(Input.GetKey(KeyCode.Alpha0) && Input.GetKey(KeyCode.KeypadPlus))
+        {
+            takeDamage(1000.0f);
+        }
     }
 }

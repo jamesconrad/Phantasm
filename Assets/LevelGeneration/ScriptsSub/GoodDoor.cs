@@ -18,6 +18,7 @@ public class GoodDoor : MonoBehaviour {
     public GameObject LockObject;
     private GameObject LockReference;
     public bool locked = false;
+    public bool unlocked = false;
     public string code = "CHEATER";
 
     [Header("Room Number to be used by speakers")]
@@ -56,12 +57,13 @@ public class GoodDoor : MonoBehaviour {
 
     public bool Unlock(string input)
     {
-        if(locked)
+        if(locked && !unlocked)
         {
             //Debug.Log(code + " vs. " + input);
             if(input.ToUpper().Contains(code.ToUpper()))
             {
                 locked = false;
+                unlocked = true;
                 ElectricBarrier();
                 return true;
             }
@@ -76,7 +78,7 @@ public class GoodDoor : MonoBehaviour {
     
     void ElectricBarrier()
     {
-        if(locked)
+        if(locked && code != "cheater")
         {
             if(LockReference == null)
             {

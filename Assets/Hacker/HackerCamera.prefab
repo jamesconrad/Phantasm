@@ -397,14 +397,14 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b4f2416993c511c4486e9f26ec99d878, type: 2}
   - {fileID: 2100000, guid: 0b178672114bed748b8c170fcbddf64d, type: 2}
   - {fileID: 2100000, guid: 0d355e403b4fdd54d9b4823cf859b4b6, type: 2}
-  ambientLight: {r: 1, g: 1, b: 1, a: 1}
+  ambientLight: {r: 0.3764706, g: 0.3764706, b: 0.3764706, a: 1}
   filmGrain:
     ScrollingTexture: {fileID: 2800000, guid: 78df00b6c05950d49a2718aa7f68f092, type: 3}
     MultTexture: {fileID: 2800000, guid: d1a860762aba40e4b9f1e5d905048341, type: 3}
     GlitchTexture: {fileID: 2800000, guid: 9836b695b2e96f847b8d624e0dc506d2, type: 3}
     FaceTexture: {fileID: 2800000, guid: 6ffca5bf713cbe84b8ff03ecb98998b4, type: 3}
-    nightVisionAmount: 0.15
-    normalAmount: 0.01
+    nightVisionAmount: 0.015
+    normalAmount: 0.005
   jitterAmount: {x: 3, y: 3}
   jitterBias: 1
   filmGrainJitterActive: 1
@@ -412,11 +412,21 @@ MonoBehaviour:
   filmGrainScrollingActive: 1
   filmGrainMultActive: 1
   filmGrainMovieActive: 0
+  barrelDistortAmount:
+    normal: 0
+    night: 0
+    thermal: 0
+    sonar: 0
+  barrelDistortZoomAmount:
+    normal: 0
+    night: 0
+    thermal: 0
+    sonar: 0
+  filmGrainBarrel: 0
+  filmGrainBarrelZoom: 0
   SonarColor: {r: 0.5, g: 0.5, b: 1, a: 1}
-  SonarDiffusePass: 0
-  SonarTimeMult: 1
-  SonarMult: 0.05
   Movie: {fileID: 0}
+  Vision: 0
   agentMaterials:
     normal: {fileID: 2100000, guid: ee2edb0cf3549884881b8946a99cdde1, type: 2}
     camera: {fileID: 2100000, guid: ee2edb0cf3549884881b8946a99cdde1, type: 2}
@@ -428,11 +438,13 @@ MonoBehaviour:
     thermal: {fileID: 2100000, guid: db03c4253306cb947882c84394620907, type: 2}
     sonar: {fileID: 2100000, guid: 46a6cc74c81c3c142a1880da06638caf, type: 2}
   agentLaserMaterial: {fileID: 2100000, guid: 0161d33feccd00c46912d0cd23511077, type: 2}
+  cameraModeArray: 1
   WaveCount: {x: 400, y: 400}
   WaveIntensity: {x: 0.0015, y: 0.0005}
   WaveTimeMult: {x: 100, y: 100}
   CA_Dispersal: 1
   CA_Offset: 0.03
+  timeSinceSwap: 1
 --- !u!114 &114946137340529640
 MonoBehaviour:
   m_ObjectHideFlags: 1

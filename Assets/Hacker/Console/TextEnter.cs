@@ -81,7 +81,7 @@ public class TextEnter : MonoBehaviour {
 			addToLog("\n<color=red>*DON'T DO THAT*</color>");
 				++logLength;
         }
-		else 
+		else if (enteredText.Length > 0)
 		{
             checkDoors(enteredText);
         }

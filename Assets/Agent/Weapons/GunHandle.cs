@@ -121,45 +121,60 @@ public class GunHandle : MonoBehaviour
 
         if ((Input.GetButton("GamePad Fire") || Input.GetButton("Fire1")) || Input.GetAxis("Shoot") < 0.0f && weaponSettings.bulletPrefab != null)
         {
-            if (weaponSettings.currentNumberOfRounds > 0 && timeSinceFired > shootSpeed)
+            if (weaponSettings.currentNumberOfRounds > 0)
             {
-                weaponSettings.currentNumberOfRounds--;
-
-                gunShotAngle = new Vector2(Random.Range(-2.0f, 4.0f), Random.Range(4.0f, 6.0f));
-                gunShotAdd = 1.0f;
-                timeSinceFired = 0.0f;
-
-                //CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
-                GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds, weaponSettings.currentNumberOfClips);
-
-                if (weaponSettings.Hitscan)
+                if (timeSinceFired > shootSpeed)
                 {
+                    weaponSettings.currentNumberOfRounds--;
+
+                    gunShotAngle = new Vector2(Random.Range(-2.0f, 4.0f), Random.Range(4.0f, 6.0f));
+                    gunShotAdd = 1.0f;
+                    timeSinceFired = 0.0f;
+
+                    //CmdFireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
+                    GetComponent<Agent>().SetAmmoCount(weaponSettings.currentNumberOfRounds, weaponSettings.currentNumberOfClips);
+
+                    if (weaponSettings.Hitscan)
                     {
-                        CheckHit();
-                        //Add in some tag related collision stuff here.
+                        {
+                            CheckHit();
+                            //Add in some tag related collision stuff here.
 
+                        }
                     }
+                    else
+                    {
+                        FireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
+                    }
+
+                    GameObject smokeTrail = Instantiate(smokeTrailReference);
+                    smokeTrail.GetComponent<SmokeTrail>().SetLinePosition(laser.line);
+
+                    gunShotShootSound.pitch = Random.Range(0.90f, 1.10f);
+                    gunShotShootSound.Play();
                 }
-                else
+                else if (!gunShotEmptySound.isPlaying && weaponSettings.currentNumberOfRounds == 0)
                 {
-                    FireWeapon(gunReference.transform.position + gunReference.transform.rotation * weaponSettings.barrelOffset, gunReference.transform.rotation);
+                    gunShotEmptySound.pitch = Random.Range(0.90f, 1.10f);
+                    gunShotEmptySound.Play();
                 }
-
-                GameObject smokeTrail = Instantiate(smokeTrailReference);
-                smokeTrail.GetComponent<SmokeTrail>().SetLinePosition(laser.line);
-
-                gunShotShootSound.pitch = Random.Range(0.90f, 1.10f);
-                gunShotShootSound.Play();
             }
-            else if (!gunShotEmptySound.isPlaying && weaponSettings.currentNumberOfRounds == 0)
+            else if (weaponSettings.currentNumberOfClips > 0 && timeSinceFired > shootSpeed)
             {
-                gunShotEmptySound.pitch = Random.Range(0.90f, 1.10f);
-                gunShotEmptySound.Play();
+                reloading = true;
+                laser.active = !reloading;
+
+                gunShotReloadSound.pitch = Random.Range(0.90f, 1.10f);
+                gunShotReloadSound.Play();
+                
+                reloadTimeSpent = 0.0f;
+                timeSinceFired = -1.0f;// + Time.fixedDeltaTime;
             }
+            
         }
         if (Input.GetButtonDown("Reload") || Input.GetButtonDown("GamePad Reload"))
         {
-            if (weaponSettings.currentNumberOfClips > 0 && timeSinceFired > shootSpeed)
+            if (weaponSettings.currentNumberOfClips > 0 && timeSinceFired > shootSpeed && weaponSettings.currentNumberOfRounds < weaponSettings.ammoSettings.maxClipSize)
             {
                 reloading = true;
                 laser.active = !reloading;

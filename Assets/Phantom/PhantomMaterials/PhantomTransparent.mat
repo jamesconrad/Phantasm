@@ -123,7 +123,7 @@ Material:
       second: 0
     - first:
         name: _RimAlpha
-      second: 0.1
+      second: 0.035
     - first:
         name: _RimPower
       second: 3

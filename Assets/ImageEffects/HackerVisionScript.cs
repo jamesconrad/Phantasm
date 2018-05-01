@@ -54,9 +54,9 @@ public class HackerVisionScript : MonoBehaviour
 	[Space(10)]
     public Color SonarColor = new Color(0.5f, 0.5f, 1.0f);
     [Range(0.0f, 1.0f)]
-    public float SonarDiffusePass = 1.0f;
-    public float SonarTimeMult = 1.0f;
-    public float SonarMult = 0.02f;
+    private float SonarDiffusePass = 0.0f;
+    private float SonarTimeMult = 0.25f;
+    private float SonarMult = 0.005f;
 	
 	[Space(10)]
     public MovieTexture Movie;
@@ -265,20 +265,20 @@ public class HackerVisionScript : MonoBehaviour
 
 
 
-        if (Vision != HackerVisionMode.Sonar)
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                lightStatus[i] = all_my_damn_lights[i].enabled;
-            }
-        }
-        if (Vision != HackerVisionMode.Night)
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                lightBrightness[i] = all_my_damn_lights[i].intensity;
-            }
-        }
+        //if (Vision != HackerVisionMode.Sonar)
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        lightStatus[i] = all_my_damn_lights[i].enabled;
+        //    }
+        //}
+        //if (Vision != HackerVisionMode.Night)
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        lightBrightness[i] = all_my_damn_lights[i].intensity;
+        //    }
+        //}
 
         // Film Grain transition between vision modes
         if (timeSinceOffset > timeOffsetLength * 5.0f && Time.timeSinceLevelLoad > 5.0f)
@@ -491,7 +491,7 @@ public class HackerVisionScript : MonoBehaviour
         if(Vision == HackerVisionMode.Thermal)
         {
             ambientLightTemp = RenderSettings.ambientLight;
-            RenderSettings.ambientLight = new Color(ambientLight.r * 0.835f, ambientLight.g * 0.835f, ambientLight.b * 0.835f);
+            RenderSettings.ambientLight = new Color(ambientLight.r * 0.135f, ambientLight.g * 0.135f, ambientLight.b * 0.135f);
         }
 
         if (Vision == HackerVisionMode.Normal)
@@ -503,39 +503,39 @@ public class HackerVisionScript : MonoBehaviour
             Shader.SetGlobalFloat("_EmissionVisionMult", 10.0f);
         }
 
-        if (Vision == HackerVisionMode.Sonar)
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                all_my_damn_lights[i].enabled = false;
-            }
-            //_Light.enabled = false;
-        }
-        else
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                all_my_damn_lights[i].enabled = lightStatus[i];
-            }
+        //if (Vision == HackerVisionMode.Sonar)
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        all_my_damn_lights[i].enabled = false;
+        //    }
+        //    //_Light.enabled = false;
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        all_my_damn_lights[i].enabled = lightStatus[i];
+        //    }
+//
+        //}
 
-        }
-
-        if (Vision == HackerVisionMode.Night)
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                all_my_damn_lights[i].intensity = lightBrightness[i] * 4.0f;
-            }
-            //_Light.enabled = false;
-        }
-        else
-        {
-            for (int i = 0; i < all_my_damn_lights.Length; ++i)
-            {
-                all_my_damn_lights[i].intensity = lightBrightness[i];
-            }
-
-        }
+        //if (Vision == HackerVisionMode.Night)
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        all_my_damn_lights[i].intensity = lightBrightness[i] * 4.0f;
+        //    }
+        //    //_Light.enabled = false;
+        //}
+        //else
+        //{
+        //    for (int i = 0; i < all_my_damn_lights.Length; ++i)
+        //    {
+        //        all_my_damn_lights[i].intensity = lightBrightness[i];
+        //    }
+//
+        //}
 
 
 		

@@ -24,8 +24,9 @@ public class PickupScript : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
-		
+		transform.Rotate(50.0f * Time.fixedDeltaTime, 0.0f, 0.0f, Space.Self);
+        transform.Translate(0.0f, Mathf.Sin(Time.fixedTime) * 0.005f, 0.0f, Space.World);
 	}
 }

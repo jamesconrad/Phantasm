@@ -11,6 +11,7 @@ public enum CameraRectType
     FloorChanger,
     HeartRate
 }
+
 public class HackerInteractionWindowSetup : MonoBehaviour
 {
     public Camera cameraMap;
@@ -18,6 +19,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     public CameraRectType windowType = CameraRectType.Normal;
 
     public GameObject cameraButtonPrefab;
+    public GameObject agentButtonPrefab;
     public GameObject doorButtonPrefab;
     public GameObject speakerButtonPrefab;
     public GameObject pickupButtonPrefab;
@@ -39,6 +41,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     private List<PickupScript> survPickups;
     private List<GameObject> survPickupButtons;
 
+
+    List<List<GameObject>> roomChainList = new List<List<GameObject>>();
+
     public bool WindowIsInteractive = true;
 
     private Vector2 WindowSize;
@@ -48,36 +53,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
     private float floorHeight;
     private int agentFloor = 0;
 
-    // Use this for initialization
-    void Start()
+
+    bool setup = false;
+    IEnumerator Setup()
     {
-        WindowSize = new Vector2(Screen.width, Screen.height);
-
-        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
-
-        cameraMap = GameObject.Find("HackerMapPrefab").GetComponent<Camera>();
-
-        SetWindowSizes();
-        //switch (cameraPosition)
-        //{
-        //    case CameraPosition.BottomLeft:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
-        //        break;
-        //    case CameraPosition.BottomRight:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, Screen.height / 4.0f);
-        //        break;
-        //    case CameraPosition.TopLeft:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
-        //        break;
-        //    case CameraPosition.TopRight:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2((Screen.width / 4.0f) + Screen.width / 2.0f, (Screen.height / 4.0f) + Screen.height / 2.0f);
-        //        break;
-        //    default:
-        //        GetComponent<RectTransform>().anchoredPosition = new Vector2(Screen.width / 4.0f, Screen.height / 4.0f);
-        //        break;
-        //}
-
-
+        yield return new WaitForSeconds(10);
 
         Camera[] tempCameras = FindObjectsOfType<Camera>();
         survCameras = new List<Camera>();
@@ -95,9 +75,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         survDoors = new List<GoodDoor>();
         for (int i = 0; i < tempDoors.Length; i++)
         {
-            if (tempDoors[i].locked)
+            if(tempDoors[i].roomNumber != 0 && tempDoors[i].code.Length > 0 && tempDoors[i].code.CompareTo("cheater") != 0)
             {
-                survDoors.Add(tempDoors[i]);
+                survDoors.Add(tempDoors[i]);                
+                tempDoors[i].locked = true;
             }
         }
         survDoorButtons = new List<GameObject>();
@@ -106,10 +87,8 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         survSpeakers = new List<CodeVoice>();
         for (int i = 0; i < tempSpeakers.Length; i++)
         {
-            if (tempSpeakers[i].codeGenned)
-            {
-                survSpeakers.Add(tempSpeakers[i]);
-            }
+            
+            survSpeakers.Add(tempSpeakers[i]);
         }
         survSpeakerButtons = new List<GameObject>();
 
@@ -127,11 +106,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         Vector3 CameraPositionMax = survCameras[0].transform.position;
         Vector3 CameraPositionMin = survCameras[0].transform.position;
 
-
+    
         for (int i = 0; i < survCameras.Count; i++)
         {
             Vector3 CameraPositionTemp = survCameras[i].transform.position;
-
+        
             if(CameraPositionMax.x < CameraPositionTemp.x)
             {
                 CameraPositionMax.x = CameraPositionTemp.x + 0.0f;
@@ -162,7 +141,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         for (int i = 0; i < survDoors.Count; i++)
         {
             Vector3 DoorPositionTemp = survDoors[i].transform.position;
-
+        
             if(CameraPositionMax.x < DoorPositionTemp.x)
             {
                 CameraPositionMax.x = DoorPositionTemp.x + 0.0f;
@@ -189,11 +168,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 CameraPositionMin.z = DoorPositionTemp.z - 0.0f;
             }
         }
-
+        
         for (int i = 0; i < survSpeakers.Count; i++)
         {
             Vector3 SpeakerPositionTemp = survSpeakers[i].transform.position;
-
+        
             if(CameraPositionMax.x < SpeakerPositionTemp.x)
             {
                 CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
@@ -220,11 +199,11 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
             }
         }
-
+        
         for (int i = 0; i < survPickups.Count; i++)
         {
             Vector3 SpeakerPositionTemp = survPickups[i].transform.position;
-
+        
             if(CameraPositionMax.x < SpeakerPositionTemp.x)
             {
                 CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
@@ -251,7 +230,9 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
             }
         }
-
+    
+        CameraPositionMax.y += 1.5f;    
+        CameraPositionMin.y -= 1.5f;
         
         floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
@@ -268,9 +249,21 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             Debug.Log("cameraMap is null");
         }
 
+
         for (int i = 0; i < survCameras.Count; i++)
         {
-            GameObject tempButton = Instantiate(cameraButtonPrefab);
+            GameObject tempButton;
+            
+            if (survCameras[i].transform.parent.CompareTag("Player"))
+            {
+                tempButton = Instantiate(agentButtonPrefab);
+                tempButton.GetComponent<RectTransform>().position -= new Vector3(0.0f, 0.0f, 1.0f);
+            }
+            else
+            {
+                tempButton = Instantiate(cameraButtonPrefab);
+            }
+            
             tempButton.GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
 
             Vector3 LerpPosition = survCameras[i].transform.position;
@@ -279,14 +272,19 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survCameras[i].transform.position.z);
 
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                     GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
             survCameraButtons.Add(tempButton);
             survCameraButtons[i].GetComponent<CameraButtonManipulation>().associatedCamera = survCameras[i];
+            
+            if (!survCameras[i].transform.parent.CompareTag("Player"))
+            {
+                survCameraButtons[i].GetComponent<RectTransform>().SetSiblingIndex(0);
+            }
         }
 
         // Code to put the doors as buttons
@@ -303,20 +301,18 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survDoors[i].transform.position.z);
 
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                     GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
-            RawImage image = tempButton.GetComponent<RawImage>();
-            int doorNum = survDoors[i].roomNumber - 1;
-            float doorNumBrightness = (doorNum / 8) * 0.25f;
-            doorNum = doorNum % 8;
-            Color color = Color.HSVToRGB(doorNum / 8.0f, 1.0f - doorNumBrightness, 1.0f);
-            image.color = color;
-
             survDoorButtons.Add(tempButton);
+
+            if (survDoors[i].roomNumber == 0 || survDoors[i].code.Length == 0 || survDoors[i].code.CompareTo("cheater") == 0)
+            {
+                survDoorButtons[i].SetActive(false);
+            }
         }
 
         for (int i = 0; i < survSpeakers.Count; i++)
@@ -330,18 +326,13 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survSpeakers[i].transform.position.z);
 
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                     GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
-            RawImage image = tempButton.GetComponent<RawImage>();
-            int doorNum = survSpeakers[i].roomNumber - 1;
-            float doorNumBrightness = (doorNum / 8) * 0.25f;
-            doorNum = doorNum % 8;
-            Color color = Color.HSVToRGB(doorNum / 8.0f, 1.0f - doorNumBrightness, 1.0f);
-            image.color = color;
+            
 
             survSpeakerButtons.Add(tempButton);
         }
@@ -357,10 +348,10 @@ public class HackerInteractionWindowSetup : MonoBehaviour
             LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survPickups[i].transform.position.z);
 
             tempButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                     GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                    0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                    0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                     GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
             RawImage image = tempButton.GetComponent<RawImage>();
@@ -371,29 +362,50 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             survPickupButtons.Add(tempButton);
         }
+
+        for (int i = 0; i < survSpeakers.Count; i++)
+        {
+            if(survSpeakers[i].getCode().Length > 0)
+            {
+                roomChainList.Add(new List<GameObject>());
+                roomChainList[roomChainList.Count - 1].Add(survSpeakerButtons[i]);
+
+                for (int k = 0; k < survDoors.Count; k++)
+                {
+                    if(survDoors[k].GetCode() != "cheater")
+                    {
+                        Debug.Log(survSpeakers[i].getCode() + " Vs. " + survDoors[k].GetCode());
+                        if(survSpeakers[i].getCode().ToUpper().CompareTo(survDoors[k].GetCode().ToUpper()) == 0)
+                        {
+                            roomChainList[roomChainList.Count - 1].Add(survDoorButtons[k]);
+                        }
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < roomChainList.Count; i++)
+        {
+            Debug.Log(i + " ");
+
+            for (int k = 0; k < roomChainList[i].Count; k++)
+            {
+                Debug.Log(roomChainList[i][k]);
+                RawImage image = roomChainList[i][k].GetComponent<RawImage>();
+                int doorNum = i;
+                float doorNumBrightness = (doorNum / 10) * 0.5f;
+                doorNum = doorNum % 10;
+                Color color = Color.HSVToRGB(doorNum / 10.0f, 1.0f - doorNumBrightness, 1.0f);
+                image.color = color;
+            }
+            
+        }
+
+        setup = true;
+
     }
 
-    //used for translating map up a floor
-    public void FloorUp()
-    {
-        if (viewFloor < numOfFloors - 1)
-            viewFloor++;
-    }
-
-    //used for translating map down a floor
-    public void FloorDown()
-    {
-        if (viewFloor > 0)
-            viewFloor--;
-    }
-
-    //used for translating map to agents floor
-    public void FloorAgent()
-    {
-        viewFloor = agentFloor;
-    }
-
-    public void Update()
+    void UpdateMap()
     {
         if (WindowSize.x != Screen.width || WindowSize.y != Screen.height)
         {
@@ -410,12 +422,13 @@ public class HackerInteractionWindowSetup : MonoBehaviour
         {
             Vector3 CameraPositionMax = survCameras[0].transform.position;
             Vector3 CameraPositionMin = survCameras[0].transform.position;
-
-            for (int i = 0, count = survCameras.Count; i < count; i++)
+        
+        
+            for (int i = 0; i < survCameras.Count; i++)
             {
                 Vector3 CameraPositionTemp = survCameras[i].transform.position;
-
-                if (CameraPositionMax.x < CameraPositionTemp.x)
+            
+                if(CameraPositionMax.x < CameraPositionTemp.x)
                 {
                     CameraPositionMax.x = CameraPositionTemp.x + 0.0f;
                 }
@@ -427,7 +440,7 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 {
                     CameraPositionMax.z = CameraPositionTemp.z + 0.0f;
                 }
-
+                
                 if (CameraPositionMin.x > CameraPositionTemp.x)
                 {
                     CameraPositionMin.x = CameraPositionTemp.x - 0.0f;
@@ -441,6 +454,104 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     CameraPositionMin.z = CameraPositionTemp.z - 0.0f;
                 }
             }
+            
+            for (int i = 0; i < survDoors.Count; i++)
+            {
+                Vector3 DoorPositionTemp = survDoors[i].transform.position;
+            
+                if(CameraPositionMax.x < DoorPositionTemp.x)
+                {
+                    CameraPositionMax.x = DoorPositionTemp.x + 0.0f;
+                }
+                if (CameraPositionMax.y < DoorPositionTemp.y)
+                {
+                    CameraPositionMax.y = DoorPositionTemp.y + 0.0f;
+                }
+                if (CameraPositionMax.z < DoorPositionTemp.z)
+                {
+                    CameraPositionMax.z = DoorPositionTemp.z + 0.0f;
+                }
+                
+                if (CameraPositionMin.x > DoorPositionTemp.x)
+                {
+                    CameraPositionMin.x = DoorPositionTemp.x - 0.0f;
+                }
+                if (CameraPositionMin.y > DoorPositionTemp.y)
+                {
+                    CameraPositionMin.y = DoorPositionTemp.y - 0.0f;
+                }
+                if (CameraPositionMin.z > DoorPositionTemp.z)
+                {
+                    CameraPositionMin.z = DoorPositionTemp.z - 0.0f;
+                }
+            }
+            
+            for (int i = 0; i < survSpeakers.Count; i++)
+            {
+                Vector3 SpeakerPositionTemp = survSpeakers[i].transform.position;
+            
+                if(CameraPositionMax.x < SpeakerPositionTemp.x)
+                {
+                    CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
+                }
+                if (CameraPositionMax.y < SpeakerPositionTemp.y)
+                {
+                    CameraPositionMax.y = SpeakerPositionTemp.y + 0.0f;
+                }
+                if (CameraPositionMax.z < SpeakerPositionTemp.z)
+                {
+                    CameraPositionMax.z = SpeakerPositionTemp.z + 0.0f;
+                }
+                
+                if (CameraPositionMin.x > SpeakerPositionTemp.x)
+                {
+                    CameraPositionMin.x = SpeakerPositionTemp.x - 0.0f;
+                }
+                if (CameraPositionMin.y > SpeakerPositionTemp.y)
+                {
+                    CameraPositionMin.y = SpeakerPositionTemp.y - 0.0f;
+                }
+                if (CameraPositionMin.z > SpeakerPositionTemp.z)
+                {
+                    CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
+                }
+            }
+            
+            for (int i = 0; i < survPickups.Count; i++)
+            {
+                Vector3 SpeakerPositionTemp = survPickups[i].transform.position;
+            
+                if(CameraPositionMax.x < SpeakerPositionTemp.x)
+                {
+                    CameraPositionMax.x = SpeakerPositionTemp.x + 0.0f;
+                }
+                if (CameraPositionMax.y < SpeakerPositionTemp.y)
+                {
+                    CameraPositionMax.y = SpeakerPositionTemp.y + 0.0f;
+                }
+                if (CameraPositionMax.z < SpeakerPositionTemp.z)
+                {
+                    CameraPositionMax.z = SpeakerPositionTemp.z + 0.0f;
+                }
+                
+                if (CameraPositionMin.x > SpeakerPositionTemp.x)
+                {
+                    CameraPositionMin.x = SpeakerPositionTemp.x - 0.0f;
+                }
+                if (CameraPositionMin.y > SpeakerPositionTemp.y)
+                {
+                    CameraPositionMin.y = SpeakerPositionTemp.y - 0.0f;
+                }
+                if (CameraPositionMin.z > SpeakerPositionTemp.z)
+                {
+                    CameraPositionMin.z = SpeakerPositionTemp.z - 0.0f;
+                }
+            }
+        
+        
+            CameraPositionMax.y += 1.5f;    
+            CameraPositionMin.y -= 3.5f;    
+            floorHeight = (CameraPositionMax.y - CameraPositionMin.y) / numOfFloors;
 
             if(cameraMap != null)
             {
@@ -473,18 +584,18 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
                 survCameraButtons[i].GetComponent<Button>().interactable = WindowIsInteractive;
 
-                if (survCameras[i].GetComponentInParent<Agent>() != null)
-                {
-                    float curY = survCameras[i].transform.position.y;
-                    for (int f = 0; f < numOfFloors; f++)
-                    {
-                        if (curY >= CameraPositionMin.y + f * floorHeight && curY <= CameraPositionMin.y + (f + 1) * floorHeight)
-                        {
-                            agentFloor = f;
-                            break;
-                        }
-                    }
-                }
+                //if (survCameras[i].transform.parent.CompareTag("Player"))
+                //{
+                //    float curY = survCameras[i].transform.position.y;
+                //    for (int f = 0; f < numOfFloors; f++)
+                //    {
+                //        if (curY >= CameraPositionMin.y + f * floorHeight && curY <= CameraPositionMin.y + (f + 1) * floorHeight)
+                //        {
+                //            agentFloor = f;
+                //            break;
+                //        }
+                //    }
+                //}
 
                 if(survCameras[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
                 && survCameras[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
@@ -505,6 +616,16 @@ public class HackerInteractionWindowSetup : MonoBehaviour
 
             for (int i = 0; i < survDoors.Count; i++)
             {
+                if (survDoors[i].code.Length > 0 && survDoors[i].code != "cheater" && !survDoors[i].unlocked)
+                {
+                    survDoors[i].locked = true;
+                }
+                else if(survDoors[i].code.Length == 0)
+                {
+                    survDoors[i].unlocked = true;
+                }
+
+
                 survDoorButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
 
                 Vector3 LerpPosition = survDoors[i].transform.position;
@@ -513,14 +634,14 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survDoors[i].transform.position.z);
 
                 survDoorButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                         GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
                     
-                if(survDoors[i].transform.position.y >= cameraMap.nearClipPlane + cameraMap.transform.position.y
-                && survDoors[i].transform.position.y <= cameraMap.farClipPlane + cameraMap.transform.position.y
+                if(survDoors[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survDoors[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
                 && survDoors[i].transform.position.x <= CameraPositionMax.x
                 && survDoors[i].transform.position.x >= CameraPositionMin.x
                 && survDoors[i].transform.position.z <= CameraPositionMax.z
@@ -533,19 +654,24 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     survDoorButtons[i].SetActive(false);
                 }
 
-                if(survDoors[i].locked)
-                {
-                    
+                if(survDoors[i].unlocked)
+                {                    
+                    survDoorButtons[i].GetComponent<Button>().interactable = false;
                 }
                 else
                 {
-                    survDoorButtons[i].GetComponent<Button>().interactable = false;
+
                 }
             }
 
 
             for (int i = 0; i < survSpeakers.Count; i++)
             {
+                if (survSpeakers[i].getCode().Length > 0)
+                {
+                    survSpeakers[i].codeGenned = true;
+                }
+
                 survSpeakerButtons[i].GetComponent<RectTransform>().SetParent(GetComponent<RectTransform>());
 
                 Vector3 LerpPosition = survSpeakers[i].transform.position;
@@ -554,13 +680,15 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survSpeakers[i].transform.position.z);
 
                 survSpeakerButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                         GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
                     
-                if(survSpeakers[i].transform.position.x <= CameraPositionMax.x
+                if(survSpeakers[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survSpeakers[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
+                && survSpeakers[i].transform.position.x <= CameraPositionMax.x
                 && survSpeakers[i].transform.position.x >= CameraPositionMin.x
                 && survSpeakers[i].transform.position.z <= CameraPositionMax.z
                 && survSpeakers[i].transform.position.z >= CameraPositionMin.z)
@@ -570,6 +698,15 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 else
                 {
                     survSpeakerButtons[i].SetActive(false);
+                }
+
+                if(survSpeakers[i].codeGenned)
+                {                    
+                    survSpeakerButtons[i].GetComponent<Button>().interactable = true;
+                }
+                else
+                {
+                    survSpeakerButtons[i].GetComponent<Button>().interactable = false;
                 }
 
                 /// TODO 
@@ -587,16 +724,19 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                 LerpPosition.z = Mathf.InverseLerp(CameraPositionMin.z, CameraPositionMax.z, survPickups[i].transform.position.z);
 
                 survPickupButtons[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.width,
                         GetComponent<RectTransform>().rect.width, LerpPosition.x),
 
-                        0.45f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
+                        0.5f * Mathf.Lerp(-GetComponent<RectTransform>().rect.height,
                         GetComponent<RectTransform>().rect.height, LerpPosition.z));
 
-                if(survPickups[i].transform.position.x <= CameraPositionMax.x
+                if(survPickups[i].transform.position.y >= CameraPositionMin.y + viewFloor * floorHeight
+                && survPickups[i].transform.position.y <= CameraPositionMin.y + (viewFloor + 1) * floorHeight
+                && survPickups[i].transform.position.x <= CameraPositionMax.x
                 && survPickups[i].transform.position.x >= CameraPositionMin.x
                 && survPickups[i].transform.position.z <= CameraPositionMax.z
-                && survPickups[i].transform.position.z >= CameraPositionMin.z)
+                && survPickups[i].transform.position.z >= CameraPositionMin.z
+                && survPickups[i] != null)
                 {
                     survPickupButtons[i].SetActive(true);
                 }
@@ -605,6 +745,52 @@ public class HackerInteractionWindowSetup : MonoBehaviour
                     survPickupButtons[i].SetActive(false);
                 }
             }
+        }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+        WindowSize = new Vector2(Screen.width, Screen.height);
+
+        GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
+
+        cameraMap = GameObject.Find("HackerMapPrefab").GetComponent<Camera>();
+
+        SetWindowSizes();
+
+
+        
+
+        StartCoroutine(Setup());
+    }
+    
+
+    //used for translating map up a floor
+    public void FloorUp()
+    {
+        if (viewFloor < numOfFloors - 1)
+            viewFloor++;
+    }
+
+    //used for translating map down a floor
+    public void FloorDown()
+    {
+        if (viewFloor > 0)
+            viewFloor--;
+    }
+
+    //used for translating map to agents floor
+    public void FloorAgent()
+    {
+        viewFloor = agentFloor;
+    }
+
+    public void Update()
+    {
+        if(setup)
+        {
+            UpdateMap();
         }
     }
 

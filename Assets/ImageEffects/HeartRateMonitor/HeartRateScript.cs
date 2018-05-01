@@ -34,7 +34,6 @@ public class HeartRateScript : MonoBehaviour
 	{
 		int arrayChoice = (int)(healthArray.Length * Mathf.InverseLerp(0.0f, agentHealth.health, agentHealth.currentHealth));
 		arrayChoice = Mathf.Clamp(arrayChoice, 0, healthArray.Length - 1);
-		print(arrayChoice);
 		material.SetColor("_Color", healthArray[arrayChoice].color);
 		material.SetVector("_UVMult", healthArray[arrayChoice].uvMult);
 	}
