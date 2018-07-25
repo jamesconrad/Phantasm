@@ -1,6 +1,6 @@
 # Phantasm
 
-A two player game in which both must work together inorder to survive.
+A two player game in which both must work together in order to survive.
 
 Attended CHI'17 in Denver as a entry to the Innovative Gameplay competition. Won first place and was published by ACM.
 https://dl.acm.org/citation.cfm?id=3048414
